@@ -202,11 +202,10 @@ img { display: block; max-width: 100%; }
   position: absolute;
   inset: 0;
 }
-
 .hero-image {
   z-index: -3;
   background:
-    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJCgBcwOR8D0FNvvEG6ObzkDmHbbH0Sv9WKHC72oMUmQ&s=10")
+    url("https://www.luxcafeclub.com/cdn/shop/articles/Minimalist_Modern_Coffee_Shop_1_1200x1200.png?v=1713243107")
     center 48% / cover no-repeat;
   transform: scale(1.04);
   animation: heroReveal 1.8s ease both, heroDrift 24s ease-in-out infinite alternate;
