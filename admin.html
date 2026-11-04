@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>TALOM | Admin Panel</title>
 
   <link rel="stylesheet" href="admin.css">
@@ -14,33 +14,21 @@
 
 <body>
 
-  <!-- صفحه ورود -->
+  <!-- Login -->
   <div class="main-content" id="login-screen">
-
     <section class="section">
       <h2>TALOM.</h2>
       <p>ورود به پنل مدیریت کافه</p>
 
       <form id="login-form">
-
         <div class="form-group">
           <label for="email">ایمیل مدیر</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="ایمیل خود را وارد کنید"
-            required
-          >
+          <input type="email" id="email" required>
         </div>
 
         <div class="form-group">
           <label for="password">رمز عبور</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="رمز عبور"
-            required
-          >
+          <input type="password" id="password" required>
         </div>
 
         <button type="submit" class="primary-btn" id="login-btn">
@@ -48,45 +36,37 @@
         </button>
 
         <p id="login-message"></p>
-
       </form>
     </section>
-
   </div>
 
-  <!-- داشبورد مدیریت -->
+  <!-- Admin Panel -->
   <div class="admin-layout" id="admin-panel" hidden>
 
     <aside class="sidebar">
-
       <div class="logo">TALOM.</div>
       <p class="sidebar-subtitle">ADMINISTRATION</p>
 
       <p class="nav-title">مدیریت</p>
-
       <a href="#dashboard" class="nav-link active">داشبورد</a>
       <a href="#products" class="nav-link">محصولات</a>
       <a href="#orders" class="nav-link">سفارش‌ها</a>
       <a href="#settings" class="nav-link">تنظیمات کافه</a>
 
       <p class="nav-title">حساب کاربری</p>
-
-      <a href="#" class="nav-link" id="logout-btn">
-        خروج از حساب
-      </a>
-
+      <a href="#" class="nav-link" id="logout-btn">خروج از حساب</a>
     </aside>
 
     <main class="main-content">
 
       <header class="topbar">
         <h1 class="page-title">داشبورد مدیریت</h1>
-
         <div class="admin-info">
           مدیر سیستم: <span id="admin-name">TALOM Admin</span>
         </div>
       </header>
 
+      <!-- Dashboard -->
       <section class="welcome" id="dashboard">
         <h2>به پنل مدیریت TALOM خوش آمدید</h2>
         <p>مدیریت کافه از این قسمت انجام می‌شود.</p>
@@ -94,7 +74,6 @@
       </section>
 
       <div class="stats-grid">
-
         <div class="stat-card">
           <p>فروش امروز</p>
           <h3>۰ تومان</h3>
@@ -107,33 +86,114 @@
 
         <div class="stat-card">
           <p>محصولات</p>
-          <h3>۰</h3>
+          <h3 id="products-count">۰</h3>
         </div>
 
         <div class="stat-card">
           <p>سفارش‌های جدید</p>
           <h3>۰</h3>
         </div>
-
       </div>
 
+      <!-- Products -->
       <section class="section" id="products">
         <h2>مدیریت محصولات</h2>
-        <p class="empty-state">هنوز محصولی بارگذاری نشده است.</p>
+        <p>افزودن، ویرایش و مدیریت محصولات منوی TALOM</p>
+
+        <form id="product-form">
+
+          <input type="hidden" id="product-id">
+
+          <div class="form-group">
+            <label for="product-name">نام محصول فارسی</label>
+            <input type="text" id="product-name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="product-name-en">نام محصول انگلیسی</label>
+            <input type="text" id="product-name-en">
+          </div>
+
+          <div class="form-group">
+            <label for="product-category">دسته‌بندی</label>
+            <select id="product-category" required>
+              <option value="coffee">قهوه</option>
+              <option value="cold">نوشیدنی سرد</option>
+              <option value="special">نوشیدنی ویژه</option>
+              <option value="dessert">دسر</option>
+              <option value="food">غذا</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="product-price">قیمت (تومان)</label>
+            <input type="number" id="product-price" min="0" required>
+          </div>
+
+          <div class="form-group">
+            <label for="product-description">توضیحات</label>
+            <textarea id="product-description" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="product-image">آدرس تصویر محصول</label>
+            <input type="url" id="product-image">
+          </div>
+
+          <div class="form-group">
+            <label for="product-available">وضعیت محصول</label>
+            <select id="product-available">
+              <option value="true">موجود</option>
+              <option value="false">ناموجود</option>
+            </select>
+          </div>
+
+          <button type="submit" class="primary-btn" id="save-product-btn">
+            ذخیره محصول
+          </button>
+
+          <button type="button" class="danger-btn" id="cancel-edit-btn" hidden>
+            لغو ویرایش
+          </button>
+
+          <p id="product-message"></p>
+        </form>
+
+        <div class="products-table">
+          <table>
+            <thead>
+              <tr>
+                <th>شناسه</th>
+                <th>نام محصول</th>
+                <th>دسته‌بندی</th>
+                <th>قیمت</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+
+            <tbody id="products-table-body">
+              <tr>
+                <td colspan="6">در حال دریافت محصولات...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
+      <!-- Orders -->
       <section class="section" id="orders">
         <h2>مدیریت سفارش‌ها</h2>
         <p class="empty-state">هنوز سفارشی ثبت نشده است.</p>
       </section>
 
+      <!-- Settings -->
       <section class="section" id="settings">
         <h2>تنظیمات کافه</h2>
         <p class="empty-state">تنظیمات کافه در این قسمت قرار می‌گیرد.</p>
       </section>
 
     </main>
-
   </div>
 
 </body>
