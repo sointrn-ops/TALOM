@@ -4,11 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TALOM | Admin Panel</title>
+
+  <link rel="stylesheet" href="admin.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js" defer></script>
 </head>
+
 <body>
 
-  <h1>TALOM Admin Panel</h1>
-  <p>پنل مدیریت کافه تالوم</p>
+  <div class="admin-layout">
+
+    <aside class="sidebar">
+      <div class="logo">TALOM.</div>
+      <p class="sidebar-subtitle">ADMINISTRATION</p>
+
+      <p class="nav-title">مدیریت</p>
+
+      <a href="#dashboard" class="nav-link active">داشبورد</a>
+      <a href="#products" class="nav-link">محصولات</a>
+      <a href="#orders" class="nav-link">سفارش‌ها</a>
+      <a href="#settings" class="nav-link">تنظیمات کافه</a>
+
+      <p class="nav-title">حساب کاربری</p>
+      <a href="#" class="nav-link" id="logout-btn">خروج از حساب</a>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="topbar">
+        <h1 class="page-title">داشبورد مدیریت</h1>
+
+        <div class="admin-info">
+          مدیر سیستم: <span>TALOM Admin</span>
+        </div>
+      </header>
+
+      <section class="welcome" id="dashboard">
+        <h2>به پنل مدیریت TALOM خوش آمدید</h2>
+        <p>مدیریت کافه، محصولات و سفارش‌ها از این قسمت انجام می‌شود.</p>
+        <p id="current-date"></p>
+      </section>
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <p>فروش امروز</p>
+          <h3>۰ تومان</h3>
+        </div>
+
+        <div class="stat-card">
+          <p>تعداد سفارش‌ها</p>
+          <h3>۰</h3>
+        </div>
+
+        <div class="stat-card">
+          <p>محصولات</p>
+          <h3>۰</h3>
+        </div>
+
+        <div class="stat-card">
+          <p>سفارش‌های جدید</p>
+          <h3>۰</h3>
+        </div>
+
+      </div>
+
+      <section class="section" id="products">
+        <h2>مدیریت محصولات</h2>
+        <p class="empty-state">هنوز محصولی بارگذاری نشده است.</p>
+      </section>
+
+      <section class="section" id="orders">
+        <h2>مدیریت سفارش‌ها</h2>
+        <p class="empty-state">هنوز سفارشی ثبت نشده است.</p>
+      </section>
+
+      <section class="section" id="settings">
+        <h2>تنظیمات کافه</h2>
+        <p class="empty-state">تنظیمات کافه در این قسمت قرار می‌گیرد.</p>
+      </section>
+
+    </main>
+
+  </div>
 
 </body>
 </html>
