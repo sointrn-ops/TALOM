@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const productMessage = document.getElementById("product-message");
   const productsTableBody = document.getElementById("products-table-body");
   const productsCount = document.getElementById("products-count");
+  const ordersTableBody = document.getElementById("orders-table-body");
+  const ordersMessage = document.getElementById("orders-message");
 
   const productId = document.getElementById("product-id");
   const productName = document.getElementById("product-name");
@@ -101,6 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       new Date().toLocaleDateString("fa-IR");
 
     await loadProducts();
+    await loadOrders();
 
     return true;
   }
@@ -129,6 +132,104 @@ document.addEventListener("DOMContentLoaded", async () => {
     products = data || [];
 
     renderProducts();
+  }
+
+  // دریافت سفارش‌ها فقط برای مدیر
+  async function loadOrders() {
+    if (!ordersTableBody) return;
+    ordersTableBody.textContent = "در حال دریافت سفارش‌ها...";
+
+    const { data, error } = await supabaseClient
+      .from("orders")
+      .select("id, customer_name, phone, total, status, created_at, order_items(product_name, quantity)")
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    if (error) {
+      console.error("Orders loading error:", error);
+      ordersTableBody.textContent = "دریافت سفارش‌ها ناموفق بود.";
+      ordersMessage.textContent = "خطا در دریافت سفارش‌ها.";
+      return;
+    }
+
+    ordersTableBody.replaceChildren();
+    ordersMessage.textContent = data.length
+      ? data.length.toLocaleString("fa-IR") + " سفارش اخیر"
+      : "هنوز سفارشی ثبت نشده است.";
+
+    if (!data.length) {
+      const row = document.createElement("tr");
+      const cell = document.createElement("td");
+      cell.colSpan = 7;
+      cell.textContent = "هنوز سفارشی ثبت نشده است.";
+      row.appendChild(cell);
+      ordersTableBody.appendChild(row);
+      return;
+    }
+
+    const statusLabels = {
+      pending: "در انتظار بررسی",
+      confirmed: "تأیید شده",
+      preparing: "در حال آماده‌سازی",
+      completed: "تکمیل شده",
+      cancelled: "لغو شده"
+    };
+
+    data.forEach((order) => {
+      const row = document.createElement("tr");
+      const values = [
+        String(order.id).slice(0, 8),
+        order.customer_name || "-",
+        order.phone || "-",
+        Number(order.total || 0).toLocaleString("fa-IR") + " تومان",
+        (order.order_items || []).map(item =>
+          (item.product_name || "محصول") + " × " + item.quantity
+        ).join("، ") || "-",
+        order.created_at
+          ? new Date(order.created_at).toLocaleString("fa-IR")
+          : "-"
+      ];
+
+      values.forEach((value) => {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.appendChild(cell);
+      });
+
+      const statusCell = document.createElement("td");
+      const statusSelect = document.createElement("select");
+      statusSelect.setAttribute("aria-label", "وضعیت سفارش " + String(order.id).slice(0, 8));
+
+      Object.entries(statusLabels).forEach(([value, label]) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = label;
+        statusSelect.appendChild(option);
+      });
+
+      statusSelect.value = order.status;
+      statusSelect.addEventListener("change", async () => {
+        statusSelect.disabled = true;
+        const { error: updateError } = await supabaseClient
+          .from("orders")
+          .update({ status: statusSelect.value })
+          .eq("id", order.id);
+
+        if (updateError) {
+          console.error("Order status update error:", updateError);
+          statusSelect.value = order.status;
+          ordersMessage.textContent = "تغییر وضعیت سفارش ذخیره نشد.";
+        } else {
+          order.status = statusSelect.value;
+          ordersMessage.textContent = "وضعیت سفارش به‌روزرسانی شد.";
+        }
+        statusSelect.disabled = false;
+      });
+
+      statusCell.appendChild(statusSelect);
+      row.appendChild(statusCell);
+      ordersTableBody.appendChild(row);
+    });
   }
 
   // ساخت جدول محصولات
