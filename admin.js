@@ -241,15 +241,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         result = await supabaseClient
           .from("products")
           .update(productData)
-          .eq("id", Number(productId.value));
+          .eq("id", Number(productId.value))
+          .select("id");
       } else {
         result = await supabaseClient
           .from("products")
-          .insert(productData);
+          .insert(productData)
+          .select("id");
       }
 
       if (result.error) {
         throw result.error;
+      }
+      if (!Array.isArray(result.data) || result.data.length !== 1) {
+        throw new Error("No product row was changed.");
       }
 
       showProductMessage(
@@ -320,12 +325,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!confirmed) return;
 
     try {
-      const { error } = await supabaseClient
+      const { data, error } = await supabaseClient
         .from("products")
         .delete()
-        .eq("id", Number(id));
+        .eq("id", Number(id))
+        .select("id");
 
       if (error) throw error;
+      if (!Array.isArray(data) || data.length !== 1) {
+        throw new Error("No product row was deleted.");
+      }
 
       showProductMessage("محصول با موفقیت حذف شد.");
 
