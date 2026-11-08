@@ -1174,3 +1174,14 @@ html[dir="ltr"] .modal-image-label { right: auto; left: 15px; }
   }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Keep dynamically hidden menu elements hidden despite grid layout. */
+.product-grid[hidden],
+.empty-state[hidden] {
+  display: none !important;
+}
+
+.product-image.image-unavailable,
+.modal-product-image-wrap img.image-unavailable {
+  visibility: hidden;
+}
