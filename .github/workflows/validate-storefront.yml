@@ -1,0 +1,19 @@
+name: Validate TALOM storefront
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [fashion-production]
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          for file in script.js admin.js account.js; do
+            node --check "$file"
+          done
