@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js" defer></script>
 </head>
 
@@ -38,6 +39,7 @@
     </nav>
 
     <div class="header-actions">
+      <button class="icon-button cart-open" id="cartOpen" type="button" aria-label="سبد خرید">سبد <span id="cartCount">۰</span></button>
       <button class="icon-button" id="languageToggle" aria-label="Change language">EN</button>
       <button class="icon-button theme-button" id="themeToggle" aria-label="Change theme">
         <span id="themeIcon">☼</span>
@@ -284,9 +286,33 @@
         <span id="modalProductCategory" class="product-category"></span>
         <h2 id="modalProductName"></h2>
         <p id="modalProductDescription"></p>
-        <div class="modal-product-bottom"><strong id="modalProductPrice"></strong><button id="modalFavorite" class="favorite-button" aria-label="Add to favorites">♡</button></div>
+        <div class="modal-product-bottom"><strong id="modalProductPrice"></strong><div class="modal-product-actions"><button id="modalAddCart" class="product-add-cart" type="button">افزودن به سبد</button><button id="modalFavorite" class="favorite-button" aria-label="Add to favorites">♡</button></div></div>
       </div>
     </div>
+  </div>
+
+  <div class="modal cart-modal" id="cartModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="cart-modal-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <button class="modal-close" data-close-modal aria-label="بستن">×</button>
+      <div class="cart-modal-heading">
+        <span class="overline">TALOM ORDER</span>
+        <h2 id="cartTitle">سبد خرید</h2>
+        <p>انتخاب‌هایت را بررسی کن و سفارش را ثبت کن.</p>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <p id="cartEmpty" class="cart-empty">سبد خریدت هنوز خالی است. از منو محصولی انتخاب کن.</p>
+      <div id="cartSummary" class="cart-summary" hidden><span>جمع کل</span><strong id="cartTotal">۰ تومان</strong></div>
+      <form id="checkoutForm" class="checkout-form" hidden>
+        <h3>اطلاعات سفارش</h3>
+        <label>نام و نام خانوادگی<input id="checkoutName" type="text" minlength="2" maxlength="120" autocomplete="name" required></label>
+        <label>شماره تماس<input id="checkoutPhone" type="tel" minlength="7" maxlength="32" autocomplete="tel" required></label>
+        <label>آدرس یا توضیح تحویل <span>(اختیاری)</span><textarea id="checkoutAddress" rows="2" maxlength="500" placeholder="مثلاً حضوری / آدرس تحویل"></textarea></label>
+        <p class="checkout-note">برای ثبت سفارش باید وارد حساب TALOM شده باشی. حساب مهمان هم قابل استفاده است.</p>
+        <button id="placeOrderButton" class="checkout-submit" type="submit">ثبت نهایی سفارش</button>
+        <p id="orderMessage" class="order-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
   </div>
 
   <div class="modal image-modal" id="imageModal" aria-hidden="true">
