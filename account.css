@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+:root{color-scheme:dark;--bg:#11110f;--panel:#1b1a17;--line:#39352c;--gold:#d4ad68;--text:#f5f0e7;--muted:#aaa398;--red:#e58b80}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0,#292318 0,transparent 55%),var(--bg);color:var(--text);font-family:Vazirmatn,sans-serif;display:flex;flex-direction:column}
+a{color:var(--gold);text-decoration:none}
+header{height:76px;padding:0 clamp(18px,6vw,80px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}
+.brand{font-size:25px;font-weight:800;letter-spacing:3px}.brand span{color:var(--gold)}
+main{width:min(680px,calc(100% - 32px));margin:65px auto;flex:1}
+.auth-card,.account-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,5vw,44px);box-shadow:0 24px 80px #0005}
+.eyebrow{color:var(--gold);font-size:11px;letter-spacing:2px}
+h1{font-size:27px;margin:10px 0}.intro,#user-email,#orders-message{color:var(--muted);font-size:14px}
+.field{margin:22px 0}.field label{display:block;font-size:13px;margin-bottom:8px;color:#d6cfc1}
+input{width:100%;background:#11110f;border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--text);font:inherit;outline:none}
+input:focus{border-color:var(--gold)}
+.primary,.secondary{border:0;border-radius:10px;padding:13px 22px;font:inherit;font-weight:700;cursor:pointer}
+.primary{width:100%;background:var(--gold);color:#17130c;margin-top:8px}.primary:disabled{opacity:.6;cursor:wait}
+.secondary{background:#332c20;color:var(--gold)}
+.actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px}
+.actions button{background:none;border:0;color:var(--gold);font:inherit;cursor:pointer;font-size:13px}
+.message{min-height:24px;font-size:13px;color:#8bd0a4;margin-top:18px}.message[data-error="true"]{color:var(--red)}
+.account-head,.order-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.account-card h2{font-size:18px;margin-top:36px}
+.order-card{border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:12px}
+.order-card p{color:var(--muted);font-size:13px;line-height:1.9}
+.order-head span{color:var(--gold);font-size:13px}
+footer{text-align:center;padding:25px;color:#777;font-size:11px;letter-spacing:2px}
+[hidden]{display:none!important}
+@media(max-width:520px){main{margin:30px auto}.account-head{align-items:flex-start;flex-direction:column}.actions{flex-direction:column;align-items:flex-start}}
