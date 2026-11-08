@@ -415,7 +415,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // فعال‌سازی لینک بخش انتخاب‌شده در پنل
-  const adminNavLinks = document.querySelectorAll(".sidebar .nav-link[href^='#']");
+  const adminNavLinks = document.querySelectorAll(".sidebar .nav-link[href^='#']:not(#logout-btn)");
   adminNavLinks.forEach((link) => {
     link.addEventListener("click", () => {
       adminNavLinks.forEach((item) => item.classList.remove("active"));
