@@ -213,6 +213,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     saveProductButton.disabled = true;
     saveProductButton.textContent = "در حال ذخیره...";
 
+    const isEditing = Boolean(productId.value);
+
     try {
       const price = Number(productPrice.value);
 
@@ -230,8 +232,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           showProductMessage("آدرس تصویر معتبر نیست.", true);
           return;
         }
-        if (!["https:", "http:"].includes(parsedImageUrl.protocol)) {
-          showProductMessage("آدرس تصویر باید با http یا https شروع شود.", true);
+        if (parsedImageUrl.protocol !== "https:" || parsedImageUrl.username || parsedImageUrl.password) {
+          showProductMessage("آدرس تصویر باید HTTPS معتبر و بدون اطلاعات ورود باشد.", true);
           return;
         }
       }
@@ -253,7 +255,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       let result;
 
-      if (productId.value) {
+      if (isEditing) {
         result = await supabaseClient
           .from("products")
           .update(productData)
@@ -274,7 +276,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       showProductMessage(
-        productId.value
+        isEditing
           ? "محصول با موفقیت ویرایش شد."
           : "محصول جدید با موفقیت اضافه شد."
       );
@@ -412,6 +414,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     showLogin("از حساب خود خارج شدید.");
+  });
+
+  // همگام‌سازی پنل با خروج یا انقضای نشست احراز هویت
+  supabaseClient.auth.onAuthStateChange((event) => {
+    if (event === "SIGNED_OUT") {
+      showLogin("نشست شما پایان یافت. دوباره وارد شوید.");
+    }
   });
 
   // فعال‌سازی لینک بخش انتخاب‌شده در پنل
