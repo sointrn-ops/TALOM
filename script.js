@@ -75,10 +75,15 @@ async function loadProducts() {
     )
   );
 
-  localStorage.setItem(
-    "talom-favorites",
-    JSON.stringify([...state.favorites])
-  );
+  try {
+    localStorage.setItem(
+      "talom-favorites",
+      JSON.stringify([...state.favorites])
+    );
+  } catch (error) {
+    // Product loading must not fail when browser storage is unavailable.
+    console.warn("Could not persist favorites:", error);
+  }
 }
 
 function isEnglish() {
