@@ -68,7 +68,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   function resetProductForm() {
     productForm.reset();
     $("product-id").value = "";
-    $("product-form-title").textContent = "افزودن محصول جدید";\n    $("product-sizes").value = ""; $("product-colors").value = ""; $("product-stock").value = "0";
+    $("product-form-title").textContent = "افزودن محصول جدید";
+    $("product-sizes").value = ""; $("product-colors").value = ""; $("product-stock").value = "0";
     $("save-product-btn").textContent = "ذخیره محصول";
     $("cancel-edit-btn").hidden = true;
     message(productMessage, "");
@@ -187,7 +188,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     $("product-category").value = p.category || "women";
     $("product-price").value = p.price ?? "";
     $("product-description").value = p.description || "";
-    $("product-image").value = p.image_url || "";\n    $("product-sizes").value = (p.sizes || []).join(", ");\n    $("product-colors").value = (p.colors || []).join(", ");\n    $("product-stock").value = p.stock ?? 0;
+    $("product-image").value = p.image_url || "";
+    $("product-sizes").value = (p.sizes || []).join(", ");
+    $("product-colors").value = (p.colors || []).join(", ");
+    $("product-stock").value = p.stock ?? 0;
     $("product-available").value = String(!!p.is_available);
     $("product-form-title").textContent = "ویرایش محصول";
     $("save-product-btn").textContent = "ذخیره تغییرات";
@@ -229,7 +233,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const data = {
       name, name_en: $("product-name-en").value.trim() || null,
-      category: $("product-category").value, price,\n      sizes: $("product-sizes").value.split(",").map(v => v.trim()).filter(Boolean),\n      colors: $("product-colors").value.split(",").map(v => v.trim()).filter(Boolean),\n      stock: Math.max(0, Math.trunc(Number($("product-stock").value) || 0)),
+      category: $("product-category").value, price,
+      sizes: $("product-sizes").value.split(",").map(v => v.trim()).filter(Boolean),
+      colors: $("product-colors").value.split(",").map(v => v.trim()).filter(Boolean),
+      stock: Math.max(0, Math.trunc(Number($("product-stock").value) || 0)),
       description: $("product-description").value.trim() || null,
       image_url: imageUrl || null,
       is_available: $("product-available").value === "true"
