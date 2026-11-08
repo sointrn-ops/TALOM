@@ -21,3 +21,52 @@
   .sidebar.mobile-open .admin-identity,.sidebar.mobile-open .logout-icon{display:grid}
   .sidebar.mobile-open .sidebar-bottom{justify-content:flex-start;flex-wrap:nowrap}
 }
+
+/* Typography accessibility pass: larger, clearer admin interface */
+body{font-size:15px}
+.sidebar .side-caption{font-size:11px}
+.sidebar .nav-link{font-size:13px}
+.sidebar .brand-lockup small{font-size:9px}
+.sidebar .admin-identity strong{font-size:12px}
+.sidebar .admin-identity small{font-size:11px}
+.eyebrow{font-size:10px}
+.page-title{font-size:23px}
+.topbar-actions{font-size:12px}
+.welcome-panel h2{font-size:32px}
+.welcome-panel p{font-size:13px;line-height:2.1}
+.section-heading h2{font-size:22px}
+.section-desc{font-size:12px}
+.stat-top{font-size:12px}
+.stat-card>strong{font-size:29px}
+.stat-card>strong small{font-size:12px}
+.stat-card>p{font-size:11px}
+.content-card{font-size:14px}
+.card-heading h3,.quick-card h3{font-size:18px}
+.recent-main strong,.quick-link strong{font-size:13px}
+.recent-main small,.quick-link small{font-size:11px}
+.recent-price{font-size:12px}
+.data-table th{font-size:12px}
+.data-table td{font-size:13px}
+.customer-cell strong,.product-name-cell strong{font-size:13px}
+.customer-cell small,.product-name-cell small{font-size:11px}
+.address-link,.status-select,.mini-btn{font-size:12px}
+.status-select{padding:9px 10px}
+.field>span{font-size:13px}
+.field input,.field select,.field textarea,.filter-select{font-size:13px;padding:13px 14px}
+.btn{font-size:13px}
+.link-button{font-size:13px}
+.form-message{font-size:13px}
+.inventory-count,.table-note{font-size:11px}
+.admin-footer{font-size:10px}
+@media(max-width:600px){
+ body{font-size:14px}
+ .page-title{font-size:19px}
+ .welcome-panel h2{font-size:26px}
+ .welcome-panel p{font-size:12px}
+ .section-heading h2{font-size:20px}
+ .stat-top{font-size:10px}
+ .stat-card>strong{font-size:23px}
+ .data-table th{font-size:11px}
+ .data-table td{font-size:12px}
+ .field>span,.field input,.field select,.field textarea{font-size:13px}
+}
