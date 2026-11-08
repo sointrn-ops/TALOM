@@ -58,7 +58,7 @@ async function loadProducts() {
   const rows = await response.json();
 
   products = rows.map(row => ({
-    id: Number(row.id),
+    id: String(row.id),
     category: row.category,
     name: row.name || "",
     en: row.name_en || row.name || "",
@@ -144,7 +144,7 @@ function renderProducts() {
             loading="lazy"
             data-product-image="${product.id}"
           >
-          <span class="product-number">${String(product.id).padStart(2, "0")}</span>
+          <span class="product-number">${String(index + 1).padStart(2, "0")}</span>
           <button
             class="favorite-button ${favorite ? "is-favorite" : ""}"
             data-favorite="${product.id}"
@@ -459,7 +459,7 @@ function setupMenu() {
 
       if (favoriteButton) {
         toggleFavorite(
-          Number(favoriteButton.dataset.favorite),
+          favoriteButton.dataset.favorite,
           favoriteButton
         );
         return;
@@ -468,7 +468,7 @@ function setupMenu() {
       const detailsButton = event.target.closest("[data-details]");
 
       if (detailsButton) {
-        openProduct(Number(detailsButton.dataset.details));
+        openProduct(detailsButton.dataset.details);
       }
     });
 
@@ -741,7 +741,7 @@ function loadSavedSettings() {
     }
 
     if (Array.isArray(savedFavorites)) {
-      state.favorites = new Set(savedFavorites.map(Number));
+      state.favorites = new Set(savedFavorites.map(String));
     }
   } catch {
     // The site still works if browser storage is unavailable.
