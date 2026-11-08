@@ -5,6 +5,7 @@ const SUPABASE_URL = "https://rlecvkrrdxqjepsxylee.supabase.co";
 const SUPABASE_KEY = "sb_publishable__TOW24x67zjRnlas6Lb0xg_1wF0tC1g";
 
 let products = [];
+let productsLoadFailed = false;
 
 const categoryNames = {
   all: { fa: "همه", en: "All" },
@@ -56,6 +57,7 @@ async function loadProducts() {
   }
 
   const rows = await response.json();
+  productsLoadFailed = false;
 
   products = rows.map(row => ({
     id: Number(row.id),
@@ -178,7 +180,15 @@ function renderProducts() {
       : `${new Intl.NumberFormat("fa-IR").format(filtered.length)} انتخاب`;
   }
 
-  if (emptyState) emptyState.hidden = filtered.length !== 0;
+  if (emptyState) {
+    emptyState.hidden = filtered.length !== 0;
+    const message = $("p", emptyState);
+    if (message && productsLoadFailed) {
+      message.textContent = isEnglish()
+        ? "The menu could not be loaded. Please try again later."
+        : "بارگذاری منو ناموفق بود. لطفاً بعداً دوباره تلاش کنید.";
+    }
+  }
   if (grid) grid.hidden = filtered.length === 0;
 }
 
@@ -817,6 +827,7 @@ async function init() {
   } catch (error) {
     console.error("TALOM products loading error:", error);
     products = [];
+    productsLoadFailed = true;
     renderProducts();
     if (grid) grid.hidden = true;
     if (emptyState) {
