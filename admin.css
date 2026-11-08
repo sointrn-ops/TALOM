@@ -124,3 +124,20 @@ body{font-size:16px}
  .field>span,.field input,.field select,.field textarea{font-size:14px}
  .btn{font-size:14px}
 }
+
+
+/* RTL layout: move the forest navigation sidebar to the right */
+.sidebar{right:0;left:auto}
+.main-area{margin-right:258px;margin-left:0}
+.nav-link.active{box-shadow:inset 2px 0 var(--gold)}
+@media(max-width:1250px){
+ .main-area{margin-right:225px;margin-left:0}
+}
+@media(max-width:850px){
+ .main-area{margin-right:76px;margin-left:0}
+ .sidebar{right:0;left:auto}
+ .sidebar.mobile-open{box-shadow:-15px 0 40px #10281f40}
+}
+@media(max-width:600px){
+ .main-area{margin-right:76px;margin-left:0}
+}
