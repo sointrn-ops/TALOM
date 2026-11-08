@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     showMessage("");
   }
 
-  async function showAccount(user) {
+  function continueCheckoutIfRequested() {\n    if (new URLSearchParams(location.search).get("next") === "checkout") location.replace("index.html#shop");\n  }\n\n  async function showAccount(user) {
     authCard.hidden = true;
     accountCard.hidden = false;
     document.getElementById("user-email").textContent = user.is_anonymous ? "حساب مهمان آزمایشی" : (user.email || "");
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         if (error) throw error;
         if (data.session) {
-          await showAccount(data.user);
+          await showAccount(data.user);\n        continueCheckoutIfRequested();\n          continueCheckoutIfRequested();
         } else {
           showMessage("ثبت‌نام انجام شد. ایمیل خود را برای تأیید حساب بررسی کنید.");
         }
@@ -210,5 +210,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     showMessage("بررسی نشست ورود ناموفق بود.", true);
     return;
   }
-  if (session?.user) await showAccount(session.user);
+  if (session?.user) { await showAccount(session.user); continueCheckoutIfRequested(); }
 });
