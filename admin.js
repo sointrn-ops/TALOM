@@ -408,7 +408,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const phone = $("setting-phone").value.trim();
     const instagram = $("setting-instagram").value.trim();
     const telegram = $("setting-telegram").value.trim();
-    if (!cafeName) { message(settingsMessage, "نام کافه الزامی است.", true); return; }
+    if (!cafeName) { message(settingsMessage, "نام فروشگاه الزامی است.", true); return; }
     for (const [label, value] of [["اینستاگرام", instagram], ["تلگرام", telegram]]) {
       if (value && !/^(https?:\/\/|@)[^\s]+$/i.test(value)) {
         message(settingsMessage, "آدرس " + label + " باید لینک معتبر یا شناسه با @ باشد.", true); return;
@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         .eq("id", 1).select("id").maybeSingle();
       if (error) throw error;
       if (!data) throw new Error("Settings row was not updated.");
-      message(settingsMessage, "تنظیمات کافه با موفقیت ذخیره شد.");
+      message(settingsMessage, "تنظیمات فروشگاه با موفقیت ذخیره شد.");
     } catch (error) {
       console.error("Save settings:", error); message(settingsMessage, "ذخیره تنظیمات انجام نشد؛ مجوز مدیر را بررسی کنید.", true);
     } finally { button.disabled = false; button.textContent = "ذخیره تنظیمات"; }
