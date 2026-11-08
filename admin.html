@@ -184,7 +184,25 @@
       <!-- Orders -->
       <section class="section" id="orders">
         <h2>مدیریت سفارش‌ها</h2>
-        <p class="empty-state">هنوز سفارشی ثبت نشده است.</p>
+        <p id="orders-message" aria-live="polite">در حال دریافت سفارش‌ها...</p>
+        <div class="products-table">
+          <table>
+            <thead>
+              <tr>
+                <th>کد سفارش</th>
+                <th>مشتری</th>
+                <th>تلفن</th>
+                <th>مبلغ</th>
+                <th>اقلام</th>
+                <th>تاریخ</th>
+                <th>وضعیت</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body">
+              <tr><td colspan="7">در حال دریافت...</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Settings -->
