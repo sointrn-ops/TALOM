@@ -111,8 +111,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const [productResult, availableResult] = await Promise.all([
       supabaseClient.from("products")
         .select("id,name,name_en,category,description,price,image_url,is_available,sizes,colors,stock,created_at", { count: "exact" })
+        .in("category", ["women", "men", "unisex"])
         .order("created_at", { ascending: false }),
-      supabaseClient.from("products").select("id", { count: "exact", head: true }).eq("is_available", true)
+      supabaseClient.from("products").select("id", { count: "exact", head: true }).eq("is_available", true).in("category", ["women", "men", "unisex"])
     ]);
     const { data, error, count } = productResult;
     if (error || availableResult.error) {
