@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#103b2d">
-  <title>TALOM | پنل مدیریت کافه</title>
+  <title>TALOM | پنل مدیریت فروشگاه</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
   <div class="login-screen" id="login-screen">
     <div class="login-card">
       <div class="login-brand">TALOM<span>.</span></div>
-      <p class="eyebrow">COFFEE CULTURE · ADMINISTRATION</p>
+      <p class="eyebrow">CONTEMPORARY FASHION · ADMINISTRATION</p>
       <h1>ورود به مدیریت</h1>
       <p class="login-copy">برای ادامه، با حساب مدیر وارد شوید.</p>
       <form id="login-form">
@@ -39,8 +39,8 @@
 
   <div class="admin-shell" id="admin-panel" hidden>
     <aside class="sidebar" id="sidebar">
-      <a class="brand-lockup" href="#dashboard"><span class="brand-emblem">T</span><span><strong>TALOM<span>.</span></strong><small>COFFEE CULTURE</small></span></a>
-      <div class="side-caption">مدیریت کافه</div>
+      <a class="brand-lockup" href="#dashboard"><span class="brand-emblem">T</span><span><strong>TALOM<span>.</span></strong><small>CONTEMPORARY FASHION</small></span></a>
+      <div class="side-caption">مدیریت فروشگاه</div>
       <nav class="side-nav" aria-label="منوی مدیریت">
         <a class="nav-link active" href="#dashboard"><span class="nav-icon">⌂</span> نمای کلی</a>
         <a class="nav-link" href="#orders"><span class="nav-icon">▤</span> سفارش‌ها <span class="nav-count" id="nav-pending-count">۰</span></a>
@@ -71,16 +71,16 @@
 
       <section class="page-section" id="dashboard">
         <div class="welcome-panel">
-          <div class="welcome-copy"><span class="eyebrow light">TALOM · MANAGEMENT</span><h2>به پنل مدیریت کافه تالم خوش آمدید</h2><p>نمایی روشن از سفارش‌ها، محصولات و عملکرد روزانه کافه.</p><button class="welcome-refresh" id="refresh-all-btn" type="button">↻ به‌روزرسانی اطلاعات</button></div>
+          <div class="welcome-copy"><span class="eyebrow light">TALOM · MANAGEMENT</span><h2>به پنل مدیریت فروشگاه تالم خوش آمدید</h2><p>نمایی روشن از سفارش‌ها، محصولات و عملکرد فروشگاه.</p><button class="welcome-refresh" id="refresh-all-btn" type="button">↻ به‌روزرسانی اطلاعات</button></div>
           <div class="welcome-date"><span class="date-icon">▦</span><strong id="welcome-date-label">امروز</strong><small><i></i> حساب مدیر تأیید شد</small></div>
           <div class="welcome-decoration"><span>Ｔ</span><small>COFFEE<br>PEOPLE<br>CULTURE</small></div>
         </div>
 
-        <div class="section-heading"><div><span class="eyebrow">LIVE OVERVIEW</span><h2>خلاصه عملکرد کافه</h2></div><span class="section-hint">آمار بر اساس اطلاعات ثبت‌شده</span></div>
+        <div class="section-heading"><div><span class="eyebrow">LIVE OVERVIEW</span><h2>خلاصه عملکرد فروشگاه</h2></div><span class="section-hint">آمار بر اساس اطلاعات ثبت‌شده</span></div>
         <div class="stats-grid">
           <article class="stat-card stat-cream"><div class="stat-top"><span>فروش تکمیل‌شده امروز</span><span class="stat-icon">↗</span></div><strong id="today-sales">۰ <small>تومان</small></strong><p>مجموع سفارش‌های تکمیل‌شده امروز</p><div class="stat-spark spark-gold"></div></article>
           <article class="stat-card stat-sage"><div class="stat-top"><span>سفارش‌های در انتظار</span><span class="stat-icon">◷</span></div><strong id="new-orders-count">۰</strong><p>نیازمند بررسی و پیگیری</p><div class="stat-spark spark-green"></div></article>
-          <article class="stat-card stat-cream"><div class="stat-top"><span>کل محصولات</span><span class="stat-icon">▣</span></div><strong id="products-count">۰</strong><p>محصولات ثبت‌شده در منو</p><div class="stat-spark spark-gold"></div></article>
+          <article class="stat-card stat-cream"><div class="stat-top"><span>کل محصولات</span><span class="stat-icon">▣</span></div><strong id="products-count">۰</strong><p>محصولات پوشاک ثبت‌شده</p><div class="stat-spark spark-gold"></div></article>
           <article class="stat-card stat-sage"><div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong id="orders-count">۰</strong><p>تمام سفارش‌های ثبت‌شده</p><div class="stat-spark spark-green"></div></article>
         </div>
 
@@ -97,9 +97,9 @@
           <article class="content-card activity-card"><div class="card-heading"><div><span class="eyebrow">QUICK ACCESS</span><h3>دسترسی سریع</h3></div><span class="card-icon">⌁</span></div>
             <a href="#products" class="quick-link"><span class="quick-symbol">＋</span><span><strong>افزودن محصول</strong><small>محصول تازه به منو اضافه کنید</small></span><b>←</b></a>
             <a href="#orders" class="quick-link"><span class="quick-symbol">▤</span><span><strong>مدیریت سفارش‌ها</strong><small>بررسی و تغییر وضعیت سفارش‌ها</small></span><b>←</b></a>
-            <a href="#settings" class="quick-link"><span class="quick-symbol">⚙</span><span><strong>اطلاعات کافه</strong><small>راه‌های ارتباطی و مشخصات</small></span><b>←</b></a>
+            <a href="#settings" class="quick-link"><span class="quick-symbol">⚙</span><span><strong>اطلاعات فروشگاه</strong><small>راه‌های ارتباطی و مشخصات</small></span><b>←</b></a>
           </article>
-          <article class="content-card cafe-card"><div class="card-heading"><div><span class="eyebrow">TALOM STATUS</span><h3>وضعیت پنل</h3></div><span class="status-live"><i></i> آنلاین</span></div><div class="cafe-mark">T.</div><strong class="cafe-title">TALOM COFFEE CULTURE</strong><p>مدیریت یکپارچه سفارش‌ها و منوی کافه</p><div class="cafe-bottom"><span>منطقه زمانی فروش</span><b>Asia / Tehran</b></div></article>
+          <article class="content-card cafe-card"><div class="card-heading"><div><span class="eyebrow">TALOM STATUS</span><h3>وضعیت پنل</h3></div><span class="status-live"><i></i> آنلاین</span></div><div class="cafe-mark">T.</div><strong class="cafe-title">TALOM COFFEE CULTURE</strong><p>مدیریت یکپارچه سفارش‌ها و محصولات پوشاک</p><div class="cafe-bottom"><span>منطقه زمانی فروش</span><b>Asia / Tehran</b></div></article>
         </div>
       </section>
 
@@ -112,21 +112,21 @@
       </section>
 
       <section class="page-section" id="products">
-        <div class="section-heading"><div><span class="eyebrow">MENU MANAGEMENT</span><h2>مدیریت محصولات</h2><p class="section-desc">اطلاعات و وضعیت محصولات منوی TALOM را مدیریت کنید.</p></div></div>
+        <div class="section-heading"><div><span class="eyebrow">APPAREL CATALOG</span><h2>مدیریت محصولات</h2><p class="section-desc">اطلاعات، دسته‌بندی، سایز، رنگ و موجودی پوشاک TALOM را مدیریت کنید.</p></div></div>
         <div class="product-workspace">
           <article class="content-card product-form-card"><div class="card-heading"><div><span class="eyebrow">PRODUCT EDITOR</span><h3 id="product-form-title">افزودن محصول جدید</h3></div><span class="form-mark">＋</span></div>
             <form id="product-form"><input type="hidden" id="product-id">
-              <label class="field"><span>نام محصول فارسی *</span><input type="text" id="product-name" maxlength="120" required placeholder="مثلاً لاته وانیلی"></label>
-              <label class="field"><span>نام محصول انگلیسی</span><input type="text" id="product-name-en" maxlength="120" placeholder="Vanilla Latte"></label>
-              <div class="field-row"><label class="field"><span>دسته‌بندی *</span><select id="product-category" required><option value="coffee">قهوه</option><option value="cold">نوشیدنی سرد</option><option value="special">نوشیدنی ویژه</option><option value="dessert">دسر</option><option value="food">غذا</option></select></label><label class="field"><span>قیمت (تومان) *</span><input type="number" id="product-price" min="1" step="1" required placeholder="۱۵۰۰۰۰"></label></div>
+              <label class="field"><span>نام محصول *</span><input type="text" id="product-name" maxlength="120" required placeholder="مثلاً کت ساختارمند"></label>
+              <label class="field"><span>نام انگلیسی محصول</span><input type="text" id="product-name-en" maxlength="120" placeholder="Structured Jacket"></label>
+              <div class="field-row"><label class="field"><span>دسته‌بندی *</span><select id="product-category" required><option value="women">زنانه</option><option value="men">مردانه</option><option value="unisex">بدون جنسیت</option></select></label><label class="field"><span>قیمت (تومان) *</span><input type="number" id="product-price" min="1" step="1" required placeholder="۱۵۰۰۰۰"></label></div>
               <label class="field"><span>توضیحات</span><textarea id="product-description" rows="3" maxlength="1000" placeholder="توضیح کوتاه محصول..."></textarea></label>
-              <label class="field"><span>آدرس تصویر محصول</span><input type="url" id="product-image" placeholder="https://..."></label>
+              <label class="field"><span>آدرس تصویر محصول</span><input type="url" id="product-image" placeholder="https://..."></label><div class="field-row"><label class="field"><span>سایزها (با کاما جدا کنید)</span><input type="text" id="product-sizes" placeholder="XS, S, M, L, XL"></label><label class="field"><span>رنگ‌ها (با کاما جدا کنید)</span><input type="text" id="product-colors" placeholder="مشکی, کرم, زیتونی"></label></div><label class="field"><span>موجودی کل</span><input type="number" id="product-stock" min="0" step="1" value="0"></label>
               <label class="field"><span>وضعیت نمایش در منو</span><select id="product-available"><option value="true">موجود و قابل سفارش</option><option value="false">ناموجود و پنهان از سفارش</option></select></label>
               <div class="form-actions"><button class="btn btn-primary" id="save-product-btn" type="submit">ذخیره محصول</button><button class="btn btn-quiet" id="cancel-edit-btn" type="button" hidden>لغو ویرایش</button></div><p class="form-message" id="product-message" aria-live="polite"></p>
             </form>
           </article>
           <article class="content-card inventory-card"><div class="card-heading"><div><span class="eyebrow">CURRENT INVENTORY</span><h3>فهرست محصولات</h3></div><span class="inventory-count" id="inventory-count">۰ مورد</span></div>
-            <div class="toolbar inventory-toolbar"><div class="search-wrap"><span>⌕</span><input id="product-search" type="search" placeholder="جست‌وجوی محصول..."></div><select id="product-category-filter" class="filter-select" aria-label="فیلتر دسته‌بندی"><option value="all">همه دسته‌ها</option><option value="coffee">قهوه</option><option value="cold">نوشیدنی سرد</option><option value="special">نوشیدنی ویژه</option><option value="dessert">دسر</option><option value="food">غذا</option></select></div>
+            <div class="toolbar inventory-toolbar"><div class="search-wrap"><span>⌕</span><input id="product-search" type="search" placeholder="جست‌وجوی محصول..."></div><select id="product-category-filter" class="filter-select" aria-label="فیلتر دسته‌بندی"><option value="all">همه دسته‌ها</option><option value="women">زنانه</option><option value="men">مردانه</option><option value="unisex">بدون جنسیت</option></select></div>
             <div class="table-scroll"><table class="data-table product-table"><thead><tr><th>محصول</th><th>دسته</th><th>قیمت</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody id="products-table-body"><tr><td colspan="5">در حال دریافت محصولات...</td></tr></tbody></table></div>
           </article>
         </div>
