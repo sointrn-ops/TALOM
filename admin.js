@@ -38,18 +38,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   function formatMoney(value) {
     return Number(value || 0).toLocaleString("fa-IR") + " تومان";
   }
+  const CAFE_TIME_ZONE = "Asia/Tehran";
   function formatDate(value) {
     if (!value) return "—";
     const date = new Date(value);
-    return Number.isNaN(date.getTime()) ? "—" : date.toLocaleString("fa-IR", { dateStyle: "medium", timeStyle: "short" });
+    return Number.isNaN(date.getTime()) ? "—" : date.toLocaleString("fa-IR", {
+      timeZone: CAFE_TIME_ZONE, dateStyle: "medium", timeStyle: "short"
+    });
   }
-  function localIso(date) {
-    const offset = -date.getTimezoneOffset();
-    const sign = offset >= 0 ? "+" : "-";
-    const pad = (n) => String(Math.floor(Math.abs(n))).padStart(2, "0");
-    return date.getFullYear() + "-" + pad(date.getMonth()+1) + "-" + pad(date.getDate()) +
-      "T" + pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) +
-      sign + pad(offset / 60) + ":" + pad(offset % 60);
+  function tehranDayBounds() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: CAFE_TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit"
+    }).formatToParts(new Date());
+    const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    const startUtc = Date.UTC(Number(values.year), Number(values.month) - 1, Number(values.day)) - 12600000;
+    return { start: new Date(startUtc).toISOString(), end: new Date(startUtc + 86400000).toISOString() };
   }
   function setLogin(text = "") {
     loginScreen.hidden = false;
@@ -84,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginScreen.hidden = true;
     adminPanel.hidden = false;
     setAdminName(profile.full_name || "TALOM Admin");
-    $("current-date").textContent = new Date().toLocaleDateString("fa-IR", { dateStyle: "full" });
+    $("current-date").textContent = new Date().toLocaleDateString("fa-IR", { timeZone: CAFE_TIME_ZONE, dateStyle: "full" });
     await refreshAll();
     return true;
   }
@@ -108,7 +111,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     products = data || [];
     $("products-count").textContent = products.length.toLocaleString("fa-IR");
-    $("inventory-count").textContent = products.length.toLocaleString("fa-IR") + " مورد";
+    const availableCount = products.filter(product => product.is_available).length;
+    $("inventory-count").textContent = products.length.toLocaleString("fa-IR") + " محصول · " + availableCount.toLocaleString("fa-IR") + " موجود";
     renderProducts();
   }
 
@@ -116,7 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const term = $("product-search").value.trim().toLocaleLowerCase();
     const category = $("product-category-filter").value;
     const filtered = products.filter(p => {
-      const matchesTerm = [p.name, p.name_en, p.category].some(v => String(v || "").toLocaleLowerCase().includes(term));
+      const matchesTerm = [p.name, p.name_en, p.category, p.description].some(v => String(v || "").toLocaleLowerCase().includes(term));
       return matchesTerm && (category === "all" || p.category === category);
     });
     productBody.replaceChildren();
@@ -194,11 +198,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!name || !Number.isSafeInteger(price) || price < 1) {
       message(productMessage, "نام محصول و قیمت صحیح (عدد صحیح بیشتر از صفر) الزامی است.", true); return;
     }
+    const imageUrl = $("product-image").value.trim();
+    if (imageUrl) {
+      try {
+        const parsedImageUrl = new URL(imageUrl);
+        if (!["http:", "https:"].includes(parsedImageUrl.protocol)) throw new Error("Invalid protocol");
+      } catch {
+        message(productMessage, "آدرس تصویر باید یک لینک معتبر با https:// باشد.", true); return;
+      }
+    }
     const data = {
       name, name_en: $("product-name-en").value.trim() || null,
       category: $("product-category").value, price,
       description: $("product-description").value.trim() || null,
-      image_url: $("product-image").value.trim() || null,
+      image_url: imageUrl || null,
       is_available: $("product-available").value === "true"
     };
     button.disabled = true; button.textContent = "در حال ذخیره...";
@@ -230,8 +243,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       .order("created_at", { ascending: false }).limit(200);
     if (error) {
       console.error("Orders:", error);
-      orderBody.innerHTML = '<tr><td colspan="7" class="empty-row">دریافت سفارش‌ها ناموفق بود.</td></tr>';
-      message(ordersMessage, "خطا در دریافت سفارش‌ها.", true);
+      orders = [];
+      orderBody.innerHTML = '<tr><td colspan="7" class="empty-row">دریافت سفارش‌ها ناموفق بود. اتصال و دسترسی مدیر را بررسی کنید.</td></tr>';
+      $("nav-pending-count").textContent = "۰";
+      renderRecentOrders();
+      message(ordersMessage, "خطا در دریافت سفارش‌ها؛ اطلاعات قبلی به‌عنوان داده تازه نمایش داده نمی‌شود.", true);
       return;
     }
     orders = data || [];
@@ -300,13 +316,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function loadDashboardStats() {
-    const start = new Date(); start.setHours(0,0,0,0);
-    const end = new Date(start); end.setDate(end.getDate()+1);
+    const { start, end } = tehranDayBounds();
     const [all, pending, sales] = await Promise.all([
       supabaseClient.from("orders").select("id", { count: "exact", head: true }),
       supabaseClient.from("orders").select("id", { count: "exact", head: true }).eq("status", "pending"),
       supabaseClient.from("orders").select("total").eq("status", "completed")
-        .gte("created_at", localIso(start)).lt("created_at", localIso(end))
+        .gte("created_at", start).lt("created_at", end)
     ]);
     if (all.error || pending.error || sales.error) {
       console.error("Dashboard stats:", all.error || pending.error || sales.error);
@@ -445,7 +460,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   $("order-search").addEventListener("input", renderOrders);
   $("order-status-filter").addEventListener("change", renderOrders);
-  $("mobile-menu-btn").addEventListener("click", () => $("sidebar").classList.toggle("mobile-open"));
+  $("mobile-menu-btn").addEventListener("click", () => {
+    const opened = $("sidebar").classList.toggle("mobile-open");
+    $("mobile-menu-btn").setAttribute("aria-expanded", String(opened));
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      $("sidebar").classList.remove("mobile-open");
+      $("mobile-menu-btn").setAttribute("aria-expanded", "false");
+    }
+  });
+  document.addEventListener("click", event => {
+    if (window.innerWidth <= 850 && $("sidebar").classList.contains("mobile-open") &&
+        !$("sidebar").contains(event.target) && !$("mobile-menu-btn").contains(event.target)) {
+      $("sidebar").classList.remove("mobile-open");
+      $("mobile-menu-btn").setAttribute("aria-expanded", "false");
+    }
+  });
   document.querySelectorAll(".nav-link, .quick-link, .inline-link, .brand-lockup").forEach(link => {
     link.addEventListener("click", () => {
       document.querySelectorAll(".nav-link").forEach(item => item.classList.toggle("active", item.hash === link.hash));
