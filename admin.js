@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // حذف محصول
   async function deleteProduct(id) {
-    const product = products.find((item) => Number(item.id) === Number(id));
+    const product = products.find((item) => item.id === id);
 
     if (!product) return;
 
