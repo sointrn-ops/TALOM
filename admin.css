@@ -290,3 +290,27 @@ td {
     overflow-x: auto;
   }
 }
+
+/* Keep hidden screens hidden even when component styles set display. */
+[hidden] {
+  display: none !important;
+}
+
+#login-screen {
+  margin-right: 0;
+  width: min(100%, 560px);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+}
+
+#login-screen .section {
+  width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
