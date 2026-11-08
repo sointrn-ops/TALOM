@@ -31,6 +31,17 @@ footer{background:#292622;color:#fff;padding:45px 0 17px}.footer-grid{display:gr
 @media(max-width:900px){.header-inner{grid-template-columns:auto 1fr auto;gap:14px}.brand{font-size:23px}.hero-layout{min-height:490px}.category-card{height:300px}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.footer-grid{grid-template-columns:1.5fr 1fr 1fr}.footer-grid>div:last-child{display:none}}
 @media(max-width:650px){.announce{height:28px;font-size:9px}.header-inner{height:auto;min-height:70px;grid-template-columns:30px 1fr auto;gap:8px}.menu-btn{display:block}.brand{justify-self:center;font-size:21px}.brand small{font-size:6px}.search{grid-column:1/-1;grid-row:2;height:37px;margin:0 0 10px}.head-actions{gap:4px}.head-btn{height:34px;min-width:34px;font-size:15px}.nav-row{display:none}.nav-row.open{display:block;height:auto}.nav-inner{padding:14px 0;display:flex;flex-wrap:wrap;gap:15px 22px}.hero{padding-top:10px}.hero-layout{display:flex;flex-direction:column;gap:0;min-height:0}.hero-photo{height:390px;order:0}.hero-panel{min-height:310px;padding:27px 7% 25px;order:1}.hero-panel h1{font-size:43px;margin:12px 0}.hero-panel p{font-size:10px;margin-bottom:17px}.hero-note{margin-top:25px}.section{padding:42px 0}.section-head h2{font-size:22px}.category-grid{grid-template-columns:1fr 1fr;gap:8px}.category-card{height:245px}.category-card:last-child{grid-column:1/-1;height:280px}.category-info{right:13px;bottom:13px}.category-info strong{font-size:19px}.category-info small{font-size:7px}.shop-section{padding:42px 0 50px}.shop-top h2{font-size:22px}.shop-controls{align-items:flex-start;flex-direction:column}.chips{gap:5px}.chip{padding:8px 10px;font-size:9px}.sort-select{align-self:flex-end}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 9px}.product-name{font-size:10px}.product-price{font-size:10px}.product-add{font-size:9px}.quick-add{display:none}.campaign{grid-template-columns:1fr;margin:40px 0;min-height:0}.campaign-image{height:310px;min-height:0;grid-row:1}.campaign-copy{padding:30px 7% 36px}.campaign-copy h2{font-size:35px}.service-row{grid-template-columns:1fr;gap:16px;padding:20px 0;margin-bottom:42px}.service{justify-content:flex-start}.newsletter{display:block;padding:27px 6%;margin-bottom:42px}.newsletter h2{font-size:19px}.newsletter form{width:100%;margin-top:15px}.footer-grid{grid-template-columns:1fr 1fr;gap:16px}.footer-grid>div:first-child{grid-column:1/-1}.footer-grid>div:last-child{display:block}.copyright{display:block;line-height:2.2}.modal-box{grid-template-columns:1fr;max-height:88vh}.modal-photo{height:260px;min-height:0}.modal-info{padding:22px}}
 </style>
+
+<style id="hero-portrait-adjustment">
+@media (min-width:651px){
+  .hero-layout{grid-template-columns:1fr .72fr}
+  .hero-photo{min-height:690px}
+}
+@media (max-width:650px){
+  .hero-photo{height:min(125vw,560px);min-height:0}
+}
+</style>
+
 </head>
 <body>
 <div class="announce">مجموعه جدید بهار · ارسال به سراسر ایران</div>
@@ -43,7 +54,7 @@ footer{background:#292622;color:#fff;padding:45px 0 17px}.footer-grid{display:gr
 <div class="nav-row" id="navRow"><nav class="container nav-inner"><a href="#new">تازه‌رسیده‌ها</a><a href="#categories">دسته‌بندی‌ها</a><a href="#catalog">همه محصولات</a><a href="#story">درباره Maison Cléo</a><a class="sale" href="#catalog" data-nav-filter="تخفیف">پیشنهاد ویژه</a></nav></div>
 <main>
 <section class="hero"><div class="container hero-layout">
-<div class="hero-photo"><img src="https://images.unsplash.com/photo-1564931941481-cb07951e9f2f?auto=format&fit=crop&w=1800&q=90" alt="مدل فشن در خیابان‌های سئول، کره جنوبی"><span class="photo-label">MAISON CLÉO — SPRING / SUMMER</span></div>
+<div class="hero-photo"><img src="https://images.unsplash.com/photo-1564931941481-cb07951e9f2f?auto=format&fit=crop&w=1100&h=1500&q=90" alt="مدل فشن در خیابان‌های سئول، کره جنوبی"><span class="photo-label">MAISON CLÉO — SPRING / SUMMER</span></div>
 <div class="hero-panel"><span class="eyebrow">NEW SEASON · ۱۴۰۵</span><h1>برای هر روز،<br>یک انتخاب تازه.</h1><p>مجموعه‌ای از لباس‌های زنانه با فرم‌های ساده و رنگ‌هایی که به‌راحتی با هم ست می‌شوند.</p><a class="btn-dark" href="#catalog">خرید کالکشن جدید <span>←</span></a><div class="hero-note"><span>01 — 03</span><span>پوشاک زنانه</span></div></div>
 </div></section>
 <div class="container">
