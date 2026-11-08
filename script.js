@@ -64,7 +64,7 @@ async function loadProducts() {
     en: row.name_en || row.name || "",
     price: Number(row.price) || 0,
     description: row.description || "",
-    descEn: row.description || "",
+    descEn: row.description_en || row.description || "",
     image: row.image_url || ""
   }));
 
@@ -264,8 +264,21 @@ function openProduct(productId) {
 
   state.selectedProduct = product.id;
 
-  $("#modalProductImage").src = product.image;
-  $("#modalProductImage").alt = getProductName(product);
+  const modalImage = $("#modalProductImage");
+  modalImage.onerror = () => {
+    modalImage.onerror = null;
+    modalImage.removeAttribute("src");
+    modalImage.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
+    modalImage.classList.add("image-unavailable");
+  };
+  modalImage.classList.remove("image-unavailable");
+  if (product.image) {
+    modalImage.src = product.image;
+  } else {
+    modalImage.removeAttribute("src");
+    modalImage.classList.add("image-unavailable");
+  }
+  modalImage.alt = getProductName(product);
   $("#modalProductName").textContent = getProductName(product);
   $("#modalProductDescription").textContent = getProductDescription(product);
   $("#modalProductCategory").textContent =
@@ -793,11 +806,25 @@ async function init() {
     setLanguage(state.language);
   } catch (error) {
     console.error("TALOM products loading error:", error);
+    products = [];
+    renderProducts();
+    if (grid) grid.hidden = true;
+    if (emptyState) {
+      emptyState.hidden = false;
+      const message = $("p", emptyState);
+      if (message) {
+        message.textContent = isEnglish()
+          ? "The menu could not be loaded. Please try again later."
+          : "بارگذاری منو ناموفق بود. لطفاً بعداً دوباره تلاش کنید.";
+      }
+    }
+    if (productCount) productCount.textContent = isEnglish() ? "Unavailable" : "در دسترس نیست";
     showToast(
       isEnglish()
         ? "Could not load products from the server."
         : "دریافت محصولات از سرور ناموفق بود."
     );
+    setLanguage(state.language);
   }
 }
 
