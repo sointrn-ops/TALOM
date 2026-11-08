@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#eeeae2"><meta name="description" content="TALOM — Contemporary Fashion House. پوشاک معاصر زنانه و مردانه.">
+<title>TALOM® — Contemporary Fashion House</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fashion.css"><script src="fashion.js" defer></script>
+</head>
+<body>
+<div class="announcement">COMPLIMENTARY DELIVERY ON ORDERS OVER €150 <span>—</span> مجموعه تازه TALOM</div>
+<header class="header">
+ <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
+ <nav class="nav" id="nav"><a href="#collections">مجموعه‌ها</a><a href="#experience">اتاق نمایش</a><a href="#story">داستان TALOM</a></nav>
+ <a class="wordmark" href="#top">TALOM<span>®</span><small>CONTEMPORARY FASHION HOUSE</small></a>
+ <div class="actions"><button id="lang">EN</button><button id="theme" aria-label="تغییر پوسته">◐</button><button id="bag">کیف خرید <b id="count">۰</b></button></div>
+</header>
+<main id="top">
+<section class="hero">
+ <div class="hero-copy"><p class="eyebrow">COLLECTION 001 — AUTUMN / WINTER</p><h1>لباس،<br><em>بیانِ بی‌کلام.</em></h1><p class="lead">فرم‌های ماندگار، جزئیات دقیق و نگاهی تازه به پوشش روزمره.</p><div class="hero-links"><a class="button dark" href="#collections">کشف مجموعه <span>↗</span></a><a class="underlink" href="#experience">تجربه TALOM</a></div><div class="hero-index"><strong>01</strong><span> / 04</span><i></i><small>DESIGNED TO BE YOURS</small></div></div>
+ <div class="hero-visual"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1500&q=90" alt="مدل پوشاک در کمپین مد TALOM"><div class="visual-caption"><span>THE NEW FORM</span><span>01 / TALOM EDIT</span></div><div class="vertical-note">A STUDY IN MODERN ELEGANCE</div></div>
+ <div class="hero-watermark">T.</div>
+</section>
+<section class="intro-strip"><span>LESS, BUT BETTER.</span><p>طراحی‌شده برای پوشیدن؛ ساخته‌شده برای ماندن.</p><span>EST. 2026</span></section>
+<section class="collections section" id="collections">
+ <div class="section-head"><div><p class="eyebrow">THE COLLECTIONS</p><h2>انتخابِ <em>شما</em></h2></div><p>دو جهان مستقل، یک زبان طراحی مشترک.</p></div>
+ <div class="collection-grid">
+  <a class="collection-card women" href="#shop" data-filter="women"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85" alt="مجموعه زنانه"><span class="collection-number">01 / WOMEN</span><span class="collection-title">زنانه <b>↗</b></span></a>
+  <a class="collection-card men" href="#shop" data-filter="men"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85" alt="مجموعه مردانه"><span class="collection-number">02 / MEN</span><span class="collection-title">مردانه <b>↗</b></span></a>
+ </div>
+</section>
+<section class="experience section" id="experience">
+ <div class="experience-copy"><p class="eyebrow">THE TALOM FITTING ROOM</p><h2>لباس را<br><em>از زاویه‌ای تازه</em><br>ببینید.</h2><p>در فضای نمایش TALOM، مدل را انتخاب کنید و استایل‌های منتخب را بررسی کنید. این پیش‌نمایش، نقطه شروع تجربه پرو مجازی ماست.</p><div class="model-switch"><button class="active" data-model="women">مدل زنانه</button><button data-model="men">مدل مردانه</button></div><small class="disclaimer">پیش‌نمایش تصویری فعلی ثابت است؛ نمایش ۳۶۰ درجه و تعویض واقعی لباس در مرحله توسعه سه‌بعدی قرار دارد.</small></div>
+ <div class="stage"><div class="stage-top"><span>VIRTUAL SHOWROOM / 001</span><span>PREVIEW</span></div><div class="stage-glow"></div><img id="modelImage" src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=90" alt="پیش‌نمایش مدل زنانه"><div class="stage-bottom"><span id="modelLabel">WOMENSWEAR / LOOK 01</span><span>✳ TALOM</span></div></div>
+</section>
+<section class="shop section" id="shop">
+ <div class="section-head"><div><p class="eyebrow">CURATED PIECES</p><h2>منتخبِ <em>فصل</em></h2></div><a class="underlink" href="#collections">مشاهده مجموعه‌ها ↗</a></div>
+ <div class="filters"><button class="filter active" data-filter="all">همه</button><button class="filter" data-filter="women">زنانه</button><button class="filter" data-filter="men">مردانه</button></div>
+ <div class="products" id="products">
+  <article class="product" data-gender="women"><div class="product-photo"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=85" alt="کت ساختارمند"><span>NEW ARRIVAL</span><button class="add" data-name="کت ساختارمند" data-price="4890000">+</button></div><p>WOMEN / OUTERWEAR</p><h3>کت ساختارمند</h3><strong>۴٬۸۹۰٬۰۰۰ تومان</strong></article>
+  <article class="product" data-gender="men"><div class="product-photo"><img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=800&q=85" alt="پیراهن مینیمال"><span>THE ESSENTIAL</span><button class="add" data-name="پیراهن مینیمال" data-price="2190000">+</button></div><p>MEN / SHIRTS</p><h3>پیراهن مینیمال</h3><strong>۲٬۱۹۰٬۰۰۰ تومان</strong></article>
+  <article class="product" data-gender="women"><div class="product-photo"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=85" alt="پیراهن فرم آزاد"><span>LIMITED EDITION</span><button class="add" data-name="پیراهن فرم آزاد" data-price="3690000">+</button></div><p>WOMEN / DRESSES</p><h3>پیراهن فرم آزاد</h3><strong>۳٬۶۹۰٬۰۰۰ تومان</strong></article>
+  <article class="product" data-gender="men"><div class="product-photo"><img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=800&q=85" alt="استایل روزمره مردانه"><span>DAILY UNIFORM</span><button class="add" data-name="لایه روزمره" data-price="2790000">+</button></div><p>MEN / ESSENTIALS</p><h3>لایه روزمره</h3><strong>۲٬۷۹۰٬۰۰۰ تومان</strong></article>
+ </div>
+</section>
+<section class="manifesto" id="story"><p class="eyebrow">OUR POINT OF VIEW</p><h2>سادگی، وقتی<br>با <em>دقت</em> همراه شود.</h2><p>در TALOM به لباس‌هایی باور داریم که به‌جای دنبال کردن هر موج، بخشی از شخصیت شما می‌شوند.</p><a href="#collections" class="underlink">جهان TALOM را کشف کنید ↗</a></section>
+</main>
+<footer><a class="wordmark" href="#top">TALOM<span>®</span><small>CONTEMPORARY FASHION HOUSE</small></a><p>پوشاک معاصر، برای هر روز و فراتر از آن.</p><span>© 2026 TALOM. ALL RIGHTS RESERVED.</span></footer>
+<div class="toast" id="toast" role="status"></div>
+</body></html>
