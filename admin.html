@@ -1,237 +1,133 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TALOM | Admin Panel</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173b32">
+  <title>TALOM | مدیریت کافه</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="admin.js" defer></script>
 </head>
-
 <body>
-
-  <!-- Login -->
-  <div class="main-content" id="login-screen">
-    <section class="section">
-      <h2>TALOM.</h2>
-      <p>ورود به پنل مدیریت کافه</p>
-
+  <div class="login-screen" id="login-screen">
+    <div class="login-card">
+      <div class="login-brand">TALOM<span>.</span></div>
+      <p class="eyebrow">COFFEE CULTURE · ADMINISTRATION</p>
+      <h1>ورود به مدیریت</h1>
+      <p class="login-copy">برای ادامه، با حساب مدیر وارد شوید.</p>
       <form id="login-form">
-        <div class="form-group">
-          <label for="email">ایمیل مدیر</label>
-          <input type="email" id="email" required>
-        </div>
-
-        <div class="form-group">
-          <label for="password">رمز عبور</label>
-          <input type="password" id="password" required>
-        </div>
-
-        <button type="submit" class="primary-btn" id="login-btn">
-          ورود به پنل
-        </button>
-
-        <p id="login-message" aria-live="polite"></p>
-        <button type="button" class="text-btn" id="forgot-password-btn">فراموشی رمز عبور</button>
+        <label class="field"><span>ایمیل مدیر</span><input type="email" id="email" autocomplete="username" placeholder="name@example.com" required></label>
+        <label class="field"><span>رمز عبور</span><input type="password" id="password" autocomplete="current-password" placeholder="رمز عبور" required></label>
+        <button class="btn btn-primary btn-wide" id="login-btn" type="submit">ورود به پنل <span>←</span></button>
+        <p class="form-message" id="login-message" aria-live="polite"></p>
+        <button class="link-button" id="forgot-password-btn" type="button">رمز عبور را فراموش کرده‌اید؟</button>
       </form>
-
       <form id="reset-password-form" hidden>
-        <h3>تنظیم رمز عبور جدید</h3>
-        <div class="form-group">
-          <label for="new-password">رمز عبور جدید (حداقل ۸ کاراکتر)</label>
-          <input type="password" id="new-password" minlength="8" autocomplete="new-password" required>
-        </div>
-        <div class="form-group">
-          <label for="confirm-password">تکرار رمز عبور جدید</label>
-          <input type="password" id="confirm-password" minlength="8" autocomplete="new-password" required>
-        </div>
-        <button type="submit" class="primary-btn" id="reset-password-btn">ذخیره رمز جدید</button>
-        <p id="reset-password-message" aria-live="polite"></p>
+        <h2 class="form-heading">تنظیم رمز جدید</h2>
+        <label class="field"><span>رمز جدید (حداقل ۸ کاراکتر)</span><input type="password" id="new-password" minlength="8" autocomplete="new-password" required></label>
+        <label class="field"><span>تکرار رمز جدید</span><input type="password" id="confirm-password" minlength="8" autocomplete="new-password" required></label>
+        <button class="btn btn-primary btn-wide" id="reset-password-btn" type="submit">ذخیره رمز جدید</button>
+        <p class="form-message" id="reset-password-message" aria-live="polite"></p>
       </form>
-    </section>
+      <div class="login-foot">TALOM · PRIVATE ADMIN AREA</div>
+    </div>
   </div>
 
-  <!-- Admin Panel -->
-  <div class="admin-layout" id="admin-panel" hidden>
-
-    <aside class="sidebar">
-      <div class="logo">TALOM.</div>
-      <p class="sidebar-subtitle">ADMINISTRATION</p>
-
-      <p class="nav-title">مدیریت</p>
-      <a href="#dashboard" class="nav-link active">داشبورد</a>
-      <a href="#products" class="nav-link">محصولات</a>
-      <a href="#orders" class="nav-link">سفارش‌ها</a>
-      <a href="#settings" class="nav-link">تنظیمات کافه</a>
-
-      <p class="nav-title">حساب کاربری</p>
-      <a href="#" class="nav-link" id="logout-btn">خروج از حساب</a>
+  <div class="admin-shell" id="admin-panel" hidden>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand-lockup" href="#dashboard"><span class="brand-mark">T</span><span><strong>TALOM<span>.</span></strong><small>COFFEE CULTURE</small></span></a>
+      <div class="side-caption">فضای مدیریت</div>
+      <nav class="side-nav" aria-label="منوی مدیریت">
+        <a class="nav-link active" href="#dashboard"><span class="nav-icon">◫</span> نمای کلی</a>
+        <a class="nav-link" href="#orders"><span class="nav-icon">▤</span> سفارش‌ها <span class="nav-count" id="nav-pending-count">۰</span></a>
+        <a class="nav-link" href="#products"><span class="nav-icon">◇</span> محصولات</a>
+        <a class="nav-link" href="#settings"><span class="nav-icon">⚙</span> تنظیمات کافه</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="admin-avatar">TA</div>
+        <div class="admin-identity"><strong id="sidebar-admin-name">TALOM Admin</strong><small>مدیر سیستم</small></div>
+        <button class="icon-btn logout-icon" id="logout-btn" type="button" title="خروج از حساب" aria-label="خروج از حساب">↪</button>
+      </div>
     </aside>
 
-    <main class="main-content">
-
+    <main class="main-area">
       <header class="topbar">
-        <h1 class="page-title">داشبورد مدیریت</h1>
-        <div class="admin-info">
-          مدیر سیستم: <span id="admin-name">TALOM Admin</span>
+        <div class="topbar-title">
+          <button class="mobile-menu" id="mobile-menu-btn" type="button" aria-label="باز کردن منو">☰</button>
+          <div><span class="eyebrow">TALOM / CONTROL CENTER</span><h1 class="page-title" id="page-title">نمای کلی</h1></div>
         </div>
+        <div class="topbar-actions"><span class="live-dot">اتصال برقرار است</span><span class="top-date" id="current-date"></span></div>
       </header>
 
-      <!-- Dashboard -->
-      <section class="welcome" id="dashboard">
-        <h2>به پنل مدیریت TALOM خوش آمدید</h2>
-        <p>مدیریت کافه از این قسمت انجام می‌شود.</p>
-        <p id="current-date"></p>
-      </section>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <p>فروش امروز</p>
-          <h3 id="today-sales">۰ تومان</h3>
+      <section class="page-section" id="dashboard">
+        <div class="welcome-panel">
+          <div><span class="eyebrow light">خوش آمدید</span><h2>همه‌چیز از اینجا<br>در جریان است.</h2><p>عملکرد کافه را ببینید، سفارش‌ها را پیگیری کنید و منو را به‌روز نگه دارید.</p></div>
+          <div class="welcome-stamp"><span>EST.</span><strong>2022</strong><small>COFFEE · PEOPLE · CULTURE</small></div>
+          <div class="welcome-orbit"></div>
         </div>
-
-        <div class="stat-card">
-          <p>تعداد سفارش‌ها</p>
-          <h3 id="orders-count">۰</h3>
+        <div class="section-heading"><div><span class="eyebrow">LIVE OVERVIEW</span><h2>خلاصه عملکرد</h2></div><button class="btn btn-quiet" id="refresh-all-btn" type="button">↻ به‌روزرسانی</button></div>
+        <div class="stats-grid">
+          <article class="stat-card stat-feature"><div class="stat-top"><span>فروش سفارش‌های تکمیل‌شده امروز</span><span class="stat-icon">↗</span></div><strong id="today-sales">۰ <small>تومان</small></strong><p>فقط سفارش‌های تکمیل‌شده محاسبه می‌شوند.</p></article>
+          <article class="stat-card"><div class="stat-top"><span>کل سفارش‌ها</span><span class="stat-icon">▤</span></div><strong id="orders-count">۰</strong><p>تمام سفارش‌های ثبت‌شده</p></article>
+          <article class="stat-card"><div class="stat-top"><span>محصولات منو</span><span class="stat-icon">◇</span></div><strong id="products-count">۰</strong><p>محصولات فعال و غیرفعال</p></article>
+          <article class="stat-card"><div class="stat-top"><span>در انتظار بررسی</span><span class="stat-icon">◷</span></div><strong id="new-orders-count">۰</strong><p>نیازمند پیگیری</p></article>
         </div>
-
-        <div class="stat-card">
-          <p>محصولات</p>
-          <h3 id="products-count">۰</h3>
-        </div>
-
-        <div class="stat-card">
-          <p>سفارش‌های جدید</p>
-          <h3 id="new-orders-count">۰</h3>
-        </div>
-      </div>
-
-      <!-- Products -->
-      <section class="section" id="products">
-        <h2>مدیریت محصولات</h2>
-        <p>افزودن، ویرایش و مدیریت محصولات منوی TALOM</p>
-
-        <form id="product-form">
-
-          <input type="hidden" id="product-id">
-
-          <div class="form-group">
-            <label for="product-name">نام محصول فارسی</label>
-            <input type="text" id="product-name" required>
-          </div>
-
-          <div class="form-group">
-            <label for="product-name-en">نام محصول انگلیسی</label>
-            <input type="text" id="product-name-en">
-          </div>
-
-          <div class="form-group">
-            <label for="product-category">دسته‌بندی</label>
-            <select id="product-category" required>
-              <option value="coffee">قهوه</option>
-              <option value="cold">نوشیدنی سرد</option>
-              <option value="special">نوشیدنی ویژه</option>
-              <option value="dessert">دسر</option>
-              <option value="food">غذا</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="product-price">قیمت (تومان)</label>
-            <input type="number" id="product-price" min="0" required>
-          </div>
-
-          <div class="form-group">
-            <label for="product-description">توضیحات</label>
-            <textarea id="product-description" rows="3"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="product-image">آدرس تصویر محصول</label>
-            <input type="url" id="product-image">
-          </div>
-
-          <div class="form-group">
-            <label for="product-available">وضعیت محصول</label>
-            <select id="product-available">
-              <option value="true">موجود</option>
-              <option value="false">ناموجود</option>
-            </select>
-          </div>
-
-          <button type="submit" class="primary-btn" id="save-product-btn">
-            ذخیره محصول
-          </button>
-
-          <button type="button" class="danger-btn" id="cancel-edit-btn" hidden>
-            لغو ویرایش
-          </button>
-
-          <p id="product-message"></p>
-        </form>
-
-        <div class="products-table">
-          <table>
-            <thead>
-              <tr>
-                <th>شناسه</th>
-                <th>نام محصول</th>
-                <th>دسته‌بندی</th>
-                <th>قیمت</th>
-                <th>وضعیت</th>
-                <th>عملیات</th>
-              </tr>
-            </thead>
-
-            <tbody id="products-table-body">
-              <tr>
-                <td colspan="6">در حال دریافت محصولات...</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="dashboard-lower">
+          <article class="content-card recent-card"><div class="card-heading"><div><span class="eyebrow">LATEST ACTIVITY</span><h3>آخرین سفارش‌ها</h3></div><a href="#orders" class="inline-link">همه سفارش‌ها ←</a></div><div class="recent-list" id="recent-orders"><p class="muted">در حال دریافت اطلاعات...</p></div></article>
+          <article class="content-card quick-card"><span class="eyebrow">QUICK ACCESS</span><h3>دسترسی سریع</h3><a href="#products" class="quick-link"><span class="quick-symbol">＋</span><span><strong>افزودن محصول</strong><small>محصول تازه به منو اضافه کنید</small></span><b>←</b></a><a href="#orders" class="quick-link"><span class="quick-symbol">▤</span><span><strong>پیگیری سفارش‌ها</strong><small>وضعیت سفارش‌های مشتریان</small></span><b>←</b></a><a href="#settings" class="quick-link"><span class="quick-symbol">⚙</span><span><strong>اطلاعات کافه</strong><small>راه‌های ارتباطی و مشخصات</small></span><b>←</b></a></article>
         </div>
       </section>
 
-      <!-- Orders -->
-      <section class="section" id="orders">
-        <div class="orders-heading">
-          <h2>مدیریت سفارش‌ها</h2>
-          <button type="button" class="primary-btn" id="refresh-orders">به‌روزرسانی سفارش‌ها</button>
-        </div>
-        <p id="orders-message" aria-live="polite">در حال دریافت سفارش‌ها...</p>
-        <div class="products-table">
-          <table>
-            <thead>
-              <tr>
-                <th>کد سفارش</th>
-                <th>مشتری</th>
-                <th>تلفن</th>
-                <th>نشانی / توضیح</th>
-                <th>مبلغ</th>
-                <th>اقلام</th>
-                <th>تاریخ</th>
-                <th>وضعیت</th>
-              </tr>
-            </thead>
-            <tbody id="orders-table-body">
-              <tr><td colspan="8">در حال دریافت...</td></tr>
-            </tbody>
-          </table>
+      <section class="page-section" id="orders">
+        <div class="section-heading"><div><span class="eyebrow">ORDER MANAGEMENT</span><h2>مدیریت سفارش‌ها</h2><p class="section-desc">سفارش‌ها را بررسی کنید و وضعیت هرکدام را به‌روزرسانی کنید.</p></div><button class="btn btn-primary" id="refresh-orders" type="button">↻ دریافت آخرین سفارش‌ها</button></div>
+        <div class="toolbar"><div class="search-wrap"><span>⌕</span><input id="order-search" type="search" placeholder="جست‌وجوی نام، تلفن یا کد سفارش..."></div><select id="order-status-filter" class="filter-select" aria-label="فیلتر وضعیت"><option value="all">همه وضعیت‌ها</option><option value="pending">در انتظار بررسی</option><option value="confirmed">تأیید شده</option><option value="preparing">در حال آماده‌سازی</option><option value="completed">تکمیل شده</option><option value="cancelled">لغو شده</option></select></div>
+        <p class="form-message" id="orders-message" aria-live="polite"></p>
+        <div class="table-card"><div class="table-scroll"><table class="data-table"><thead><tr><th>سفارش</th><th>مشتری</th><th>اطلاعات تماس</th><th>مبلغ</th><th>اقلام</th><th>زمان ثبت</th><th>وضعیت</th></tr></thead><tbody id="orders-table-body"><tr><td colspan="7">در حال دریافت...</td></tr></tbody></table></div></div>
+        <p class="table-note">برای مشاهده نشانی کامل، روی نشانی مشتری در ردیف سفارش کلیک کنید.</p>
+      </section>
+
+      <section class="page-section" id="products">
+        <div class="section-heading"><div><span class="eyebrow">MENU MANAGEMENT</span><h2>مدیریت محصولات</h2><p class="section-desc">اطلاعات و وضعیت محصولات منوی TALOM را مدیریت کنید.</p></div></div>
+        <div class="product-workspace">
+          <article class="content-card product-form-card"><div class="card-heading"><div><span class="eyebrow">PRODUCT EDITOR</span><h3 id="product-form-title">افزودن محصول جدید</h3></div><span class="form-mark">＋</span></div>
+            <form id="product-form">
+              <input type="hidden" id="product-id">
+              <label class="field"><span>نام محصول فارسی *</span><input type="text" id="product-name" maxlength="120" required placeholder="مثلاً لاته وانیلی"></label>
+              <label class="field"><span>نام محصول انگلیسی</span><input type="text" id="product-name-en" maxlength="120" placeholder="Vanilla Latte"></label>
+              <div class="field-row"><label class="field"><span>دسته‌بندی *</span><select id="product-category" required><option value="coffee">قهوه</option><option value="cold">نوشیدنی سرد</option><option value="special">نوشیدنی ویژه</option><option value="dessert">دسر</option><option value="food">غذا</option></select></label><label class="field"><span>قیمت (تومان) *</span><input type="number" id="product-price" min="1" step="1" required placeholder="۱۵۰۰۰۰"></label></div>
+              <label class="field"><span>توضیحات</span><textarea id="product-description" rows="3" maxlength="1000" placeholder="توضیح کوتاه محصول..."></textarea></label>
+              <label class="field"><span>آدرس تصویر محصول</span><input type="url" id="product-image" placeholder="https://..."></label>
+              <label class="field"><span>وضعیت نمایش در منو</span><select id="product-available"><option value="true">موجود و قابل سفارش</option><option value="false">ناموجود و پنهان از سفارش</option></select></label>
+              <div class="form-actions"><button class="btn btn-primary" id="save-product-btn" type="submit">ذخیره محصول</button><button class="btn btn-quiet" id="cancel-edit-btn" type="button" hidden>لغو ویرایش</button></div>
+              <p class="form-message" id="product-message" aria-live="polite"></p>
+            </form>
+          </article>
+          <article class="content-card inventory-card"><div class="card-heading"><div><span class="eyebrow">CURRENT INVENTORY</span><h3>فهرست محصولات</h3></div><span class="inventory-count" id="inventory-count">۰ مورد</span></div>
+            <div class="toolbar inventory-toolbar"><div class="search-wrap"><span>⌕</span><input id="product-search" type="search" placeholder="جست‌وجوی محصول..."></div><select id="product-category-filter" class="filter-select" aria-label="فیلتر دسته‌بندی"><option value="all">همه دسته‌ها</option><option value="coffee">قهوه</option><option value="cold">نوشیدنی سرد</option><option value="special">نوشیدنی ویژه</option><option value="dessert">دسر</option><option value="food">غذا</option></select></div>
+            <div class="table-scroll"><table class="data-table product-table"><thead><tr><th>محصول</th><th>دسته</th><th>قیمت</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody id="products-table-body"><tr><td colspan="5">در حال دریافت محصولات...</td></tr></tbody></table></div>
+          </article>
         </div>
       </section>
 
-      <!-- Settings -->
-      <section class="section" id="settings">
-        <h2>تنظیمات کافه</h2>
-        <p class="empty-state">تنظیمات کافه در این قسمت قرار می‌گیرد.</p>
+      <section class="page-section" id="settings">
+        <div class="section-heading"><div><span class="eyebrow">CAFE CONFIGURATION</span><h2>تنظیمات کافه</h2><p class="section-desc">اطلاعات تماس و نام نمایشی کافه را مدیریت کنید.</p></div></div>
+        <div class="settings-layout"><article class="content-card settings-card"><div class="card-heading"><div><span class="eyebrow">PUBLIC INFORMATION</span><h3>اطلاعات عمومی</h3></div><span class="form-mark">⚙</span></div>
+          <form id="settings-form">
+            <label class="field"><span>نام کافه</span><input type="text" id="setting-cafe-name" maxlength="100" required></label>
+            <label class="field"><span>شماره تماس</span><input type="tel" id="setting-phone" maxlength="32" placeholder="شماره تماس کافه"></label>
+            <label class="field"><span>آدرس اینستاگرام</span><input type="text" id="setting-instagram" maxlength="200" placeholder="https://instagram.com/..."></label>
+            <label class="field"><span>آدرس تلگرام</span><input type="text" id="setting-telegram" maxlength="200" placeholder="https://t.me/..."></label>
+            <button class="btn btn-primary" id="save-settings-btn" type="submit">ذخیره تنظیمات</button>
+            <p class="form-message" id="settings-message" aria-live="polite"></p>
+          </form>
+        </article><aside class="settings-note"><span class="eyebrow">NOTE</span><h3>اطلاعات دقیق، تجربه بهتر</h3><p>اطلاعات این بخش در جدول تنظیمات سایت ذخیره می‌شود. قبل از انتشار شماره تماس و لینک شبکه‌های اجتماعی را بررسی کنید.</p><div class="note-line"></div><small>TALOM · BEYOND COFFEE</small></aside></div>
       </section>
-
+      <footer class="admin-footer"><span>TALOM. — COFFEE CULTURE</span><span>مدیریت داخلی · نسخه به‌روزشده</span></footer>
     </main>
   </div>
-
 </body>
 </html>
