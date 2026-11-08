@@ -78,7 +78,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (error || !user) { setLogin(); return false; }
     const { data: profile, error: profileError } = await supabaseClient
       .from("profiles").select("full_name, role").eq("id", user.id).maybeSingle();
-    if (profileError || !profile || profile.role !== "admin") {
+    if (profileError) {
+      console.error("Admin profile lookup:", profileError);
+      setLogin("بررسی دسترسی مدیر ناموفق بود؛ اتصال یا مجوز پروفایل را بررسی کنید.");
+      return false;
+    }
+    if (!profile || profile.role !== "admin") {
       await supabaseClient.auth.signOut();
       setLogin("این حساب دسترسی مدیر ندارد.");
       return false;
@@ -87,7 +92,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginScreen.hidden = true;
     adminPanel.hidden = false;
     setAdminName(profile.full_name || "TALOM Admin");
-    $("current-date").textContent = new Date().toLocaleDateString("fa-IR", { timeZone: CAFE_TIME_ZONE, dateStyle: "full" });
+    const todayLabel = new Date().toLocaleDateString("fa-IR", { timeZone: CAFE_TIME_ZONE, dateStyle: "full" });
+    $("current-date").textContent = todayLabel;
+    $("welcome-date-label").textContent = todayLabel;
+    showSection(location.hash.slice(1) || "dashboard", false);
     await refreshAll();
     return true;
   }
@@ -109,8 +117,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { data, error, count } = productResult;
     if (error || availableResult.error) {
       console.error("Products:", error || availableResult.error);
+      products = [];
+      $("products-count").textContent = "—";
+      $("inventory-count").textContent = "—";
       productBody.innerHTML = '<tr><td colspan="5" class="empty-row">دریافت محصولات ناموفق بود. اتصال و مجوزها را بررسی کنید.</td></tr>';
-      message(productMessage, "خطا در دریافت محصولات.", true);
+      message(productMessage, "خطا در دریافت محصولات؛ اطلاعات قبلی پاک شد تا داده کهنه نمایش داده نشود.", true);
       return;
     }
     products = data || [];
@@ -186,10 +197,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function deleteProduct(id) {
     const p = products.find(item => item.id === id);
     if (!p || !window.confirm("محصول «" + p.name + "» حذف شود؟ این عملیات قابل بازگشت نیست.")) return;
-    const { error } = await supabaseClient.from("products").delete().eq("id", id);
-    if (error) {
+    const { data, error } = await supabaseClient.from("products").delete().eq("id", id).select("id").maybeSingle();
+    if (error || !data) {
       console.error("Delete product:", error);
-      message(productMessage, "حذف انجام نشد. ممکن است محصول در سفارش‌ها استفاده شده باشد.", true);
+      message(productMessage, "حذف انجام نشد؛ ممکن است محصول در سفارش‌ها استفاده شده باشد یا مجوز کافی وجود نداشته باشد.", true);
       return;
     }
     if ($("product-id").value === id) resetProductForm();
@@ -212,7 +223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const parsedImageUrl = new URL(imageUrl);
         if (!["http:", "https:"].includes(parsedImageUrl.protocol)) throw new Error("Invalid protocol");
       } catch {
-        message(productMessage, "آدرس تصویر باید یک لینک معتبر با https:// باشد.", true); return;
+        message(productMessage, "آدرس تصویر باید یک لینک معتبر با http:// یا https:// باشد.", true); return;
       }
     }
     const data = {
@@ -365,6 +376,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function loadSettings() {
+    settingsLoaded = false;
     const { data, error } = await supabaseClient.from("site_settings")
       .select("id,cafe_name,phone,instagram,telegram").eq("id", 1).maybeSingle();
     if (error) {
@@ -492,14 +504,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       $("mobile-menu-btn").setAttribute("aria-expanded", "false");
     }
   });
+  const sectionTitles = { dashboard: "نمای کلی", orders: "مدیریت سفارش‌ها", products: "مدیریت محصولات", settings: "تنظیمات کافه" };
+  function showSection(id, updateHash = true) {
+    const allowed = Object.keys(sectionTitles);
+    const selected = allowed.includes(id) ? id : "dashboard";
+    document.querySelectorAll(".page-section").forEach(section => { section.hidden = section.id !== selected; });
+    document.querySelectorAll(".nav-link").forEach(link => link.classList.toggle("active", link.hash === "#" + selected));
+    $("page-title").textContent = sectionTitles[selected];
+    if (updateHash && location.hash !== "#" + selected) history.replaceState(null, "", "#" + selected);
+    $("sidebar").classList.remove("mobile-open");
+    $("mobile-menu-btn").setAttribute("aria-expanded", "false");
+  }
   document.querySelectorAll(".nav-link, .quick-link, .inline-link, .brand-lockup").forEach(link => {
-    link.addEventListener("click", () => {
-      document.querySelectorAll(".nav-link").forEach(item => item.classList.toggle("active", item.hash === link.hash));
-      $("sidebar").classList.remove("mobile-open");
-      const target = link.hash && document.querySelector(link.hash);
-      if (target && target.id) $("page-title").textContent = ({ dashboard: "نمای کلی", orders: "مدیریت سفارش‌ها", products: "مدیریت محصولات", settings: "تنظیمات کافه" })[target.id] || "مدیریت";
+    link.addEventListener("click", event => {
+      const id = link.hash.slice(1);
+      if (!sectionTitles[id]) return;
+      event.preventDefault();
+      showSection(id);
     });
   });
+  window.addEventListener("hashchange", () => showSection(location.hash.slice(1), false));
 
   try { await requireAdmin(); }
   catch (error) { console.error("Initial session:", error); setLogin("ارتباط با سرویس برقرار نشد. صفحه را دوباره بارگذاری کنید."); }
