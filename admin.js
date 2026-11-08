@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const loginMessage = document.getElementById("login-message");
   const loginButton = document.getElementById("login-btn");
   const logoutButton = document.getElementById("logout-btn");
+  const forgotPasswordButton = document.getElementById("forgot-password-btn");
+  const resetPasswordForm = document.getElementById("reset-password-form");
+  const resetPasswordMessage = document.getElementById("reset-password-message");
+  const resetPasswordButton = document.getElementById("reset-password-btn");
 
   const productForm = document.getElementById("product-form");
   const productMessage = document.getElementById("product-message");
@@ -535,9 +539,74 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // هماهنگ نگه داشتن رابط با خروج از حساب در تب یا بخش دیگر
-  supabaseClient.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_OUT" || !session) {
+  // درخواست لینک بازیابی رمز عبور از طریق ایمیل مدیر
+  forgotPasswordButton.addEventListener("click", async () => {
+    const email = document.getElementById("email").value.trim();
+    if (!email) {
+      loginMessage.textContent = "ابتدا ایمیل مدیر را وارد کنید.";
+      return;
+    }
+
+    forgotPasswordButton.disabled = true;
+    loginMessage.textContent = "در حال ارسال لینک بازیابی...";
+    try {
+      const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+      });
+      if (error) throw error;
+      loginMessage.textContent = "اگر این ایمیل در سامانه ثبت شده باشد، لینک بازیابی برای آن ارسال می‌شود. صندوق ورودی و پوشه Spam را بررسی کنید.";
+    } catch (error) {
+      console.error("Password recovery error:", error);
+      loginMessage.textContent = "ارسال لینک بازیابی انجام نشد. تنظیمات ایمیل Supabase را بررسی کنید.";
+    } finally {
+      forgotPasswordButton.disabled = false;
+    }
+  });
+
+  // ثبت رمز جدید پس از باز کردن لینک بازیابی
+  resetPasswordForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const password = document.getElementById("new-password").value;
+    const confirmation = document.getElementById("confirm-password").value;
+
+    if (password.length < 8) {
+      resetPasswordMessage.textContent = "رمز عبور باید حداقل ۸ کاراکتر باشد.";
+      return;
+    }
+    if (password !== confirmation) {
+      resetPasswordMessage.textContent = "تکرار رمز عبور مطابقت ندارد.";
+      return;
+    }
+
+    resetPasswordButton.disabled = true;
+    resetPasswordMessage.textContent = "در حال ذخیره رمز جدید...";
+    try {
+      const { error } = await supabaseClient.auth.updateUser({ password });
+      if (error) throw error;
+      await supabaseClient.auth.signOut();
+      resetPasswordForm.hidden = true;
+      loginForm.hidden = false;
+      resetPasswordForm.reset();
+      loginMessage.textContent = "رمز عبور با موفقیت تغییر کرد. اکنون با رمز جدید وارد شوید.";
+    } catch (error) {
+      console.error("Password update error:", error);
+      resetPasswordMessage.textContent = "تغییر رمز انجام نشد. لینک بازیابی ممکن است منقضی شده باشد.";
+    } finally {
+      resetPasswordButton.disabled = false;
+    }
+  });
+
+  // دریافت رویداد لینک بازیابی و نمایش فرم رمز جدید
+  supabaseClient.auth.onAuthStateChange((event) => {
+    if (event === "PASSWORD_RECOVERY") {
+      loginScreen.hidden = false;
+      adminPanel.hidden = true;
+      loginForm.hidden = true;
+      resetPasswordForm.hidden = false;
+      loginMessage.textContent = "";
+    } else if (event === "SIGNED_OUT") {
+      resetPasswordForm.hidden = true;
+      loginForm.hidden = false;
       showLogin();
     }
   });
