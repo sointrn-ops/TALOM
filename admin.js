@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const productsCount = document.getElementById("products-count");
   const ordersTableBody = document.getElementById("orders-table-body");
   const ordersMessage = document.getElementById("orders-message");
+  const todaySales = document.getElementById("today-sales");
+  const ordersCount = document.getElementById("orders-count");
+  const newOrdersCount = document.getElementById("new-orders-count");
 
   const productId = document.getElementById("product-id");
   const productName = document.getElementById("product-name");
@@ -104,6 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await loadProducts();
     await loadOrders();
+    await loadDashboardStats();
 
     return true;
   }
@@ -132,6 +136,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     products = data || [];
 
     renderProducts();
+  }
+
+  // آمار زنده داشبورد
+  async function loadDashboardStats() {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+    const todayIso = startOfDay.toISOString();
+
+    const [allOrders, pendingOrders, completedToday] = await Promise.all([
+      supabaseClient.from("orders").select("id", { count: "exact", head: true }),
+      supabaseClient.from("orders").select("id", { count: "exact", head: true }).eq("status", "pending"),
+      supabaseClient.from("orders").select("total").eq("status", "completed").gte("created_at", todayIso)
+    ]);
+
+    if (allOrders.error || pendingOrders.error || completedToday.error) {
+      console.error("Dashboard stats error:", allOrders.error || pendingOrders.error || completedToday.error);
+      return;
+    }
+
+    ordersCount.textContent = Number(allOrders.count || 0).toLocaleString("fa-IR");
+    newOrdersCount.textContent = Number(pendingOrders.count || 0).toLocaleString("fa-IR");
+    const sales = (completedToday.data || []).reduce((sum, order) => sum + Number(order.total || 0), 0);
+    todaySales.textContent = sales.toLocaleString("fa-IR") + " تومان";
   }
 
   // دریافت سفارش‌ها فقط برای مدیر
