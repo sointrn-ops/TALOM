@@ -116,7 +116,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (error) {
       console.error("Products loading error:", error);
-
+      products = [];
+      productsCount.textContent = "—";
       productsTableBody.textContent = "خطا در دریافت محصولات.";
       showProductMessage(
         "دریافت محصولات ناموفق بود. دسترسی دیتابیس را بررسی کنید.",
@@ -218,6 +219,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!Number.isFinite(price) || price < 0) {
         showProductMessage("قیمت واردشده معتبر نیست.", true);
         return;
+      }
+
+      const imageUrl = productImage.value.trim();
+      if (imageUrl) {
+        let parsedImageUrl;
+        try {
+          parsedImageUrl = new URL(imageUrl);
+        } catch {
+          showProductMessage("آدرس تصویر معتبر نیست.", true);
+          return;
+        }
+        if (!["https:", "http:"].includes(parsedImageUrl.protocol)) {
+          showProductMessage("آدرس تصویر باید با http یا https شروع شود.", true);
+          return;
+        }
       }
 
       const productData = {
@@ -396,6 +412,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     showLogin("از حساب خود خارج شدید.");
+  });
+
+  // فعال‌سازی لینک بخش انتخاب‌شده در پنل
+  const adminNavLinks = document.querySelectorAll(".sidebar .nav-link[href^='#']");
+  adminNavLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      adminNavLinks.forEach((item) => item.classList.remove("active"));
+      link.classList.add("active");
+    });
   });
 
   // بررسی وضعیت ورود هنگام باز شدن صفحه
