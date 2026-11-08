@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11110f">
+  <title>حساب کاربری | TALOM</title>
+  <link rel="stylesheet" href="account.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="account.js" defer></script>
+</head>
+<body>
+  <header><a href="index.html" class="brand">TALOM<span>.</span></a><a href="index.html">بازگشت به سایت</a></header>
+  <main>
+    <section class="auth-card" id="auth-card">
+      <p class="eyebrow">TALOM COFFEE CULTURE</p>
+      <h1 id="form-title">ورود به حساب</h1>
+      <p class="intro" id="form-intro">برای مشاهده حساب و سفارش‌ها وارد شوید.</p>
+      <form id="auth-form">
+        <div class="field" id="name-field" hidden>
+          <label for="full-name">نام و نام خانوادگی</label>
+          <input id="full-name" autocomplete="name" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="email">ایمیل</label>
+          <input id="email" type="email" autocomplete="email" required maxlength="254">
+        </div>
+        <div class="field" id="password-field">
+          <label for="password">رمز عبور</label>
+          <input id="password" type="password" autocomplete="current-password" minlength="8">
+        </div>
+        <div class="field" id="confirm-field" hidden>
+          <label for="confirm-password">تکرار رمز عبور</label>
+          <input id="confirm-password" type="password" autocomplete="new-password" minlength="8">
+        </div>
+        <button class="primary" id="submit-button" type="submit">ورود</button>
+      </form>
+      <div class="actions">
+        <button type="button" id="toggle-signup">ساخت حساب جدید</button>
+        <button type="button" id="forgot-password">فراموشی رمز عبور</button>
+      </div>
+      <p class="message" id="auth-message" role="status" aria-live="polite"></p>
+    </section>
+    <section class="account-card" id="account-card" hidden>
+      <div class="account-head">
+        <div><p class="eyebrow">YOUR TALOM ACCOUNT</p><h1>حساب کاربری</h1><p id="user-email"></p></div>
+        <button type="button" class="secondary" id="logout-button">خروج</button>
+      </div>
+      <h2>سفارش‌های من</h2>
+      <p id="orders-message" role="status">در حال دریافت سفارش‌ها...</p>
+      <div class="orders" id="orders-list"></div>
+    </section>
+  </main>
+  <footer>© TALOM — COFFEE CULTURE</footer>
+</body>
+</html>
