@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const settingsMessage = $("settings-message");
   const productBody = $("products-table-body");
   const orderBody = $("orders-table-body");
-  const categoryNames = { coffee: "قهوه", cold: "نوشیدنی سرد", special: "نوشیدنی ویژه", dessert: "دسر", food: "غذا" };
+  const categoryNames = { women: "زنانه", men: "مردانه", unisex: "بدون جنسیت" };
   const statusLabels = { pending: "در انتظار بررسی", confirmed: "تأیید شده", preparing: "در حال آماده‌سازی", completed: "تکمیل شده", cancelled: "لغو شده" };
   let products = [];
   let orders = [];
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function resetProductForm() {
     productForm.reset();
     $("product-id").value = "";
-    $("product-form-title").textContent = "افزودن محصول جدید";
+    $("product-form-title").textContent = "افزودن محصول جدید";\n    $("product-sizes").value = ""; $("product-colors").value = ""; $("product-stock").value = "0";
     $("save-product-btn").textContent = "ذخیره محصول";
     $("cancel-edit-btn").hidden = true;
     message(productMessage, "");
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     productBody.innerHTML = '<tr><td colspan="5" class="empty-row">در حال دریافت محصولات...</td></tr>';
     const [productResult, availableResult] = await Promise.all([
       supabaseClient.from("products")
-        .select("id,name,name_en,category,description,price,image_url,is_available,created_at", { count: "exact" })
+        .select("id,name,name_en,category,description,price,image_url,is_available,sizes,colors,stock,created_at", { count: "exact" })
         .order("created_at", { ascending: false }),
       supabaseClient.from("products").select("id", { count: "exact", head: true }).eq("is_available", true)
     ]);
@@ -183,10 +183,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     $("product-id").value = p.id;
     $("product-name").value = p.name || "";
     $("product-name-en").value = p.name_en || "";
-    $("product-category").value = p.category || "coffee";
+    $("product-category").value = p.category || "women";
     $("product-price").value = p.price ?? "";
     $("product-description").value = p.description || "";
-    $("product-image").value = p.image_url || "";
+    $("product-image").value = p.image_url || "";\n    $("product-sizes").value = (p.sizes || []).join(", ");\n    $("product-colors").value = (p.colors || []).join(", ");\n    $("product-stock").value = p.stock ?? 0;
     $("product-available").value = String(!!p.is_available);
     $("product-form-title").textContent = "ویرایش محصول";
     $("save-product-btn").textContent = "ذخیره تغییرات";
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const data = {
       name, name_en: $("product-name-en").value.trim() || null,
-      category: $("product-category").value, price,
+      category: $("product-category").value, price,\n      sizes: $("product-sizes").value.split(",").map(v => v.trim()).filter(Boolean),\n      colors: $("product-colors").value.split(",").map(v => v.trim()).filter(Boolean),\n      stock: Math.max(0, Math.trunc(Number($("product-stock").value) || 0)),
       description: $("product-description").value.trim() || null,
       image_url: imageUrl || null,
       is_available: $("product-available").value === "true"
