@@ -100,8 +100,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadProducts() {
     productBody.innerHTML = '<tr><td colspan="5" class="empty-row">در حال دریافت محصولات...</td></tr>';
-    const { data, error } = await supabaseClient.from("products")
-      .select("id,name,name_en,category,description,price,image_url,is_available,created_at")
+    const { data, error, count } = await supabaseClient.from("products")
+      .select("id,name,name_en,category,description,price,image_url,is_available,created_at", { count: "exact" })
       .order("created_at", { ascending: false });
     if (error) {
       console.error("Products:", error);
@@ -110,9 +110,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
     products = data || [];
-    $("products-count").textContent = products.length.toLocaleString("fa-IR");
+    const totalCount = Number(count ?? products.length);
+    $("products-count").textContent = totalCount.toLocaleString("fa-IR");
     const availableCount = products.filter(product => product.is_available).length;
-    $("inventory-count").textContent = products.length.toLocaleString("fa-IR") + " محصول · " + availableCount.toLocaleString("fa-IR") + " موجود";
+    $("inventory-count").textContent = totalCount.toLocaleString("fa-IR") + " محصول · " + availableCount.toLocaleString("fa-IR") + " موجود";
+    if (totalCount !== products.length) {
+      message(productMessage, "تعداد رکوردها با فهرست دریافتی یکسان نیست؛ مجوزهای خواندن محصولات را بررسی کنید.", true);
+    }
     renderProducts();
   }
 
@@ -251,9 +255,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
     orders = data || [];
-    message(ordersMessage, orders.length.toLocaleString("fa-IR") + " سفارش اخیر دریافت شد.");
+    message(ordersMessage, orders.length.toLocaleString("fa-IR") + " سفارش اخیر دریافت شد (حداکثر ۲۰۰ سفارش).");
     renderOrders(); renderRecentOrders();
-    $("nav-pending-count").textContent = orders.filter(o => o.status === "pending").length.toLocaleString("fa-IR");
+    const { count: pendingCount, error: pendingError } = await supabaseClient
+      .from("orders").select("id", { count: "exact", head: true }).eq("status", "pending");
+    if (pendingError) {
+      console.error("Pending order count:", pendingError);
+      $("nav-pending-count").textContent = "—";
+    } else {
+      $("nav-pending-count").textContent = Number(pendingCount || 0).toLocaleString("fa-IR");
+    }
   }
   function renderOrders() {
     const term = $("order-search").value.trim().toLocaleLowerCase();
