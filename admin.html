@@ -45,10 +45,10 @@
         <a class="nav-link active" href="#dashboard"><span class="nav-icon">⌂</span> نمای کلی</a>
         <a class="nav-link" href="#orders"><span class="nav-icon">▤</span> سفارش‌ها <span class="nav-count" id="nav-pending-count">۰</span></a>
         <a class="nav-link" href="#products"><span class="nav-icon">▣</span> محصولات</a>
-        <a class="nav-link" href="#settings"><span class="nav-icon">⚙</span> تنظیمات کافه</a>
+        <a class="nav-link" href="#settings"><span class="nav-icon">⚙</span> تنظیمات فروشگاه</a>
       </nav>
       <div class="sidebar-divider"></div>
-      <div class="sidebar-note"><span class="note-orb">✳</span><strong>قهوه، فراتر از عادت</strong><small>هر روز، یک تجربه تازه</small></div>
+      <div class="sidebar-note"><span class="note-orb">✳</span><strong>پوشاک، فراتر از فصل</strong><small>هر روز، یک انتخاب تازه</small></div>
       <div class="sidebar-bottom">
         <div class="admin-avatar">TA</div>
         <div class="admin-identity"><strong id="sidebar-admin-name">TALOM Admin</strong><small>مدیر سیستم</small></div>
@@ -65,7 +65,7 @@
         <div class="topbar-tools">
           <label class="global-search"><span>⌕</span><input type="search" placeholder="جست‌وجو در پنل مدیریت..." aria-label="جست‌وجو در پنل" disabled></label>
           <span class="top-date" id="current-date"></span>
-          <div class="top-admin"><span class="admin-avatar small-avatar">TA</span><span><strong id="admin-name">مدیر کافه</strong><small>مدیر سیستم</small></span></div>
+          <div class="top-admin"><span class="admin-avatar small-avatar">TA</span><span><strong id="admin-name">مدیر فروشگاه</strong><small>مدیر سیستم</small></span></div>
         </div>
       </header>
 
@@ -99,7 +99,7 @@
             <a href="#orders" class="quick-link"><span class="quick-symbol">▤</span><span><strong>مدیریت سفارش‌ها</strong><small>بررسی و تغییر وضعیت سفارش‌ها</small></span><b>←</b></a>
             <a href="#settings" class="quick-link"><span class="quick-symbol">⚙</span><span><strong>اطلاعات فروشگاه</strong><small>راه‌های ارتباطی و مشخصات</small></span><b>←</b></a>
           </article>
-          <article class="content-card cafe-card"><div class="card-heading"><div><span class="eyebrow">TALOM STATUS</span><h3>وضعیت پنل</h3></div><span class="status-live"><i></i> آنلاین</span></div><div class="cafe-mark">T.</div><strong class="cafe-title">TALOM COFFEE CULTURE</strong><p>مدیریت یکپارچه سفارش‌ها و محصولات پوشاک</p><div class="cafe-bottom"><span>منطقه زمانی فروش</span><b>Asia / Tehran</b></div></article>
+          <article class="content-card cafe-card"><div class="card-heading"><div><span class="eyebrow">TALOM STATUS</span><h3>وضعیت پنل</h3></div><span class="status-live"><i></i> آنلاین</span></div><div class="cafe-mark">T.</div><strong class="cafe-title">TALOM CONTEMPORARY FASHION</strong><p>مدیریت یکپارچه سفارش‌ها و محصولات پوشاک</p><div class="cafe-bottom"><span>منطقه زمانی فروش</span><b>Asia / Tehran</b></div></article>
         </div>
       </section>
 
@@ -133,12 +133,12 @@
       </section>
 
       <section class="page-section" id="settings">
-        <div class="section-heading"><div><span class="eyebrow">CAFE CONFIGURATION</span><h2>تنظیمات کافه</h2><p class="section-desc">اطلاعات تماس و نام نمایشی کافه را مدیریت کنید.</p></div></div>
+        <div class="section-heading"><div><span class="eyebrow">STORE CONFIGURATION</span><h2>تنظیمات فروشگاه</h2><p class="section-desc">اطلاعات تماس و نام نمایشی فروشگاه را مدیریت کنید.</p></div></div>
         <div class="settings-layout"><article class="content-card settings-card"><div class="card-heading"><div><span class="eyebrow">PUBLIC INFORMATION</span><h3>اطلاعات عمومی</h3></div><span class="form-mark">⚙</span></div>
-          <form id="settings-form"><label class="field"><span>نام کافه</span><input type="text" id="setting-cafe-name" maxlength="100" required></label><label class="field"><span>شماره تماس</span><input type="tel" id="setting-phone" maxlength="32" placeholder="شماره تماس کافه"></label><label class="field"><span>آدرس اینستاگرام</span><input type="text" id="setting-instagram" maxlength="200" placeholder="https://instagram.com/..."></label><label class="field"><span>آدرس تلگرام</span><input type="text" id="setting-telegram" maxlength="200" placeholder="https://t.me/..."></label><button class="btn btn-primary" id="save-settings-btn" type="submit">ذخیره تنظیمات</button><p class="form-message" id="settings-message" aria-live="polite"></p></form>
+          <form id="settings-form"><label class="field"><span>نام فروشگاه</span><input type="text" id="setting-cafe-name" maxlength="100" required></label><label class="field"><span>شماره تماس</span><input type="tel" id="setting-phone" maxlength="32" placeholder="شماره تماس فروشگاه"></label><label class="field"><span>آدرس اینستاگرام</span><input type="text" id="setting-instagram" maxlength="200" placeholder="https://instagram.com/..."></label><label class="field"><span>آدرس تلگرام</span><input type="text" id="setting-telegram" maxlength="200" placeholder="https://t.me/..."></label><button class="btn btn-primary" id="save-settings-btn" type="submit">ذخیره تنظیمات</button><p class="form-message" id="settings-message" aria-live="polite"></p></form>
         </article><aside class="settings-note"><span class="eyebrow">NOTE</span><h3>اطلاعات دقیق، تجربه بهتر</h3><p>اطلاعات این بخش در جدول تنظیمات سایت ذخیره می‌شود. قبل از انتشار شماره تماس و لینک شبکه‌های اجتماعی را بررسی کنید.</p><div class="note-line"></div><small>TALOM · BEYOND COFFEE</small></aside></div>
       </section>
-      <footer class="admin-footer"><span>TALOM. — COFFEE CULTURE</span><span>پنل مدیریت داخلی</span></footer>
+      <footer class="admin-footer"><span>TALOM. — CONTEMPORARY FASHION</span><span>پنل مدیریت داخلی</span></footer>
     </main>
   </div>
 </body>
