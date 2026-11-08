@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const { data, error } = await supabaseClient
       .from("orders")
-      .select("id, customer_name, phone, total, status, created_at, order_items(product_name, quantity)")
+      .select("id, customer_name, phone, address, total, status, created_at, order_items(product_name, quantity)")
       .order("created_at", { ascending: false })
       .limit(100);
 
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!data.length) {
       const row = document.createElement("tr");
       const cell = document.createElement("td");
-      cell.colSpan = 7;
+      cell.colSpan = 8;
       cell.textContent = "هنوز سفارشی ثبت نشده است.";
       row.appendChild(cell);
       ordersTableBody.appendChild(row);
@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         String(order.id).slice(0, 8),
         order.customer_name || "-",
         order.phone || "-",
+        order.address || "-",
         Number(order.total || 0).toLocaleString("fa-IR") + " تومان",
         (order.order_items || []).map(item =>
           (item.product_name || "محصول") + " × " + item.quantity
@@ -249,6 +250,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
           order.status = statusSelect.value;
           ordersMessage.textContent = "وضعیت سفارش به‌روزرسانی شد.";
+          await loadDashboardStats();
         }
         statusSelect.disabled = false;
       });
@@ -515,6 +517,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     showLogin("از حساب خود خارج شدید.");
+  });
+
+  // تازه‌سازی دستی سفارش‌ها و آمار داشبورد
+  document.getElementById("refresh-orders").addEventListener("click", async () => {
+    const refreshButton = document.getElementById("refresh-orders");
+    refreshButton.disabled = true;
+    refreshButton.textContent = "در حال به‌روزرسانی...";
+    try {
+      await Promise.all([loadOrders(), loadDashboardStats()]);
+      if (!ordersMessage.textContent.startsWith("خطا")) {
+        ordersMessage.textContent = "سفارش‌ها و آمار به‌روز شدند.";
+      }
+    } finally {
+      refreshButton.disabled = false;
+      refreshButton.textContent = "به‌روزرسانی سفارش‌ها";
+    }
   });
 
   // هماهنگ نگه داشتن رابط با خروج از حساب در تب یا بخش دیگر
