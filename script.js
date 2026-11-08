@@ -429,6 +429,16 @@ function setupNavigation() {
 function setupMenu() {
   const categoryTabs = $("#categoryTabs");
 
+  if (grid) {
+    grid.addEventListener("error", event => {
+      const image = event.target;
+      if (!(image instanceof HTMLImageElement) || !image.classList.contains("product-image")) return;
+      image.classList.add("image-unavailable");
+      image.removeAttribute("src");
+      image.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
+    }, true);
+  }
+
   if (categoryTabs) {
     categoryTabs.addEventListener("click", event => {
       const button = event.target.closest("[data-category]");
