@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const title = document.getElementById("form-title");
   const intro = document.getElementById("form-intro");
   const nameField = document.getElementById("name-field");
+  const emailField = document.getElementById("email").closest(".field");
   const confirmField = document.getElementById("confirm-field");
   const passwordField = document.getElementById("password-field");
   const password = document.getElementById("password");
@@ -32,17 +33,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     mode = nextMode;
     const signup = mode === "signup";
     const recovery = mode === "recovery";
-    title.textContent = signup ? "ساخت حساب TALOM" : recovery ? "بازیابی رمز عبور" : "ورود به حساب";
-    intro.textContent = signup ? "برای ساخت حساب، اطلاعات زیر را وارد کنید." : recovery ? "لینک بازیابی برای ایمیل شما ارسال می‌شود." : "برای مشاهده حساب و سفارش‌ها وارد شوید.";
+    const updatePassword = mode === "update";
+    title.textContent = signup ? "ساخت حساب TALOM" : recovery ? "بازیابی رمز عبور" : updatePassword ? "تنظیم رمز جدید" : "ورود به حساب";
+    intro.textContent = signup ? "برای ساخت حساب، اطلاعات زیر را وارد کنید." : recovery ? "ایمیل حساب خود را وارد کنید تا لینک بازیابی ارسال شود." : updatePassword ? "رمز عبور جدید خود را انتخاب کنید." : "برای مشاهده حساب و سفارش‌ها وارد شوید.";
     nameField.hidden = !signup;
-    confirmField.hidden = !signup;
+    emailField.hidden = updatePassword;
+    confirmField.hidden = !signup && !updatePassword;
     passwordField.hidden = recovery;
     password.required = !recovery;
-    confirmPassword.required = signup;
-    submit.textContent = signup ? "ثبت‌نام" : recovery ? "ارسال لینک بازیابی" : "ورود";
-    toggleSignup.hidden = recovery;
-    forgot.hidden = signup || recovery;
-    toggleSignup.textContent = signup ? "قبلاً حساب ساخته‌ام؛ ورود" : "ساخت حساب جدید";
+    confirmPassword.required = signup || updatePassword;
+    password.autocomplete = updatePassword || signup ? "new-password" : "current-password";
+    submit.textContent = signup ? "ثبت‌نام" : recovery ? "ارسال لینک بازیابی" : updatePassword ? "ذخیره رمز جدید" : "ورود";
+    toggleSignup.hidden = false;
+    forgot.hidden = signup || recovery || updatePassword;
+    toggleSignup.textContent = signup ? "قبلاً حساب ساخته‌ام؛ ورود" : updatePassword || recovery ? "بازگشت به ورود" : "ساخت حساب جدید";
     showMessage("");
   }
 
@@ -116,6 +120,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         if (error) throw error;
         showMessage("اگر این ایمیل ثبت شده باشد، لینک بازیابی برای آن ارسال می‌شود.");
+      } else if (mode === "update") {
+        if (password.value.length < 8) throw new Error("رمز عبور باید حداقل ۸ نویسه باشد.");
+        if (password.value !== confirmPassword.value) throw new Error("تکرار رمز عبور مطابقت ندارد.");
+        const { error } = await supabaseClient.auth.updateUser({ password: password.value });
+        if (error) throw error;
+        showMessage("رمز عبور با موفقیت تغییر کرد. اکنون می‌توانید وارد حساب شوید.");
+        form.reset();
+        setMode("login");
       } else if (mode === "signup") {
         const fullName = document.getElementById("full-name").value.trim();
         if (fullName.length < 2) throw new Error("نام خود را کامل وارد کنید.");
@@ -148,7 +160,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  toggleSignup.addEventListener("click", () => setMode(mode === "signup" ? "login" : "signup"));
+  toggleSignup.addEventListener("click", () => {
+    if (mode === "signup" || mode === "recovery" || mode === "update") setMode("login");
+    else setMode("signup");
+  });
   forgot.addEventListener("click", () => setMode("recovery"));
 
   document.getElementById("logout-button").addEventListener("click", async () => {
@@ -164,7 +179,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   supabaseClient.auth.onAuthStateChange((event, session) => {
-    if (event === "PASSWORD_RECOVERY") setMode("recovery");
+    if (event === "PASSWORD_RECOVERY") setMode("update");
     if (event === "SIGNED_OUT") {
       accountCard.hidden = true;
       authCard.hidden = false;
