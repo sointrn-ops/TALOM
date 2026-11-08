@@ -141,3 +141,47 @@ body{font-size:16px}
 @media(max-width:600px){
  .main-area{margin-right:76px;margin-left:0}
 }
+
+
+/* Business-grade admin polish */
+:root{
+ --forest:#173b32;--forest-2:#214a3e;--cream:#f3f4ef;--paper:#ffffff;
+ --ink:#1d2923;--muted:#738078;--line:#e3e8e1;--sage:#e8efe8;
+ --gold:#b99a63;--shadow:0 8px 28px rgba(23,59,50,.055);
+}
+body{background:#f2f4f0;color:var(--ink)}
+.sidebar{box-shadow:0 0 28px rgba(16,42,32,.08)}
+.main-area{max-width:1900px;padding-inline:clamp(24px,3.2vw,58px)}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(242,244,240,.94);backdrop-filter:blur(14px);margin-inline:-1px;padding-inline:1px}
+.page-section{margin-bottom:64px}
+.welcome-panel{border-radius:8px;min-height:220px;padding:36px 44px;background:linear-gradient(115deg,#173b32 0%,#214a3e 68%,#2a5546 100%)}
+.welcome-panel h2{font-size:34px;line-height:1.7}
+.stats-grid{gap:16px}
+.stat-card,.content-card,.table-card{border:1px solid #e5e9e3;border-radius:7px;box-shadow:var(--shadow)}
+.stat-card{min-height:154px;padding:22px}
+.stat-card>strong{font-variant-numeric:tabular-nums}
+.stat-feature{background:#e9f0e9;border-color:#dce7dc}
+.section-heading{margin-top:42px;margin-bottom:20px}
+.section-heading h2{font-size:23px}
+.data-table th{background:#f0f3ee;color:#4f6155}
+.data-table td{border-top-color:#edf0eb}
+.data-table tbody tr:nth-child(even){background:#fcfdfa}
+.data-table tbody tr:hover{background:#f2f7f1}
+.status-select{border-radius:5px;min-height:40px}
+.btn,.mini-btn,.filter-select,.field input,.field select,.field textarea{border-radius:5px}
+.btn-primary{box-shadow:0 3px 9px rgba(23,59,50,.12)}
+.btn-primary:hover{transform:translateY(-1px)}
+.search-wrap{border-radius:5px}
+.product-thumb{border-radius:5px}
+.settings-note{border-radius:7px}
+.form-message{line-height:2}
+@media(max-width:850px){
+ .main-area{padding-inline:20px}
+ .topbar{position:relative}
+}
+@media(max-width:600px){
+ .main-area{padding-inline:13px}
+ .welcome-panel{border-radius:6px}
+ .welcome-panel h2{font-size:27px}
+ .stat-card{border-radius:6px}
+}
