@@ -504,3 +504,182 @@ body{background:var(--cream);color:var(--ink);font-family:'Vazirmatn',sans-serif
   .product-form-card{position:static}
   .field-row{grid-template-columns:1fr}
 }
+
+
+/* MODERN SaaS dashboard system — TALOM */
+:root{
+ --saas-bg:#f5f7fb;--saas-surface:#ffffff;--saas-text:#182230;
+ --saas-muted:#8491a3;--saas-line:#e8edf4;--saas-blue:#3978e8;
+ --saas-blue-soft:#edf4ff;--saas-green:#16866a;--saas-green-soft:#e9f7f1;
+ --saas-orange:#c78231;--saas-red:#d45c64;--saas-shadow:0 2px 12px rgba(30,48,78,.045);
+}
+*{box-sizing:border-box}
+html,body{background:var(--saas-bg)!important;color:var(--saas-text);font-family:'Vazirmatn',sans-serif}
+body{font-size:14px;line-height:1.7}
+.admin-shell{min-height:100vh;background:var(--saas-bg)}
+/* Clean right-side app navigation */
+.sidebar{
+ position:fixed!important;inset:0 0 0 auto!important;width:252px!important;
+ padding:25px 17px 18px!important;background:#fff!important;color:#344154!important;
+ border-left:1px solid var(--saas-line);box-shadow:0 0 24px rgba(31,50,80,.035)
+}
+.brand-lockup{padding:5px 9px 30px!important;gap:11px}
+.brand-mark{width:40px;height:40px;border:0;border-radius:11px;background:#eaf1ff;color:#356fd0;font:700 23px Georgia,serif}
+.brand-lockup strong{font:800 21px 'Vazirmatn',sans-serif;letter-spacing:1px;color:#1e2a3b}
+.brand-lockup small{font-size:9px;letter-spacing:1.1px;color:#9aa5b5}
+.side-caption{padding:9px 12px 10px;color:#a0aaba;font-size:10px;font-weight:700}
+.side-nav{display:grid;gap:5px}
+.nav-link{min-height:44px;padding:10px 12px;border-radius:8px;color:#657287;font-size:13px;gap:11px;transition:background .16s,color .16s}
+.nav-link:hover{background:#f5f8fd;color:#2d65c6}
+.nav-link.active{background:var(--saas-blue-soft);color:#2865c8;box-shadow:inset -3px 0 var(--saas-blue);font-weight:700}
+.nav-icon{width:19px;color:inherit;font-size:17px}
+.nav-count{margin-right:auto;border-radius:6px;background:#eaf1ff;color:#356fd0;padding:2px 7px;font-size:10px}
+.sidebar-bottom{margin-top:auto;border-top:1px solid var(--saas-line);padding:16px 5px 2px;gap:9px}
+.admin-avatar{width:36px;height:36px;border-radius:10px;background:#eaf1ff;color:#356fd0;font-size:10px}
+.admin-identity strong{font-size:11px;color:#344154}
+.admin-identity small{font-size:10px;color:#9aa5b5}
+.icon-btn{color:#8190a4}
+.main-area{
+ margin:0 252px 0 0!important;max-width:none!important;width:auto;
+ padding:0 clamp(22px,3vw,48px) 42px!important
+}
+.topbar{
+ height:82px;margin-bottom:27px;position:sticky;top:0;z-index:15;
+ background:rgba(245,247,251,.94);backdrop-filter:blur(14px);
+ border-bottom:1px solid var(--saas-line)
+}
+.eyebrow{font-size:9px;letter-spacing:1.15px;color:#98a4b4;font-weight:700}
+.page-title{font-size:22px;font-weight:800;color:#1d2939;margin-top:2px}
+.topbar-actions{font-size:11px;gap:17px;color:#8b97a8}
+.live-dot{display:flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid #dcefe7;border-radius:7px;background:#f0faf5;color:#26815e}
+.live-dot:before{width:6px;height:6px;background:#20a575;box-shadow:0 0 0 3px #dff4e9}
+.top-date{border-right:1px solid var(--saas-line);padding-right:15px}
+.mobile-menu{display:none;border:1px solid var(--saas-line);background:#fff;color:#53647a;border-radius:8px;width:38px;height:38px}
+.page-section{margin-bottom:54px;scroll-margin-top:105px}
+/* SaaS welcome header */
+.welcome-panel{
+ min-height:190px;padding:30px 34px;border-radius:12px;
+ background:linear-gradient(112deg,#285fc0 0%,#3978e8 56%,#6597ed 100%);
+ color:#fff;box-shadow:0 8px 22px rgba(57,120,232,.13)
+}
+.welcome-panel:after{display:none}
+.welcome-panel h2{font-size:29px;line-height:1.6;font-weight:800}
+.welcome-panel p{font-size:12px;line-height:2;color:#e6efff}
+.welcome-panel .eyebrow{color:#d9e6ff}
+.welcome-stamp{border:1px solid #ffffff42;border-radius:10px;background:#ffffff12;padding:16px 22px}
+.welcome-stamp strong{font:36px Georgia,serif;color:#fff}
+.welcome-stamp span,.welcome-stamp small{color:#e1ebff;font-size:9px;letter-spacing:1px}
+.welcome-orbit{border-color:#ffffff16}
+/* Stats */
+.section-heading{margin:30px 0 16px;align-items:center}
+.section-heading h2{font-size:19px;font-weight:800;color:#263449}
+.section-desc{font-size:12px;color:#8a96a8;line-height:1.9}
+.stats-grid{gap:14px}
+.stat-card,.content-card,.table-card{
+ background:#fff;border:1px solid var(--saas-line);border-radius:10px;
+ box-shadow:var(--saas-shadow)
+}
+.stat-card{min-height:138px;padding:17px 19px}
+.stat-top{font-size:11px;color:#78869a;font-weight:600}
+.stat-icon{width:32px;height:32px;display:grid;place-items:center;border-radius:8px;background:#f0f5ff;color:#3978e8;font-size:16px}
+.stat-card>strong{font-size:29px;font-weight:800;color:#1d2c42;margin:12px 0 2px;font-variant-numeric:tabular-nums}
+.stat-card>strong small{font-size:11px;color:#8c99aa}
+.stat-card>p{font-size:10px;color:#9aa5b4}
+.stat-feature{background:#fff;border-color:var(--saas-line)}
+.stat-feature .stat-icon{background:#e9f7f1;color:#16866a}
+.dashboard-lower{gap:14px;margin-top:15px}
+.content-card{padding:20px}
+.card-heading{margin-bottom:14px}
+.card-heading h3,.quick-card h3{font-size:16px;font-weight:800;color:#263449}
+.recent-row{padding:12px 0;border-color:#eff2f6}
+.recent-avatar,.quick-symbol{width:35px;height:35px;border-radius:8px;background:#edf4ff;color:#3978e8}
+.recent-main strong,.quick-link strong{font-size:12px;color:#344154}
+.recent-main small,.quick-link small{font-size:10px;color:#9aa5b4}
+.recent-price{font-size:11px;font-weight:700;color:#53647a}
+.quick-link{padding:12px 0;border-color:#eff2f6}
+.quick-link>b{color:#9ba8b8}
+.inline-link{font-size:11px;color:#3978e8;font-weight:700}
+/* Tables / filters */
+.toolbar{gap:10px;margin:17px 0 13px}
+.search-wrap{min-height:42px;border:1px solid var(--saas-line);border-radius:8px;background:#fff;padding:0 12px}
+.search-wrap input{height:40px;font-size:12px}
+.filter-select{min-height:42px;border:1px solid var(--saas-line);border-radius:8px;background:#fff;padding:9px 12px;font-size:11px}
+.table-card{overflow:hidden}
+.table-scroll{overflow:auto}
+.data-table{min-width:830px;border-collapse:separate;border-spacing:0}
+.data-table th{padding:13px 14px;background:#f7f9fc;color:#8491a3;font-size:10px;font-weight:800;white-space:nowrap;border-bottom:1px solid var(--saas-line)}
+.data-table td{padding:13px 14px;border-top:1px solid #f0f3f7;font-size:11px;line-height:1.8;color:#536176}
+.data-table tbody tr:nth-child(even){background:#fcfdff}
+.data-table tbody tr:hover{background:#f6f9ff}
+.order-code{font-family:monospace;font-size:10px;background:#edf4ff;color:#3978e8;border-radius:5px;padding:4px 7px}
+.customer-cell strong,.product-name-cell strong{font-size:12px;color:#354257}
+.customer-cell small,.product-name-cell small{font-size:10px;color:#9aa5b4}
+.address-link{font-size:10px;color:#3978e8}
+.status-select{min-height:34px;padding:6px 9px;border:1px solid var(--saas-line);border-radius:7px;background:#fff;font-size:10px}
+.mini-btn{border:1px solid var(--saas-line);border-radius:6px;padding:6px 9px;font-size:10px}
+.table-note{font-size:10px;color:#98a3b2;margin-top:9px}
+/* Forms */
+.product-workspace{gap:14px;align-items:start}
+.product-form-card{top:100px}
+.field{gap:7px;margin-bottom:14px}
+.field>span{font-size:11px;font-weight:700;color:#647287}
+.field input,.field select,.field textarea,.filter-select{
+ border:1px solid var(--saas-line);border-radius:8px;background:#fff;
+ padding:11px 12px;font-size:12px;min-height:42px;color:#344154
+}
+.field textarea{min-height:86px}
+.field input:focus,.field select:focus,.field textarea:focus,.filter-select:focus{border-color:#91b5f3;box-shadow:0 0 0 3px #edf4ff}
+.btn{border-radius:7px;padding:10px 15px;font-size:11px;min-height:39px}
+.btn-primary{background:var(--saas-blue);color:#fff;box-shadow:0 3px 8px rgba(57,120,232,.14)}
+.btn-primary:hover{background:#2867d3}
+.btn-quiet{border:1px solid var(--saas-line);background:#fff;color:#586981}
+.form-mark{width:32px;height:32px;border-radius:8px;background:#edf4ff;color:#3978e8}
+.inventory-count{border-radius:6px;background:#edf4ff;color:#3978e8;padding:6px 9px;font-size:10px}
+.form-message{font-size:11px;line-height:1.8}
+.settings-layout{gap:14px}
+.settings-note{border:1px solid var(--saas-line);border-radius:10px;background:#fff;padding:24px}
+.settings-note h3{font-size:17px;color:#344154}
+.settings-note p{font-size:11px;line-height:2;color:#7d8a9d}
+.settings-note small{color:#a1acba}
+.admin-footer{border-top:1px solid var(--saas-line);padding-top:15px;color:#a0aaba;font-size:10px}
+/* Login screen */
+.login-screen{background:radial-gradient(circle at 20% 15%,#4b82d7 0,transparent 34%),linear-gradient(135deg,#1b3765,#285fc0)}
+.login-card{border:1px solid #e8edf4;border-radius:12px;box-shadow:0 25px 75px #122d5c55}
+.login-brand{font-family:'Vazirmatn',sans-serif;letter-spacing:2px}
+.login-card .field input{border-radius:8px;min-height:45px}
+.login-card .btn{border-radius:8px}
+/* Responsive */
+@media(max-width:1250px){
+ .sidebar{width:226px!important}
+ .main-area{margin-right:226px!important;padding-inline:23px!important}
+ .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:850px){
+ .sidebar{width:70px!important;padding:20px 9px!important}
+ .main-area{margin-right:70px!important;padding-inline:17px!important}
+ .sidebar.mobile-open{width:252px!important;padding:24px 17px!important;box-shadow:-16px 0 40px #20334c24}
+ .sidebar.mobile-open .nav-link{font-size:13px}
+ .sidebar.mobile-open .brand-lockup{justify-content:flex-start}
+ .mobile-menu{display:inline-grid;place-items:center}
+ .dashboard-lower{grid-template-columns:1fr}
+ .topbar{position:relative}
+}
+@media(max-width:600px){
+ .main-area{padding-inline:11px!important}
+ .topbar{height:auto;min-height:75px;margin-bottom:20px;gap:8px}
+ .page-title{font-size:19px}
+ .topbar-actions{font-size:9px;gap:7px;flex-direction:column;align-items:flex-end}
+ .welcome-panel{min-height:185px;padding:22px 18px;border-radius:9px}
+ .welcome-panel h2{font-size:24px}
+ .welcome-panel p{font-size:10px}
+ .welcome-stamp{display:none}
+ .stats-grid{grid-template-columns:1fr 1fr;gap:9px}
+ .stat-card{min-height:122px;padding:12px}
+ .stat-top{font-size:10px}
+ .stat-card>strong{font-size:22px}
+ .section-heading h2{font-size:17px}
+ .content-card{padding:14px}
+ .product-workspace,.settings-layout{grid-template-columns:1fr}
+ .product-form-card{position:static}
+ .field-row{grid-template-columns:1fr}
+}
