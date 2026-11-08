@@ -185,3 +185,142 @@ body{background:#f2f4f0;color:var(--ink)}
  .welcome-panel h2{font-size:27px}
  .stat-card{border-radius:6px}
 }
+
+
+/* TALOM Operations UI — full visual refresh */
+:root{
+ --forest:#173b32;--forest-2:#214a3e;--cream:#f5f7f3;--paper:#fff;
+ --ink:#17251e;--muted:#748078;--line:#e5ebe5;--sage:#edf3ed;
+ --gold:#c6a66c;--red:#a64f43;--shadow:0 10px 30px rgba(25,53,40,.07);
+}
+html{background:var(--cream)}
+body{background:var(--cream);color:var(--ink);font-size:16px;line-height:1.75}
+.admin-shell{background:var(--cream);min-height:100vh}
+.sidebar{
+ inset:0 0 0 auto!important;width:270px;padding:30px 22px 22px;
+ background:linear-gradient(180deg,#163a30 0%,#1d493b 100%);
+ box-shadow:-8px 0 32px rgba(17,44,34,.08);border-left:1px solid #ffffff12
+}
+.brand-lockup{padding:8px 7px 42px;gap:14px}
+.brand-mark{width:46px;height:46px;border-radius:12px;background:#ffffff0b;border-color:#ffffff35;font-size:28px}
+.brand-lockup strong{font-size:24px;letter-spacing:2px}
+.brand-lockup small{font-size:10px}
+.side-caption{font-size:12px;padding-bottom:14px;color:#a9bdb0}
+.side-nav{gap:8px}
+.nav-link{min-height:48px;border-radius:9px;padding:12px 14px;font-size:14px;gap:13px}
+.nav-link:hover{background:#ffffff12}
+.nav-link.active{background:#ffffff18;box-shadow:inset -3px 0 var(--gold);color:#fff}
+.nav-icon{font-size:18px}
+.nav-count{font-size:11px;padding:2px 8px}
+.sidebar-bottom{padding-top:20px}
+.admin-avatar{width:40px;height:40px;font-size:12px}
+.admin-identity strong{font-size:13px}
+.admin-identity small{font-size:11px}
+.main-area{
+ margin:0!important;margin-right:270px!important;margin-left:0!important;
+ max-width:none;width:auto;padding:0 clamp(24px,3vw,54px) 50px
+}
+.topbar{
+ height:94px;margin-bottom:34px;position:sticky;top:0;z-index:15;
+ background:rgba(245,247,243,.94);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)
+}
+.eyebrow{font-size:10px;letter-spacing:1.5px}
+.page-title{font-size:27px;font-weight:800;color:var(--ink)}
+.topbar-actions{font-size:13px}
+.live-dot{background:#e7f2e8;padding:7px 12px;border-radius:30px;color:#376b49}
+.top-date{border-color:var(--line)}
+.page-section{margin-bottom:68px;scroll-margin-top:115px}
+.welcome-panel{
+ min-height:250px;padding:42px 48px;border-radius:16px;
+ background:radial-gradient(circle at 12% 15%,#376b52 0,transparent 32%),linear-gradient(115deg,#16392f,#214b3c 70%,#2d5b46);
+ box-shadow:0 18px 45px rgba(22,58,45,.14)
+}
+.welcome-panel h2{font-size:36px;line-height:1.65;font-weight:800}
+.welcome-panel p{font-size:14px;line-height:2.1;color:#d1ded4}
+.welcome-stamp{border-radius:14px;background:#ffffff08}
+.section-heading{margin:42px 0 20px;align-items:center}
+.section-heading h2{font-size:24px;font-weight:800}
+.section-desc{font-size:13px}
+.stats-grid{gap:18px}
+.stat-card,.content-card,.table-card{
+ background:var(--paper);border:1px solid var(--line);border-radius:13px;
+ box-shadow:var(--shadow)
+}
+.stat-card{min-height:164px;padding:23px 24px}
+.stat-top{font-size:13px;color:#65746a}
+.stat-icon{width:36px;height:36px;border-radius:10px;background:#edf4ed;font-size:18px}
+.stat-card>strong{font-size:34px;margin:18px 0 5px;color:#1e4938}
+.stat-card>strong small{font-size:14px}
+.stat-card>p{font-size:12px;color:#87938a}
+.stat-feature{background:linear-gradient(145deg,#eaf2e9,#f8fbf7);border-color:#dce8dc}
+.dashboard-lower{gap:18px;margin-top:20px}
+.content-card{padding:25px}
+.card-heading h3,.quick-card h3{font-size:19px;font-weight:800}
+.recent-row{padding:15px 0}
+.recent-avatar,.quick-symbol{width:40px;height:40px;border-radius:10px}
+.recent-main strong,.quick-link strong{font-size:14px}
+.recent-main small,.quick-link small{font-size:12px}
+.recent-price{font-size:13px}
+.quick-link{padding:16px 0}
+.toolbar{gap:12px;margin:20px 0 14px}
+.search-wrap{border-radius:9px;padding-inline:14px;background:#fff;border-color:var(--line)}
+.search-wrap input{height:48px;font-size:14px}
+.filter-select{border-radius:9px;padding:13px 15px;font-size:13px}
+.table-card{overflow:hidden}
+.data-table{min-width:820px}
+.data-table th{font-size:13px;padding:17px 16px;background:#f2f6f1;color:#52645a}
+.data-table td{font-size:13px;padding:16px;border-top:1px solid #edf1ec}
+.data-table tbody tr:nth-child(even){background:#fbfcfa}
+.data-table tbody tr:hover{background:#f0f6f0}
+.customer-cell strong,.product-name-cell strong{font-size:14px}
+.customer-cell small,.product-name-cell small{font-size:11px}
+.address-link{font-size:12px}
+.status-select{font-size:12px;padding:11px 12px;border-radius:8px;min-height:42px}
+.mini-btn{font-size:12px;padding:8px 12px;border-radius:7px}
+.product-workspace{gap:18px}
+.product-form-card{top:112px}
+.field{gap:9px;margin-bottom:18px}
+.field>span{font-size:14px}
+.field input,.field select,.field textarea{font-size:14px;padding:14px 15px;border-radius:9px}
+.btn{font-size:14px;padding:13px 19px;border-radius:9px}
+.btn-primary{background:linear-gradient(135deg,#173b32,#285745)}
+.btn-quiet{border-radius:9px}
+.inventory-count{font-size:12px;border-radius:7px;padding:8px 11px}
+.settings-note{border-radius:13px;padding:30px}
+.settings-note h3{font-size:21px}
+.settings-note p{font-size:13px}
+.admin-footer{font-size:11px}
+@media(max-width:1250px){
+ .sidebar{width:235px}
+ .main-area{margin-right:235px!important;padding-inline:25px}
+ .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:850px){
+ .sidebar{width:76px;padding:22px 10px}
+ .main-area{margin-right:76px!important;padding-inline:18px}
+ .sidebar.mobile-open{width:270px;box-shadow:-18px 0 45px #10281f35}
+ .sidebar.mobile-open .nav-link{font-size:14px}
+ .sidebar.mobile-open .brand-lockup{justify-content:flex-start}
+ .dashboard-lower{grid-template-columns:1fr}
+ .topbar{position:relative}
+}
+@media(max-width:600px){
+ .main-area{padding-inline:12px}
+ .topbar{height:auto;min-height:82px;gap:10px;margin-bottom:22px}
+ .topbar-actions{font-size:10px;gap:8px;flex-direction:column;align-items:flex-end}
+ .page-title{font-size:22px}
+ .welcome-panel{min-height:210px;padding:26px 22px;border-radius:12px}
+ .welcome-panel h2{font-size:27px}
+ .welcome-panel p{font-size:12px}
+ .welcome-stamp{display:none}
+ .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .stat-card{min-height:140px;padding:15px}
+ .stat-top{font-size:11px}
+ .stat-card>strong{font-size:25px}
+ .section-heading h2{font-size:20px}
+ .content-card{padding:17px}
+ .product-workspace,.settings-layout{grid-template-columns:1fr}
+ .product-form-card{position:static}
+ .field-row{grid-template-columns:1fr}
+}
