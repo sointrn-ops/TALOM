@@ -439,16 +439,6 @@ function setupNavigation() {
 function setupMenu() {
   const categoryTabs = $("#categoryTabs");
 
-  if (grid) {
-    grid.addEventListener("error", event => {
-      const image = event.target;
-      if (!(image instanceof HTMLImageElement) || !image.classList.contains("product-image")) return;
-      image.classList.add("image-unavailable");
-      image.removeAttribute("src");
-      image.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
-    }, true);
-  }
-
   if (categoryTabs) {
     categoryTabs.addEventListener("click", event => {
       const button = event.target.closest("[data-category]");
@@ -520,10 +510,15 @@ function setupMenu() {
 
       if (!image.dataset.fallbackTried) {
         image.dataset.fallbackTried = "true";
-
+        image.classList.remove("image-unavailable");
         image.src =
           "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80";
+        return;
       }
+
+      image.classList.add("image-unavailable");
+      image.removeAttribute("src");
+      image.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
     }, true);
   }
 
