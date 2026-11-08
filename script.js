@@ -3,6 +3,7 @@
 
 const SUPABASE_URL = "https://rlecvkrrdxqjepsxylee.supabase.co";
 const SUPABASE_KEY = "sb_publishable__TOW24x67zjRnlas6Lb0xg_1wF0tC1g";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let products = [];
 
@@ -20,7 +21,8 @@ const state = {
   category: "all",
   search: "",
   selectedProduct: null,
-  favorites: new Set()
+  favorites: new Set(),
+  cart: []
 };
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -34,6 +36,9 @@ const productCount = $("#productCount");
 const productModal = $("#productModal");
 const imageModal = $("#imageModal");
 const toastElement = $("#toast");
+const cartModal = $("#cartModal");
+const cartItemsElement = $("#cartItems");
+const cartCountElement = $("#cartCount");
 
 let toastTimer;
 let activeModal = null;
@@ -158,9 +163,10 @@ function renderProducts() {
           <p class="product-description">${escapeHTML(getProductDescription(product))}</p>
           <div class="product-bottom">
             <strong class="product-price">${formatPrice(product.price)}</strong>
-            <button class="product-details" data-details="${product.id}">
-              ${isEnglish() ? "Details ↗" : "جزئیات ↗"}
-            </button>
+            <div class="product-actions">
+              <button class="product-details" data-details="${product.id}">${isEnglish() ? "Details ↗" : "جزئیات ↗"}</button>
+              <button class="product-add-cart" data-add-cart="${product.id}" type="button">${isEnglish() ? "Add to bag +" : "افزودن به سبد +"}</button>
+            </div>
           </div>
         </div>
       </article>
@@ -269,6 +275,8 @@ function openProduct(productId) {
 
   const favoriteButton = $("#modalFavorite");
   updateFavoriteButton(favoriteButton, product.id);
+  const addCartButton = $("#modalAddCart");
+  if (addCartButton) addCartButton.dataset.addCart = product.id;
 
   openModal(productModal);
 }
@@ -465,6 +473,12 @@ function setupMenu() {
         return;
       }
 
+      const addButton = event.target.closest("[data-add-cart]");
+      if (addButton) {
+        addToCart(addButton.dataset.addCart);
+        return;
+      }
+
       const detailsButton = event.target.closest("[data-details]");
 
       if (detailsButton) {
@@ -506,6 +520,167 @@ function setupMenu() {
       }
     });
   }
+}
+
+
+function saveCart() {
+  try { localStorage.setItem("talom-cart", JSON.stringify(state.cart)); } catch {}
+}
+
+function renderCart() {
+  const count = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+  if (cartCountElement) cartCountElement.textContent = count.toLocaleString("fa-IR");
+  if (!cartItemsElement) return;
+
+  cartItemsElement.replaceChildren();
+  state.cart.forEach(item => {
+    const product = products.find(entry => entry.id === item.id);
+    if (!product) return;
+    const row = document.createElement("article");
+    row.className = "cart-item";
+    const image = document.createElement("img");
+    image.src = product.image;
+    image.alt = getProductName(product);
+    image.loading = "lazy";
+    const details = document.createElement("div");
+    details.className = "cart-item-details";
+    const name = document.createElement("strong");
+    name.textContent = getProductName(product);
+    const price = document.createElement("span");
+    price.textContent = formatPrice(product.price);
+    const controls = document.createElement("div");
+    controls.className = "cart-quantity";
+    const minus = document.createElement("button");
+    minus.type = "button"; minus.dataset.cartAction = "decrease"; minus.dataset.productId = item.id;
+    minus.textContent = "−"; minus.setAttribute("aria-label", "کاهش تعداد");
+    const quantity = document.createElement("span");
+    quantity.textContent = item.quantity.toLocaleString("fa-IR");
+    const plus = document.createElement("button");
+    plus.type = "button"; plus.dataset.cartAction = "increase"; plus.dataset.productId = item.id;
+    plus.textContent = "+"; plus.setAttribute("aria-label", "افزایش تعداد");
+    const remove = document.createElement("button");
+    remove.type = "button"; remove.className = "cart-remove";
+    remove.dataset.cartAction = "remove"; remove.dataset.productId = item.id; remove.textContent = "حذف";
+    controls.append(minus, quantity, plus, remove);
+    details.append(name, price, controls);
+    row.append(image, details);
+    cartItemsElement.appendChild(row);
+  });
+
+  const hasItems = state.cart.length > 0;
+  const cartEmpty = $("#cartEmpty");
+  const cartSummary = $("#cartSummary");
+  const checkoutForm = $("#checkoutForm");
+  if (cartEmpty) cartEmpty.hidden = hasItems;
+  if (cartSummary) cartSummary.hidden = !hasItems;
+  if (checkoutForm) checkoutForm.hidden = !hasItems;
+  const total = state.cart.reduce((sum, item) => {
+    const product = products.find(entry => entry.id === item.id);
+    return sum + (product ? product.price * item.quantity : 0);
+  }, 0);
+  const totalElement = $("#cartTotal");
+  if (totalElement) totalElement.textContent = formatPrice(total);
+}
+
+function addToCart(productId) {
+  const product = products.find(item => item.id === productId);
+  if (!product) return;
+  const existing = state.cart.find(item => item.id === productId);
+  if (existing) {
+    if (existing.quantity >= 20) { showToast("حداکثر تعداد هر محصول ۲۰ عدد است."); return; }
+    existing.quantity += 1;
+  } else {
+    state.cart.push({ id: productId, quantity: 1 });
+  }
+  saveCart();
+  renderCart();
+  showToast("به سبد خرید اضافه شد.");
+}
+
+function setupCart() {
+  const openButton = $("#cartOpen");
+  const checkoutForm = $("#checkoutForm");
+  const placeOrderButton = $("#placeOrderButton");
+  const modalAddButton = $("#modalAddCart");
+
+  if (openButton) openButton.addEventListener("click", () => {
+    renderCart();
+    openModal(cartModal);
+  });
+
+  if (modalAddButton) modalAddButton.addEventListener("click", () => {
+    const productId = modalAddButton.dataset.addCart;
+    if (!productId) return;
+    addToCart(productId);
+    openModal(cartModal);
+  });
+
+  if (cartItemsElement) cartItemsElement.addEventListener("click", event => {
+    const button = event.target.closest("[data-cart-action]");
+    if (!button) return;
+    const item = state.cart.find(entry => entry.id === button.dataset.productId);
+    if (!item) return;
+    if (button.dataset.cartAction === "increase") {
+      if (item.quantity < 20) item.quantity += 1;
+    } else if (button.dataset.cartAction === "decrease") {
+      item.quantity -= 1;
+      if (item.quantity <= 0) state.cart = state.cart.filter(entry => entry.id !== item.id);
+    } else if (button.dataset.cartAction === "remove") {
+      state.cart = state.cart.filter(entry => entry.id !== item.id);
+    }
+    saveCart();
+    renderCart();
+  });
+
+  if (checkoutForm) checkoutForm.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!state.cart.length || !placeOrderButton) return;
+    placeOrderButton.disabled = true;
+    placeOrderButton.textContent = "در حال ثبت سفارش...";
+    const orderMessage = $("#orderMessage");
+    if (orderMessage) orderMessage.textContent = "";
+
+    try {
+      const name = $("#checkoutName").value.trim();
+      const phone = $("#checkoutPhone").value.trim();
+      const address = $("#checkoutAddress").value.trim();
+      if (name.length < 2) throw new Error("نام را کامل وارد کن.");
+      if (phone.length < 7) throw new Error("شماره تماس معتبر وارد کن.");
+
+      const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+      if (sessionError) throw sessionError;
+      if (!sessionData.session) {
+        window.location.href = "account.html";
+        return;
+      }
+
+      const items = state.cart.map(item => ({ product_id: item.id, quantity: item.quantity }));
+      const { data: orderId, error } = await supabaseClient.rpc("create_order", {
+        p_customer_name: name,
+        p_phone: phone,
+        p_address: address || null,
+        p_items: items
+      });
+      if (error) throw error;
+
+      state.cart = [];
+      saveCart();
+      renderCart();
+      checkoutForm.reset();
+      if (orderMessage) orderMessage.textContent =
+        "سفارش با موفقیت ثبت شد. کد سفارش: " + String(orderId).slice(0, 8);
+      showToast("سفارش با موفقیت ثبت شد.");
+    } catch (error) {
+      console.error("TALOM order submission error:", error);
+      if (orderMessage) orderMessage.textContent =
+        error.message || "ثبت سفارش انجام نشد. دوباره تلاش کن.";
+    } finally {
+      placeOrderButton.disabled = false;
+      placeOrderButton.textContent = "ثبت نهایی سفارش";
+    }
+  });
+
+  renderCart();
 }
 
 function setupModals() {
@@ -733,6 +908,7 @@ function loadSavedSettings() {
     const savedFavorites = JSON.parse(
       localStorage.getItem("talom-favorites") || "[]"
     );
+    const savedCart = JSON.parse(localStorage.getItem("talom-cart") || "[]");
 
     if (savedTheme) setTheme(savedTheme);
 
@@ -742,6 +918,10 @@ function loadSavedSettings() {
 
     if (Array.isArray(savedFavorites)) {
       state.favorites = new Set(savedFavorites.map(String));
+    }
+    if (Array.isArray(savedCart)) {
+      state.cart = savedCart.filter(item => item && typeof item.id === "string" && Number.isInteger(item.quantity))
+        .map(item => ({ id: item.id, quantity: Math.max(1, Math.min(20, item.quantity)) }));
     }
   } catch {
     // The site still works if browser storage is unavailable.
@@ -786,6 +966,7 @@ async function init() {
   try {
     await loadProducts();
     setLanguage(state.language);
+    setupCart();
   } catch (error) {
     console.error("TALOM products loading error:", error);
     showToast(
