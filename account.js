@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const submit = document.getElementById("submit-button");
   const toggleSignup = document.getElementById("toggle-signup");
   const forgot = document.getElementById("forgot-password");
+  const guestLogin = document.getElementById("guest-login");
   const ordersList = document.getElementById("orders-list");
   const ordersMessage = document.getElementById("orders-message");
   let mode = "login";
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function showAccount(user) {
     authCard.hidden = true;
     accountCard.hidden = false;
-    document.getElementById("user-email").textContent = user.email || "";
+    document.getElementById("user-email").textContent = user.is_anonymous ? "حساب مهمان آزمایشی" : (user.email || "");
     await loadOrders(user.id);
   }
 
@@ -157,6 +158,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       showMessage(error.message || "عملیات انجام نشد. دوباره تلاش کنید.", true);
     } finally {
       submit.disabled = false;
+    }
+  });
+
+  guestLogin.addEventListener("click", async () => {
+    guestLogin.disabled = true;
+    showMessage("در حال ساخت حساب مهمان...");
+    try {
+      const { data, error } = await supabaseClient.auth.signInAnonymously({
+        options: { data: { account_type: "guest_test" } }
+      });
+      if (error) throw error;
+      if (!data.user) throw new Error("حساب مهمان ساخته نشد؛ دوباره تلاش کنید.");
+      await showAccount(data.user);
+    } catch (error) {
+      console.error("Anonymous sign-in error:", error);
+      showMessage(error.message || "ورود آزمایشی انجام نشد.", true);
+    } finally {
+      guestLogin.disabled = false;
     }
   });
 
