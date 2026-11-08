@@ -290,3 +290,47 @@ td {
     overflow-x: auto;
   }
 }
+
+
+.orders-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.orders-heading h2 {
+  margin-bottom: 0;
+}
+
+#refresh-orders:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+#orders-message {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+#orders-table-body select {
+  min-width: 145px;
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+#orders-table-body select:focus {
+  outline: 1px solid var(--gold);
+}
+
+@media (max-width: 700px) {
+  .orders-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
