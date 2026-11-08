@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const settingsMessage = $("settings-message");
   const productBody = $("products-table-body");
   const orderBody = $("orders-table-body");
-  const categoryNames = { coffee: "قهوه", cold: "نوشیدنی سرد", special: "نوشیدنی ویژه", dessert: "دسر", food: "غذا" };
+  const categoryNames = { women: "زنانه", men: "مردانه", unisex: "بدون جنسیت" };
   const statusLabels = { pending: "در انتظار بررسی", confirmed: "تأیید شده", preparing: "در حال آماده‌سازی", completed: "تکمیل شده", cancelled: "لغو شده" };
   let products = [];
   let orders = [];
@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     productForm.reset();
     $("product-id").value = "";
     $("product-form-title").textContent = "افزودن محصول جدید";
+    $("product-sizes").value = ""; $("product-colors").value = ""; $("product-stock").value = "0";
     $("save-product-btn").textContent = "ذخیره محصول";
     $("cancel-edit-btn").hidden = true;
     message(productMessage, "");
@@ -110,9 +111,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     productBody.innerHTML = '<tr><td colspan="5" class="empty-row">در حال دریافت محصولات...</td></tr>';
     const [productResult, availableResult] = await Promise.all([
       supabaseClient.from("products")
-        .select("id,name,name_en,category,description,price,image_url,is_available,created_at", { count: "exact" })
+        .select("id,name,name_en,category,description,price,image_url,is_available,sizes,colors,stock,created_at", { count: "exact" })
+        .in("category", ["women", "men", "unisex"])
         .order("created_at", { ascending: false }),
-      supabaseClient.from("products").select("id", { count: "exact", head: true }).eq("is_available", true)
+      supabaseClient.from("products").select("id", { count: "exact", head: true }).eq("is_available", true).in("category", ["women", "men", "unisex"])
     ]);
     const { data, error, count } = productResult;
     if (error || availableResult.error) {
@@ -183,10 +185,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     $("product-id").value = p.id;
     $("product-name").value = p.name || "";
     $("product-name-en").value = p.name_en || "";
-    $("product-category").value = p.category || "coffee";
+    $("product-category").value = p.category || "women";
     $("product-price").value = p.price ?? "";
     $("product-description").value = p.description || "";
     $("product-image").value = p.image_url || "";
+    $("product-sizes").value = (p.sizes || []).join(", ");
+    $("product-colors").value = (p.colors || []).join(", ");
+    $("product-stock").value = p.stock ?? 0;
     $("product-available").value = String(!!p.is_available);
     $("product-form-title").textContent = "ویرایش محصول";
     $("save-product-btn").textContent = "ذخیره تغییرات";
@@ -229,6 +234,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = {
       name, name_en: $("product-name-en").value.trim() || null,
       category: $("product-category").value, price,
+      sizes: $("product-sizes").value.split(",").map(v => v.trim()).filter(Boolean),
+      colors: $("product-colors").value.split(",").map(v => v.trim()).filter(Boolean),
+      stock: Math.max(0, Math.trunc(Number($("product-stock").value) || 0)),
       description: $("product-description").value.trim() || null,
       image_url: imageUrl || null,
       is_available: $("product-available").value === "true"
@@ -400,7 +408,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const phone = $("setting-phone").value.trim();
     const instagram = $("setting-instagram").value.trim();
     const telegram = $("setting-telegram").value.trim();
-    if (!cafeName) { message(settingsMessage, "نام کافه الزامی است.", true); return; }
+    if (!cafeName) { message(settingsMessage, "نام فروشگاه الزامی است.", true); return; }
     for (const [label, value] of [["اینستاگرام", instagram], ["تلگرام", telegram]]) {
       if (value && !/^(https?:\/\/|@)[^\s]+$/i.test(value)) {
         message(settingsMessage, "آدرس " + label + " باید لینک معتبر یا شناسه با @ باشد.", true); return;
@@ -413,7 +421,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         .eq("id", 1).select("id").maybeSingle();
       if (error) throw error;
       if (!data) throw new Error("Settings row was not updated.");
-      message(settingsMessage, "تنظیمات کافه با موفقیت ذخیره شد.");
+      message(settingsMessage, "تنظیمات فروشگاه با موفقیت ذخیره شد.");
     } catch (error) {
       console.error("Save settings:", error); message(settingsMessage, "ذخیره تنظیمات انجام نشد؛ مجوز مدیر را بررسی کنید.", true);
     } finally { button.disabled = false; button.textContent = "ذخیره تنظیمات"; }

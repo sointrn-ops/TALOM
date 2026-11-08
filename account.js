@@ -51,6 +51,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     showMessage("");
   }
 
+  function continueCheckoutIfRequested() {
+    if (new URLSearchParams(location.search).get("next") === "checkout") location.replace("index.html#shop");
+  }
+
   async function showAccount(user) {
     authCard.hidden = true;
     accountCard.hidden = false;
@@ -145,6 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (error) throw error;
         if (data.session) {
           await showAccount(data.user);
+          continueCheckoutIfRequested();
         } else {
           showMessage("ثبت‌نام انجام شد. ایمیل خود را برای تأیید حساب بررسی کنید.");
         }
@@ -152,6 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: password.value });
         if (error) throw error;
         await showAccount(data.user);
+        continueCheckoutIfRequested();
       }
     } catch (error) {
       console.error("Auth error:", error);
@@ -171,6 +177,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (error) throw error;
       if (!data.user) throw new Error("حساب مهمان ساخته نشد؛ دوباره تلاش کنید.");
       await showAccount(data.user);
+      continueCheckoutIfRequested();
     } catch (error) {
       console.error("Anonymous sign-in error:", error);
       showMessage(error.message || "ورود آزمایشی انجام نشد.", true);
@@ -210,5 +217,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     showMessage("بررسی نشست ورود ناموفق بود.", true);
     return;
   }
-  if (session?.user) await showAccount(session.user);
+  if (session?.user) { await showAccount(session.user); continueCheckoutIfRequested(); }
 });
