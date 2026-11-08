@@ -100,11 +100,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function loadProducts() {
     productBody.innerHTML = '<tr><td colspan="5" class="empty-row">در حال دریافت محصولات...</td></tr>';
-    const { data, error, count } = await supabaseClient.from("products")
-      .select("id,name,name_en,category,description,price,image_url,is_available,created_at", { count: "exact" })
-      .order("created_at", { ascending: false });
-    if (error) {
-      console.error("Products:", error);
+    const [productResult, availableResult] = await Promise.all([
+      supabaseClient.from("products")
+        .select("id,name,name_en,category,description,price,image_url,is_available,created_at", { count: "exact" })
+        .order("created_at", { ascending: false }),
+      supabaseClient.from("products").select("id", { count: "exact", head: true }).eq("is_available", true)
+    ]);
+    const { data, error, count } = productResult;
+    if (error || availableResult.error) {
+      console.error("Products:", error || availableResult.error);
       productBody.innerHTML = '<tr><td colspan="5" class="empty-row">دریافت محصولات ناموفق بود. اتصال و مجوزها را بررسی کنید.</td></tr>';
       message(productMessage, "خطا در دریافت محصولات.", true);
       return;
@@ -112,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     products = data || [];
     const totalCount = Number(count ?? products.length);
     $("products-count").textContent = totalCount.toLocaleString("fa-IR");
-    const availableCount = products.filter(product => product.is_available).length;
+    const availableCount = Number(availableResult.count ?? products.filter(product => product.is_available).length);
     $("inventory-count").textContent = totalCount.toLocaleString("fa-IR") + " محصول · " + availableCount.toLocaleString("fa-IR") + " موجود";
     if (totalCount !== products.length) {
       message(productMessage, "تعداد رکوردها با فهرست دریافتی یکسان نیست؛ مجوزهای خواندن محصولات را بررسی کنید.", true);
