@@ -35,7 +35,22 @@
           ورود به پنل
         </button>
 
-        <p id="login-message"></p>
+        <p id="login-message" aria-live="polite"></p>
+        <button type="button" class="text-btn" id="forgot-password-btn">فراموشی رمز عبور</button>
+      </form>
+
+      <form id="reset-password-form" hidden>
+        <h3>تنظیم رمز عبور جدید</h3>
+        <div class="form-group">
+          <label for="new-password">رمز عبور جدید (حداقل ۸ کاراکتر)</label>
+          <input type="password" id="new-password" minlength="8" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">تکرار رمز عبور جدید</label>
+          <input type="password" id="confirm-password" minlength="8" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="primary-btn" id="reset-password-btn">ذخیره رمز جدید</button>
+        <p id="reset-password-message" aria-live="polite"></p>
       </form>
     </section>
   </div>
