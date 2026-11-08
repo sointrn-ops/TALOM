@@ -70,3 +70,57 @@ body{font-size:15px}
  .data-table td{font-size:12px}
  .field>span,.field input,.field select,.field textarea{font-size:13px}
 }
+
+
+/* Final readability pass: comfortable desktop and mobile typography */
+body{font-size:16px}
+.sidebar .nav-link{font-size:15px;padding-top:15px;padding-bottom:15px}
+.sidebar .side-caption{font-size:12px}
+.sidebar .brand-lockup strong{font-size:23px}
+.sidebar .brand-lockup small{font-size:10px}
+.sidebar .admin-identity strong{font-size:14px}
+.sidebar .admin-identity small{font-size:12px}
+.page-title{font-size:26px}
+.topbar-actions{font-size:14px}
+.welcome-panel h2{font-size:35px}
+.welcome-panel p{font-size:15px}
+.section-heading h2{font-size:24px}
+.section-desc{font-size:14px}
+.stat-top{font-size:14px}
+.stat-card>strong{font-size:32px}
+.stat-card>strong small{font-size:14px}
+.stat-card>p{font-size:13px}
+.card-heading h3,.quick-card h3{font-size:20px}
+.recent-main strong,.quick-link strong{font-size:15px}
+.recent-main small,.quick-link small{font-size:13px}
+.recent-price{font-size:14px}
+.data-table th{font-size:14px;padding:16px}
+.data-table td{font-size:14px;padding:16px}
+.customer-cell strong,.product-name-cell strong{font-size:15px}
+.customer-cell small,.product-name-cell small{font-size:12px}
+.address-link,.status-select,.mini-btn{font-size:13px}
+.status-select{padding:11px}
+.field{gap:10px;margin-bottom:20px}
+.field>span{font-size:15px}
+.field input,.field select,.field textarea,.filter-select{font-size:15px;padding:15px 16px}
+.btn{font-size:14px;padding:13px 19px}
+.link-button,.form-message{font-size:14px}
+.search-wrap input{font-size:14px;height:48px}
+.inventory-count,.table-note{font-size:13px}
+.admin-footer{font-size:12px}
+@media(max-width:850px){
+ .sidebar .nav-link{font-size:0}
+ .sidebar.mobile-open .nav-link{font-size:15px}
+}
+@media(max-width:600px){
+ body{font-size:15px}
+ .page-title{font-size:21px}
+ .welcome-panel h2{font-size:28px}
+ .welcome-panel p{font-size:13px}
+ .section-heading h2{font-size:22px}
+ .stat-top{font-size:12px}
+ .stat-card>strong{font-size:25px}
+ .data-table th,.data-table td{font-size:13px}
+ .field>span,.field input,.field select,.field textarea{font-size:14px}
+ .btn{font-size:14px}
+}
