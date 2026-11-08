@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         result = await supabaseClient
           .from("products")
           .update(productData)
-          .eq("id", Number(productId.value));
+          .eq("id", productId.value);
       } else {
         result = await supabaseClient
           .from("products")
@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // آماده‌سازی فرم ویرایش
   function editProduct(id) {
-    const product = products.find((item) => Number(item.id) === Number(id));
+    const product = products.find((item) => item.id === id);
 
     if (!product) return;
 
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const { error } = await supabaseClient
         .from("products")
         .delete()
-        .eq("id", Number(id));
+        .eq("id", id);
 
       if (error) throw error;
 
@@ -387,6 +387,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     showLogin("از حساب خود خارج شدید.");
+  });
+
+  // هماهنگ نگه داشتن رابط با خروج از حساب در تب یا بخش دیگر
+  supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" || !session) {
+      showLogin();
+    }
   });
 
   // بررسی وضعیت ورود هنگام باز شدن صفحه
