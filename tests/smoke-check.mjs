@@ -65,3 +65,9 @@ assert.match(publicJs, /data-cart-add/, "Product add-to-bag control is missing")
 assert.match(publicJs, /cart-add-button/, "Product add-to-bag button styling hook is missing");
 assert.match(publicHtml, /پرداخت آنلاین هنوز فعال نشده/, "Cart must disclose that online payment is not active");
 assert.match(readFileSync(resolve(root, "cart.js"), "utf8"), /talom-cart/, "Shopping bag persistence is missing");
+
+assert.match(publicHtml, /id=["']checkoutForm["']/, "Customer order form is missing");
+assert.match(publicHtml, /id=["']checkoutSubmit["']/, "Order submit control is missing");
+assert.match(readFileSync(resolve(root, "cart.js"), "utf8"), /rpc\(["']create_store_order["']/, "Secure server-side order RPC is missing");
+assert.match(readFileSync(resolve(root, "cart.js"), "utf8"), /product_id: productId/, "Checkout must send product IDs, not browser prices");
+assert.match(readFileSync(resolve(root, "script.js"), "utf8"), /window\.talomAuthClient = authClient/, "Checkout must reuse the authenticated customer session");
