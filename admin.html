@@ -3,13 +3,13 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>TALOM | Admin Panel</title>
 
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="admin.css?v=20261109-12">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="admin.js" defer></script>
+  <script src="admin.js?v=20261109-12" defer></script>
 </head>
 
 <body>
@@ -74,25 +74,10 @@
       </section>
 
       <div class="stats-grid">
-        <div class="stat-card">
-          <p>فروش امروز</p>
-          <h3>۰ تومان</h3>
-        </div>
-
-        <div class="stat-card">
-          <p>تعداد سفارش‌ها</p>
-          <h3>۰</h3>
-        </div>
-
-        <div class="stat-card">
-          <p>محصولات</p>
-          <h3 id="products-count">۰</h3>
-        </div>
-
-        <div class="stat-card">
-          <p>سفارش‌های جدید</p>
-          <h3>۰</h3>
-        </div>
+        <div class="stat-card"><p>فروش تکمیل‌شده امروز</p><h3 id="today-sales">—</h3></div>
+        <div class="stat-card"><p>سفارش‌های امروز</p><h3 id="today-orders">—</h3></div>
+        <div class="stat-card"><p>محصولات ثبت‌شده</p><h3 id="products-count">—</h3></div>
+        <div class="stat-card"><p>سفارش‌های در انتظار</p><h3 id="pending-orders">—</h3></div>
       </div>
 
       <!-- Products -->
@@ -184,13 +169,28 @@
       <!-- Orders -->
       <section class="section" id="orders">
         <h2>مدیریت سفارش‌ها</h2>
-        <p class="empty-state">هنوز سفارشی ثبت نشده است.</p>
+        <p class="section-description">مشاهده سفارش‌ها و به‌روزرسانی وضعیت آن‌ها</p>
+        <p id="orders-message" class="form-message" role="status"></p>
+        <div class="products-table">
+          <table class="orders-table">
+            <thead><tr><th>شماره سفارش</th><th>مشتری</th><th>تلفن</th><th>مبلغ</th><th>تاریخ</th><th>وضعیت</th></tr></thead>
+            <tbody id="orders-table-body"><tr><td colspan="6">در حال دریافت سفارش‌ها...</td></tr></tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Settings -->
       <section class="section" id="settings">
         <h2>تنظیمات کافه</h2>
-        <p class="empty-state">تنظیمات کافه در این قسمت قرار می‌گیرد.</p>
+        <p class="section-description">اطلاعات تماس و نام کافه که در وب‌سایت استفاده می‌شوند.</p>
+        <form id="settings-form" class="settings-form">
+          <div class="form-group"><label for="setting-cafe-name">نام کافه</label><input id="setting-cafe-name" type="text" required maxlength="100"></div>
+          <div class="form-group"><label for="setting-phone">شماره تماس</label><input id="setting-phone" type="tel" maxlength="40"></div>
+          <div class="form-group"><label for="setting-instagram">لینک اینستاگرام</label><input id="setting-instagram" type="url" placeholder="https://instagram.com/..."></div>
+          <div class="form-group"><label for="setting-telegram">لینک تلگرام</label><input id="setting-telegram" type="url" placeholder="https://t.me/..."></div>
+          <button type="submit" class="primary-btn" id="save-settings-btn">ذخیره تنظیمات</button>
+          <p id="settings-message" class="form-message" role="status"></p>
+        </form>
       </section>
 
     </main>
