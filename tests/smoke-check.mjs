@@ -63,7 +63,7 @@ assert.match(publicHtml, /id=["']cartOpenButton["']/, "Shopping bag control is m
 assert.match(publicHtml, /id=["']cartModal["']/, "Shopping bag dialog is missing");
 assert.match(publicJs, /data-cart-add/, "Product add-to-bag control is missing");
 assert.match(publicJs, /cart-add-button/, "Product add-to-bag button styling hook is missing");
-assert.match(publicHtml, /پرداخت آنلاین هنوز فعال نیست/, "Cart must disclose that online payment is not active");
+assert.match(publicHtml, /پرداخت آنلاین هنوز فعال نشده/, "Cart must disclose that online payment is not active");
 assert.match(readFileSync(resolve(root, "cart.js"), "utf8"), /talom-cart/, "Shopping bag persistence is missing");
 
 assert.match(publicHtml, /id=["']checkoutForm["']/, "Customer order form is missing");
