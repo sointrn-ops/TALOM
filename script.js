@@ -60,14 +60,17 @@ async function loadProducts() {
   productsLoadFailed = false;
 
   const usedProductImages = new Set();
-  products = rows.map((row, index) => {
-    // Keep the product's own image from the database. If it is already used,
-    // request a distinct image using this product's actual name.
-    let image = row.image_url || "";
-    if (!image || usedProductImages.has(image)) {
-      image = makeUniqueProductImage(row, index);
-    }
-    usedProductImages.add(image);
+  products = rows.map(row => {
+    // Use verified product image URLs from the database only.
+    // Repeated or missing URLs receive a labeled local placeholder rather than
+    // an unrelated random photo that could misrepresent the product.
+    const sourceImage = String(row.image_url || "").trim();
+    const hasUniqueImage = Boolean(sourceImage && !usedProductImages.has(sourceImage));
+    const image = hasUniqueImage
+      ? sourceImage
+      : productPlaceholder(row.name || row.name_en || "TALOM");
+    if (hasUniqueImage) usedProductImages.add(sourceImage);
+
     return {
       id: String(row.id),
       category: row.category,
@@ -164,7 +167,8 @@ function productCardMarkup(product, index) {
     </article>`;
 }
 
-// تصاویر منو از گالری رسمی کافه گالری؛ برای هر محصول تصویر متناسب انتخاب می‌شود.
+// No third-party random image service is used for product photos.
+
 function makeUniqueProductImage(row, index) {
   const categoryTags = {
     coffee: "coffee espresso",
