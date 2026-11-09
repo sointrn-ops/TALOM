@@ -51,4 +51,10 @@ for (const source of [publicJs, adminJs]) {
   assert.doesNotMatch(source, /service_role|sb_secret_/, "A privileged Supabase key must never be shipped to the browser");
 }
 
+const productDescriptionMigrationPath = resolve(root, "supabase/migrations/20261109180105_add_english_product_descriptions.sql");
+assert.ok(existsSync(productDescriptionMigrationPath), "The English product description schema migration must be committed");
+const productDescriptionMigration = readFileSync(productDescriptionMigrationPath, "utf8");
+assert.match(productDescriptionMigration, /alter\\s+table\\s+public\\.products/i, "The English description migration must target public.products");
+assert.match(productDescriptionMigration, /add\\s+column\\s+if\\s+not\\s+exists\\s+description_en\\s+text/i, "The English description migration must add a nullable text column safely");
+
 console.log("TALOM static smoke checks passed.");
