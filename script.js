@@ -59,7 +59,7 @@ async function loadProducts() {
   const rows = await response.json();
   productsLoadFailed = false;
 
-  products = rows.map(row => ({
+  products = rows.map((row, index) => ({
     id: String(row.id),
     category: row.category,
     name: row.name || "",
@@ -67,7 +67,7 @@ async function loadProducts() {
     price: Number(row.price) || 0,
     description: row.description || "",
     descEn: row.description_en || row.description || "",
-    image: row.image_url || ""
+    image: makeUniqueProductImage(row, index)
   }));
 
   // حذف علاقه‌مندی‌هایی که دیگر در دیتابیس وجود ندارند
@@ -117,81 +117,77 @@ function escapeHTML(value) {
   })[character]);
 }
 
+function productCardMarkup(product, index) {
+  const favorite = state.favorites.has(product.id);
+  const categoryLabel = categoryNames[product.category]?.[state.language] || "";
+  return `
+    <article class="product-card" style="animation-delay:${Math.min(index * 35, 280)}ms">
+      <div class="product-image-wrap">
+        <img class="product-image" src="${escapeHTML(product.image)}" alt="${escapeHTML(getProductName(product))}" loading="lazy" data-product-image="${product.id}">
+        <span class="product-number">${String(index + 1).padStart(2, "0")}</span>
+        <button class="favorite-button ${favorite ? "is-favorite" : ""}" data-favorite="${product.id}" aria-label="${isEnglish() ? "Toggle favorite" : "افزودن به علاقه‌مندی‌ها"}" aria-pressed="${favorite}">${favorite ? "♥" : "♡"}</button>
+      </div>
+      <div class="product-info">
+        <span class="product-category">${escapeHTML(categoryLabel)}</span>
+        <h3 class="product-name">${escapeHTML(getProductName(product))}</h3>
+        <p class="product-description">${escapeHTML(getProductDescription(product))}</p>
+        <div class="product-bottom"><strong class="product-price">${formatPrice(product.price)}</strong><button class="product-details" data-details="${product.id}">${isEnglish() ? "Details ↗" : "جزئیات ↗"}</button></div>
+      </div>
+    </article>`;
+}
+
+function makeUniqueProductImage(row, index) {
+  const tags = {
+    coffee: "coffee,espresso,latte",
+    cold: "iced-drink,lemonade,cold-drink",
+    special: "tea,matcha,beverage",
+    dessert: "dessert,cake,pastry",
+    food: "cafe-food,sandwich,brunch"
+  }[row.category] || "cafe,food";
+  return `https://loremflickr.com/900/900/${tags}?lock=${index + 4100}`;
+}
+
 function renderProducts() {
   if (!grid) return;
-
   const query = state.search.trim().toLocaleLowerCase();
-
   const filtered = products.filter(product => {
-    const matchesCategory =
-      state.category === "all" || product.category === state.category;
-
-    const searchable = [
-      product.name,
-      product.en,
-      product.description,
-      product.descEn
-    ].join(" ").toLocaleLowerCase();
-
+    const matchesCategory = state.category === "all" || product.category === state.category;
+    const searchable = [product.name, product.en, product.description, product.descEn].join(" ").toLocaleLowerCase();
     return matchesCategory && (!query || searchable.includes(query));
   });
 
-  grid.innerHTML = filtered.map((product, index) => {
-    const favorite = state.favorites.has(product.id);
-    const categoryLabel =
-      categoryNames[product.category]?.[state.language] || "";
+  const groups = [
+    { key: "drinks", ids: ["productGrid"], categories: ["coffee", "cold", "special"], shelf: "drinksShelf", count: "drinksCount" },
+    { key: "desserts", ids: ["dessertGrid"], categories: ["dessert"], shelf: "dessertsShelf", count: "dessertsCount" },
+    { key: "food", ids: ["foodGrid"], categories: ["food"], shelf: "foodShelf", count: "foodCount" }
+  ];
 
-    return `
-      <article class="product-card" style="animation-delay:${Math.min(index * 45, 360)}ms">
-        <div class="product-image-wrap">
-          <img
-            class="product-image"
-            src="${escapeHTML(product.image)}"
-            alt="${escapeHTML(getProductName(product))}"
-            loading="lazy"
-            data-product-image="${product.id}"
-          >
-          <span class="product-number">${String(index + 1).padStart(2, "0")}</span>
-          <button
-            class="favorite-button ${favorite ? "is-favorite" : ""}"
-            data-favorite="${product.id}"
-            aria-label="${isEnglish() ? "Toggle favorite" : "افزودن به علاقه‌مندی‌ها"}"
-            aria-pressed="${favorite}"
-          >${favorite ? "♥" : "♡"}</button>
-        </div>
-        <div class="product-info">
-          <span class="product-category">${escapeHTML(categoryLabel)}</span>
-          <h3 class="product-name">${escapeHTML(getProductName(product))}</h3>
-          <p class="product-description">${escapeHTML(getProductDescription(product))}</p>
-          <div class="product-bottom">
-            <strong class="product-price">${formatPrice(product.price)}</strong>
-            <button class="product-details" data-details="${product.id}">
-              ${isEnglish() ? "Details ↗" : "جزئیات ↗"}
-            </button>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
+  groups.forEach(group => {
+    const target = document.getElementById(group.ids[0]);
+    const shelf = document.getElementById(group.shelf);
+    const items = filtered.filter(product => group.categories.includes(product.category));
+    if (target) {
+      target.innerHTML = items.map((product, index) => productCardMarkup(product, index)).join("");
+      target.hidden = items.length === 0;
+      target.scrollTo({ left: 0, behavior: "auto" });
+    }
+    if (shelf) shelf.hidden = items.length === 0;
+    const count = document.getElementById(group.count);
+    if (count) count.textContent = isEnglish() ? String(items.length).padStart(2, "0") + " ITEMS" : new Intl.NumberFormat("fa-IR").format(items.length) + " مورد";
+  });
 
-  if (productCount) {
-    productCount.textContent = isEnglish()
-      ? `${filtered.length} selections`
-      : `${new Intl.NumberFormat("fa-IR").format(filtered.length)} انتخاب`;
-  }
+  if (productCount) productCount.textContent = isEnglish()
+    ? `${filtered.length} selections`
+    : `${new Intl.NumberFormat("fa-IR").format(filtered.length)} انتخاب`;
 
   if (emptyState) {
     emptyState.hidden = filtered.length !== 0;
     const message = $("p", emptyState);
-    if (message && productsLoadFailed) {
-      message.textContent = isEnglish()
-        ? "The menu could not be loaded. Please try again later."
-        : "بارگذاری منو ناموفق بود. لطفاً بعداً دوباره تلاش کنید.";
-    }
+    if (message && productsLoadFailed) message.textContent = isEnglish()
+      ? "The menu could not be loaded. Please try again later."
+      : "بارگذاری منو ناموفق بود. لطفاً بعداً دوباره تلاش کنید.";
   }
-  if (grid) grid.hidden = filtered.length === 0;
-  if (grid) grid.scrollTo({ left: 0, behavior: "auto" });
-  updateCarouselControls();
+  updateAllCarouselControls();
 }
 
 function showToast(message) {
@@ -438,40 +434,54 @@ function setupNavigation() {
   }
 }
 
-function updateCarouselControls() {
-  if (!grid) return;
-  const previous = $("#productsPrev");
-  const next = $("#productsNext");
-  const progress = $("#carouselProgress");
-  const card = $(".product-card", grid);
-  const step = card ? card.getBoundingClientRect().width + 18 : 1;
-  const max = Math.max(0, grid.scrollWidth - grid.clientWidth);
-  const current = Math.min(max, Math.max(0, Math.abs(grid.scrollLeft)));
+function updateCarouselControls(trackId, previousId, nextId, progressId) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const previous = document.getElementById(previousId);
+  const next = document.getElementById(nextId);
+  const progress = document.getElementById(progressId);
+  const card = $(".product-card", track);
+  const gap = parseFloat(getComputedStyle(track).columnGap) || 18;
+  const step = card ? card.getBoundingClientRect().width + gap : 1;
+  const max = Math.max(0, track.scrollWidth - track.clientWidth);
+  const current = Math.min(max, Math.max(0, Math.abs(track.scrollLeft)));
   if (previous) previous.disabled = current <= 4;
   if (next) next.disabled = current >= max - 4;
   if (progress) {
-    const visibleStart = Math.min(products.length, Math.floor(current / Math.max(step, 1)) + 1);
-    const total = products.length;
-    progress.textContent = `${String(visibleStart).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+    const total = track.querySelectorAll(".product-card").length;
+    const visibleStart = Math.min(total, Math.floor(current / Math.max(step, 1)) + 1);
+    progress.textContent = `${String(total ? visibleStart : 0).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
   }
 }
 
+function updateAllCarouselControls() {
+  updateCarouselControls("productGrid", "drinksPrev", "drinksNext", "drinksProgress");
+  updateCarouselControls("dessertGrid", "dessertsPrev", "dessertsNext", "dessertsProgress");
+  updateCarouselControls("foodGrid", "foodPrev", "foodNext", "foodProgress");
+}
+
 function setupProductCarousel() {
-  if (!grid) return;
-  const previous = $("#productsPrev");
-  const next = $("#productsNext");
-  const move = direction => {
-    const card = $(".product-card", grid);
-    if (!card) return;
-    const gap = parseFloat(getComputedStyle(grid).columnGap) || 18;
-    const distance = card.getBoundingClientRect().width + gap;
-    grid.scrollBy({ left: direction * distance * 2, behavior: "smooth" });
-  };
-  previous?.addEventListener("click", () => move(1));
-  next?.addEventListener("click", () => move(-1));
-  grid.addEventListener("scroll", updateCarouselControls, { passive: true });
-  window.addEventListener("resize", updateCarouselControls);
-  updateCarouselControls();
+  const tracks = [
+    { track: "productGrid", prev: "drinksPrev", next: "drinksNext" },
+    { track: "dessertGrid", prev: "dessertsPrev", next: "dessertsNext" },
+    { track: "foodGrid", prev: "foodPrev", next: "foodNext" }
+  ];
+  tracks.forEach(item => {
+    const track = document.getElementById(item.track);
+    const previous = document.getElementById(item.prev);
+    const next = document.getElementById(item.next);
+    const move = direction => {
+      const card = $(".product-card", track);
+      if (!card) return;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 18;
+      track.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap) * 2, behavior: "smooth" });
+    };
+    previous?.addEventListener("click", () => move(1));
+    next?.addEventListener("click", () => move(-1));
+    track?.addEventListener("scroll", updateAllCarouselControls, { passive: true });
+  });
+  window.addEventListener("resize", updateAllCarouselControls);
+  updateAllCarouselControls();
 }
 
 function setupMenu() {
@@ -520,44 +530,24 @@ function setupMenu() {
   }
 
   if (grid) {
-    grid.addEventListener("click", event => {
-      const favoriteButton = event.target.closest("[data-favorite]");
-
-      if (favoriteButton) {
-        toggleFavorite(
-          Number(favoriteButton.dataset.favorite),
-          favoriteButton
-        );
-        return;
-      }
-
-      const detailsButton = event.target.closest("[data-details]");
-
-      if (detailsButton) {
-        openProduct(Number(detailsButton.dataset.details));
-      }
+    [grid, $("#dessertGrid"), $("#foodGrid")].filter(Boolean).forEach(track => {
+      track.addEventListener("click", event => {
+        const favoriteButton = event.target.closest("[data-favorite]");
+        if (favoriteButton) {
+          toggleFavorite(String(favoriteButton.dataset.favorite), favoriteButton);
+          return;
+        }
+        const detailsButton = event.target.closest("[data-details]");
+        if (detailsButton) openProduct(String(detailsButton.dataset.details));
+      });
+      track.addEventListener("error", event => {
+        const image = event.target;
+        if (!(image instanceof HTMLImageElement) || !image.matches("[data-product-image]")) return;
+        image.classList.add("image-unavailable");
+        image.removeAttribute("src");
+        image.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
+      }, true);
     });
-
-    grid.addEventListener("error", event => {
-      const image = event.target;
-
-      if (
-        !(image instanceof HTMLImageElement) ||
-        !image.matches("[data-product-image]")
-      ) return;
-
-      if (!image.dataset.fallbackTried) {
-        image.dataset.fallbackTried = "true";
-        image.classList.remove("image-unavailable");
-        image.src =
-          "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80";
-        return;
-      }
-
-      image.classList.add("image-unavailable");
-      image.removeAttribute("src");
-      image.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
-    }, true);
   }
 
   const modalFavorite = $("#modalFavorite");
@@ -812,7 +802,7 @@ function loadSavedSettings() {
     }
 
     if (Array.isArray(savedFavorites)) {
-      state.favorites = new Set(savedFavorites.map(Number));
+      state.favorites = new Set(savedFavorites.map(String));
     }
   } catch {
     // The site still works if browser storage is unavailable.
