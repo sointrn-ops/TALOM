@@ -167,6 +167,7 @@ function productCardMarkup(product, index) {
         <h3 class="product-name">${escapeHTML(getProductName(product))}</h3>
         <p class="product-description">${escapeHTML(getProductDescription(product))}</p>
         <div class="product-bottom"><strong class="product-price">${formatPrice(product.price)}</strong><button class="product-details" data-details="${product.id}">${isEnglish() ? "Details ↗" : "جزئیات ↗"}</button></div>
+      <button class="cart-add-button" type="button" data-cart-add="${product.id}">${isEnglish() ? "Add to bag +" : "افزودن به سبد خرید +"}</button>
       </div>
     </article>`;
 }
