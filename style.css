@@ -1308,3 +1308,101 @@ html[dir="ltr"] .hero-shade {
     background: linear-gradient(0deg, rgba(10,9,7,.94), rgba(10,9,7,.45) 70%, rgba(10,9,7,.3));
   }
 }
+
+
+/* TALOM refinement — composition, contrast and responsive details */
+.hero-shade {
+  background:
+    linear-gradient(270deg, rgba(10,9,7,.95) 0%, rgba(10,9,7,.78) 38%, rgba(10,9,7,.12) 100%),
+    linear-gradient(0deg, rgba(10,9,7,.78), transparent 42%, rgba(10,9,7,.2));
+}
+html[dir="ltr"] .hero-shade {
+  background:
+    linear-gradient(90deg, rgba(10,9,7,.95) 0%, rgba(10,9,7,.78) 38%, rgba(10,9,7,.12) 100%),
+    linear-gradient(0deg, rgba(10,9,7,.78), transparent 42%, rgba(10,9,7,.2));
+}
+.signature-overlay {
+  background: linear-gradient(270deg, rgba(10,10,8,.96), rgba(10,10,8,.76) 48%, rgba(10,10,8,.12));
+}
+html[dir="ltr"] .signature-overlay {
+  background: linear-gradient(90deg, rgba(10,10,8,.96), rgba(10,10,8,.76) 48%, rgba(10,10,8,.12));
+}
+.hero-content { max-width: 700px; }
+.hero-description { text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+.hero-title { text-wrap: balance; }
+.hero .button { min-width: 148px; }
+.hero-image { will-change: transform; }
+.site-header:not(.scrolled) { background: linear-gradient(180deg, rgba(8,8,7,.64), transparent); }
+.main-nav a { font-size: 12px; font-weight: 500; }
+.section-pad { position: relative; }
+.story-visual { isolation: isolate; }
+.story-image-main, .contact-photo { background-color: var(--surface-2); }
+.story-image-main { border-radius: 2px; }
+.story-image-frame { z-index: 1; }
+.story-stamp { z-index: 2; }
+.stats-row { background: linear-gradient(110deg, transparent, rgba(201,169,110,.035), transparent); }
+.menu-section { position: relative; }
+.menu-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 9%;
+  left: 9%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: .38;
+}
+.menu-toolbar { gap: 24px; }
+.category-tab { border-radius: 999px; padding-inline: 16px; }
+.search-box { border-radius: 999px; min-height: 42px; }
+.product-grid { align-items: stretch; }
+.product-card { border-radius: 3px; }
+.product-image-wrap { aspect-ratio: 1 / 1.08; }
+.product-info { display: flex; flex-direction: column; }
+.product-bottom { margin-top: auto; padding-top: 14px; }
+.product-description { min-height: 44px; }
+.gallery-card { border-radius: 3px; }
+.gallery-card img { transition: transform .9s cubic-bezier(.2,.7,.2,1), filter .5s; }
+.gallery-card:hover img { transform: scale(1.045); }
+.quote-section { background: radial-gradient(ellipse at center, rgba(201,169,110,.08), transparent 68%), var(--bg-soft); }
+.contact-visual { isolation: isolate; }
+.contact-photo { border-radius: 2px; }
+.contact-card { z-index: 2; }
+.contact-links a { transition: color .25s, padding .25s; }
+.contact-links a:hover { color: var(--gold); padding-inline: 8px; }
+.site-footer { gap: 28px; }
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+}
+.music-player { border-radius: 4px; }
+.toast { border-radius: 3px; box-shadow: 0 12px 36px rgba(0,0,0,.22); }
+
+@media (min-width: 1200px) {
+  .hero { padding-inline: 12%; }
+  .hero-title { max-width: 760px; }
+  .story-grid { grid-template-columns: .82fr 1.18fr; }
+  .gallery-grid { gap: 18px; }
+}
+@media (max-width: 760px) {
+  .hero-shade,
+  html[dir="ltr"] .hero-shade {
+    background: linear-gradient(0deg, rgba(10,9,7,.96), rgba(10,9,7,.68) 58%, rgba(10,9,7,.4));
+  }
+  .signature-overlay,
+  html[dir="ltr"] .signature-overlay {
+    background: linear-gradient(0deg, rgba(10,10,8,.97), rgba(10,10,8,.72) 66%, rgba(10,10,8,.25));
+  }
+  .menu-section::before { right: 6%; left: 6%; }
+  .category-tabs { overflow-x: auto; flex-wrap: nowrap; padding: 3px 1px 8px; scrollbar-width: thin; }
+  .category-tab { flex: 0 0 auto; }
+  .product-image-wrap { aspect-ratio: 1 / 1.12; }
+  .product-info { min-height: 168px; }
+  .product-description { min-height: 40px; }
+}
+@media (max-width: 420px) {
+  .product-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .product-info { min-height: 178px; }
+  .product-bottom { align-items: flex-start; }
+  .hero-bottom { align-items: flex-start; }
+}
