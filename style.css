@@ -742,3 +742,96 @@ body{font-family:"Vazirmatn",sans-serif;background:var(--bg)}
     object-position:center center!important;
   }
 }
+
+
+/* TALOM homepage — full editorial hero with real content */
+.site-header.editorial-header:not(.scrolled){
+  background:linear-gradient(180deg,rgba(20,17,14,.48),rgba(20,17,14,0));
+  border-color:rgba(255,255,255,.12);
+  color:#fff;
+}
+.site-header.editorial-header:not(.scrolled) .brand-word,
+.site-header.editorial-header:not(.scrolled) .main-nav a,
+.site-header.editorial-header:not(.scrolled) .icon-button{color:#fff}
+.site-header.editorial-header:not(.scrolled) .brand-word small{color:rgba(255,255,255,.68)}
+.site-header.editorial-header:not(.scrolled) .icon-button{border-color:rgba(255,255,255,.35)}
+.site-header.editorial-header:not(.scrolled) .mobile-menu-toggle span{background:#fff}
+.full-hero{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  width:100%;
+  height:100svh!important;
+  min-height:660px!important;
+  max-height:980px!important;
+  margin:0!important;
+  padding:150px 9% 85px!important;
+  overflow:hidden;
+  isolation:isolate;
+  background:#211b17!important;
+  color:#fff;
+}
+.full-hero-image{
+  position:absolute;inset:0;width:100%;height:100%;max-width:none;
+  object-fit:cover;object-position:center 52%;z-index:-2;
+  transform:scale(1.015);
+}
+.full-hero-shade{
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(270deg,rgba(20,17,14,.84) 0%,rgba(20,17,14,.66) 34%,rgba(20,17,14,.2) 72%,rgba(20,17,14,.12) 100%),
+    linear-gradient(0deg,rgba(16,13,11,.48),transparent 48%);
+}
+.full-hero-content{
+  position:relative;z-index:2;width:min(690px,65%);margin-right:2%;
+  padding-top:28px;
+}
+.full-hero-eyebrow{
+  display:flex;align-items:center;gap:13px;
+  color:#e1c5a8;font-size:11px;letter-spacing:1.5px;margin:0 0 25px;
+}
+.full-hero-eyebrow:before{content:"";width:36px;height:1px;background:#c28a64}
+.full-hero-content h1{
+  color:#fff8ef;font-size:clamp(54px,7vw,96px);font-weight:500;
+  line-height:1.38;letter-spacing:-2px;margin:0 0 22px;
+}
+.full-hero-content h1 em{
+  color:#d6a47e;font-family:var(--serif);font-weight:500;font-style:italic;
+}
+.full-hero-description{
+  max-width:470px;color:rgba(255,248,239,.78);
+  font-size:14px;line-height:2.35;margin:0 0 30px;
+}
+.full-hero-actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.full-hero .button-gold{background:#b76a48;color:#fffaf3;border:1px solid #b76a48}
+.full-hero .button-gold:hover{background:#965239}
+.full-hero-secondary{display:inline-flex;align-items:center;gap:14px;color:#fff5e9;font-size:11px}
+.full-hero-secondary span:last-child{color:#d6a47e;font:18px var(--latin)}
+.full-hero-foot{
+  display:flex;justify-content:space-between;gap:20px;max-width:520px;
+  margin-top:clamp(55px,9vh,95px);padding-top:15px;
+  border-top:1px solid rgba(255,255,255,.28);
+  color:rgba(255,248,239,.65);font:9px var(--latin);letter-spacing:1.5px;
+}
+.full-hero-scroll{
+  position:absolute;left:6%;bottom:37px;display:flex;align-items:center;gap:13px;
+  color:rgba(255,255,255,.75);font:9px var(--latin);letter-spacing:2px;
+}
+.full-hero-scroll span{display:block;width:1px;height:34px;background:rgba(255,255,255,.65)}
+@media(max-width:900px){
+  .full-hero{padding-inline:7%!important}
+  .full-hero-content{width:min(680px,78%);margin-right:0}
+  .full-hero-content h1{font-size:clamp(48px,8vw,76px)}
+}
+@media(max-width:760px){
+  .full-hero{height:calc(100svh - 0px)!important;min-height:650px!important;padding:125px 7% 80px!important}
+  .full-hero-image{object-position:57% center}
+  .full-hero-shade{
+    background:linear-gradient(0deg,rgba(17,14,11,.86) 0%,rgba(17,14,11,.48) 62%,rgba(17,14,11,.28) 100%);
+  }
+  .full-hero-content{width:100%;padding-top:80px}
+  .full-hero-content h1{font-size:clamp(43px,11vw,64px);line-height:1.45;letter-spacing:-1px}
+  .full-hero-description{font-size:12px;line-height:2.25;max-width:95%}
+  .full-hero-foot{margin-top:54px;font-size:8px}
+  .full-hero-scroll{display:none}
+  .site-header.editorial-header:not(.scrolled){min-height:72px;padding-inline:5%}
+}
