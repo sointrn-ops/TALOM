@@ -4,6 +4,9 @@
 const SUPABASE_URL = "https://rlecvkrrdxqjepsxylee.supabase.co";
 const SUPABASE_KEY = "sb_publishable__TOW24x67zjRnlas6Lb0xg_1wF0tC1g";
 
+let authClient = null;
+let authMode = "signin";
+
 let products = [];
 let productsLoadFailed = false;
 
@@ -399,6 +402,165 @@ function setTheme(theme) {
   try {
     localStorage.setItem("talom-theme", selectedTheme);
   } catch {}
+}
+
+
+function setAuthMessage(message, type = "") {
+  const element = $("#authMessage");
+  if (!element) return;
+  element.textContent = message;
+  element.dataset.type = type;
+}
+
+function setAuthMode(mode) {
+  authMode = mode === "signup" ? "signup" : "signin";
+  const confirmWrap = $("#authConfirmWrap");
+  const confirmInput = $("#authPasswordConfirm");
+  const passwordInput = $("#authPassword");
+  const submit = $("#authSubmit");
+  const tabs = $("[data-auth-mode]");
+  tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.authMode === authMode));
+  if (confirmWrap) confirmWrap.hidden = authMode !== "signup";
+  if (confirmInput) confirmInput.required = authMode === "signup";
+  if (passwordInput) passwordInput.autocomplete = authMode === "signup" ? "new-password" : "current-password";
+  if (submit) submit.textContent = isEnglish()
+    ? (authMode === "signup" ? "Create account" : "Sign in")
+    : (authMode === "signup" ? "ساخت حساب کاربری" : "ورود به حساب");
+  setAuthMessage("");
+}
+
+function renderAuthSession(session) {
+  const user = session?.user || null;
+  const signedOut = $("#authSignedOut");
+  const signedIn = $("#authSignedIn");
+  const openButton = $("#authOpenButton");
+  const email = $("#authUserEmail");
+  if (signedOut) signedOut.hidden = Boolean(user);
+  if (signedIn) signedIn.hidden = !user;
+  if (email) email.textContent = user?.email || "";
+  if (openButton) {
+    openButton.textContent = user
+      ? (isEnglish() ? "My account" : "حساب من")
+      : (isEnglish() ? "Sign in" : "ورود / ثبت‌نام");
+    openButton.setAttribute("aria-label", openButton.textContent);
+  }
+  if (!user) setAuthMode(authMode);
+}
+
+function setupAuth() {
+  const modal = $("#authModal");
+  const openButton = $("#authOpenButton");
+  const form = $("#authForm");
+  const signOutButton = $("#authSignOut");
+  if (!modal || !openButton || !form) return;
+
+  if (!window.supabase?.createClient) {
+    openButton.disabled = true;
+    openButton.title = isEnglish() ? "Authentication library unavailable" : "کتابخانه ورود بارگذاری نشد";
+    return;
+  }
+
+  authClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  });
+
+  openButton.addEventListener("click", async () => {
+    if (authClient) {
+      const { data } = await authClient.auth.getSession();
+      renderAuthSession(data?.session || null);
+    }
+    openModal(modal);
+  });
+
+  $("[data-auth-mode]").forEach(button => {
+    button.addEventListener("click", () => setAuthMode(button.dataset.authMode));
+  });
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!authClient) return;
+    const email = $("#authEmail")?.value.trim();
+    const password = $("#authPassword")?.value || "";
+    const confirmPassword = $("#authPasswordConfirm")?.value || "";
+    const submit = $("#authSubmit");
+    if (!email || !password) return;
+    if (password.length < 8) {
+      setAuthMessage(isEnglish() ? "Use at least 8 characters for your password." : "رمز عبور باید حداقل ۸ نویسه داشته باشد.", "error");
+      return;
+    }
+    if (authMode === "signup" && password !== confirmPassword) {
+      setAuthMessage(isEnglish() ? "Passwords do not match." : "رمزهای عبور یکسان نیستند.", "error");
+      return;
+    }
+    if (submit) submit.disabled = true;
+    setAuthMessage(isEnglish() ? "Please wait..." : "لطفاً صبر کن...");
+    try {
+      if (authMode === "signup") {
+        const { data, error } = await authClient.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: window.location.origin + window.location.pathname }
+        });
+        if (error) throw error;
+        if (data.session) {
+          renderAuthSession(data.session);
+          setAuthMessage(isEnglish() ? "Your account has been created." : "حساب کاربری ساخته شد.", "success");
+        } else {
+          setAuthMessage(isEnglish()
+            ? "Check your inbox and confirm your email to finish signing up."
+            : "برای تکمیل ثبت‌نام، ایمیل خود را باز کن و نشانی تأیید را بزن.", "success");
+        }
+      } else {
+        const { data, error } = await authClient.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        renderAuthSession(data.session);
+        setAuthMessage(isEnglish() ? "Signed in successfully." : "با موفقیت وارد شدی.", "success");
+      }
+    } catch (error) {
+      const message = error?.message || "";
+      const translated = /invalid login credentials/i.test(message)
+        ? (isEnglish() ? "Email or password is incorrect." : "ایمیل یا رمز عبور نادرست است.")
+        : /already registered|user already registered/i.test(message)
+          ? (isEnglish() ? "This email is already registered. Sign in instead." : "این ایمیل قبلاً ثبت‌نام شده؛ وارد حساب شو.")
+          : /email not confirmed/i.test(message)
+            ? (isEnglish() ? "Confirm your email before signing in." : "ابتدا ایمیل خود را تأیید کن.")
+            : (isEnglish() ? "Could not complete authentication. Check the settings and try again." : "ورود انجام نشد. تنظیمات احراز هویت را بررسی و دوباره تلاش کن.");
+      setAuthMessage(translated, "error");
+      console.error("TALOM auth error:", message);
+    } finally {
+      if (submit) submit.disabled = false;
+    }
+  });
+
+  signOutButton?.addEventListener("click", async () => {
+    if (!authClient) return;
+    signOutButton.disabled = true;
+    const { error } = await authClient.auth.signOut();
+    signOutButton.disabled = false;
+    if (error) {
+      setAuthMessage(isEnglish() ? "Could not sign out. Try again." : "خروج انجام نشد؛ دوباره تلاش کن.", "error");
+      return;
+    }
+    renderAuthSession(null);
+    setAuthMode("signin");
+    setAuthMessage(isEnglish() ? "You have signed out." : "از حساب خارج شدی.", "success");
+  });
+
+  authClient.auth.onAuthStateChange((_event, session) => {
+    renderAuthSession(session);
+  });
+
+  authClient.auth.getSession().then(({ data, error }) => {
+    if (error) console.error("TALOM session restore error:", error.message);
+    renderAuthSession(data?.session || null);
+  });
+
+  renderAuthSession(null);
+  setAuthMode("signin");
 }
 
 function setupNavigation() {
@@ -910,6 +1072,7 @@ async function init() {
     year.textContent = new Date().getFullYear();
   }
 
+  setupAuth();
   setupNavigation();
   setupMenu();
   setupProductCarousel();

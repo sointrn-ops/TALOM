@@ -1102,3 +1102,34 @@ button,a,input{touch-action:manipulation}
   content:"";display:block;width:34px;height:1px;background:var(--olive);opacity:.45;
 }
 @media(max-width:760px){.menu-discovery-kicker{margin-bottom:14px;font-size:9px}}
+
+
+/* Customer email authentication */
+.auth-open-button{min-height:38px;padding:0 16px;border:1px solid var(--olive);background:transparent;color:var(--olive);font:600 11px var(--font);white-space:nowrap;transition:.2s}
+.auth-open-button:hover{background:var(--olive);color:#fff}
+.auth-open-button:disabled{opacity:.5;cursor:not-allowed}
+.auth-modal{z-index:1700}
+.auth-modal-panel{position:relative;z-index:1;width:min(460px,100%);max-height:90vh;overflow:auto;background:var(--paper);color:var(--ink);box-shadow:var(--shadow);border:1px solid var(--line)}
+.auth-modal-content{padding:48px clamp(22px,6vw,42px) 38px}
+.auth-kicker{font:10px var(--latin);letter-spacing:2px;color:var(--olive)}
+.auth-modal-content h2{font-size:30px;font-weight:600;margin:9px 0 24px}
+.auth-mode-switch{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);margin-bottom:22px}
+.auth-mode-switch button{padding:12px 8px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font:500 13px var(--font)}
+.auth-mode-switch button.active{color:var(--olive);border-bottom-color:var(--olive)}
+.auth-form{display:grid;gap:9px}
+.auth-form label{font-size:12px;color:var(--muted);margin-top:7px}
+.auth-form input{width:100%;min-height:46px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:10px 13px;outline:none;direction:ltr;text-align:left;font:14px var(--latin)}
+.auth-form input:focus{border-color:var(--olive)}
+.auth-submit{width:100%;min-height:47px;margin-top:12px;border:0;background:var(--olive);color:#fff;font:600 13px var(--font)}
+.auth-submit:disabled{opacity:.6;cursor:wait}
+.auth-signout{margin-top:24px}
+.auth-message{min-height:24px;margin:12px 0 0;font-size:12px;color:var(--muted);line-height:1.9}
+.auth-message[data-type="error"]{color:#c65b4b}
+.auth-message[data-type="success"],.auth-success{color:var(--olive)}
+.auth-note{font-size:10px;line-height:1.9;color:var(--muted);margin:8px 0 0}
+.auth-user-email{direction:ltr;text-align:center;overflow-wrap:anywhere;color:var(--muted);font:13px var(--latin);padding:14px 0;border-block:1px solid var(--line)}
+@media(max-width:760px){
+ .auth-open-button{min-height:33px;padding:0 10px;font-size:10px}
+ .auth-modal-content{padding:44px 22px 28px}
+ .auth-modal-content h2{font-size:25px}
+}

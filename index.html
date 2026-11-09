@@ -11,7 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20261109-11">
-  <script src="script.js?v=20261109-11" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
+  <script src="script.js?v=20261109-12" defer></script>
 </head>
 <body class="talom-redesign">
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -28,6 +29,7 @@
       <a href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
     </nav>
     <div class="header-actions">
+      <button class="auth-open-button" id="authOpenButton" type="button" data-fa="ورود / ثبت‌نام" data-en="Sign in">ورود / ثبت‌نام</button>
       <button class="icon-button" id="languageToggle" aria-label="Change language">EN</button>
       <button class="icon-button theme-button" id="themeToggle" aria-label="Change theme"><span id="themeIcon">☼</span></button>
       <a class="header-cta" href="#menu"><span data-fa="دیدن منو" data-en="View menu">دیدن منو</span><span class="cta-arrow">↗</span></a>
@@ -130,6 +132,41 @@
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
   <div class="modal" id="productModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="modal-panel product-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalProductName"><button class="modal-close" data-close-modal aria-label="Close">×</button><div class="modal-product-image-wrap"><img id="modalProductImage" src="" alt=""><span class="modal-image-label">TALOM SELECTION</span></div><div class="modal-product-content"><span id="modalProductCategory" class="product-category"></span><h2 id="modalProductName"></h2><p id="modalProductDescription"></p><div class="modal-product-bottom"><strong id="modalProductPrice"></strong><button id="modalFavorite" class="favorite-button" aria-label="Add to favorites">♡</button></div></div></div></div>
   <div class="modal image-modal" id="imageModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="image-modal-panel" role="dialog" aria-modal="true"><button class="modal-close" data-close-modal aria-label="Close">×</button><img id="expandedImage" src="" alt="TALOM gallery image"></div></div>
+
+  <div class="modal auth-modal" id="authModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="auth-modal-panel" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="بستن">×</button>
+      <div class="auth-modal-content">
+        <span class="auth-kicker">TALOM / ACCOUNT</span>
+        <h2 id="authTitle" data-fa="حساب کاربری" data-en="Your account">حساب کاربری</h2>
+        <div id="authSignedOut">
+          <div class="auth-mode-switch" role="group" aria-label="روش حساب کاربری">
+            <button type="button" class="active" data-auth-mode="signin" data-fa="ورود" data-en="Sign in">ورود</button>
+            <button type="button" data-auth-mode="signup" data-fa="ثبت‌نام" data-en="Create account">ثبت‌نام</button>
+          </div>
+          <form id="authForm" class="auth-form">
+            <label for="authEmail" data-fa="ایمیل" data-en="Email">ایمیل</label>
+            <input id="authEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com">
+            <label for="authPassword" data-fa="رمز عبور" data-en="Password">رمز عبور</label>
+            <input id="authPassword" name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="72">
+            <div id="authConfirmWrap" hidden>
+              <label for="authPasswordConfirm" data-fa="تکرار رمز عبور" data-en="Confirm password">تکرار رمز عبور</label>
+              <input id="authPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" minlength="8" maxlength="72">
+            </div>
+            <button id="authSubmit" class="auth-submit" type="submit" data-fa="ورود به حساب" data-en="Sign in">ورود به حساب</button>
+          </form>
+          <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
+          <p class="auth-note" data-fa="با ثبت‌نام، حساب کاربری شما در TALOM ساخته می‌شود." data-en="Create an account to use your TALOM customer profile.">با ثبت‌نام، حساب کاربری شما در TALOM ساخته می‌شود.</p>
+        </div>
+        <div id="authSignedIn" hidden>
+          <p class="auth-success" data-fa="با موفقیت وارد حساب شده‌اید." data-en="You are signed in.">با موفقیت وارد حساب شده‌اید.</p>
+          <p id="authUserEmail" class="auth-user-email"></p>
+          <button id="authSignOut" class="auth-submit auth-signout" type="button" data-fa="خروج از حساب" data-en="Sign out">خروج از حساب</button>
+        </div>
+      </div>
+    </section>
+  </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
