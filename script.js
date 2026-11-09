@@ -421,7 +421,7 @@ function setAuthMode(mode) {
   const submit = $("#authSubmit");
   const modeSwitch = $("#authModeSwitch");
   const forgotButton = $("#authForgotPassword");
-  const tabs = $("[data-auth-mode]");
+  const tabs = $$("[data-auth-mode]");
   const needsConfirmation = authMode === "signup" || authMode === "recovery";
   tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.authMode === authMode));
   if (modeSwitch) modeSwitch.hidden = authMode === "recovery";
