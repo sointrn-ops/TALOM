@@ -172,6 +172,7 @@
       if (sessionError) throw sessionError;
       if (!sessionData?.session) {
         setMessage("برای ثبت سفارش ابتدا وارد حساب کاربری شوید.", "error");
+        if (typeof window.talomCloseModal === "function") window.talomCloseModal(modal);
         const authButton = document.getElementById("authOpenButton");
         if (authButton) authButton.click();
         return;
