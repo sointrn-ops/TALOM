@@ -414,7 +414,7 @@ function setAuthMessage(message, type = "") {
 }
 
 function setAuthMode(mode) {
-  authMode = mode === "signup" ? "signup" : "signin";
+  authMode = mode === "signup" || mode === "recovery" ? mode : "signin";
   const confirmWrap = $("#authConfirmWrap");
   const confirmInput = $("#authPasswordConfirm");
   const passwordInput = $("#authPassword");
