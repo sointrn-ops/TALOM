@@ -393,19 +393,11 @@ function setLanguage(language) {
   } catch {}
 }
 
-function setTheme(theme) {
-  const selectedTheme = theme === "light" ? "light" : "dark";
-
-  document.documentElement.dataset.theme = selectedTheme;
-
-  const icon = $("#themeIcon");
-
-  if (icon) {
-    icon.textContent = selectedTheme === "dark" ? "☼" : "☾";
-  }
-
+function setTheme() {
+  document.documentElement.dataset.theme = "light";
   try {
-    localStorage.setItem("talom-theme", selectedTheme);
+    localStorage.setItem("talom-theme", "light");
+    localStorage.setItem("talom-theme-version", "4");
   } catch {}
 }
 
@@ -1100,18 +1092,12 @@ function setupCounters() {
 
 function loadSavedSettings() {
   try {
-    const themeVersion = localStorage.getItem("talom-theme-version");
-    if (themeVersion !== "3") {
-      localStorage.setItem("talom-theme", "light");
-      localStorage.setItem("talom-theme-version", "3");
-    }
-    const savedTheme = localStorage.getItem("talom-theme");
     const savedLanguage = localStorage.getItem("talom-language");
     const savedFavorites = JSON.parse(
       localStorage.getItem("talom-favorites") || "[]"
     );
 
-    if (savedTheme) setTheme(savedTheme);
+    setTheme();
 
     if (savedLanguage === "en" || savedLanguage === "fa") {
       state.language = savedLanguage;
@@ -1129,23 +1115,12 @@ async function init() {
   loadSavedSettings();
 
   const languageButton = $("#languageToggle");
-  const themeButton = $("#themeToggle");
-
   if (languageButton) {
     languageButton.addEventListener("click", () => {
       setLanguage(isEnglish() ? "fa" : "en");
     });
   }
 
-  if (themeButton) {
-    themeButton.addEventListener("click", () => {
-      setTheme(
-        document.documentElement.dataset.theme === "dark"
-          ? "light"
-          : "dark"
-      );
-    });
-  }
 
   const year = $("#year");
 
