@@ -407,51 +407,72 @@ function setupNavigation() {
   const menuToggle = $("#mobileMenuToggle");
   const backToTop = $("#backToTop");
   const scrollProgress = $("#scrollProgress");
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
+
+  function setMenuOpen(open, returnFocus = false) {
+    if (!nav || !menuToggle) return;
+    nav.classList.toggle("open", open && mobileQuery.matches);
+    const isOpen = nav.classList.contains("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    nav.setAttribute("aria-hidden", String(mobileQuery.matches && !isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen
+        ? (isEnglish() ? "Close navigation" : "بستن منو")
+        : (isEnglish() ? "Open navigation" : "باز کردن منو")
+    );
+    if (!mobileQuery.matches) nav.classList.remove("open");
+    if (returnFocus) menuToggle.focus();
+  }
 
   function updateScrollUI() {
     const scrollTop = window.scrollY;
-    const scrollable =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    const progress = scrollable > 0
-      ? (scrollTop / scrollable) * 100
-      : 0;
-
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
     if (header) header.classList.toggle("scrolled", scrollTop > 30);
     if (backToTop) backToTop.classList.toggle("visible", scrollTop > 500);
-
-    if (scrollProgress) {
-      scrollProgress.style.width = `${progress}%`;
-    }
+    if (scrollProgress) scrollProgress.style.width = `${progress}%`;
   }
 
   window.addEventListener("scroll", updateScrollUI, { passive: true });
   updateScrollUI();
 
   if (menuToggle && nav) {
+    setMenuOpen(false);
     menuToggle.addEventListener("click", () => {
-      const open = nav.classList.toggle("open");
-      menuToggle.setAttribute("aria-expanded", String(open));
+      setMenuOpen(!nav.classList.contains("open"));
     });
 
     $$("a", nav).forEach(link => {
-      link.addEventListener("click", () => {
-        nav.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
+      link.addEventListener("click", () => setMenuOpen(false));
     });
 
     document.addEventListener("click", event => {
       if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
-        nav.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
+        setMenuOpen(false);
       }
     });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && nav.classList.contains("open")) {
+        setMenuOpen(false, true);
+      }
+    });
+
+    const handleBreakpoint = () => setMenuOpen(false);
+    if (mobileQuery.addEventListener) {
+      mobileQuery.addEventListener("change", handleBreakpoint);
+    } else {
+      mobileQuery.addListener(handleBreakpoint);
+    }
   }
 
   if (backToTop) {
     backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+      });
     });
   }
 }
@@ -620,8 +641,31 @@ function setupModals() {
   });
 
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && activeModal) {
+    if (!activeModal) return;
+    if (event.key === "Escape") {
       closeModal(activeModal);
+      return;
+    }
+    if (event.key !== "Tab") return;
+
+    const focusable = $(
+      'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
+      activeModal
+    ).filter(element => element.getClientRects().length > 0);
+
+    if (!focusable.length) {
+      event.preventDefault();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
     }
   });
 }
