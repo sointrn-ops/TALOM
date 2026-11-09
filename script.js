@@ -418,7 +418,7 @@ function setAuthMode(mode) {
   const confirmInput = $("#authPasswordConfirm");
   const passwordInput = $("#authPassword");
   const submit = $("#authSubmit");
-  const tabs = $("[data-auth-mode]");
+  const tabs = $$("[data-auth-mode]");
   tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.authMode === authMode));
   if (confirmWrap) confirmWrap.hidden = authMode !== "signup";
   if (confirmInput) confirmInput.required = authMode === "signup";
@@ -476,7 +476,7 @@ function setupAuth() {
     openModal(modal);
   });
 
-  $("[data-auth-mode]").forEach(button => {
+  $$("[data-auth-mode]").forEach(button => {
     button.addEventListener("click", () => setAuthMode(button.dataset.authMode));
   });
 
