@@ -47,7 +47,7 @@ let previousFocus = null;
 // دریافت محصولات از Supabase
 async function loadProducts() {
   const response = await fetch(
-    `${SUPABASE_URL}/rest/v1/products?select=id,name,name_en,category,description,price,image_url&is_available=eq.true&order=id.asc`,
+    `${SUPABASE_URL}/rest/v1/products?select=id,name,name_en,category,description,description_en,price,image_url&is_available=eq.true&order=id.asc`,
     {
       headers: {
         apikey: SUPABASE_KEY,
