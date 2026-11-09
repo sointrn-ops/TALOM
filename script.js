@@ -33,7 +33,8 @@ $$("[data-collection]").forEach(a=>a.addEventListener("click",()=>{state.filter=
 const modelData={women:{src:"https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=90",label:"WOMENSWEAR / LOOK 01",alt:"پیش‌نمایش مدل زنانه"},men:{src:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1000&q=90",label:"MENSWEAR / LOOK 01",alt:"پیش‌نمایش مدل مردانه"}};
 $$("[data-model]").forEach(b=>b.addEventListener("click",()=>{const m=modelData[b.dataset.model];$$("[data-model]").forEach(x=>x.classList.toggle("active",x===b));const img=$("#modelImage");img.style.opacity="0";setTimeout(()=>{img.src=m.src;img.alt=m.alt;$("#modelLabel").textContent=m.label;img.style.opacity="1"},180)}));
 $("#theme").addEventListener("click",()=>{const root=document.documentElement;root.dataset.theme=root.dataset.theme==="dark"?"light":"dark";localStorage.setItem("talom-fashion-theme",root.dataset.theme)});
-$("#lang").addEventListener("click",()=>notify("نسخه انگلیسی کامل در مرحله بعد تکمیل می‌شود."));
+$("#lang").addEventListener("click",()=>notify("نسخه انگلیسی هنوز آماده نیست."));
+$("#newsletterForm").addEventListener("submit",e=>{e.preventDefault();notify("درخواست عضویت ثبت شد.")});
 $("#menuToggle").addEventListener("click",()=>$("#nav").classList.toggle("open"));$$(".nav a").forEach(a=>a.addEventListener("click",()=>$("#nav").classList.remove("open")));
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeDrawer();hideModal("#productModal","#productBackdrop");hideModal("#checkoutModal","#checkoutBackdrop")}});
 loadCart();renderCart();const theme=localStorage.getItem("talom-fashion-theme");if(theme==="dark"||theme==="light")document.documentElement.dataset.theme=theme;loadProducts();
