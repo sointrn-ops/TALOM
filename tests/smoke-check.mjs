@@ -58,3 +58,10 @@ assert.ok(productDescriptionMigration.toLowerCase().includes("alter table public
 assert.ok(productDescriptionMigration.toLowerCase().includes("add column if not exists description_en text"), "The English description migration must add a nullable text column safely");
 
 console.log("TALOM static smoke checks passed.");
+
+assert.match(publicHtml, /id=["']cartOpenButton["']/, "Shopping bag control is missing");
+assert.match(publicHtml, /id=["']cartModal["']/, "Shopping bag dialog is missing");
+assert.match(publicJs, /data-cart-add/, "Product add-to-bag control is missing");
+assert.match(publicJs, /cart-add-button/, "Product add-to-bag button styling hook is missing");
+assert.match(publicHtml, /پرداخت آنلاین هنوز فعال نشده/, "Cart must disclose that online payment is not active");
+assert.match(readFileSync(resolve(root, "cart.js"), "utf8"), /talom-cart/, "Shopping bag persistence is missing");
