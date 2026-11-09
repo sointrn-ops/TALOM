@@ -1133,3 +1133,8 @@ button,a,input{touch-action:manipulation}
  .auth-modal-content{padding:44px 22px 28px}
  .auth-modal-content h2{font-size:25px}
 }
+
+/* Password recovery control */
+.auth-forgot{justify-self:start;border:0;background:transparent;color:var(--olive);padding:8px 0;font:500 12px var(--font);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.auth-forgot:hover{color:var(--olive-dark)}
+.auth-forgot:disabled{opacity:.6;cursor:wait}
