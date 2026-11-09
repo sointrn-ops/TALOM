@@ -190,6 +190,8 @@ function renderProducts() {
     }
   }
   if (grid) grid.hidden = filtered.length === 0;
+  if (grid) grid.scrollTo({ left: 0, behavior: "auto" });
+  updateCarouselControls();
 }
 
 function showToast(message) {
@@ -434,6 +436,42 @@ function setupNavigation() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
+}
+
+function updateCarouselControls() {
+  if (!grid) return;
+  const previous = $("#productsPrev");
+  const next = $("#productsNext");
+  const progress = $("#carouselProgress");
+  const card = $(".product-card", grid);
+  const step = card ? card.getBoundingClientRect().width + 18 : 1;
+  const max = Math.max(0, grid.scrollWidth - grid.clientWidth);
+  const current = Math.min(max, Math.max(0, Math.abs(grid.scrollLeft)));
+  if (previous) previous.disabled = current <= 4;
+  if (next) next.disabled = current >= max - 4;
+  if (progress) {
+    const visibleStart = Math.min(products.length, Math.floor(current / Math.max(step, 1)) + 1);
+    const total = products.length;
+    progress.textContent = `${String(visibleStart).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+  }
+}
+
+function setupProductCarousel() {
+  if (!grid) return;
+  const previous = $("#productsPrev");
+  const next = $("#productsNext");
+  const move = direction => {
+    const card = $(".product-card", grid);
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(grid).columnGap) || 18;
+    const distance = card.getBoundingClientRect().width + gap;
+    grid.scrollBy({ left: direction * distance * 2, behavior: "smooth" });
+  };
+  previous?.addEventListener("click", () => move(1));
+  next?.addEventListener("click", () => move(-1));
+  grid.addEventListener("scroll", updateCarouselControls, { passive: true });
+  window.addEventListener("resize", updateCarouselControls);
+  updateCarouselControls();
 }
 
 function setupMenu() {
@@ -811,6 +849,7 @@ async function init() {
 
   setupNavigation();
   setupMenu();
+  setupProductCarousel();
   setupModals();
   setupMusic();
   setupRevealAnimations();
