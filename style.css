@@ -1087,3 +1087,18 @@ button,a,input{touch-action:manipulation}
 @media(prefers-reduced-motion:reduce){
   .menu-shelf .product-card,.menu-shelf .product-image{transition:none!important}
 }
+
+
+/* Quiet editorial treatment for the menu discovery label */
+.menu-discovery-kicker{
+  display:flex;align-items:center;gap:13px;margin-bottom:18px;
+  color:var(--muted);font-size:9px;font-weight:400;letter-spacing:1.1px;opacity:.78;
+}
+.menu-discovery-kicker>span:first-child{
+  color:var(--olive);font:500 9px var(--latin);letter-spacing:1px;
+}
+.menu-discovery-kicker>span:last-child{font-weight:400}
+.menu-discovery-kicker::after{
+  content:"";display:block;width:34px;height:1px;background:var(--olive);opacity:.45;
+}
+@media(max-width:760px){.menu-discovery-kicker{margin-bottom:14px;font-size:9px}}
