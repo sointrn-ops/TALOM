@@ -504,3 +504,27 @@ body{font-family:"Vazirmatn",sans-serif;background:var(--bg)}
  .contact-grid{gap:35px}
  .site-footer{gap:15px;flex-wrap:wrap}
 }
+
+
+/* Product carousel — visible navigation + touch/drag */
+.product-carousel{position:relative;display:flex;align-items:center;gap:14px}
+.product-carousel .product-grid{flex:1;min-width:0}
+.carousel-arrow{
+ flex:0 0 42px;width:42px;height:42px;border:1px solid var(--line);
+ border-radius:50%;background:var(--paper);color:var(--ink);
+ display:grid;place-items:center;font:26px/1 var(--latin);
+ transition:background .2s,color .2s,border-color .2s,transform .2s;
+ box-shadow:0 5px 18px rgba(35,24,17,.08);z-index:2
+}
+.carousel-arrow:hover{background:var(--olive);border-color:var(--olive);color:#fff;transform:scale(1.06)}
+.carousel-arrow:disabled{opacity:.3;cursor:default;transform:none}
+.carousel-hint{display:flex;align-items:center;justify-content:space-between;margin:5px 58px 0;color:var(--muted);font-size:10px}
+.carousel-progress{font:600 10px var(--latin);letter-spacing:1px;color:var(--olive)}
+.product-grid{scroll-behavior:smooth;scrollbar-width:none}
+.product-grid::-webkit-scrollbar{display:none}
+@media(max-width:760px){
+ .product-carousel{gap:7px}
+ .carousel-arrow{width:32px;height:32px;flex-basis:32px;font-size:21px}
+ .carousel-hint{margin:7px 38px 0}
+ .product-grid .product-card{flex-basis:82%}
+}
