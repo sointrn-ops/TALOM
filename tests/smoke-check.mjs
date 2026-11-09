@@ -22,6 +22,7 @@ for (const page of pages) {
 const publicJs = readFileSync(resolve(root, "script.js"), "utf8");
 const adminJs = readFileSync(resolve(root, "admin.js"), "utf8");
 const publicHtml = readFileSync(resolve(root, "index.html"), "utf8");
+const publicCss = readFileSync(resolve(root, "style.css"), "utf8");
 const adminHtml = readFileSync(resolve(root, "admin.html"), "utf8");
 
 assert.match(publicJs, /auth\.resetPasswordForEmail\(/, "Customer password recovery request is missing");
@@ -29,6 +30,9 @@ assert.match(publicJs, /auth\.updateUser\(\{ password \}\)/, "Customer password 
 assert.match(publicJs, /PASSWORD_RECOVERY/, "Password recovery callback is missing");
 assert.match(publicJs, /const focusable = \$\$\(/, "Modal focus trap must query all focusable controls");
 assert.match(publicHtml, /id=["']authForgotPassword["']/, "Password recovery control is missing");
+assert.match(publicHtml, /id=["']authModeSwitch["']/, "Authentication mode switch container is missing");
+assert.match(publicCss, /--font\s*:/, "Public CSS font variable is missing");
+assert.match(publicCss, /\.auth-forgot[^{]*\{[^}]*var\(--font\)/s, "Password recovery control must use the declared font variable");
 assert.ok(publicJs.includes('const tabs = $$("[data-auth-mode]");'), "Auth mode tabs must query all mode buttons");
 assert.ok(publicJs.includes('$$("[data-auth-mode]").forEach(button => {'), "Auth mode event binding must query all mode buttons");
 assert.match(adminJs, /profile\.role !== ["']admin["']/, "Admin role check is missing");
