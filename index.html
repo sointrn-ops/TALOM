@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="style.css?v=20261109-12">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
   <script src="script.js?v=20261109-14" defer></script>
+  <script src="cart.js" defer></script>
 </head>
 <body class="talom-redesign">
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -29,6 +30,7 @@
       <a href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
     </nav>
     <div class="header-actions">
+      <button class="cart-open-button" id="cartOpenButton" type="button"><span>سبد خرید</span> <b id="cartCount">0</b></button>
       <button class="auth-open-button" id="authOpenButton" type="button" data-fa="ورود / ثبت‌نام" data-en="Sign in">ورود / ثبت‌نام</button>
       <button class="icon-button" id="languageToggle" aria-label="Change language">EN</button>
       <button class="icon-button theme-button" id="themeToggle" aria-label="Change theme"><span id="themeIcon">☼</span></button>
@@ -131,6 +133,7 @@
   <div class="music-player" id="musicPlayer"><audio id="siteMusic" src="music/ali.mp3" preload="metadata" loop></audio><button class="music-toggle" id="musicToggle" aria-label="Play music"><span class="music-play-icon">▶</span></button><div class="music-info"><strong data-fa="لحظه‌ای با TALOM" data-en="A moment with TALOM">لحظه‌ای با TALOM</strong><small id="musicStatus" data-fa="برای پخش لمس کن" data-en="Tap to play">برای پخش لمس کن</small></div><div class="music-progress-wrap"><span id="musicCurrent">0:00</span><input id="musicProgress" type="range" min="0" max="100" value="0" aria-label="Music progress"><span id="musicDuration">0:00</span></div><button class="music-mute" id="musicMute" aria-label="Mute music">♫</button></div>
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
   <div class="modal" id="productModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="modal-panel product-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalProductName"><button class="modal-close" data-close-modal aria-label="Close">×</button><div class="modal-product-image-wrap"><img id="modalProductImage" src="" alt=""><span class="modal-image-label">TALOM SELECTION</span></div><div class="modal-product-content"><span id="modalProductCategory" class="product-category"></span><h2 id="modalProductName"></h2><p id="modalProductDescription"></p><div class="modal-product-bottom"><strong id="modalProductPrice"></strong><button id="modalFavorite" class="favorite-button" aria-label="Add to favorites">♡</button></div></div></div></div>
+  <div class="modal cart-modal" id="cartModal" aria-hidden="true"><div class="modal-backdrop" data-cart-close></div><section class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle"><button class="modal-close" type="button" data-cart-close aria-label="بستن">×</button><span class="auth-kicker">TALOM / YOUR SELECTION</span><h2 id="cartTitle">سبد خرید</h2><div id="cartItems"></div><p id="cartEmpty" class="cart-empty">سبد خریدت هنوز خالی است.</p><p class="cart-notice">این نسخه فقط سبد خرید را نگه می‌دارد. ثبت سفارش و پرداخت آنلاین هنوز فعال نشده است.</p></section></div>
   <div class="modal image-modal" id="imageModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="image-modal-panel" role="dialog" aria-modal="true"><button class="modal-close" data-close-modal aria-label="Close">×</button><img id="expandedImage" src="" alt="TALOM gallery image"></div></div>
 
   <div class="modal auth-modal" id="authModal" aria-hidden="true">
