@@ -1769,83 +1769,32 @@ body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothin
  .story-link,.site-header.editorial-header .main-nav a:after{transition:none}
 }
 
-
-/* TALOM pure RGB palette: black, pure red and pure green */
-:root,
-html[data-theme="dark"]{
-  --bg:#000000;
-  --paper:#000000;
-  --surface:#000000;
-  --ink:#00FF00;
-  --muted:#00FF00;
-  --olive:#00FF00;
-  --olive-dark:#00FF00;
-  --espresso:#000000;
-  --line:#00FF00;
-  --header-bg:#000000;
-  --shadow:none;
-  --talom-copper:#FF0000;
-  --talom-copper-soft:#00FF00;
-  --talom-terracotta:#FF0000;
-  --talom-terracotta-deep:#FF0000;
-  --talom-cream:#000000;
-  --talom-sand:#000000;
-  --talom-espresso:#000000;
-  --talom-gold:#00FF00;
-  color-scheme:dark;
+/* TALOM — balanced pure-color accents, preserving the editorial palette */
+:root{
+  --talom-pure-red:#FF0000;
+  --talom-pure-green:#00FF00;
+  --talom-pure-black:#000000;
 }
-html,body,.story,.menu-section,.gallery-section,.contact-section,
-.product-card,.modal-panel,.cart-panel,.auth-modal-panel,
-.music-player,.back-to-top,.modal-close,.search-box input{
-  background-color:#000000;
-  color:#00FF00;
+.story-index,.shelf-count,.section-kicker{
+  color:var(--talom-pure-red);
 }
-.site-header.scrolled,.main-nav,.main-nav.open{background:#000000}
-.site-footer,.signature-banner{background-color:#000000;color:#00FF00}
-.brand-symbol,.brand-dot,.main-nav a:hover,.icon-button:hover,
-.section-kicker,.overline,.story-copy h2 em,.section-heading h2 em,
-.contact-copy h2 em,.signature-content h2 em,.text-link,
-.product-category,.product-details,.contact-links a:hover,
-.contact-links b,.music-mute,.product-price,.shelf-index{
-  color:#FF0000;
+.story-index::before,.section-kicker::before{
+  background:var(--talom-pure-green);
 }
-.brand-symbol,.icon-button,.category-tab,.search-box,.product-card,
-.product-bottom,.contact-links,.contact-links a,.story-value,
-.menu-toolbar,.modal-product-bottom,.site-header.scrolled{
-  border-color:#00FF00;
+.story-image-frame{
+  border-color:rgba(0,255,0,.38);
 }
-.header-cta,.category-tab.active,.category-tab:hover,
-.button-gold,.music-toggle,.contact-card{
-  background:#FF0000;
-  color:#000000;
+.header-cta{
+  background:var(--talom-pure-black);
+  color:#fff;
+  border:1px solid var(--talom-pure-black);
 }
-.button-ghost{border-color:#00FF00;color:#00FF00}
-.button-ghost:hover{background:#00FF00;color:#000000}
-.favorite-button:hover,.favorite-button.is-favorite{
-  color:#FF0000;border-color:#FF0000;
+.header-cta:hover,.button-gold:hover{
+  background:var(--talom-pure-red);
+  border-color:var(--talom-pure-red);
+  color:#fff;
 }
-.scroll-progress{background:#FF0000}
-::selection{background:#00FF00;color:#000000}
-.hero,.hero-title,.hero-description,.hero-bottom,.hero-side-label,
-.scroll-cue,.signature-content,.signature-content>p:not(.overline),
-.signature-vertical,.gallery-caption,.site-footer p,.site-footer>span{
-  color:#00FF00;
-}
-.hero-shade,.signature-overlay{
-  background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.78) 52%,rgba(0,0,0,.48));
-}
-.hero-title .gold-text,.hero-index span,.eyebrow-line,.note-line{
-  color:#FF0000;background-color:#FF0000;
-}
-.button-gold:hover,.header-cta:hover,.music-toggle:hover{
-  background:#00FF00;color:#000000;
-}
-.product-image-wrap,.modal-product-image-wrap,.gallery-card{
-  background:#000000;
-}
-.site-footer .image-credit a{color:#00FF00}
-.toast{background:#FF0000;color:#000000}
-input,textarea,select{accent-color:#00FF00}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}
+::selection{
+  background:var(--talom-pure-green);
+  color:var(--talom-pure-black);
 }
