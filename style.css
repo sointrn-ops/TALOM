@@ -706,22 +706,39 @@ body{font-family:"Vazirmatn",sans-serif;background:var(--bg)}
   .editorial-hero .scroll-cue{display:none}
 }
 
-/* Homepage: one vertical exterior-cafe photograph only */
+/* Homepage: full-screen exterior cafe photograph */
 .portrait-only-hero{
-  min-height:0!important;height:auto!important;max-height:none!important;
-  margin-top:76px;padding:34px 20px 54px!important;
-  display:flex!important;align-items:center;justify-content:center;
-  background:var(--bg);overflow:hidden;
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:calc(100svh - 76px)!important;
+  min-height:calc(100vh - 76px)!important;
+  max-height:none!important;
+  margin:76px 0 0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#17130f!important;
 }
 .portrait-only-hero::before{display:none!important}
 .portrait-only-hero .portrait-cafe-image{
-  display:block;width:auto;height:min(78vh,820px);max-width:min(88vw,560px);
-  aspect-ratio:3/4;object-fit:cover;object-position:center;
-  box-shadow:0 24px 70px rgba(0,0,0,.16);
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  object-fit:cover!important;
+  object-position:center 48%!important;
+  box-shadow:none!important;
 }
 @media(max-width:760px){
-  .portrait-only-hero{margin-top:72px;padding:16px 0 28px!important}
+  .portrait-only-hero{
+    height:calc(100svh - 72px)!important;
+    min-height:calc(100vh - 72px)!important;
+    margin-top:72px!important;
+  }
   .portrait-only-hero .portrait-cafe-image{
-    width:min(88vw,460px);height:auto;max-width:88vw;aspect-ratio:3/4;
+    width:100%!important;height:100%!important;max-width:none!important;
+    object-position:center center!important;
   }
 }
