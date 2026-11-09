@@ -463,12 +463,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   logoutButton.addEventListener("click", async event => {
     event.preventDefault();
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) {
-      showLogin("خطا در خروج از حساب.");
-      return;
+    logoutButton.setAttribute("aria-disabled", "true");
+    try {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) throw error;
+      showLogin("از حساب خود خارج شدید.");
+    } catch (error) {
+      console.error("Admin sign-out error:", error);
+      showOrdersMessage("خروج از حساب انجام نشد. اتصال را بررسی کنید و دوباره تلاش کنید.", true);
+    } finally {
+      logoutButton.removeAttribute("aria-disabled");
     }
-    showLogin("از حساب خود خارج شدید.");
   });
 
   supabaseClient.auth.onAuthStateChange(event => {
