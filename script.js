@@ -1100,6 +1100,11 @@ function setupCounters() {
 
 function loadSavedSettings() {
   try {
+    const themeVersion = localStorage.getItem("talom-theme-version");
+    if (themeVersion !== "2") {
+      localStorage.setItem("talom-theme", "light");
+      localStorage.setItem("talom-theme-version", "2");
+    }
     const savedTheme = localStorage.getItem("talom-theme");
     const savedLanguage = localStorage.getItem("talom-language");
     const savedFavorites = JSON.parse(
