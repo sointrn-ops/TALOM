@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261109-4">
-  <script src="script.js?v=20261109-4" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261109-5">
+  <script src="script.js?v=20261109-5" defer></script>
 </head>
 <body class="talom-redesign">
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -92,12 +92,36 @@
         <label class="search-box"><span>⌕</span><input id="menuSearch" type="search" placeholder="جست‌وجو در منو..." data-placeholder-fa="جست‌وجو در منو..." data-placeholder-en="Search the menu..." autocomplete="off"><button id="clearSearch" type="button" aria-label="Clear search">×</button></label>
       </div>
       <div class="menu-meta reveal"><span id="productCount">انتخاب‌های ما</span><span data-fa="قیمت‌ها به تومان" data-en="Prices in toman">قیمت‌ها به تومان</span></div>
-      <div class="product-carousel">
-        <button class="carousel-arrow carousel-prev" id="productsPrev" type="button" aria-label="محصولات قبلی">‹</button>
-        <div class="product-grid" id="productGrid"></div>
-        <button class="carousel-arrow carousel-next" id="productsNext" type="button" aria-label="محصولات بعدی">›</button>
-      </div>
-      <div class="carousel-hint"><span data-fa="برای دیدن محصولات بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن محصولات بیشتر ورق بزنید</span><span class="carousel-progress" id="carouselProgress">01 / 200</span></div>
+
+      <section class="menu-shelf" id="drinksShelf">
+        <div class="shelf-heading"><div><span class="shelf-index">01 / DRINKS</span><h3 data-fa="نوشیدنی‌ها" data-en="Drinks">نوشیدنی‌ها</h3><p data-fa="قهوه‌های کلاسیک، نوشیدنی‌های سرد و ترکیب‌های ویژه" data-en="Coffee classics, chilled drinks and signatures">قهوه‌های کلاسیک، نوشیدنی‌های سرد و ترکیب‌های ویژه</p></div><span class="shelf-count" id="drinksCount"></span></div>
+        <div class="product-carousel" data-carousel="drinks">
+          <button class="carousel-arrow" id="drinksPrev" type="button" aria-label="قبلی">‹</button>
+          <div class="product-grid" id="productGrid"></div>
+          <button class="carousel-arrow" id="drinksNext" type="button" aria-label="بعدی">›</button>
+        </div>
+        <div class="carousel-hint"><span data-fa="برای دیدن موارد بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن موارد بیشتر ورق بزنید</span><span class="carousel-progress" id="drinksProgress"></span></div>
+      </section>
+
+      <section class="menu-shelf" id="dessertsShelf">
+        <div class="shelf-heading"><div><span class="shelf-index">02 / DESSERTS</span><h3 data-fa="دسرها" data-en="Desserts">دسرها</h3><p data-fa="چیزهای شیرین برای کنار قهوه یا یک مکث کوتاه" data-en="Something sweet for your coffee break">چیزهای شیرین برای کنار قهوه یا یک مکث کوتاه</p></div><span class="shelf-count" id="dessertsCount"></span></div>
+        <div class="product-carousel" data-carousel="desserts">
+          <button class="carousel-arrow" id="dessertsPrev" type="button" aria-label="قبلی">‹</button>
+          <div class="product-grid" id="dessertGrid"></div>
+          <button class="carousel-arrow" id="dessertsNext" type="button" aria-label="بعدی">›</button>
+        </div>
+        <div class="carousel-hint"><span data-fa="برای دیدن موارد بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن موارد بیشتر ورق بزنید</span><span class="carousel-progress" id="dessertsProgress"></span></div>
+      </section>
+
+      <section class="menu-shelf" id="foodShelf">
+        <div class="shelf-heading"><div><span class="shelf-index">03 / FOOD</span><h3 data-fa="خوراکی‌ها" data-en="Food">خوراکی‌ها</h3><p data-fa="انتخاب‌های سبک و خوش‌طعم برای هر ساعت روز" data-en="Fresh bites for any time of day">انتخاب‌های سبک و خوش‌طعم برای هر ساعت روز</p></div><span class="shelf-count" id="foodCount"></span></div>
+        <div class="product-carousel" data-carousel="food">
+          <button class="carousel-arrow" id="foodPrev" type="button" aria-label="قبلی">‹</button>
+          <div class="product-grid" id="foodGrid"></div>
+          <button class="carousel-arrow" id="foodNext" type="button" aria-label="بعدی">›</button>
+        </div>
+        <div class="carousel-hint"><span data-fa="برای دیدن موارد بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن موارد بیشتر ورق بزنید</span><span class="carousel-progress" id="foodProgress"></span></div>
+      </section>
       <div class="empty-state" id="emptyState" hidden><span>⌕</span><p data-fa="موردی پیدا نشد؛ عبارت دیگری را امتحان کن." data-en="Nothing found. Try another search.">موردی پیدا نشد؛ عبارت دیگری را امتحان کن.</p></div>
     </section>
 
