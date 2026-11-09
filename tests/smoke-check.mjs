@@ -30,6 +30,7 @@ assert.match(publicJs, /PASSWORD_RECOVERY/, "Password recovery callback is missi
 assert.match(publicJs, /const focusable = \$\$\(/, "Modal focus trap must query all focusable controls");
 assert.match(publicHtml, /id=["']authForgotPassword["']/, "Password recovery control is missing");
 assert.ok(publicJs.includes('const tabs = $$("[data-auth-mode]");'), "Auth mode tabs must query all mode buttons");
+assert.ok(publicJs.includes('$$("[data-auth-mode]").forEach(button => {'), "Auth mode event binding must query all mode buttons");
 assert.match(adminJs, /profile\.role !== ["']admin["']/, "Admin role check is missing");
 assert.match(adminHtml, /name=["']robots["'][^>]*noindex/i, "Admin page should not be indexed");
 
