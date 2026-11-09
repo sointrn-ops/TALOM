@@ -835,3 +835,11 @@ body{font-family:"Vazirmatn",sans-serif;background:var(--bg)}
   .full-hero-scroll{display:none}
   .site-header.editorial-header:not(.scrolled){min-height:72px;padding-inline:5%}
 }
+
+
+/* Bug fix: menu shelves are horizontal carousels, not the legacy product grid. */
+.menu-shelf .product-grid{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:0;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;direction:inherit;}
+.menu-shelf .product-grid .product-card{scroll-snap-align:start;}
+.product-image.image-unavailable{opacity:1!important;object-fit:contain;padding:10%;background:var(--surface);}
+.product-grid:focus-visible{outline:2px solid var(--olive);outline-offset:4px;}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
