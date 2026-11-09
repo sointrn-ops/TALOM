@@ -38,6 +38,8 @@ assert.ok(publicJs.includes('const tabs = $$("[data-auth-mode]");'), "Auth mode 
 assert.ok(publicJs.includes('$$("[data-auth-mode]").forEach(button => {'), "Auth mode event binding must query all mode buttons");
 assert.match(adminJs, /profile\.role !== ["']admin["']/, "Admin role check is missing");
 assert.match(adminHtml, /name=["']robots["'][^>]*noindex/i, "Admin page should not be indexed");
+assert.ok(adminHtml.includes('supabase-js@2.119.0'), 'Admin Supabase SDK must use the same pinned version as the public site');
+assert.ok(publicHtml.includes('supabase-js@2.119.0'), 'Public Supabase SDK version must remain pinned');
 
 for (const source of [publicJs, adminJs]) {
   assert.match(source, /sb_publishable_/, "A Supabase publishable key should be used");
