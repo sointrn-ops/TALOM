@@ -28,6 +28,7 @@ const adminHtml = readFileSync(resolve(root, "admin.html"), "utf8");
 assert.match(publicJs, /auth\.resetPasswordForEmail\(/, "Customer password recovery request is missing");
 assert.match(publicJs, /auth\.updateUser\(\{ password \}\)/, "Customer password update is missing");
 assert.match(publicJs, /PASSWORD_RECOVERY/, "Password recovery callback is missing");
+assert.match(publicJs, /authMode = mode === "signup" \\|\\| mode === "recovery" \\? mode : "signin";/, "Password recovery mode must remain distinct from sign-in mode");
 assert.match(publicJs, /const focusable = \$\$\(/, "Modal focus trap must query all focusable controls");
 assert.match(publicHtml, /id=["']authForgotPassword["']/, "Password recovery control is missing");
 assert.match(publicHtml, /id=["']authModeSwitch["']/, "Authentication mode switch container is missing");
