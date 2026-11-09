@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const productCategory = document.getElementById("product-category");
   const productPrice = document.getElementById("product-price");
   const productDescription = document.getElementById("product-description");
+  const productDescriptionEn = document.getElementById("product-description-en");
   const productImage = document.getElementById("product-image");
   const productAvailable = document.getElementById("product-available");
   const saveProductButton = document.getElementById("save-product-btn");
@@ -179,6 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     productCategory.value = product.category || "coffee";
     productPrice.value = product.price ?? "";
     productDescription.value = product.description || "";
+    productDescriptionEn.value = product.description_en || "";
     productImage.value = product.image_url || "";
     productAvailable.value = String(product.is_available);
 
@@ -370,6 +372,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         category: productCategory.value,
         price,
         description: productDescription.value.trim(),
+        description_en: productDescriptionEn.value.trim() || null,
         image_url: imageUrl || null,
         is_available: productAvailable.value === "true"
       };
