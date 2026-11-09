@@ -60,7 +60,7 @@ async function loadProducts() {
   productsLoadFailed = false;
 
   products = rows.map(row => ({
-    id: Number(row.id),
+    id: String(row.id),
     category: row.category,
     name: row.name || "",
     en: row.name_en || row.name || "",
@@ -151,7 +151,7 @@ function renderProducts() {
             loading="lazy"
             data-product-image="${product.id}"
           >
-          <span class="product-number">${String(product.id).padStart(2, "0")}</span>
+          <span class="product-number">${String(index + 1).padStart(2, "0")}</span>
           <button
             class="favorite-button ${favorite ? "is-favorite" : ""}"
             data-favorite="${product.id}"
