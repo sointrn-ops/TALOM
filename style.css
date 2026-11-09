@@ -1185,3 +1185,126 @@ html[dir="ltr"] .modal-image-label { right: auto; left: 15px; }
 .modal-product-image-wrap img.image-unavailable {
   visibility: hidden;
 }
+
+
+/* TALOM visual refinement — warm luxury, preserved layout */
+:root {
+  --bg: #100f0d;
+  --bg-soft: #171510;
+  --surface: #1d1a14;
+  --surface-2: #252016;
+  --text: #f5f0e6;
+  --muted: #b0a797;
+  --gold: #c9a96e;
+  --gold-light: #e6cc98;
+  --gold-dark: #80663d;
+  --border: rgba(201, 169, 110, .2);
+  --header-bg: rgba(16, 15, 13, .9);
+}
+html[data-theme="light"] {
+  --bg: #f3eee4;
+  --bg-soft: #e9e1d3;
+  --surface: #fffaf1;
+  --surface-2: #eee5d7;
+  --text: #282219;
+  --muted: #766d60;
+  --gold: #987644;
+  --gold-light: #b3915a;
+  --gold-dark: #6f542e;
+  --border: rgba(115, 87, 45, .2);
+  --header-bg: rgba(243, 238, 228, .92);
+}
+.site-header {
+  padding-inline: 6%;
+  border-bottom-color: rgba(201,169,110,.12);
+  background: linear-gradient(180deg, rgba(12,11,9,.58), transparent);
+}
+.site-header.scrolled {
+  box-shadow: 0 12px 38px rgba(0,0,0,.18);
+}
+.brand-symbol {
+  border-radius: 50%;
+  transform: none;
+  box-shadow: inset 0 0 0 4px rgba(201,169,110,.07);
+}
+.hero {
+  min-height: min(860px, 100svh);
+  padding-top: 165px;
+  padding-bottom: 90px;
+}
+.hero-image {
+  background-image: url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=2200&q=90");
+  background-position: center 52%;
+}
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(10,9,7,.94) 0%, rgba(10,9,7,.78) 36%, rgba(10,9,7,.18) 100%),
+    linear-gradient(0deg, rgba(10,9,7,.78), transparent 42%, rgba(10,9,7,.24));
+}
+html[dir="ltr"] .hero-shade {
+  background:
+    linear-gradient(270deg, rgba(10,9,7,.94) 0%, rgba(10,9,7,.78) 36%, rgba(10,9,7,.18) 100%),
+    linear-gradient(0deg, rgba(10,9,7,.78), transparent 42%, rgba(10,9,7,.24));
+}
+.hero-title { letter-spacing: -.0.02em; }
+.gold-text { color: var(--gold-light); }
+.button-gold, .header-cta {
+  background: linear-gradient(135deg, #d7bd88, #a9854d);
+  color: #17130d;
+  box-shadow: 0 9px 28px rgba(169,133,77,.18);
+}
+.button-gold:hover, .header-cta:hover { filter: brightness(1.08); transform: translateY(-2px); }
+.story-image-main {
+  background-image: url("https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1400&q=88");
+  filter: saturate(.84) contrast(1.04);
+}
+.signature-image {
+  background-image: url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=88");
+  background-position: center 55%;
+}
+.contact-photo {
+  background-image: url("https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1400&q=88");
+  filter: saturate(.82) contrast(1.04);
+}
+.gallery-card img {
+  filter: saturate(.84) contrast(1.03);
+}
+.gallery-card:hover img { filter: saturate(1) contrast(1.04); }
+.product-card {
+  border: 1px solid rgba(201,169,110,.12);
+  background: linear-gradient(155deg, var(--surface), color-mix(in srgb, var(--surface) 82%, #000));
+  box-shadow: 0 14px 34px rgba(0,0,0,.13);
+  transition: transform .45s cubic-bezier(.2,.75,.25,1), border-color .35s, box-shadow .35s;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201,169,110,.42);
+  box-shadow: 0 24px 48px rgba(0,0,0,.25);
+}
+.product-image-wrap { background: #211d16; }
+.product-image { transition: transform .8s cubic-bezier(.2,.75,.25,1), filter .5s; }
+.product-info { padding: 19px 18px 17px; }
+.product-name { letter-spacing: -.2px; }
+.category-tab {
+  border-radius: 2px;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.category-tab.active { box-shadow: 0 5px 18px rgba(201,169,110,.13); }
+.section-kicker { color: var(--gold); }
+.story-image-frame { border-color: rgba(201,169,110,.72); }
+.contact-card { background: linear-gradient(135deg, #d8c08e, #b18c53); }
+.music-player {
+  border: 1px solid rgba(201,169,110,.22);
+  box-shadow: 0 18px 48px rgba(0,0,0,.28);
+  backdrop-filter: blur(18px);
+}
+@media (max-width: 700px) {
+  .hero { min-height: 760px; padding-top: 145px; }
+  .hero-image { background-position: 58% center; }
+  .hero-shade {
+    background: linear-gradient(0deg, rgba(10,9,7,.94), rgba(10,9,7,.45) 70%, rgba(10,9,7,.3));
+  }
+  html[dir="ltr"] .hero-shade {
+    background: linear-gradient(0deg, rgba(10,9,7,.94), rgba(10,9,7,.45) 70%, rgba(10,9,7,.3));
+  }
+}
