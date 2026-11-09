@@ -1101,9 +1101,9 @@ function setupCounters() {
 function loadSavedSettings() {
   try {
     const themeVersion = localStorage.getItem("talom-theme-version");
-    if (themeVersion !== "2") {
+    if (themeVersion !== "3") {
       localStorage.setItem("talom-theme", "light");
-      localStorage.setItem("talom-theme-version", "2");
+      localStorage.setItem("talom-theme-version", "3");
     }
     const savedTheme = localStorage.getItem("talom-theme");
     const savedLanguage = localStorage.getItem("talom-language");
