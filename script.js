@@ -59,16 +59,26 @@ async function loadProducts() {
   const rows = await response.json();
   productsLoadFailed = false;
 
-  products = rows.map((row, index) => ({
-    id: String(row.id),
-    category: row.category,
-    name: row.name || "",
-    en: row.name_en || row.name || "",
-    price: Number(row.price) || 0,
-    description: row.description || "",
-    descEn: row.description_en || row.description || "",
-    image: makeUniqueProductImage(row, index)
-  }));
+  const usedProductImages = new Set();
+  products = rows.map((row, index) => {
+    // Keep the product's own image from the database. If it is already used,
+    // request a distinct image using this product's actual name.
+    let image = row.image_url || "";
+    if (!image || usedProductImages.has(image)) {
+      image = makeUniqueProductImage(row, index);
+    }
+    usedProductImages.add(image);
+    return {
+      id: String(row.id),
+      category: row.category,
+      name: row.name || "",
+      en: row.name_en || row.name || "",
+      price: Number(row.price) || 0,
+      description: row.description || "",
+      descEn: row.description_en || row.description || "",
+      image
+    };
+  });
 
   // حذف علاقه‌مندی‌هایی که دیگر در دیتابیس وجود ندارند
   state.favorites = new Set(
@@ -137,33 +147,20 @@ function productCardMarkup(product, index) {
 }
 
 // تصاویر منو از گالری رسمی کافه گالری؛ برای هر محصول تصویر متناسب انتخاب می‌شود.
-const IRANIAN_CAFE_IMAGES = {
-  coffee: [
-    "https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085725_7dacc3d6-1c44-4383-8840-bcc9aa706a35_min.webp",
-    "https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085726_b379a820-cbd1-4811-bbd7-8123c8489b5c_min.webp",
-    "https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085722_1b5f8e5a-a49d-4a9b-b31b-ead59dd29191_min.webp"
-  ],
-  cold: [
-    "https://www.caffegallery.com/images/gallery/cafe-tea.jpg",
-    "https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085725_7dacc3d6-1c44-4383-8840-bcc9aa706a35_min.webp"
-  ],
-  special: [
-    "https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085725_7dacc3d6-1c44-4383-8840-bcc9aa706a35_min.webp",
-    "https://www.caffegallery.com/images/gallery/cafe-tea.jpg"
-  ],
-  dessert: [
-    "https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085731_6e79bf6c-c754-4c37-a235-52ff3e44ea12_min.webp"
-  ],
-  food: [
-    "https://www.caffegallery.com/images/gallery/cafe-day-1.jpg",
-    "https://www.caffegallery.com/images/gallery/cafe-day-2.jpg",
-    "https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085730_83bb7da9-b43c-4b08-ad76-c683c9c61404_min.webp"
-  ]
-};
-
 function makeUniqueProductImage(row, index) {
-  const images = IRANIAN_CAFE_IMAGES[row.category] || IRANIAN_CAFE_IMAGES.food;
-  return images[index % images.length];
+  const categoryTags = {
+    coffee: "coffee espresso",
+    cold: "iced drink beverage",
+    special: "specialty drink",
+    dessert: "dessert pastry",
+    food: "cafe food meal"
+  }[row.category] || "cafe food";
+  const productWords = String(row.name_en || row.name || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ",")
+    .replace(/^,|,$/g, "");
+  const tags = [productWords, categoryTags.replace(/ /g, ",")].filter(Boolean).join(",");
+  return `https://loremflickr.com/900/900/${tags}?lock=${index + 4100}`;
 }
 
 function renderProducts() {
