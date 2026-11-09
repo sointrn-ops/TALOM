@@ -270,11 +270,11 @@ html[data-theme="dark"] .talom-redesign{--bg:#211f1a;--paper:#2b2922;--surface:#
 .editorial-menu .category-tab.active{background:var(--olive);border-color:var(--olive);color:#fff}
 .editorial-menu .product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
 .editorial-menu .product-card{background:var(--bg);border:0;border-radius:0;box-shadow:none;overflow:hidden}
-.editorial-menu .product-card-image{aspect-ratio:4/4.6;overflow:hidden}
-.editorial-menu .product-card-image img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
-.editorial-menu .product-card:hover .product-card-image img{transform:scale(1.055)}
-.editorial-menu .product-card-content{padding:18px 18px 22px}
-.editorial-menu .product-card h3{font-size:17px}
+.editorial-menu .product-image-wrap{aspect-ratio:4/4.6;overflow:hidden}
+.editorial-menu .product-image-wrap .product-image{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.editorial-menu .product-card:hover .product-image-wrap .product-image{transform:scale(1.055)}
+.editorial-menu .product-info{padding:18px 18px 22px}
+.editorial-menu .product-info h3{font-size:17px}
 .editorial-menu .product-card .product-price{color:var(--olive)}
 .editorial-signature{min-height:620px;display:flex;align-items:center;padding:90px 12%;position:relative;overflow:hidden}
 .editorial-signature .signature-image{background-image:url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2000&q=90");background-position:center 55%;transform:scale(1.02)}
@@ -323,8 +323,8 @@ html[data-theme="dark"] .talom-redesign{--bg:#211f1a;--paper:#2b2922;--surface:#
  .editorial-menu .section-heading,.editorial-gallery .section-heading{display:block}
  .editorial-menu .section-heading>p,.editorial-gallery .section-heading>p{max-width:420px;margin-top:15px}
  .editorial-menu .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
- .editorial-menu .product-card-content{padding:12px}
- .editorial-menu .product-card h3{font-size:14px}
+ .editorial-menu .product-info{padding:12px}
+ .editorial-menu .product-info h3{font-size:14px}
  .editorial-menu .category-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}
  .editorial-menu .category-tab{white-space:nowrap;font-size:12px}
  .editorial-menu .menu-toolbar{display:flex;flex-direction:column;align-items:stretch;gap:14px}
