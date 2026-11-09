@@ -117,6 +117,24 @@ function getProductDescription(product) {
   return isEnglish() ? product.descEn : product.description;
 }
 
+function normalizeSearchText(value) {
+  return String(value ?? "")
+    .normalize("NFKC")
+    .replace(/[يى]/g, "ی")
+    .replace(/ك/g, "ک")
+    .replace(/[\u064B-\u065F\u0670]/g, "")
+    .replace(/[٠-٩]/g, digit => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+    .replace(/[۰-۹]/g, digit => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))
+    .toLocaleLowerCase()
+    .trim();
+}
+
+function productPlaceholder(productName) {
+  const label = escapeHTML(productName || (isEnglish() ? "TALOM" : "TALOM"));
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900"><rect width="900" height="900" fill="#ded8c9"/><circle cx="450" cy="390" r="150" fill="#c6bda9"/><path d="M330 360h240v145a120 120 0 0 1-240 0z" fill="#74634e"/><path d="M570 390h55a55 55 0 0 1 0 110h-55" fill="none" stroke="#74634e" stroke-width="28"/><path d="M390 280c-35-45 35-55 0-100m95 100c-35-45 35-55 0-100" fill="none" stroke="#8a765c" stroke-width="13" stroke-linecap="round"/><text x="450" y="680" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" fill="#4d463b">${label}</text><text x="450" y="730" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" letter-spacing="6" fill="#766d5f">TALOM COFFEE CULTURE</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, character => ({
     "&": "&amp;",
@@ -165,10 +183,10 @@ function makeUniqueProductImage(row, index) {
 
 function renderProducts() {
   if (!grid) return;
-  const query = state.search.trim().toLocaleLowerCase();
+  const query = normalizeSearchText(state.search);
   const filtered = products.filter(product => {
     const matchesCategory = state.category === "all" || product.category === state.category;
-    const searchable = [product.name, product.en, product.description, product.descEn].join(" ").toLocaleLowerCase();
+    const searchable = normalizeSearchText([product.name, product.en, product.description, product.descEn].join(" "));
     return matchesCategory && (!query || searchable.includes(query));
   });
 
@@ -291,15 +309,15 @@ function openProduct(productId) {
   const modalImage = $("#modalProductImage");
   modalImage.onerror = () => {
     modalImage.onerror = null;
-    modalImage.removeAttribute("src");
-    modalImage.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
+    modalImage.src = productPlaceholder(getProductName(product));
+    modalImage.alt = getProductName(product);
     modalImage.classList.add("image-unavailable");
   };
   modalImage.classList.remove("image-unavailable");
   if (product.image) {
     modalImage.src = product.image;
   } else {
-    modalImage.removeAttribute("src");
+    modalImage.src = productPlaceholder(getProductName(product));
     modalImage.classList.add("image-unavailable");
   }
   modalImage.alt = getProductName(product);
@@ -490,10 +508,14 @@ function setupProductCarousel() {
       const card = $(".product-card", track);
       if (!card) return;
       const gap = parseFloat(getComputedStyle(track).columnGap) || 18;
-      track.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap) * 2, behavior: "smooth" });
+      const rtlSign = document.documentElement.dir === "rtl" ? -1 : 1;
+      track.scrollBy({
+        left: direction * rtlSign * (card.getBoundingClientRect().width + gap) * 2,
+        behavior: "smooth"
+      });
     };
-    previous?.addEventListener("click", () => move(1));
-    next?.addEventListener("click", () => move(-1));
+    previous?.addEventListener("click", () => move(-1));
+    next?.addEventListener("click", () => move(1));
     track?.addEventListener("scroll", updateAllCarouselControls, { passive: true });
   });
   window.addEventListener("resize", updateAllCarouselControls);
@@ -559,9 +581,12 @@ function setupMenu() {
       track.addEventListener("error", event => {
         const image = event.target;
         if (!(image instanceof HTMLImageElement) || !image.matches("[data-product-image]")) return;
+        if (image.dataset.fallbackApplied === "true") return;
+        image.dataset.fallbackApplied = "true";
+        const product = products.find(item => item.id === image.dataset.productImage);
+        image.src = productPlaceholder(product ? getProductName(product) : "TALOM");
         image.classList.add("image-unavailable");
-        image.removeAttribute("src");
-        image.alt = isEnglish() ? "Image unavailable" : "تصویر در دسترس نیست";
+        image.alt = product ? getProductName(product) : "TALOM";
       }, true);
     });
   }
