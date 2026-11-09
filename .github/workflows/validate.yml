@@ -20,3 +20,6 @@ jobs:
         run: |
           node --check script.js
           node --check admin.js
+          node --check tests/smoke-check.mjs
+      - name: Run static smoke checks
+        run: node tests/smoke-check.mjs
