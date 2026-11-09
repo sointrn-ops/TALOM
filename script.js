@@ -537,17 +537,29 @@ function setupAuth() {
   });
 
   signOutButton?.addEventListener("click", async () => {
-    if (!authClient) return;
+    if (!authClient || signOutButton.disabled) return;
+
     signOutButton.disabled = true;
-    const { error } = await authClient.auth.signOut();
-    signOutButton.disabled = false;
-    if (error) {
-      setAuthMessage(isEnglish() ? "Could not sign out. Try again." : "خروج انجام نشد؛ دوباره تلاش کن.", "error");
-      return;
+    setAuthMessage(isEnglish() ? "Signing out..." : "در حال خروج...");
+
+    try {
+      // Clear this browser's session locally so the customer is not left signed in
+      // if a remote session-revocation request is slow or unavailable.
+      const { error } = await authClient.auth.signOut({ scope: "local" });
+      if (error) throw error;
+
+      renderAuthSession(null);
+      setAuthMode("signin");
+      setAuthMessage(isEnglish() ? "You have signed out." : "از حساب خارج شدی.", "success");
+    } catch (error) {
+      console.error("TALOM sign-out error:", error);
+      setAuthMessage(
+        isEnglish() ? "Could not sign out. Check your connection and try again." : "خروج انجام نشد؛ اتصال اینترنت را بررسی و دوباره تلاش کن.",
+        "error"
+      );
+    } finally {
+      signOutButton.disabled = false;
     }
-    renderAuthSession(null);
-    setAuthMode("signin");
-    setAuthMessage(isEnglish() ? "You have signed out." : "از حساب خارج شدی.", "success");
   });
 
   authClient.auth.onAuthStateChange((_event, session) => {
