@@ -25,6 +25,8 @@ const publicHtml = readFileSync(resolve(root, "index.html"), "utf8");
 const publicCss = readFileSync(resolve(root, "style.css"), "utf8");
 const adminHtml = readFileSync(resolve(root, "admin.html"), "utf8");
 
+assert.ok(publicJs.includes("select=id,name,name_en,category,description,description_en,price,image_url"), "Public product query must load English descriptions");
+assert.ok(publicJs.includes("descEn: row.description_en || row.description || \"\""), "Public product cards must use the stored English description");
 assert.match(publicJs, /auth\.resetPasswordForEmail\(/, "Customer password recovery request is missing");
 assert.match(publicJs, /auth\.updateUser\(\{ password \}\)/, "Customer password update is missing");
 assert.match(publicJs, /PASSWORD_RECOVERY/, "Password recovery callback is missing");
