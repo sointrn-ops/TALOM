@@ -822,7 +822,7 @@ function setupModals() {
     }
     if (event.key !== "Tab") return;
 
-    const focusable = $(
+    const focusable = $$(
       'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
       activeModal
     ).filter(element => element.getClientRects().length > 0);
