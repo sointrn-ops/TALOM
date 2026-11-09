@@ -243,8 +243,8 @@ html[data-theme="dark"] .talom-redesign{--bg:#211f1a;--paper:#2b2922;--surface:#
 .hero-text-link{display:inline-flex;align-items:center;gap:14px;font-size:13px;border-bottom:1px solid var(--line);padding:10px 0}
 .hero-text-link span:last-child{color:var(--olive)}
 .hero-footnote{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);margin-top:clamp(45px,7vw,90px);padding-top:16px;color:var(--muted);font-size:11px}
-.hero-editorial-visual{height:min(66vh,690px);min-height:470px;position:relative;direction:ltr}
-.hero-main-photo{position:absolute;inset:0 8% 7% auto;width:min(78%,440px);aspect-ratio:3/4;max-height:100%;overflow:hidden;background:var(--surface);box-shadow:0 24px 70px rgba(0,0,0,.16)}
+.hero-editorial-visual{height:min(76vh,760px);min-height:540px;position:relative;direction:ltr;display:flex;align-items:center;justify-content:flex-end}
+.hero-main-photo{position:relative;width:min(78%,480px);height:100%;aspect-ratio:3/4;max-height:100%;overflow:hidden;background:var(--surface);box-shadow:0 24px 70px rgba(0,0,0,.16)}
 .hero-main-photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.78)}
 .hero-photo-small{position:absolute;width:34%;height:34%;left:0;bottom:0;border:9px solid var(--bg);overflow:hidden;background:var(--surface)}
 .hero-photo-small img{width:100%;height:100%;object-fit:cover}
@@ -693,4 +693,15 @@ body{font-family:"Vazirmatn",sans-serif;background:var(--bg)}
   .hero-topline{margin-bottom:22px}
   .hero-edition{margin-bottom:18px}
   .hero-footnote{margin-top:35px}
+}
+
+/* One portrait hero image — no collage or secondary photo */
+.editorial-hero .hero-editorial-visual .hero-main-photo{inset:auto}
+.editorial-hero .hero-editorial-visual .hero-main-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+@media(max-width:760px){
+  .editorial-hero{grid-template-columns:1fr;gap:34px;padding:42px 6% 76px;min-height:auto}
+  .hero-editorial-copy{padding-block:0}
+  .hero-editorial-visual{height:auto;min-height:0;justify-content:center}
+  .hero-main-photo{width:min(78vw,420px);height:auto;aspect-ratio:3/4}
+  .editorial-hero .scroll-cue{display:none}
 }
