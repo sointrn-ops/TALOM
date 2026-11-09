@@ -169,22 +169,6 @@ function productCardMarkup(product, index) {
 
 // No third-party random image service is used for product photos.
 
-function makeUniqueProductImage(row, index) {
-  const categoryTags = {
-    coffee: "coffee espresso",
-    cold: "iced drink beverage",
-    special: "specialty drink",
-    dessert: "dessert pastry",
-    food: "cafe food meal"
-  }[row.category] || "cafe food";
-  const productWords = String(row.name_en || row.name || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ",")
-    .replace(/^,|,$/g, "");
-  const tags = [productWords, categoryTags.replace(/ /g, ",")].filter(Boolean).join(",");
-  return `https://loremflickr.com/900/900/${tags}?lock=${index + 4100}`;
-}
-
 function renderProducts() {
   if (!grid) return;
   const query = normalizeSearchText(state.search);
