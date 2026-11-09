@@ -1246,7 +1246,7 @@ html[dir="ltr"] .hero-shade {
     linear-gradient(270deg, rgba(10,9,7,.94) 0%, rgba(10,9,7,.78) 36%, rgba(10,9,7,.18) 100%),
     linear-gradient(0deg, rgba(10,9,7,.78), transparent 42%, rgba(10,9,7,.24));
 }
-.hero-title { letter-spacing: -.0.02em; }
+.hero-title { letter-spacing: -0.02em; }
 .gold-text { color: var(--gold-light); }
 .button-gold, .header-cta {
   background: linear-gradient(135deg, #d7bd88, #a9854d);
