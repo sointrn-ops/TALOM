@@ -486,7 +486,7 @@ function setupAuth() {
     openModal(modal);
   });
 
-  $("[data-auth-mode]").forEach(button => {
+  $$("[data-auth-mode]").forEach(button => {
     button.addEventListener("click", () => setAuthMode(button.dataset.authMode));
   });
 
