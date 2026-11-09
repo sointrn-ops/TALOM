@@ -705,3 +705,23 @@ body{font-family:"Vazirmatn",sans-serif;background:var(--bg)}
   .hero-main-photo{width:min(78vw,420px);height:auto;aspect-ratio:3/4}
   .editorial-hero .scroll-cue{display:none}
 }
+
+/* Homepage: one vertical exterior-cafe photograph only */
+.portrait-only-hero{
+  min-height:0!important;height:auto!important;max-height:none!important;
+  margin-top:76px;padding:34px 20px 54px!important;
+  display:flex!important;align-items:center;justify-content:center;
+  background:var(--bg);overflow:hidden;
+}
+.portrait-only-hero::before{display:none!important}
+.portrait-only-hero .portrait-cafe-image{
+  display:block;width:auto;height:min(78vh,820px);max-width:min(88vw,560px);
+  aspect-ratio:3/4;object-fit:cover;object-position:center;
+  box-shadow:0 24px 70px rgba(0,0,0,.16);
+}
+@media(max-width:760px){
+  .portrait-only-hero{margin-top:72px;padding:16px 0 28px!important}
+  .portrait-only-hero .portrait-cafe-image{
+    width:min(88vw,460px);height:auto;max-width:88vw;aspect-ratio:3/4;
+  }
+}
