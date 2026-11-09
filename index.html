@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261109-3">
-  <script src="script.js?v=20261109-3" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261109-4">
+  <script src="script.js?v=20261109-4" defer></script>
 </head>
 <body class="talom-redesign">
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -92,7 +92,12 @@
         <label class="search-box"><span>⌕</span><input id="menuSearch" type="search" placeholder="جست‌وجو در منو..." data-placeholder-fa="جست‌وجو در منو..." data-placeholder-en="Search the menu..." autocomplete="off"><button id="clearSearch" type="button" aria-label="Clear search">×</button></label>
       </div>
       <div class="menu-meta reveal"><span id="productCount">انتخاب‌های ما</span><span data-fa="قیمت‌ها به تومان" data-en="Prices in toman">قیمت‌ها به تومان</span></div>
-      <div class="product-grid" id="productGrid"></div>
+      <div class="product-carousel">
+        <button class="carousel-arrow carousel-prev" id="productsPrev" type="button" aria-label="محصولات قبلی">‹</button>
+        <div class="product-grid" id="productGrid"></div>
+        <button class="carousel-arrow carousel-next" id="productsNext" type="button" aria-label="محصولات بعدی">›</button>
+      </div>
+      <div class="carousel-hint"><span data-fa="برای دیدن محصولات بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن محصولات بیشتر ورق بزنید</span><span class="carousel-progress" id="carouselProgress">01 / 200</span></div>
       <div class="empty-state" id="emptyState" hidden><span>⌕</span><p data-fa="موردی پیدا نشد؛ عبارت دیگری را امتحان کن." data-en="Nothing found. Try another search.">موردی پیدا نشد؛ عبارت دیگری را امتحان کن.</p></div>
     </section>
 
