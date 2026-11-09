@@ -292,6 +292,9 @@ function closeModal(modal = activeModal) {
   }
 }
 
+window.talomOpenModal = openModal;
+window.talomCloseModal = closeModal;
+
 function openProduct(productId) {
   const product = products.find(item => item.id === productId);
 
@@ -474,6 +477,7 @@ function setupAuth() {
       detectSessionInUrl: true
     }
   });
+  window.talomAuthClient = authClient;
 
   openButton.addEventListener("click", async () => {
     try {
