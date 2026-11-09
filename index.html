@@ -141,7 +141,7 @@
         <span class="auth-kicker">TALOM / ACCOUNT</span>
         <h2 id="authTitle" data-fa="حساب کاربری" data-en="Your account">حساب کاربری</h2>
         <div id="authSignedOut">
-          <div class="auth-mode-switch" role="group" aria-label="روش حساب کاربری">
+          <div class="auth-mode-switch" id="authModeSwitch" role="group" aria-label="روش حساب کاربری">
             <button type="button" class="active" data-auth-mode="signin" data-fa="ورود" data-en="Sign in">ورود</button>
             <button type="button" data-auth-mode="signup" data-fa="ثبت‌نام" data-en="Create account">ثبت‌نام</button>
           </div>
@@ -155,6 +155,7 @@
               <input id="authPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" minlength="8" maxlength="72">
             </div>
             <button id="authSubmit" class="auth-submit" type="submit" data-fa="ورود به حساب" data-en="Sign in">ورود به حساب</button>
+            <button id="authForgotPassword" class="auth-forgot" type="button" data-fa="رمز عبور را فراموش کرده‌ام" data-en="Forgot password?" hidden>رمز عبور را فراموش کرده‌ام</button>
           </form>
           <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
           <p class="auth-note" data-fa="با ثبت‌نام، حساب کاربری شما در TALOM ساخته می‌شود." data-en="Create an account to use your TALOM customer profile.">با ثبت‌نام، حساب کاربری شما در TALOM ساخته می‌شود.</p>

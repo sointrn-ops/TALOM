@@ -6,6 +6,7 @@ const SUPABASE_KEY = "sb_publishable__TOW24x67zjRnlas6Lb0xg_1wF0tC1g";
 
 let authClient = null;
 let authMode = "signin";
+let authRecoveryActive = false;
 
 let products = [];
 let productsLoadFailed = false;
@@ -418,14 +419,19 @@ function setAuthMode(mode) {
   const confirmInput = $("#authPasswordConfirm");
   const passwordInput = $("#authPassword");
   const submit = $("#authSubmit");
+  const modeSwitch = $("#authModeSwitch");
+  const forgotButton = $("#authForgotPassword");
   const tabs = $$("[data-auth-mode]");
+  const needsConfirmation = authMode === "signup" || authMode === "recovery";
   tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.authMode === authMode));
-  if (confirmWrap) confirmWrap.hidden = authMode !== "signup";
-  if (confirmInput) confirmInput.required = authMode === "signup";
-  if (passwordInput) passwordInput.autocomplete = authMode === "signup" ? "new-password" : "current-password";
+  if (modeSwitch) modeSwitch.hidden = authMode === "recovery";
+  if (forgotButton) forgotButton.hidden = authMode !== "signin";
+  if (confirmWrap) confirmWrap.hidden = !needsConfirmation;
+  if (confirmInput) confirmInput.required = needsConfirmation;
+  if (passwordInput) passwordInput.autocomplete = needsConfirmation ? "new-password" : "current-password";
   if (submit) submit.textContent = isEnglish()
-    ? (authMode === "signup" ? "Create account" : "Sign in")
-    : (authMode === "signup" ? "ساخت حساب کاربری" : "ورود به حساب");
+    ? (authMode === "signup" ? "Create account" : authMode === "recovery" ? "Update password" : "Sign in")
+    : (authMode === "signup" ? "ساخت حساب کاربری" : authMode === "recovery" ? "تغییر رمز عبور" : "ورود به حساب");
   setAuthMessage("");
 }
 
@@ -435,8 +441,8 @@ function renderAuthSession(session) {
   const signedIn = $("#authSignedIn");
   const openButton = $("#authOpenButton");
   const email = $("#authUserEmail");
-  if (signedOut) signedOut.hidden = Boolean(user);
-  if (signedIn) signedIn.hidden = !user;
+  if (signedOut) signedOut.hidden = Boolean(user) && !authRecoveryActive;
+  if (signedIn) signedIn.hidden = !user || authRecoveryActive;
   if (email) email.textContent = user?.email || "";
   if (openButton) {
     openButton.textContent = user
@@ -469,15 +475,46 @@ function setupAuth() {
   });
 
   openButton.addEventListener("click", async () => {
-    if (authClient) {
-      const { data } = await authClient.auth.getSession();
+    try {
+      const { data, error } = await authClient.auth.getSession();
+      if (error) throw error;
       renderAuthSession(data?.session || null);
+    } catch (error) {
+      console.error("TALOM session lookup error:", error);
+      setAuthMessage(isEnglish() ? "Could not check your session. Please try again." : "بررسی وضعیت حساب انجام نشد؛ دوباره تلاش کن.", "error");
     }
     openModal(modal);
   });
 
   $$("[data-auth-mode]").forEach(button => {
     button.addEventListener("click", () => setAuthMode(button.dataset.authMode));
+  });
+
+  const forgotButton = $("#authForgotPassword");
+  forgotButton?.addEventListener("click", async () => {
+    const emailInput = $("#authEmail");
+    const email = emailInput?.value.trim() || "";
+    if (!email || !emailInput.reportValidity()) {
+      emailInput?.focus();
+      setAuthMessage(isEnglish() ? "Enter a valid email address first." : "ابتدا یک ایمیل معتبر وارد کن.", "error");
+      return;
+    }
+    forgotButton.disabled = true;
+    setAuthMessage(isEnglish() ? "Sending recovery email..." : "در حال ارسال ایمیل بازیابی...");
+    try {
+      const { error } = await authClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+      });
+      if (error) throw error;
+      setAuthMessage(isEnglish()
+        ? "If this address is registered, a password recovery link will arrive by email."
+        : "اگر این ایمیل ثبت شده باشد، پیوند بازیابی رمز برایت ارسال می‌شود.", "success");
+    } catch (error) {
+      console.error("TALOM password recovery request error:", error);
+      setAuthMessage(isEnglish() ? "Could not send the recovery email. Check your connection and try again." : "ارسال ایمیل بازیابی انجام نشد؛ اتصال را بررسی و دوباره تلاش کن.", "error");
+    } finally {
+      forgotButton.disabled = false;
+    }
   });
 
   form.addEventListener("submit", async event => {
@@ -492,14 +529,22 @@ function setupAuth() {
       setAuthMessage(isEnglish() ? "Use at least 8 characters for your password." : "رمز عبور باید حداقل ۸ نویسه داشته باشد.", "error");
       return;
     }
-    if (authMode === "signup" && password !== confirmPassword) {
+    if ((authMode === "signup" || authMode === "recovery") && password !== confirmPassword) {
       setAuthMessage(isEnglish() ? "Passwords do not match." : "رمزهای عبور یکسان نیستند.", "error");
       return;
     }
     if (submit) submit.disabled = true;
     setAuthMessage(isEnglish() ? "Please wait..." : "لطفاً صبر کن...");
     try {
-      if (authMode === "signup") {
+      if (authMode === "recovery") {
+        const { error } = await authClient.auth.updateUser({ password });
+        if (error) throw error;
+        authRecoveryActive = false;
+        const { data } = await authClient.auth.getSession();
+        renderAuthSession(data?.session || null);
+        setAuthMode("signin");
+        showToast(isEnglish() ? "Your password has been updated." : "رمز عبور با موفقیت تغییر کرد.");
+      } else if (authMode === "signup") {
         const { data, error } = await authClient.auth.signUp({
           email,
           password,
@@ -562,13 +607,27 @@ function setupAuth() {
     }
   });
 
-  authClient.auth.onAuthStateChange((_event, session) => {
+  authClient.auth.onAuthStateChange((event, session) => {
+    if (event === "PASSWORD_RECOVERY") {
+      authRecoveryActive = true;
+      const emailInput = $("#authEmail");
+      if (emailInput && session?.user?.email) emailInput.value = session.user.email;
+      renderAuthSession(session);
+      setAuthMode("recovery");
+      setAuthMessage(isEnglish() ? "Choose a new password for your account." : "رمز عبور جدیدی برای حساب خود انتخاب کن.");
+      openModal(modal);
+      return;
+    }
+    if (event === "SIGNED_OUT") authRecoveryActive = false;
     renderAuthSession(session);
   });
 
   authClient.auth.getSession().then(({ data, error }) => {
     if (error) console.error("TALOM session restore error:", error.message);
     renderAuthSession(data?.session || null);
+  }).catch(error => {
+    console.error("TALOM session restore error:", error);
+    renderAuthSession(null);
   });
 
   renderAuthSession(null);
@@ -822,7 +881,7 @@ function setupModals() {
     }
     if (event.key !== "Tab") return;
 
-    const focusable = $(
+    const focusable = $$(
       'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
       activeModal
     ).filter(element => element.getClientRects().length > 0);
