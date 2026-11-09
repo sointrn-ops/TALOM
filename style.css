@@ -1144,3 +1144,46 @@ button,a,input{touch-action:manipulation}
 
 /* Secure order submission */
 .checkout-divider{height:1px;background:var(--line);margin:24px 0 18px}.checkout-heading{margin:0 0 16px;font-size:16px}.checkout-form{display:grid;gap:9px}.checkout-form label{font-size:11px;color:var(--muted);margin-top:5px}.checkout-form input,.checkout-form textarea{width:100%;min-height:44px;padding:11px 12px;border:1px solid var(--line);border-radius:0;background:var(--surface);color:var(--ink);font:inherit;font-size:13px;outline-offset:2px}.checkout-form textarea{resize:vertical}.checkout-submit{min-height:46px;margin-top:10px;border:0;background:var(--olive);color:#fff;font:600 13px var(--font);cursor:pointer}.checkout-submit:disabled{opacity:.6;cursor:wait}.checkout-message{min-height:20px;margin:3px 0 0;font-size:11px;line-height:1.8;overflow-wrap:anywhere}.checkout-message[data-kind="error"]{color:#b94b43}.checkout-message[data-kind="success"]{color:#4d805d}
+
+
+/* TALOM white & red visual identity */
+:root{
+  --bg:#ffffff;
+  --paper:#ffffff;
+  --surface:#fff5f5;
+  --ink:#292020;
+  --muted:#756767;
+  --olive:#c62828;
+  --olive-dark:#991b1b;
+  --espresso:#4a1717;
+  --line:rgba(105,25,25,.14);
+  --header-bg:rgba(255,255,255,.92);
+  --shadow:0 24px 70px rgba(90,20,20,.10);
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#211b1b;
+  --paper:#2b2222;
+  --surface:#352828;
+  --ink:#f5eeee;
+  --muted:#c0aaaa;
+  --olive:#ef7777;
+  --olive-dark:#ffaaaa;
+  --espresso:#f0dada;
+  --line:rgba(255,220,220,.16);
+  --header-bg:rgba(33,27,27,.92);
+  --shadow:0 24px 70px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+::selection{background:#c62828;color:#fff}
+.scroll-progress{background:#c62828}
+.hero .gold-text,
+.hero-index span{color:#ffaaaa}
+.hero .eyebrow-line,
+.hero .note-line{background:#ffaaaa}
+.button-gold{background:#c62828;color:#fff}
+.button-gold:hover{background:#a91f1f}
+.hero-bottom{border-color:rgba(255,255,255,.28)}
+.site-footer .footer-brand .brand-symbol{border-color:#ffaaaa;color:#ffaaaa}
+.site-footer{background:var(--espresso)}
+html[data-theme="dark"] .button-gold{background:#c62828;color:#fff}
