@@ -1655,3 +1655,116 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 @media(prefers-reduced-motion:reduce){
   .coffee-marquee *{animation:none!important;transition:none!important}
 }
+
+
+/* TALOM — complete brand experience layer */
+:root{
+ --talom-terracotta:#A83D25;--talom-terracotta-deep:#762918;
+ --talom-cream:#FFF9EF;--talom-sand:#F1DEC1;--talom-espresso:#321D16;
+ --talom-gold:#E5A83B;
+}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+.skip-link{position:fixed;z-index:3000;top:10px;right:12px;transform:translateY(-160%);padding:12px 18px;background:var(--talom-espresso);color:#fff;border-radius:3px}
+.skip-link:focus{transform:translateY(0)}
+.site-header.editorial-header{min-height:84px}
+.site-header.editorial-header .main-nav a{position:relative;padding:10px 0}
+.site-header.editorial-header .main-nav a:after{content:"";position:absolute;right:0;bottom:3px;width:0;height:2px;background:var(--talom-terracotta);transition:width .25s}
+.site-header.editorial-header .main-nav a:hover:after,.site-header.editorial-header .main-nav a:focus-visible:after{width:100%}
+.brand-story{position:relative;overflow:hidden;background:var(--talom-cream);padding-top:104px;padding-bottom:88px}
+.brand-story:before{content:"T";position:absolute;left:-35px;top:40px;font:clamp(260px,36vw,520px)/1 "Playfair Display",serif;color:rgba(168,61,37,.035);pointer-events:none}
+.brand-story-topline{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid rgba(50,29,22,.17);position:relative}
+.story-index{font:600 9px "DM Sans",sans-serif;letter-spacing:2px;color:var(--talom-terracotta)}
+.story-topline-note{font-size:11px;color:#735344}
+.brand-story-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:9%;align-items:center;padding:70px 0 76px;position:relative}
+.brand-story-copy{max-width:520px}
+.brand-story-copy .overline{color:var(--talom-terracotta)}
+.brand-story-copy h2{font-size:clamp(38px,4.5vw,62px);line-height:1.65;font-weight:600;letter-spacing:-1.3px;color:var(--talom-espresso);margin:0 0 20px}
+.brand-story-copy h2 em{font-family:"Playfair Display",serif;color:var(--talom-terracotta);font-weight:500}
+.brand-story-description{max-width:450px;font-size:13px;line-height:2.35;color:#735344}
+.story-link{display:inline-flex;align-items:center;gap:25px;margin-top:26px;padding:0 0 10px;border-bottom:1px solid var(--talom-terracotta);font-size:12px;font-weight:700;color:var(--talom-terracotta);transition:gap .2s}
+.story-link:hover{gap:36px}
+.story-link b{font:20px "DM Sans",sans-serif}
+.brand-story-visual{height:520px;position:relative;margin:0 0 0 24px}
+.brand-story-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:3px;box-shadow:0 24px 55px rgba(50,29,22,.14)}
+.story-image-frame{position:absolute;inset:18px -18px -18px 18px;border:1px solid rgba(168,61,37,.5);pointer-events:none}
+.story-image-note{position:absolute;right:-28px;bottom:28px;width:132px;height:132px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--talom-terracotta);color:#fff9ef;box-shadow:0 12px 28px rgba(50,29,22,.2)}
+.story-image-note span{font:8px "DM Sans",sans-serif;letter-spacing:1.5px}
+.story-image-note b{font:42px "Playfair Display",serif;line-height:1}
+.story-image-note small{font:8px "DM Sans",sans-serif;letter-spacing:2px;color:#F5D7A2}
+.story-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(50,29,22,.18);position:relative}
+.story-value{display:flex;gap:18px;padding:26px 22px 4px 14px;border-left:1px solid rgba(50,29,22,.15)}
+.story-value:first-child{padding-right:0}
+.story-value:last-child{border-left:0}
+.story-value>span{font:11px "DM Sans",sans-serif;color:var(--talom-terracotta);letter-spacing:1px;padding-top:5px}
+.story-value h3{font-size:16px;font-weight:700;color:var(--talom-espresso);margin:0 0 8px}
+.story-value p{font-size:11px;line-height:1.9;color:#735344;margin:0}
+.coffee-marquee{min-height:70px}
+.coffee-marquee span{letter-spacing:1.1px}
+.section-heading h2,.contact-copy h2{letter-spacing:-.7px}
+.menu-shelf{position:relative}
+.shelf-heading{align-items:center}
+.shelf-count{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;padding:0 8px;border:1px solid rgba(168,61,37,.28);border-radius:50%;font:10px "DM Sans",sans-serif;color:var(--talom-terracotta)}
+.product-card{display:flex;flex-direction:column}
+.product-info{display:flex;flex-direction:column;flex:1}
+.product-bottom{margin-top:auto}
+.product-image-wrap .product-image{display:block}
+.gallery-card{overflow:hidden}
+.gallery-card img{display:block}
+.gallery-card:focus-visible{outline:3px solid var(--talom-gold);outline-offset:4px}
+.signature-banner.editorial-signature{isolation:isolate}
+.signature-banner.editorial-signature:after{content:"";position:absolute;inset:18px;z-index:1;border:1px solid rgba(255,249,239,.25);pointer-events:none}
+.signature-content,.signature-vertical{z-index:2}
+.contact-links a{transition:padding .2s,color .2s}
+.contact-links a:hover{padding-inline:8px}
+.site-footer{display:grid;grid-template-columns:1.2fr 1fr auto;align-items:center;gap:20px}
+.site-footer>p{margin:0;color:rgba(255,249,239,.75);font-size:12px}
+.site-footer .image-credit{grid-column:1/-1;padding-top:18px;border-top:1px solid rgba(255,249,239,.18);color:rgba(255,249,239,.55);line-height:1.8}
+.site-footer .image-credit a{color:#F2BE5C;text-decoration:underline;text-underline-offset:3px}
+.back-to-top{box-shadow:0 8px 24px rgba(50,29,22,.2)}
+.modal-panel,.cart-panel,.auth-modal-panel{box-shadow:0 28px 80px rgba(30,15,10,.28)}
+@media(max-width:1000px){
+ .brand-story-layout{gap:6%;grid-template-columns:1fr 1fr}
+ .brand-story-visual{height:450px}
+ .story-image-note{right:-18px;width:112px;height:112px}
+ .story-value{padding-inline:12px}
+}
+@media(max-width:760px){
+ html{scroll-padding-top:78px}
+ .site-header.editorial-header{min-height:72px}
+ .site-header.editorial-header .main-nav a:after{display:none}
+ .brand-story{padding:70px 6% 58px}
+ .brand-story-topline{align-items:flex-start;flex-direction:column;gap:7px;padding-bottom:14px}
+ .story-index{font-size:8px}
+ .story-topline-note{font-size:10px}
+ .brand-story-layout{grid-template-columns:1fr;gap:35px;padding:40px 0 46px}
+ .brand-story-copy h2{font-size:clamp(34px,9vw,46px);line-height:1.7;margin-bottom:13px}
+ .brand-story-description{font-size:12px;line-height:2.2}
+ .story-link{margin-top:17px;font-size:11px}
+ .brand-story-visual{height:390px;margin:0 8px 0 12px}
+ .story-image-frame{inset:12px -10px -12px 10px}
+ .story-image-note{right:-15px;bottom:18px;width:94px;height:94px}
+ .story-image-note b{font-size:32px}
+ .story-image-note span,.story-image-note small{font-size:6px}
+ .story-values{grid-template-columns:1fr}
+ .story-value,.story-value:first-child{padding:18px 0;gap:15px;border-left:0;border-bottom:1px solid rgba(50,29,22,.14)}
+ .story-value:last-child{border-bottom:0}
+ .story-value h3{font-size:14px}
+ .story-value p{font-size:10px}
+ .shelf-heading{align-items:flex-end}
+ .shelf-count{min-width:32px;height:32px}
+ .signature-banner.editorial-signature:after{inset:10px}
+ .site-footer{grid-template-columns:1fr auto;gap:14px}
+ .site-footer>p{grid-column:1/-1;grid-row:2}
+ .site-footer>span{font-size:10px}
+ .site-footer .image-credit{grid-column:1/-1;font-size:9px}
+}
+@media(max-width:380px){
+ .brand-story-visual{height:330px}
+ .story-image-note{width:82px;height:82px;right:-12px}
+ .story-value p{max-width:270px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .story-link,.site-header.editorial-header .main-nav a:after{transition:none}
+}

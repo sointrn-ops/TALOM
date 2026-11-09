@@ -10,13 +10,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261109-20">
+  <link rel="stylesheet" href="style.css?v=20261109-21">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
   <script src="script.js?v=20261109-19" defer></script>
   <script src="cart.js" defer></script>
 </head>
 <body class="talom-redesign">
-  <div class="scroll-progress" id="scrollProgress"></div>
+  <a class="skip-link" href="#mainContent" data-fa="رفتن به محتوای اصلی" data-en="Skip to content">رفتن به محتوای اصلی</a>\n  <div class="scroll-progress" id="scrollProgress"></div>
   <header class="site-header editorial-header" id="siteHeader">
     <a class="brand" href="#home" aria-label="TALOM Home">
       <span class="brand-symbol">T</span>
@@ -25,7 +25,7 @@
     <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="باز کردن منو" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
     <nav class="main-nav" id="mainNav" aria-label="ناوبری اصلی">
       <a href="#home" data-fa="خانه" data-en="Home">خانه</a>
-      <a href="#menu" data-fa="منو" data-en="Menu">منو</a>
+      <a href="#menu" data-fa="منو" data-en="Menu">منو</a>\n      <a href="#story" data-fa="داستان ما" data-en="Our story">داستان ما</a>
       <a href="#gallery" data-fa="فضای کافه" data-en="The space">فضای کافه</a>
       <a href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
     </nav>
@@ -37,7 +37,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="mainContent">
     <section class="hero full-hero" id="home" aria-label="صفحه اصلی کافه TALOM">
       <img class="full-hero-image" src="https://d8j0ntlcm91z4.cloudfront.net/user_36eIr1isDUTNCuNk7dazeSjIsL2/hf_20260610_085733_d967bb4e-0ecc-4cad-ac14-d75bea6aff49_min.webp" alt="تصویر نمای بیرونی یک کافه" fetchpriority="high">
       <div class="full-hero-shade"></div>
@@ -59,6 +59,31 @@
       <span data-fa="نوشیدنی‌های سرد" data-en="COLD DRINKS">نوشیدنی‌های سرد</span><span class="marquee-star" aria-hidden="true">✳</span>
       <span data-fa="لحظه‌های خوش‌طعم" data-en="GOOD COFFEE MOMENTS">لحظه‌های خوش‌طعم</span>
     </div>
+
+    <section class="brand-story section-pad" id="story">
+      <div class="brand-story-topline">
+        <span class="story-index">01 / THE TALOM WAY</span>
+        <span class="story-topline-note" data-fa="فراتر از یک فنجان قهوه" data-en="MORE THAN A CUP OF COFFEE">فراتر از یک فنجان قهوه</span>
+      </div>
+      <div class="brand-story-layout">
+        <div class="brand-story-copy reveal">
+          <p class="overline" data-fa="نگاه ما به قهوه" data-en="OUR POINT OF VIEW">نگاه ما به قهوه</p>
+          <h2 data-fa="قهوه فقط یک نوشیدنی نیست؛<br><em>یک جور مکث است.</em>" data-en="Coffee is more than a drink.<br><em>It is a moment to pause.</em>">قهوه فقط یک نوشیدنی نیست؛<br><em>یک جور مکث است.</em></h2>
+          <p class="brand-story-description" data-fa="در TALOM قرار نیست فقط چیزی سفارش بدهی و بروی. اینجا می‌توانی میان طعم‌های آشنا بچرخی، انتخاب تازه‌ای پیدا کنی و چند دقیقه از شلوغی روز فاصله بگیری." data-en="At TALOM, it is not only about ordering and leaving. Explore familiar flavours, find something new and take a few minutes away from the rush of the day.">در TALOM قرار نیست فقط چیزی سفارش بدهی و بروی. اینجا می‌توانی میان طعم‌های آشنا بچرخی، انتخاب تازه‌ای پیدا کنی و چند دقیقه از شلوغی روز فاصله بگیری.</p>
+          <a class="story-link" href="#menu"><span data-fa="طعم‌های TALOM را کشف کن" data-en="Discover TALOM flavours">طعم‌های TALOM را کشف کن</span><b>↗</b></a>
+        </div>
+        <div class="brand-story-visual reveal">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1500&q=88" alt="فنجان قهوه در فضایی گرم و صمیمی" loading="lazy" decoding="async">
+          <div class="story-image-frame"></div>
+          <div class="story-image-note"><span>THE DAILY RITUAL</span><b>T.</b><small>EST. 2022</small></div>
+        </div>
+      </div>
+      <div class="story-values">
+        <article class="story-value reveal"><span>01</span><div><h3 data-fa="طعم‌های آشنا" data-en="Familiar flavours">طعم‌های آشنا</h3><p data-fa="برای وقت‌هایی که انتخاب همیشگی‌ات را می‌خواهی." data-en="For the moments when your usual favourite feels right.">برای وقت‌هایی که انتخاب همیشگی‌ات را می‌خواهی.</p></div></article>
+        <article class="story-value reveal"><span>02</span><div><h3 data-fa="کشف تازه‌ها" data-en="Something new">کشف تازه‌ها</h3><p data-fa="برای روزهایی که دلت یک تجربه متفاوت می‌خواهد." data-en="For the days when you feel like trying something different.">برای روزهایی که دلت یک تجربه متفاوت می‌خواهد.</p></div></article>
+        <article class="story-value reveal"><span>03</span><div><h3 data-fa="لحظه‌های مشترک" data-en="Shared moments">لحظه‌های مشترک</h3><p data-fa="برای گفت‌وگوها، قرارها و مکث‌های کوتاه." data-en="For conversations, catch-ups and little pauses.">برای گفت‌وگوها، قرارها و مکث‌های کوتاه.</p></div></article>
+      </div>
+    </section>
 
     <section class="menu-section editorial-menu section-pad" id="menu">
       <div class="section-kicker reveal menu-discovery-kicker"><span>02</span><span data-fa="برای کشف طعم تازه" data-en="A TASTE TO DISCOVER">برای کشف طعم تازه</span></div>
