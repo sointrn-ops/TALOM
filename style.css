@@ -2124,3 +2124,22 @@ html[data-theme="dark"] .talom-redesign{
 @media(prefers-reduced-motion:reduce){
   .talom-redesign .experience-card img{transition:none}
 }
+
+
+/* QA refinement: show the complete experience grid on desktop and keep section indices in order. */
+@media(min-width:761px){
+  .talom-redesign .experience-grid{
+    grid-template-rows:300px 300px 250px;
+  }
+  .talom-redesign .experience-card-wide{
+    display:block;
+    grid-column:1/-1;
+    min-height:250px;
+  }
+}
+@media(min-width:761px) and (max-width:980px){
+  .talom-redesign .experience-grid{
+    grid-template-rows:260px 260px 230px;
+  }
+  .talom-redesign .experience-card-wide{min-height:230px}
+}
