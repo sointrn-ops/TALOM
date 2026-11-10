@@ -134,26 +134,43 @@ function normalizeSearchText(value) {
 }
 
 function stockPhoto(path) {
-  return `https://images.pexels.com/photos/${path}?auto=compress&cs=tinysrgb&w=1200`;
+  return `https://images.pexels.com/photos/${path}/pexels-photo-${path}.jpeg?auto=compress&cs=tinysrgb&w=1200`;
+}
+
+// Curated Pexels photographs. Each category has its own image pool;
+// a stable product-ID hash distributes products across different photographs.
+const PRODUCT_PHOTO_POOLS = {
+  coffee: ["12821515","8963391","11774911","2159156","9188612","3755708","22873663","36495566"],
+  cold: ["32681655","36979984","6769487","5527544","12801414","5946658","32848465","38680065","28162736"],
+  special: ["8329672","39766079","8329677","8004570","2611811","28038331","38958418","34689214","32972520"],
+  dessert: ["29721413","32802342","4109376","4109459","12232470","27969779","36405064","5163948","15911843","15028377","36254047"],
+  food: ["5729343","27354734","6529831","31742769","36429910","8108065","6612776","5848038","5692285"]
+};
+
+function stablePhotoIndex(id, poolLength) {
+  let hash = 0;
+  for (const character of String(id || "")) {
+    hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+  }
+  return poolLength ? hash % poolLength : 0;
 }
 
 function productStockImage(row) {
   const name = normalizeSearchText([row.name, row.name_en].join(" "));
-  if (/matcha|ماچا/.test(name)) return stockPhoto("29173450/pexels-photo-29173450.jpeg");
-  if (/croissant|کروسان/.test(name)) return stockPhoto("30667031/pexels-photo-30667031.jpeg");
-  if (/pasta|پاستا|lasagna|لازانیا/.test(name)) return stockPhoto("21294883/pexels-photo-21294883.jpeg");
-  if (/tiramisu|تیرامیسو/.test(name)) return stockPhoto("32249757/pexels-photo-32249757.jpeg");
-  if (/cheesecake|کیک|تارت|براونی|کوکی|پاناکوتا|پروفیترول|وافل|panna|cake|tart|cookie|brownie/.test(name)) return stockPhoto("33853815/pexels-photo-33853815.jpeg");
-  if (/tea|چای|دمنوش|کرک/.test(name)) return stockPhoto("29173450/pexels-photo-29173450.jpeg");
-  if (/coffee|قهوه|لاته|اسپرسو|موکا|ماکیاتو|کورتادو|فلت وایت|v60|کمکس|ایروپرس|ریسترتو|long black/.test(name)) return stockPhoto("26951872/pexels-photo-26951872.jpeg");
-  if (row.category === "food") return stockPhoto("21294883/pexels-photo-21294883.jpeg");
-  if (row.category === "dessert") return stockPhoto("33853815/pexels-photo-33853815.jpeg");
-  if (row.category === "cold") return stockPhoto("32249757/pexels-photo-32249757.jpeg");
-  if (row.category === "special") return stockPhoto("29173450/pexels-photo-29173450.jpeg");
-  return stockPhoto("26951872/pexels-photo-26951872.jpeg");
+  let pool = PRODUCT_PHOTO_POOLS[row.category] || PRODUCT_PHOTO_POOLS.coffee;
+
+  // Prefer photographs that visibly match distinctive products.
+  if (/matcha|ماچا/.test(name)) pool = PRODUCT_PHOTO_POOLS.special;
+  else if (/croissant|کروسان/.test(name)) pool = ["32802342","4109376","4109459","12232470","27969779","36405064"];
+  else if (/tiramisu|تیرامیسو/.test(name)) pool = ["29721413","36254037","36254047","15028377"];
+  else if (/pasta|پاستا|lasagna|لازانیا/.test(name)) pool = ["5729343","27354734","36429910","37478463"];
+  else if (/cheesecake|کیک|تارت|براونی|کوکی|پاناکوتا|پروفیترول|وافل|panna|cake|tart|cookie|brownie/.test(name)) pool = PRODUCT_PHOTO_POOLS.dessert;
+  else if (/tea|چای|دمنوش|کرک/.test(name)) pool = ["38958418","34689214","1544787219","38958418"];
+
+  return stockPhoto(pool[stablePhotoIndex(row.id, pool.length)]);
 }
 
-function productLocalImage(category) {
+function productLocalImage(category)(category) {
   const images = {
     coffee: "assets/images/product-coffee.svg",
     cold: "assets/images/product-cold.svg",
