@@ -1255,3 +1255,70 @@ html[data-theme="dark"]{
 .cart-add-button:hover{background:var(--olive-dark)}
 html[data-theme="dark"] .site-footer{background:#171211}
 html[data-theme="dark"] .site-footer .footer-brand .brand-symbol{border-color:#df8975;color:#df8975}
+
+
+/* TALOM Theme 03 — Terracotta & Cream */
+:root{
+  --bg:#F5EBDD;
+  --paper:#FFFCF6;
+  --surface:#EFE3D3;
+  --ink:#352821;
+  --muted:#88776A;
+  --olive:#B65D43;
+  --olive-dark:#914631;
+  --espresso:#704536;
+  --line:rgba(112,69,54,.17);
+  --header-bg:rgba(245,235,221,.95);
+  --shadow:0 18px 48px rgba(92,58,42,.10);
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#241D19;
+  --paper:#30251F;
+  --surface:#3B2D25;
+  --ink:#F5EBDD;
+  --muted:#C6B19F;
+  --olive:#D8896E;
+  --olive-dark:#E5A18A;
+  --espresso:#E8CDB7;
+  --line:rgba(232,205,183,.17);
+  --header-bg:rgba(36,29,25,.95);
+  --shadow:0 18px 48px rgba(0,0,0,.32);
+  color-scheme:dark;
+}
+::selection{background:#B65D43;color:#fff}
+.scroll-progress{background:var(--olive)}
+.brand-symbol{border-color:var(--olive);color:var(--olive)}
+.brand-dot,.main-nav a:hover,.section-kicker,.overline,
+.story-copy h2 em,.section-heading h2 em,.contact-copy h2 em,
+.signature-content h2 em,.text-link,.product-category,.product-details,
+.contact-links a:hover,.contact-links b{color:var(--olive)}
+.header-cta,.category-tab:hover,.category-tab.active,.contact-card,
+.music-toggle{background:var(--olive);color:#fff}
+.header-cta:hover,.button-gold:hover{background:var(--olive-dark)}
+.button-gold,.auth-submit,.checkout-submit,.cart-add-button{background:var(--olive);color:#fff}
+.hero .gold-text,.hero-index span{color:#E8B99F}
+.hero .eyebrow-line,.hero .note-line{background:#E8B99F}
+.hero-bottom .hero-index span{color:#E8B99F}
+.story-stamp{background:var(--olive)}
+.menu-shelf .product-card:hover{border-color:rgba(182,93,67,.45)}
+.menu-shelf .product-details:hover{background:var(--olive);border-color:var(--olive);color:#fff}
+.favorite-button:hover,.favorite-button.is-favorite{color:var(--olive);border-color:var(--olive)}
+.signature-content .overline{color:#E8B99F}
+.contact-card{background:var(--olive)}
+.site-footer{background:#704536;color:#F5EBDD}
+.site-footer .footer-brand .brand-symbol{border-color:#E8B99F;color:#E8B99F}
+.music-toggle{background:var(--olive)}
+.music-progress-wrap input{accent-color:var(--olive)}
+.auth-open-button{border-color:var(--olive);color:var(--olive)}
+.auth-open-button:hover{background:var(--olive);color:#fff}
+.auth-mode-switch button.active{color:var(--olive);border-bottom-color:var(--olive)}
+.auth-form input:focus,.checkout-form input:focus,.checkout-form textarea:focus{border-color:var(--olive)}
+.auth-forgot,.auth-forgot:hover{color:var(--olive)}
+.auth-message[data-type="success"],.auth-success{color:#638064}
+.checkout-submit:hover,.auth-submit:hover,.cart-add-button:hover{background:var(--olive-dark)}
+.cart-open-button b{background:var(--olive);color:#fff}
+html[data-theme="dark"] .site-footer{background:#191310}
+html[data-theme="dark"] .site-footer .footer-brand .brand-symbol{border-color:#D8896E;color:#D8896E}
+html[data-theme="dark"] .hero .gold-text,
+html[data-theme="dark"] .hero-index span{color:#E8B99F}
