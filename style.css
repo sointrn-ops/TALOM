@@ -1187,3 +1187,71 @@ html[data-theme="dark"]{
 .site-footer .footer-brand .brand-symbol{border-color:#ffaaaa;color:#ffaaaa}
 .site-footer{background:var(--espresso)}
 html[data-theme="dark"] .button-gold{background:#c62828;color:#fff}
+
+
+/* TALOM unified cream & red identity — aligned with the admin panel */
+:root{
+  --bg:#f4f0e7;
+  --paper:#fffdf8;
+  --surface:#f8f4eb;
+  --ink:#29251f;
+  --muted:#81796e;
+  --olive:#a94335;
+  --olive-dark:#873326;
+  --espresso:#4b2924;
+  --line:rgba(90,49,39,.15);
+  --header-bg:rgba(244,240,231,.94);
+  --shadow:0 18px 48px rgba(66,47,31,.09);
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#211c1a;
+  --paper:#2d2521;
+  --surface:#382c26;
+  --ink:#f4eee5;
+  --muted:#c2b4a6;
+  --olive:#df8975;
+  --olive-dark:#efaa98;
+  --espresso:#f0dfd2;
+  --line:rgba(240,223,210,.16);
+  --header-bg:rgba(33,28,26,.94);
+  --shadow:0 18px 48px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+::selection{background:#a94335;color:#fff}
+.scroll-progress{background:#a94335}
+.brand-symbol{border-color:var(--olive);color:var(--olive)}
+.brand-dot,.main-nav a:hover,.section-kicker,.overline,
+.story-copy h2 em,.section-heading h2 em,.contact-copy h2 em,
+.signature-content h2 em,.text-link,.product-category,.product-details,
+.contact-links a:hover,.contact-links b{color:var(--olive)}
+.header-cta,.category-tab:hover,.category-tab.active,.contact-card,
+.music-toggle{background:var(--olive);color:#fff}
+.header-cta:hover,.button-gold:hover{background:var(--olive-dark)}
+.button-gold{background:var(--olive);color:#fff}
+.hero .gold-text,.hero-index span{color:#f2c1b2}
+.hero .eyebrow-line,.hero .note-line{background:#f2c1b2}
+.hero-bottom .hero-index span{color:#f2c1b2}
+.story-stamp{background:var(--olive)}
+.menu-shelf .product-card:hover{border-color:rgba(169,67,53,.42)}
+.menu-shelf .product-details:hover{background:var(--olive);border-color:var(--olive);color:#fff}
+.favorite-button:hover,.favorite-button.is-favorite{color:var(--olive);border-color:var(--olive)}
+.signature-content .overline{color:#f2c1b2}
+.contact-card{background:var(--olive)}
+.site-footer{background:#4b2924;color:#f4f0e7}
+.site-footer .footer-brand .brand-symbol{border-color:#f2c1b2;color:#f2c1b2}
+.music-toggle{background:var(--olive)}
+.music-progress-wrap input{accent-color:var(--olive)}
+.auth-open-button{border-color:var(--olive);color:var(--olive)}
+.auth-open-button:hover,.auth-submit,.auth-mode-switch button.active,
+.checkout-submit,.cart-open-button b{background:var(--olive);color:#fff}
+.auth-mode-switch button.active{border-bottom-color:var(--olive)}
+.auth-form input:focus{border-color:var(--olive)}
+.auth-forgot,.auth-forgot:hover{color:var(--olive)}
+.auth-message[data-type="success"],.auth-success{color:#47745c}
+.checkout-submit:hover,.auth-submit:hover{background:var(--olive-dark)}
+.checkout-form input:focus,.checkout-form textarea:focus{border-color:var(--olive)}
+.cart-add-button{background:var(--olive)}
+.cart-add-button:hover{background:var(--olive-dark)}
+html[data-theme="dark"] .site-footer{background:#171211}
+html[data-theme="dark"] .site-footer .footer-brand .brand-symbol{border-color:#df8975;color:#df8975}
