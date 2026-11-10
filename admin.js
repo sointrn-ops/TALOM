@@ -357,11 +357,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const imageUrl = productImage.value.trim();
       if (imageUrl) {
-        let parsed;
-        try { parsed = new URL(imageUrl); }
-        catch { showProductMessage("آدرس تصویر معتبر نیست.", true); return; }
-        if (parsed.protocol !== "https:" || parsed.username || parsed.password) {
-          showProductMessage("آدرس تصویر باید HTTPS معتبر و بدون اطلاعات ورود باشد.", true);
+        const isLocalAsset = /^assets\/images\/[a-zA-Z0-9._-]+\.(?:avif|gif|jpe?g|png|svg|webp)$/i.test(imageUrl)
+          && !imageUrl.includes("..");
+        let isSafeHttps = false;
+        try {
+          const parsed = new URL(imageUrl);
+          isSafeHttps = parsed.protocol === "https:" && !parsed.username && !parsed.password;
+        } catch {}
+        if (!isLocalAsset && !isSafeHttps) {
+          showProductMessage("مسیر محلی باید از پوشه assets/images باشد؛ یا یک نشانی HTTPS معتبر وارد کنید.", true);
           return;
         }
       }
