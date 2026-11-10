@@ -68,8 +68,9 @@ async function loadProducts() {
     // Use verified product image URLs from the database only.
     // Repeated or missing URLs receive a labeled local placeholder rather than
     // an unrelated random photo that could misrepresent the product.
-    const sourceImage = String(row.image_url || "").trim();
-    const image = sourceImage || productLocalImage(row.category);
+    // Real Pexels stock photos are selected from the product name/category.
+    // Supabase product records remain unchanged; local SVGs are offline fallbacks.
+    const image = productStockImage(row);
 
     return {
       id: String(row.id),
@@ -130,6 +131,26 @@ function normalizeSearchText(value) {
     .replace(/[۰-۹]/g, digit => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))
     .toLocaleLowerCase()
     .trim();
+}
+
+function stockPhoto(path) {
+  return `https://images.pexels.com/photos/${path}?auto=compress&cs=tinysrgb&w=1200`;
+}
+
+function productStockImage(row) {
+  const name = normalizeSearchText([row.name, row.name_en].join(" "));
+  if (/matcha|ماچا/.test(name)) return stockPhoto("29173450/pexels-photo-29173450.jpeg");
+  if (/croissant|کروسان/.test(name)) return stockPhoto("30667031/pexels-photo-30667031.jpeg");
+  if (/pasta|پاستا|lasagna|لازانیا/.test(name)) return stockPhoto("21294883/pexels-photo-21294883.jpeg");
+  if (/tiramisu|تیرامیسو/.test(name)) return stockPhoto("32249757/pexels-photo-32249757.jpeg");
+  if (/cheesecake|کیک|تارت|براونی|کوکی|پاناکوتا|پروفیترول|وافل|panna|cake|tart|cookie|brownie/.test(name)) return stockPhoto("33853815/pexels-photo-33853815.jpeg");
+  if (/tea|چای|دمنوش|کرک/.test(name)) return stockPhoto("29173450/pexels-photo-29173450.jpeg");
+  if (/coffee|قهوه|لاته|اسپرسو|موکا|ماکیاتو|کورتادو|فلت وایت|v60|کمکس|ایروپرس|ریسترتو|long black/.test(name)) return stockPhoto("26951872/pexels-photo-26951872.jpeg");
+  if (row.category === "food") return stockPhoto("21294883/pexels-photo-21294883.jpeg");
+  if (row.category === "dessert") return stockPhoto("33853815/pexels-photo-33853815.jpeg");
+  if (row.category === "cold") return stockPhoto("32249757/pexels-photo-32249757.jpeg");
+  if (row.category === "special") return stockPhoto("29173450/pexels-photo-29173450.jpeg");
+  return stockPhoto("26951872/pexels-photo-26951872.jpeg");
 }
 
 function productLocalImage(category) {
@@ -266,7 +287,7 @@ function toggleFavorite(productId, button) {
   if (button) updateFavoriteButton(button, productId);
 
   if (state.selectedProduct === productId) {
-    const modalFavorite = $("#modalFavorite");
+  const modalFavorite = $("#modalFavorite");
     if (modalFavorite) updateFavoriteButton(modalFavorite, productId);
   }
 }
@@ -1120,6 +1141,19 @@ function loadSavedSettings() {
 
 async function init() {
   loadSavedSettings();
+
+  // If the stock-photo host is unavailable, use the repository's local
+  // illustration so the editorial sections never show broken image icons.
+  document.querySelectorAll("img[data-photo-fallback]").forEach(image => {
+    image.addEventListener("error", () => {
+      const fallback = image.dataset.photoFallback;
+      if (!fallback || image.dataset.fallbackApplied === "true") return;
+      image.dataset.fallbackApplied = "true";
+      image.src = fallback;
+      const galleryButton = image.closest("[data-image]");
+      if (galleryButton) galleryButton.dataset.image = fallback;
+    }, { once: true });
+  });
 
   const languageButton = $("#languageToggle");
   if (languageButton) {
