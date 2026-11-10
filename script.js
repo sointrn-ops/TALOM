@@ -287,19 +287,6 @@ function toggleFavorite(productId, button) {
   if (button) updateFavoriteButton(button, productId);
 
   if (state.selectedProduct === productId) {
-    // If the stock-photo host is unavailable, keep every editorial image visible
-  // with the repository's local illustration instead of leaving a broken image.
-  document.querySelectorAll("img[data-photo-fallback]").forEach(image => {
-    image.addEventListener("error", () => {
-      const fallback = image.dataset.photoFallback;
-      if (!fallback || image.dataset.fallbackApplied === "true") return;
-      image.dataset.fallbackApplied = "true";
-      image.src = fallback;
-      const galleryButton = image.closest("[data-image]");
-      if (galleryButton) galleryButton.dataset.image = fallback;
-    }, { once: true });
-  });
-
   const modalFavorite = $("#modalFavorite");
     if (modalFavorite) updateFavoriteButton(modalFavorite, productId);
   }
@@ -1154,6 +1141,19 @@ function loadSavedSettings() {
 
 async function init() {
   loadSavedSettings();
+
+  // If the stock-photo host is unavailable, use the repository's local
+  // illustration so the editorial sections never show broken image icons.
+  document.querySelectorAll("img[data-photo-fallback]").forEach(image => {
+    image.addEventListener("error", () => {
+      const fallback = image.dataset.photoFallback;
+      if (!fallback || image.dataset.fallbackApplied === "true") return;
+      image.dataset.fallbackApplied = "true";
+      image.src = fallback;
+      const galleryButton = image.closest("[data-image]");
+      if (galleryButton) galleryButton.dataset.image = fallback;
+    }, { once: true });
+  });
 
   const languageButton = $("#languageToggle");
   if (languageButton) {
