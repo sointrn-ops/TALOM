@@ -94,3 +94,44 @@ tbody tr:hover{background:#fcf8f1}
 }
 @media(max-width:360px){.sidebar{padding-inline:7px;gap:4px}.logo{font-size:16px;margin-inline:2px}.nav-link{padding:8px;font-size:10px}.section{padding:13px}.stats-grid{gap:7px}.stat-card{padding:10px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* TALOM — Ivory & Espresso admin identity */
+:root{
+  --bg:#F5F0E7;--panel:#FFFCF6;--panel2:#EEE5D9;
+  --gold:#8B624B;--text:#382B25;--muted:#81766D;
+  --border:#E2D6C8;--red:#8B624B;--green:#64816A;
+  --shadow:0 12px 34px rgba(56,43,37,.075);
+}
+body{background:var(--bg);color:var(--text)}
+.sidebar{background:#382B25;border-color:#49382F;color:#F5F0E7}
+.logo{color:#E8D8C7}
+.sidebar-subtitle,.nav-title{color:#BCA895}
+.nav-link{color:#E5D9CC;border-radius:8px}
+.nav-link:hover,.nav-link.active{background:#514035;color:#FFF9F1}
+#logout-btn{color:#E5B5A6}
+.main-content{color:var(--text)}
+.topbar{border-color:var(--border)}
+.section,.stat-card,.welcome{background:var(--panel);border:1px solid var(--border);box-shadow:var(--shadow)}
+.page-title,.section>h2{color:var(--text)}
+.stat-card h3,.welcome h2{color:var(--text)}
+.stat-card p,.section-description,.admin-info{color:var(--muted)}
+.primary-btn{background:var(--gold);color:#fff;border:1px solid var(--gold)}
+.primary-btn:hover{background:#674735}
+.danger-btn{background:#A75D50;color:#fff}
+.form-group input,.form-group select,.form-group textarea,
+#login-screen input{background:#FFFCF6;color:var(--text);border:1px solid var(--border);border-radius:7px}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus,
+#login-screen input:focus{border-color:var(--gold);outline:2px solid rgba(139,98,75,.13)}
+.products-table{border-color:var(--border)}
+table th{background:#EEE5D9;color:#594437}
+table td{border-color:var(--border)}
+tr:hover td{background:#F8F3EB}
+.badge,.status-badge{border-radius:20px}
+#login-screen .section{border-radius:14px}
+#login-screen .section>h2{color:var(--gold)}
+#login-message{color:#A75D50}
+@media(max-width:700px){
+ .sidebar{background:#382B25;border-bottom-color:#49382F}
+ .nav-link:hover,.nav-link.active{background:#514035;color:#FFF9F1}
+}
+
