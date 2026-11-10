@@ -63,17 +63,11 @@ async function loadProducts() {
   const rows = await response.json();
   productsLoadFailed = false;
 
-  const usedProductImages = new Set();
   products = rows.map(row => {
-    // Use verified product image URLs from the database only.
-    // Repeated or missing URLs receive a labeled local placeholder rather than
-    // an unrelated random photo that could misrepresent the product.
+    // Keep every verified product image URL from Supabase.
+    // Reused URLs are allowed; only products with no image get a placeholder.
     const sourceImage = String(row.image_url || "").trim();
-    const hasUniqueImage = Boolean(sourceImage && !usedProductImages.has(sourceImage));
-    const image = hasUniqueImage
-      ? sourceImage
-      : productPlaceholder(row.name || row.name_en || "TALOM");
-    if (hasUniqueImage) usedProductImages.add(sourceImage);
+    const image = sourceImage || productPlaceholder(row.name || row.name_en || "TALOM");
 
     return {
       id: String(row.id),
