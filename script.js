@@ -68,9 +68,8 @@ async function loadProducts() {
     // Use verified product image URLs from the database only.
     // Repeated or missing URLs receive a labeled local placeholder rather than
     // an unrelated random photo that could misrepresent the product.
-    // Real Pexels stock photos are selected from the product name/category.
-    // Supabase product records remain unchanged; local SVGs are offline fallbacks.
-    const image = productStockImage(row);
+    const sourceImage = String(row.image_url || "").trim();
+    const image = sourceImage || productLocalImage(row.category);
 
     return {
       id: String(row.id),
@@ -131,58 +130,6 @@ function normalizeSearchText(value) {
     .replace(/[۰-۹]/g, digit => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))
     .toLocaleLowerCase()
     .trim();
-}
-
-const PRODUCT_PHOTO_POOLS = {
-  coffee: [
-    "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=82"
-  ],
-  cold: [
-    "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=82"
-  ],
-  special: [
-    "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=82"
-  ],
-  dessert: [
-    "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=82"
-  ],
-  food: [
-    "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=82",
-    "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=900&q=82"
-  ]
-};
-
-function stablePhotoIndex(id, length) {
-  let hash = 0;
-  for (const character of String(id || "")) {
-    hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
-  }
-  return length ? hash % length : 0;
-}
-
-function productStockImage(row) {
-  const name = normalizeSearchText([row.name, row.name_en].join(" "));
-  let pool = PRODUCT_PHOTO_POOLS[row.category] || PRODUCT_PHOTO_POOLS.coffee;
-
-  if (/matcha|ماچا|tea|چای|دمنوش|کرک/.test(name)) pool = PRODUCT_PHOTO_POOLS.special;
-  else if (/croissant|کروسان|tiramisu|تیرامیسو|cheesecake|کیک|تارت|براونی|کوکی|cake|tart|cookie|brownie/.test(name)) pool = PRODUCT_PHOTO_POOLS.dessert;
-  else if (/pasta|پاستا|lasagna|لازانیا|sandwich|ساندویچ|panini|پنینی|breakfast|صبحانه|bread|نان|potato|سیب‌زمینی/.test(name)) pool = PRODUCT_PHOTO_POOLS.food;
-  else if (/iced|آیس|milkshake|میلک‌شیک|smoothie|اسموتی|lemonade|لیموناد|tonic|تونیک|cold brew|کلد برو/.test(name)) pool = PRODUCT_PHOTO_POOLS.cold;
-
-  return pool[stablePhotoIndex(row.id, pool.length)];
 }
 
 function productLocalImage(category) {
@@ -319,7 +266,7 @@ function toggleFavorite(productId, button) {
   if (button) updateFavoriteButton(button, productId);
 
   if (state.selectedProduct === productId) {
-  const modalFavorite = $("#modalFavorite");
+    const modalFavorite = $("#modalFavorite");
     if (modalFavorite) updateFavoriteButton(modalFavorite, productId);
   }
 }
@@ -1173,19 +1120,6 @@ function loadSavedSettings() {
 
 async function init() {
   loadSavedSettings();
-
-  // If the stock-photo host is unavailable, use the repository's local
-  // illustration so the editorial sections never show broken image icons.
-  document.querySelectorAll("img[data-photo-fallback]").forEach(image => {
-    image.addEventListener("error", () => {
-      const fallback = image.dataset.photoFallback;
-      if (!fallback || image.dataset.fallbackApplied === "true") return;
-      image.dataset.fallbackApplied = "true";
-      image.src = fallback;
-      const galleryButton = image.closest("[data-image]");
-      if (galleryButton) galleryButton.dataset.image = fallback;
-    }, { once: true });
-  });
 
   const languageButton = $("#languageToggle");
   if (languageButton) {
