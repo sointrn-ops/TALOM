@@ -7,10 +7,10 @@
   <meta name="robots" content="noindex, nofollow">
   <title>TALOM | Admin Panel</title>
 
-  <link rel="stylesheet" href="admin.css?v=20261109-13">
+  <link rel="stylesheet" href="admin.css?v=20261110-01">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
-  <script src="admin.js?v=20261109-13" defer></script>
+  <script src="admin.js?v=20261110-01" defer></script>
 </head>
 
 <body>
@@ -127,8 +127,9 @@
           </div>
 
           <div class="form-group">
-            <label for="product-image">آدرس تصویر محصول</label>
-            <input type="url" id="product-image">
+            <label for="product-image">مسیر تصویر محصول</label>
+            <input type="text" id="product-image" placeholder="assets/images/product-coffee.svg" inputmode="url">
+            <small class="form-hint">برای نمایش پایدار، فایل تصویر را در پوشه assets/images مخزن GitHub قرار دهید و مسیر نسبی آن را اینجا وارد کنید.</small>
           </div>
 
           <div class="form-group">
