@@ -69,11 +69,7 @@ async function loadProducts() {
     // Repeated or missing URLs receive a labeled local placeholder rather than
     // an unrelated random photo that could misrepresent the product.
     const sourceImage = String(row.image_url || "").trim();
-    const hasUniqueImage = Boolean(sourceImage && !usedProductImages.has(sourceImage));
-    const image = hasUniqueImage
-      ? sourceImage
-      : productPlaceholder(row.name || row.name_en || "TALOM");
-    if (hasUniqueImage) usedProductImages.add(sourceImage);
+    const image = sourceImage || productLocalImage(row.category);
 
     return {
       id: String(row.id),
@@ -134,6 +130,17 @@ function normalizeSearchText(value) {
     .replace(/[۰-۹]/g, digit => String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit)))
     .toLocaleLowerCase()
     .trim();
+}
+
+function productLocalImage(category) {
+  const images = {
+    coffee: "assets/images/product-coffee.svg",
+    cold: "assets/images/product-cold.svg",
+    special: "assets/images/product-coffee.svg",
+    dessert: "assets/images/product-dessert.svg",
+    food: "assets/images/product-food.svg"
+  };
+  return images[category] || "assets/images/product-coffee.svg";
 }
 
 function productPlaceholder(productName) {
@@ -305,7 +312,7 @@ function openProduct(productId) {
   const modalImage = $("#modalProductImage");
   modalImage.onerror = () => {
     modalImage.onerror = null;
-    modalImage.src = productPlaceholder(getProductName(product));
+    modalImage.src = productLocalImage(product.category);
     modalImage.alt = getProductName(product);
     modalImage.classList.add("image-unavailable");
   };
@@ -823,7 +830,7 @@ function setupMenu() {
         if (image.dataset.fallbackApplied === "true") return;
         image.dataset.fallbackApplied = "true";
         const product = products.find(item => item.id === image.dataset.productImage);
-        image.src = productPlaceholder(product ? getProductName(product) : "TALOM");
+        image.src = productLocalImage(product ? product.category : "coffee");
         image.classList.add("image-unavailable");
         image.alt = product ? getProductName(product) : "TALOM";
       }, true);
