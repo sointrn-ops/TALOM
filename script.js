@@ -405,7 +405,7 @@ function setTheme(theme) {
   }
 
   try {
-    localStorage.setItem("talom-theme", selectedTheme);
+    localStorage.setItem("talom-theme-v2", selectedTheme);
   } catch {}
 }
 
@@ -1100,7 +1100,7 @@ function setupCounters() {
 
 function loadSavedSettings() {
   try {
-    const savedTheme = localStorage.getItem("talom-theme");
+    const savedTheme = localStorage.getItem("talom-theme-v2");
     const savedLanguage = localStorage.getItem("talom-language");
     const savedFavorites = JSON.parse(
       localStorage.getItem("talom-favorites") || "[]"
