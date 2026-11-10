@@ -133,44 +133,59 @@ function normalizeSearchText(value) {
     .trim();
 }
 
-function stockPhoto(path) {
-  return `https://images.pexels.com/photos/${path}/pexels-photo-${path}.jpeg?auto=compress&cs=tinysrgb&w=1200`;
-}
-
-// Curated Pexels photographs. Each category has its own image pool;
-// a stable product-ID hash distributes products across different photographs.
 const PRODUCT_PHOTO_POOLS = {
-  coffee: ["12821515","8963391","11774911","2159156","9188612","3755708","22873663","36495566"],
-  cold: ["32681655","36979984","6769487","5527544","12801414","5946658","32848465","38680065","28162736"],
-  special: ["8329672","39766079","8329677","8004570","2611811","28038331","38958418","34689214","32972520"],
-  dessert: ["29721413","32802342","4109376","4109459","12232470","27969779","36405064","5163948","15911843","15028377","36254047"],
-  food: ["5729343","27354734","6529831","31742769","36429910","8108065","6612776","5848038","5692285"]
+  coffee: [
+    "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=82"
+  ],
+  cold: [
+    "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=82"
+  ],
+  special: [
+    "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=82"
+  ],
+  dessert: [
+    "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=82"
+  ],
+  food: [
+    "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=82",
+    "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=900&q=82"
+  ]
 };
 
-function stablePhotoIndex(id, poolLength) {
+function stablePhotoIndex(id, length) {
   let hash = 0;
   for (const character of String(id || "")) {
     hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
   }
-  return poolLength ? hash % poolLength : 0;
+  return length ? hash % length : 0;
 }
 
 function productStockImage(row) {
   const name = normalizeSearchText([row.name, row.name_en].join(" "));
   let pool = PRODUCT_PHOTO_POOLS[row.category] || PRODUCT_PHOTO_POOLS.coffee;
 
-  // Prefer photographs that visibly match distinctive products.
-  if (/matcha|ماچا/.test(name)) pool = PRODUCT_PHOTO_POOLS.special;
-  else if (/croissant|کروسان/.test(name)) pool = ["32802342","4109376","4109459","12232470","27969779","36405064"];
-  else if (/tiramisu|تیرامیسو/.test(name)) pool = ["29721413","36254037","36254047","15028377"];
-  else if (/pasta|پاستا|lasagna|لازانیا/.test(name)) pool = ["5729343","27354734","36429910","37478463"];
-  else if (/cheesecake|کیک|تارت|براونی|کوکی|پاناکوتا|پروفیترول|وافل|panna|cake|tart|cookie|brownie/.test(name)) pool = PRODUCT_PHOTO_POOLS.dessert;
-  else if (/tea|چای|دمنوش|کرک/.test(name)) pool = ["38958418","34689214","1544787219","38958418"];
+  if (/matcha|ماچا|tea|چای|دمنوش|کرک/.test(name)) pool = PRODUCT_PHOTO_POOLS.special;
+  else if (/croissant|کروسان|tiramisu|تیرامیسو|cheesecake|کیک|تارت|براونی|کوکی|cake|tart|cookie|brownie/.test(name)) pool = PRODUCT_PHOTO_POOLS.dessert;
+  else if (/pasta|پاستا|lasagna|لازانیا|sandwich|ساندویچ|panini|پنینی|breakfast|صبحانه|bread|نان|potato|سیب‌زمینی/.test(name)) pool = PRODUCT_PHOTO_POOLS.food;
+  else if (/iced|آیس|milkshake|میلک‌شیک|smoothie|اسموتی|lemonade|لیموناد|tonic|تونیک|cold brew|کلد برو/.test(name)) pool = PRODUCT_PHOTO_POOLS.cold;
 
-  return stockPhoto(pool[stablePhotoIndex(row.id, pool.length)]);
+  return pool[stablePhotoIndex(row.id, pool.length)];
 }
 
-function productLocalImage(category)(category) {
+function productLocalImage(category)(category)(category) {
   const images = {
     coffee: "assets/images/product-coffee.svg",
     cold: "assets/images/product-cold.svg",
