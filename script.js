@@ -185,7 +185,7 @@ function productStockImage(row) {
   return pool[stablePhotoIndex(row.id, pool.length)];
 }
 
-function productLocalImage(category)(category)(category) {
+function productLocalImage(category) {
   const images = {
     coffee: "assets/images/product-coffee.svg",
     cold: "assets/images/product-cold.svg",
