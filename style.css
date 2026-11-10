@@ -1194,3 +1194,41 @@ html[data-theme="dark"]{
 .auth-message[data-type="success"],.auth-success{color:var(--olive)}
 .checkout-message[data-kind="success"]{color:#777}
 
+/* TALOM — Ivory & Espresso shared brand palette */
+:root{
+  --bg:#F5F0E7;--paper:#FFFCF6;--surface:#EAE1D4;
+  --ink:#382B25;--muted:#81766D;--olive:#8B624B;
+  --olive-dark:#674735;--espresso:#382B25;
+  --line:rgba(56,43,37,.14);
+  --header-bg:rgba(245,240,231,.94);
+  --shadow:0 18px 48px rgba(56,43,37,.09);
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#211B18;--paper:#2C231F;--surface:#382D27;
+  --ink:#F5F0E7;--muted:#BEB0A3;--olive:#C69B7C;
+  --olive-dark:#D7B79D;--espresso:#F0E2D2;
+  --line:rgba(245,240,231,.14);
+  --header-bg:rgba(33,27,24,.94);
+  --shadow:0 18px 48px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+::selection{background:#8B624B;color:#fff}
+.brand-symbol{border-color:var(--olive);color:var(--olive)}
+.brand-dot,.main-nav a:hover,.product-category,.product-details,.text-link,
+.contact-links a:hover,.contact-links b,.music-mute,.auth-kicker,
+.auth-mode-switch button.active,.auth-forgot{color:var(--olive)}
+.header-cta,.category-tab:hover,.category-tab.active,.story-stamp,
+.contact-card,.music-toggle,.cart-open-button b,.cart-add-button,
+.auth-submit,.checkout-submit{background:var(--olive);color:#fff}
+.button-gold{background:#E8D8C7;color:#382B25}
+.gold-text,.hero-index span{color:#E8D8C7}
+.eyebrow-line,.note-line{background:#CBB6A2}
+.story-copy h2 em,.section-heading h2 em,.contact-copy h2 em,
+.signature-content h2 em{color:var(--olive)}
+.site-footer{background:#382B25;color:#F5F0E7}
+.footer-brand .brand-symbol{border-color:#E8D8C7;color:#E8D8C7}
+.favorite-button:hover,.favorite-button.is-favorite{color:#8B624B;border-color:#8B624B}
+.auth-message[data-type="success"],.auth-success{color:var(--olive)}
+.checkout-message[data-kind="success"]{color:#6E8A70}
+
