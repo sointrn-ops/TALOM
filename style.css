@@ -1144,3 +1144,53 @@ button,a,input{touch-action:manipulation}
 
 /* Secure order submission */
 .checkout-divider{height:1px;background:var(--line);margin:24px 0 18px}.checkout-heading{margin:0 0 16px;font-size:16px}.checkout-form{display:grid;gap:9px}.checkout-form label{font-size:11px;color:var(--muted);margin-top:5px}.checkout-form input,.checkout-form textarea{width:100%;min-height:44px;padding:11px 12px;border:1px solid var(--line);border-radius:0;background:var(--surface);color:var(--ink);font:inherit;font-size:13px;outline-offset:2px}.checkout-form textarea{resize:vertical}.checkout-submit{min-height:46px;margin-top:10px;border:0;background:var(--olive);color:#fff;font:600 13px var(--font);cursor:pointer}.checkout-submit:disabled{opacity:.6;cursor:wait}.checkout-message{min-height:20px;margin:3px 0 0;font-size:11px;line-height:1.8;overflow-wrap:anywhere}.checkout-message[data-kind="error"]{color:#b94b43}.checkout-message[data-kind="success"]{color:#4d805d}
+
+/* TALOM — Minimal neutral theme (colors only; layout and features preserved) */
+:root{
+  --bg:#f5f5f2;
+  --paper:#ffffff;
+  --surface:#eeeeeb;
+  --ink:#252525;
+  --muted:#777773;
+  --olive:#555550;
+  --olive-dark:#383835;
+  --espresso:#252525;
+  --line:rgba(37,37,37,.13);
+  --header-bg:rgba(255,255,255,.94);
+  --shadow:0 16px 42px rgba(25,25,25,.08);
+  color-scheme:light;
+}
+html[data-theme="dark"]{
+  --bg:#20201e;
+  --paper:#292927;
+  --surface:#333330;
+  --ink:#f1f1ed;
+  --muted:#aaa9a3;
+  --olive:#c4c3bc;
+  --olive-dark:#e0dfd8;
+  --espresso:#171716;
+  --line:rgba(241,241,237,.14);
+  --header-bg:rgba(32,32,30,.94);
+  --shadow:0 16px 42px rgba(0,0,0,.22);
+  color-scheme:dark;
+}
+::selection{background:#777;color:#fff}
+.brand-symbol{border-color:var(--olive);color:var(--olive)}
+.brand-dot,.main-nav a:hover,.product-category,.product-details,
+.text-link,.contact-links a:hover,.contact-links b,
+.music-mute,.auth-kicker,.auth-mode-switch button.active,
+.auth-forgot{color:var(--olive)}
+.header-cta,.category-tab:hover,.category-tab.active,
+.story-stamp,.contact-card,.music-toggle,.cart-open-button b,
+.cart-add-button,.auth-submit,.checkout-submit{background:var(--olive);color:#fff}
+.button-gold{background:#e5e5e1;color:#252525}
+.gold-text,.hero-index span,.signature-content h2 em{color:#e5e5e1}
+.eyebrow-line,.note-line{background:#d0d0ca}
+.story-copy h2 em,.section-heading h2 em,.contact-copy h2 em,
+.signature-content h2 em{color:var(--olive)}
+.site-footer{background:#252525;color:#f5f5f2}
+.footer-brand .brand-symbol{border-color:#d0d0ca;color:#e5e5e1}
+.favorite-button:hover,.favorite-button.is-favorite{color:#555;border-color:#777}
+.auth-message[data-type="success"],.auth-success{color:var(--olive)}
+.checkout-message[data-kind="success"]{color:#777}
+
