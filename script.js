@@ -158,16 +158,16 @@ function productCardMarkup(product, index) {
   return `
     <article class="product-card" style="animation-delay:${Math.min(index * 35, 280)}ms">
       <div class="product-image-wrap">
-        <img class="product-image" src="${escapeHTML(product.image)}" alt="${escapeHTML(getProductName(product))}" loading="lazy" data-product-image="${product.id}">
+        <img class="product-image" src="${escapeHTML(product.image)}" alt="${escapeHTML(getProductName(product))}" loading="lazy" data-product-image="${escapeHTML(product.id)}">
         <span class="product-number">${String(index + 1).padStart(2, "0")}</span>
-        <button class="favorite-button ${favorite ? "is-favorite" : ""}" data-favorite="${product.id}" aria-label="${isEnglish() ? "Toggle favorite" : "افزودن به علاقه‌مندی‌ها"}" aria-pressed="${favorite}">${favorite ? "♥" : "♡"}</button>
+        <button class="favorite-button ${favorite ? "is-favorite" : ""}" data-favorite="${escapeHTML(product.id)}" aria-label="${isEnglish() ? "Toggle favorite" : "افزودن به علاقه‌مندی‌ها"}" aria-pressed="${favorite}">${favorite ? "♥" : "♡"}</button>
       </div>
       <div class="product-info">
         <span class="product-category">${escapeHTML(categoryLabel)}</span>
         <h3 class="product-name">${escapeHTML(getProductName(product))}</h3>
         <p class="product-description">${escapeHTML(getProductDescription(product))}</p>
-        <div class="product-bottom"><strong class="product-price">${formatPrice(product.price)}</strong><button class="product-details" data-details="${product.id}">${isEnglish() ? "Details ↗" : "جزئیات ↗"}</button></div>
-      <button class="cart-add-button" type="button" data-cart-add="${product.id}" data-cart-price="${product.price}">${isEnglish() ? "Add to bag +" : "افزودن به سبد خرید +"}</button>
+        <div class="product-bottom"><strong class="product-price">${formatPrice(product.price)}</strong><button class="product-details" data-details="${escapeHTML(product.id)}">${isEnglish() ? "Details ↗" : "جزئیات ↗"}</button></div>
+      <button class="cart-add-button" type="button" data-cart-add="${escapeHTML(product.id)}" data-cart-price="${product.price}">${isEnglish() ? "Add to bag +" : "افزودن به سبد خرید +"}</button>
       </div>
     </article>`;
 }
