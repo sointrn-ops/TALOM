@@ -49,8 +49,8 @@ async function loadProducts() {
     `${SUPABASE_URL}/rest/v1/products?select=id,name,name_en,category,description,price,image_url&is_available=eq.true&order=id.asc`,
     {
       headers: {
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`
+        // Publishable keys are API keys, not JWTs: send them only via apikey.
+        apikey: SUPABASE_KEY
       }
     }
   );
