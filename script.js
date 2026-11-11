@@ -190,7 +190,15 @@ function renderProducts() {
     if (target) {
       target.innerHTML = items.map((product, index) => productCardMarkup(product, index)).join("");
       target.hidden = items.length === 0;
-      target.scrollTo({ left: 0, behavior: "auto" });
+      try {
+        if (typeof target.scrollTo === "function") {
+          target.scrollTo({ left: 0, behavior: "auto" });
+        } else {
+          target.scrollLeft = 0;
+        }
+      } catch {
+        target.scrollLeft = 0;
+      }
     }
     if (shelf) shelf.hidden = items.length === 0;
     const count = document.getElementById(group.count);
@@ -208,7 +216,11 @@ function renderProducts() {
       ? "The menu could not be loaded. Please try again later."
       : "بارگذاری منو ناموفق بود. لطفاً بعداً دوباره تلاش کنید.";
   }
-  updateAllCarouselControls();
+  try {
+    updateAllCarouselControls();
+  } catch (error) {
+    console.warn("TALOM carousel controls could not update:", error);
+  }
 }
 
 function showToast(message) {
@@ -1153,20 +1165,18 @@ async function init() {
 
   try {
     await loadProducts();
-    setLanguage(state.language);
   } catch (error) {
-    console.error("TALOM products loading error:", error);
+    console.error("TALOM products API request failed:", error);
     products = [];
     productsLoadFailed = true;
-    renderProducts();
     if (grid) grid.hidden = true;
     if (emptyState) {
       emptyState.hidden = false;
       const message = $("p", emptyState);
       if (message) {
         message.textContent = isEnglish()
-          ? "The menu could not be loaded. Please try again later."
-          : "بارگذاری منو ناموفق بود. لطفاً بعداً دوباره تلاش کنید.";
+          ? "The menu is temporarily unavailable. Please refresh to try again."
+          : "منو موقتاً در دسترس نیست؛ صفحه را تازه‌سازی کنید.";
       }
     }
     if (productCount) productCount.textContent = isEnglish() ? "Unavailable" : "در دسترس نیست";
@@ -1175,7 +1185,17 @@ async function init() {
         ? "Could not load products from the server."
         : "دریافت محصولات از سرور ناموفق بود."
     );
+    return;
+  }
+
+  productsLoadFailed = false;
+  try {
     setLanguage(state.language);
+  } catch (error) {
+    console.error("TALOM menu rendering error:", error);
+    productsLoadFailed = false;
+    if (grid) grid.hidden = false;
+    renderProducts();
   }
 }
 
