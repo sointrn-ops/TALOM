@@ -11,7 +11,10 @@ if(experiences&&!byId("rep10-intro")){
  const intro=document.createElement("section");
  intro.id="rep10-intro";intro.className="rep10-intro";
  intro.innerHTML='<div class="rep10-intro-copy"><span class="rep10-kicker">TALOM · CAFÉ, BAKERY & TABLE</span><h2>یک خانه برای<br><em>طعم‌های خوب و دورهمی‌ها.</em></h2></div><div class="rep10-intro-detail"><p>تالم فقط یک فنجان قهوه نیست؛ از صبحانه و نان تازه تا غذا و لحظه‌هایی که کنار هم می‌گذرانیم، برای هر ساعت روز جایی در نظر گرفته‌ایم.</p><a href="#our-story">با دنیای تالم آشنا شو <span>↗</span></a></div>';
- experiences.after(intro);
+ const menuCta=document.createElement("section");
+ menuCta.id="home-menu-cta";menuCta.className="rep10-menu-cta";
+ menuCta.innerHTML='<span>THE TALOM MENU</span><p>از قهوه و نان تازه تا انتخاب‌های آشپزخانه</p><a href="/menu">مشاهده منوی تالم <b>↗</b></a>';
+ experiences.after(menuCta);menuCta.after(intro);
 }
 const order=[
  "home","talomExperiences","rep10-intro","cafe-bakery","restaurant","menu",
