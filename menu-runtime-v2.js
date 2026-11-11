@@ -17,7 +17,15 @@ const categoryNames = {
   cold: { fa: "نوشیدنی سرد", en: "Cold Drinks" },
   special: { fa: "خاص TALOM", en: "Signatures" },
   dessert: { fa: "دسر", en: "Desserts" },
-  food: { fa: "غذا", en: "Food" }
+  food: { fa: "غذا", en: "Food" },
+  breakfast: { fa: "صبحانه و برانچ", en: "Breakfast & Brunch" },
+  bakery: { fa: "نانوایی و شیرینی", en: "Bakery" },
+  appetizer: { fa: "پیش‌غذا", en: "Appetizers" },
+  main: { fa: "غذای اصلی", en: "Main Courses" },
+  pasta: { fa: "پاستا", en: "Pasta" },
+  pizza: { fa: "پیتزا", en: "Pizza" },
+  burger: { fa: "برگر", en: "Burgers" },
+  sandwich: { fa: "ساندویچ", en: "Sandwiches" }
 };
 
 const state = {
@@ -199,7 +207,7 @@ function renderProducts() {
   const groups = [
     { key: "drinks", ids: ["productGrid"], categories: ["coffee", "cold", "special"], shelf: "drinksShelf", count: "drinksCount" },
     { key: "desserts", ids: ["dessertGrid"], categories: ["dessert"], shelf: "dessertsShelf", count: "dessertsCount" },
-    { key: "food", ids: ["foodGrid"], categories: ["food"], shelf: "foodShelf", count: "foodCount" }
+    { key: "food", ids: ["foodGrid"], categories: ["food", "breakfast", "bakery", "appetizer", "main", "pasta", "pizza", "burger", "sandwich"], shelf: "foodShelf", count: "foodCount" }
   ];
 
   groups.forEach(group => {
@@ -798,6 +806,18 @@ function setupMenu() {
   const categoryTabs = $("#categoryTabs");
 
   if (categoryTabs) {
+    const extraCategories = ["breakfast","bakery","appetizer","main","pasta","pizza","burger","sandwich"];
+    extraCategories.forEach(key => {
+      if (categoryTabs.querySelector('[data-category="' + key + '"]')) return;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "category-tab";
+      button.dataset.category = key;
+      button.dataset.fa = categoryNames[key].fa;
+      button.dataset.en = categoryNames[key].en;
+      button.textContent = categoryNames[key].fa;
+      categoryTabs.append(button);
+    });
     categoryTabs.addEventListener("click", event => {
       const button = event.target.closest("[data-category]");
       if (!button) return;
