@@ -78,3 +78,14 @@ html[data-theme="dark"] .site-header.editorial-header,html[data-theme="dark"] .s
  .rep9-menu .section-heading,.rep9-menu .menu-toolbar,.rep9-menu .menu-meta,.rep9-menu .menu-shelf{width:90%;margin-left:auto;margin-right:auto}
 }
 @media(prefers-reduced-motion:reduce){.rep10-intro,.rep9-experiences,.rep9-feature,.rep9-story,.rep9-events,.rep9-menu,.rep9-gallery,.rep9-contact{opacity:1!important;transform:none!important;transition:none!important}}
+
+.rep10-menu-cta{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 35px;padding:clamp(38px,5vw,68px) clamp(24px,9vw,140px);background:#f8f6f0;border-bottom:1px solid #ded8cd}
+.rep10-menu-cta>span{grid-column:1/-1;font:500 9px "DM Sans",sans-serif;letter-spacing:2.6px;color:#8a6b4e}
+.rep10-menu-cta p{margin:0;font-size:clamp(17px,2vw,25px);line-height:1.9;color:#25231f}
+.rep10-menu-cta a{display:inline-flex;align-items:center;gap:28px;padding:15px 20px;border:1px solid #25231f;color:#25231f;font-size:11px;white-space:nowrap;transition:background .25s,color .25s}
+.rep10-menu-cta a:hover{background:#25231f;color:#fff}
+.rep10-menu-cta a b{font:18px "DM Sans",sans-serif;font-weight:400}
+html[data-theme="dark"] .rep10-menu-cta{background:#292720;border-color:#484236}
+html[data-theme="dark"] .rep10-menu-cta p,html[data-theme="dark"] .rep10-menu-cta a{color:#f2eee4;border-color:#817866}
+html[data-theme="dark"] .rep10-menu-cta a:hover{background:#f2eee4;color:#292720}
+@media(max-width:720px){.rep10-menu-cta{grid-template-columns:1fr;gap:12px;padding:42px 24px}.rep10-menu-cta>span{grid-column:auto}.rep10-menu-cta a{justify-self:start;margin-top:8px}}
