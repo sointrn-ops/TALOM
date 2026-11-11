@@ -331,6 +331,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       showSettingsMessage("دریافت تنظیمات ناموفق بود.", true);
     }
     updateDashboard();
+    window.dispatchEvent(new Event("talom-admin-ready"));
     return true;
   }
 
@@ -339,6 +340,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
   supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  window.talomAdminClient = supabaseClient;
 
   productForm.addEventListener("submit", async event => {
     event.preventDefault();
