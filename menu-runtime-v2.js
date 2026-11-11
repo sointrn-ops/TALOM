@@ -25,7 +25,9 @@ const categoryNames = {
   pasta: { fa: "پاستا", en: "Pasta" },
   pizza: { fa: "پیتزا", en: "Pizza" },
   burger: { fa: "برگر", en: "Burgers" },
-  sandwich: { fa: "ساندویچ", en: "Sandwiches" }
+  sandwich: { fa: "ساندویچ", en: "Sandwiches" },
+  cafe: { fa: "کافه و نانوایی", en: "Cafe & Bakery" },
+  restaurant: { fa: "رستوران", en: "Restaurant" }
 };
 
 const state = {
@@ -199,7 +201,9 @@ function renderProducts() {
   if (!grid) return;
   const query = normalizeSearchText(state.search);
   const filtered = products.filter(product => {
-    const matchesCategory = state.category === "all" || product.category === state.category;
+    const cafeCategories = ["coffee","cold","special","dessert","breakfast","bakery"];
+    const restaurantCategories = ["food","appetizer","main","pasta","pizza","burger","sandwich"];
+    const matchesCategory = state.category === "all" || product.category === state.category || (state.category === "cafe" && cafeCategories.includes(product.category)) || (state.category === "restaurant" && restaurantCategories.includes(product.category));
     const searchable = normalizeSearchText([product.name, product.en, product.description, product.descEn].join(" "));
     return matchesCategory && (!query || searchable.includes(query));
   });
@@ -806,7 +810,7 @@ function setupMenu() {
   const categoryTabs = $("#categoryTabs");
 
   if (categoryTabs) {
-    const extraCategories = ["breakfast","bakery","appetizer","main","pasta","pizza","burger","sandwich"];
+    const extraCategories = ["cafe","restaurant","breakfast","bakery","appetizer","main","pasta","pizza","burger","sandwich"];
     extraCategories.forEach(key => {
       if (categoryTabs.querySelector('[data-category="' + key + '"]')) return;
       const button = document.createElement("button");
@@ -1167,6 +1171,7 @@ function loadSavedSettings() {
 
 async function init() {
   loadSavedSettings();
+  if (["cafe","restaurant"].includes(document.body.dataset.page)) state.category = document.body.dataset.page;
 
   const languageButton = $("#languageToggle");
   const themeButton = $("#themeToggle");
