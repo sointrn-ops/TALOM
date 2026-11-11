@@ -9,7 +9,7 @@ const routes={
  "/reservation":{key:"reservation",title:"رزرو میز | TALOM",desc:"درخواست رزرو میز در کافه و رستوران TALOM.",eyebrow:"TALOM / RESERVATIONS",heading:"میزتان را<br><em>هماهنگ کنیم.</em>",intro:"درخواست رزرو را ارسال کنید؛ همکاران ما برای تأیید با شما تماس می‌گیرند.",image:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=88",ids:["reservation"]},
  "/contact":{key:"contact",title:"تماس با TALOM",desc:"راه‌های ارتباطی و ارسال پیام به TALOM.",eyebrow:"TALOM / CONTACT",heading:"در ارتباط<br><em>بمانیم.</em>",intro:"برای پرسش، پیشنهاد یا همکاری از راه‌های ارتباطی زیر با ما تماس بگیرید.",image:"https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=2200&q=88",ids:["contact","contact-request"]}
 };
-const path=location.pathname.replace(/\\/+$/,"")||"/";
+const path=location.pathname.endsWith("/")?location.pathname.slice(0,-1)||"/":location.pathname;
 const route=routes[path]||routes["/"];
 const main=document.querySelector("main");
 if(!main)return;
