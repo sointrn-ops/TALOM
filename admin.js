@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const categoryNames = {
     coffee: "قهوه", cold: "نوشیدنی سرد", special: "نوشیدنی ویژه",
-    dessert: "دسر", food: "غذا"
+    dessert: "دسر", food: "غذا", breakfast: "صبحانه و برانچ", bakery: "نانوایی و شیرینی", appetizer: "پیش‌غذا", main: "غذای اصلی", pasta: "پاستا", pizza: "پیتزا", burger: "برگر", sandwich: "ساندویچ"
   };
   const orderStatuses = {
     pending: "در انتظار", confirmed: "تأیید شده",
