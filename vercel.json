@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/cafe-bakery",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/restaurant",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/menu",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/events",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/reservation",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    }
+  ]
+}
