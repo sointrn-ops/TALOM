@@ -1,0 +1,25 @@
+(()=>{"use strict";
+const main=document.querySelector("main"),header=document.getElementById("siteHeader");if(!main||!header||main.dataset.talomV4==="ready")return;main.dataset.talomV4="ready";
+const id=s=>document.getElementById(s),hero=id("home"),menu=id("menu"),signature=document.querySelector(".editorial-signature"),gallery=id("gallery"),contact=id("contact"),rep=id("talomRepSections"),exp=id("talomExperience");
+const all=[...(rep?.children||[]),...(exp?.children||[])],byId={};all.forEach(n=>{if(n.id)byId[n.id]=n});
+const intro=document.createElement("section");intro.className="talom-welcome";intro.id="talom-welcome";intro.innerHTML='<p class="talom-welcome-kicker">کافه · نانوایی · رستوران</p><h1>به <em>تالم</em> خوش آمدید</h1><p class="talom-welcome-copy">جایی برای نان تازه، قهوه خوب، غذاهای دل‌چسب و لحظه‌هایی که ارزش ماندن دارند.</p>';
+const ht=hero?.querySelector("h1"),ey=hero?.querySelector(".full-hero-eyebrow"),desc=hero?.querySelector(".full-hero-description");
+if(ey){ey.textContent="تجربه تالم";ey.dataset.fa="تجربه تالم";ey.dataset.en="THE TALOM EXPERIENCE"}
+if(ht){ht.innerHTML="طعم‌هایی برای<br><em>به‌یاد ماندن.</em>";ht.dataset.fa=ht.innerHTML}
+if(desc){desc.textContent="از صبحانه و نان تازه تا قهوه و وعده‌های رستورانی؛ هر روز، بهانه‌ای برای دورهم بودن.";desc.dataset.fa=desc.textContent}
+const foot=hero?.querySelector(".full-hero-foot");if(foot)foot.innerHTML="<span>تالم — از صبح تا شب</span><span>لحظه‌ای برای ماندن</span>";
+const scroll=hero?.querySelector(".full-hero-scroll");if(scroll)scroll.innerHTML="<span></span> کشف تالم";
+main.prepend(intro);if(hero)intro.after(hero);
+const order=["cafe-bakery","menu","signature","restaurant","our-story","services","reservation","events","event-request","gift-request","talom-team","faq","gallery","newsletter","career-request","contact-request","contact"];
+for(const key of order){const node=key==="signature"?signature:key==="gallery"?gallery:key==="contact"?contact:byId[key];if(node&&node!==hero&&node.isConnected)main.append(node)}
+[rep,exp].forEach(n=>{if(n?.isConnected)n.remove()});
+const brand=header.querySelector(".brand");if(brand){const small=brand.querySelector("small");if(small)small.textContent="کافه · نانوایی · رستوران";brand.setAttribute("aria-label","صفحه اصلی تالم")}
+const nav=header.querySelector(".talom-republique-trigger");if(nav){nav.innerHTML='<span class="talom-republique-icon" aria-hidden="true"><i></i><i></i><i></i></span><span>فهرست</span>';nav.setAttribute("aria-label","باز کردن فهرست")}
+const actions=header.querySelector(".header-actions");if(actions&&!header.querySelector(".talom-order-link")){const a=document.createElement("a");a.className="talom-order-link";a.href="#menu";a.textContent="سفارش کافه";const b=document.createElement("a");b.className="talom-reserve-link";b.href="#reservation";b.textContent="رزرو میز";actions.prepend(a,b)}
+const overlay=id("talomRepubliqueOverlay");if(overlay){const n=overlay.querySelector("nav");if(n)n.innerHTML=[["#home","صفحه اصلی"],["#cafe-bakery","کافه و نانوایی"],["#menu","منوی کافه و نانوایی"],["#restaurant","رستوران"],["#menu","منوی رستوران"],["#reservation","رزرو میز"],["#events","مراسم و دورهمی"],["#our-story","داستان تالم"],["#gallery","گالری تصاویر"],["#contact-request","تماس با ما"]].map(([h,t])=>'<a href="'+h+'">'+t+'</a>').join("");const side=overlay.querySelector(".talom-republique-side");if(side)side.innerHTML="<strong>تالم · کافه، نانوایی و رستوران</strong><a href=\"#services\">صرف در محل و سفارش بیرون‌بر</a><a href=\"#event-request\">مراسم خصوصی و پذیرایی</a><a href=\"#faq\">پرسش‌های پرتکرار</a><a href=\"#footer\">اطلاعات تماس</a>"}
+const tr={"CAFÉ & BAKERY":"کافه و نانوایی","THE RESTAURANT":"رستوران تالم","PEOPLE & CRAFT":"آدم‌ها و هنر تهیه","THE TALOM STORY":"داستان تالم","MORE THAN A MEAL":"فراتر از یک وعده","YOUR TABLE AT TALOM":"رزرو میز در تالم","GATHER AROUND":"دورهمی در تالم","EVENTS & CATERING":"مراسم و پذیرایی","GOOD TO KNOW":"اطلاعات کاربردی","A GIFT FROM TALOM":"هدیه‌ای از تالم","NOTES FROM TALOM":"خبرهای تالم","JOIN OUR TEAM":"همکاری با تالم","COME SAY HELLO":"با ما در ارتباط باش","A CLOSER LOOK":"از نزدیک ببین","SPACE & DETAILS":"فضا و جزئیات","FIND US":"پیدایمان کن"};
+document.querySelectorAll(".rx-kicker,.section-kicker,.overline").forEach(el=>{if(tr[el.textContent.trim()])el.textContent=tr[el.textContent.trim()]});
+document.querySelectorAll(".rx-service b").forEach((el,i)=>{el.textContent=["۰۱ / صرف در محل","۰۲ / بیرون‌بر","۰۳ / دورهمی خصوصی","۰۴ / نانوایی"][i]||el.textContent});
+document.querySelectorAll(".rx-footer-links a").forEach(a=>{const m={"Café & Bakery":"کافه و نانوایی","Restaurant":"رستوران","Reservations":"رزرو میز","Private Events":"مراسم خصوصی","Newsletter":"خبرنامه","Careers":"فرصت‌های همکاری"};if(m[a.textContent.trim()])a.textContent=m[a.textContent.trim()]});
+const onScroll=()=>header.classList.toggle("scrolled",window.scrollY>24);window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+})();
