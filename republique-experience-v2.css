@@ -101,3 +101,7 @@ body.talom-redesign{font-family:"DM Sans","Vazirmatn",sans-serif;background:#fff
  .rx-newsletter .rx-form{margin-top:24px!important}
 }
 @media(prefers-reduced-motion:reduce){.talom-republique-overlay,.talom-republique-overlay nav a{transition:none!important}}
+
+.site-header.editorial-header>.brand,.site-header.editorial-header>.mobile-menu-toggle,.site-header.editorial-header>.main-nav,.site-header.editorial-header>.header-actions{display:none!important}
+.site-header.editorial-header>.talom-republique-trigger{display:inline-flex!important}
+.site-header.editorial-header{justify-content:flex-start!important}
