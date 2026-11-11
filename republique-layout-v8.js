@@ -14,7 +14,7 @@ const sectionOrder=["cafe-bakery","restaurant","menu","signature","our-story","s
 if(intro)main.prepend(intro);
 if(hero)main.insertBefore(hero,intro.nextSibling);
 main.insertBefore(experiences,hero?hero.nextSibling:intro.nextSibling);
-for(const id of sectionOrder){const el=$(id);if(el&&el.parentElement!==main)main.append(el);}
+for(const id of sectionOrder){const el=$(id);if(el)main.append(el);}
 const section=(id)=>$(id);
 const cafe=section("cafe-bakery"),rest=section("restaurant"),story=section("our-story"),events=section("events"),booking=section("reservation");
 if(cafe)cafe.classList.add("rep8-feature","rep8-feature-cafe");
