@@ -1,0 +1,157 @@
+/* TALOM v8 — close editorial hospitality architecture */
+:root{--r8-ink:#24231f;--r8-muted:#77736b;--r8-paper:#f4f1ea;--r8-line:#ddd8ce;--r8-blue:#263e4b;--r8-gold:#b29a78}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body.talom-redesign{background:#f8f7f3!important;color:var(--r8-ink)!important;font-family:"Vazirmatn",sans-serif!important}
+.site-header.editorial-header,.site-header.editorial-header.scrolled{position:fixed!important;z-index:1200!important;inset:0 0 auto!important;height:78px!important;min-height:78px!important;padding:0 clamp(16px,4.6vw,72px)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;direction:ltr!important;gap:14px!important;background:rgba(248,247,243,.96)!important;border:0!important;border-bottom:1px solid rgba(35,34,30,.13)!important;box-shadow:none!important;backdrop-filter:blur(16px)!important}
+.site-header.editorial-header>.brand{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;color:var(--r8-ink)!important}
+.site-header.editorial-header .brand-symbol{display:none!important}
+.site-header.editorial-header .brand-word{font:500 27px/1 "Playfair Display",serif!important;letter-spacing:4px!important;color:var(--r8-ink)!important}
+.site-header.editorial-header .brand-word small{display:block!important;margin-top:6px!important;font:500 7px/1.4 "DM Sans","Vazirmatn",sans-serif!important;letter-spacing:1.8px!important;color:#777!important}
+.site-header.editorial-header>.talom-republique-trigger{position:absolute!important;left:clamp(16px,4.6vw,72px)!important;top:50%!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;gap:10px!important;padding:10px 0!important;border:0!important;background:none!important;color:var(--r8-ink)!important;font:500 11px "Vazirmatn",sans-serif!important;cursor:pointer!important}
+.talom-republique-icon{width:19px!important;height:13px!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important}
+.talom-republique-icon i{height:1px!important;background:var(--r8-ink)!important;width:100%!important}
+.site-header.editorial-header>.main-nav,.site-header.editorial-header>.mobile-menu-toggle{display:none!important}
+.site-header.editorial-header>.header-actions{position:absolute!important;right:clamp(16px,4.6vw,72px)!important;top:50%!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;gap:7px!important;margin:0!important}
+.site-header.editorial-header .header-actions>*{font:500 9px "Vazirmatn",sans-serif!important;color:var(--r8-ink)!important}
+.site-header.editorial-header .cart-open-button,.site-header.editorial-header .auth-open-button,.site-header.editorial-header .header-cta{min-height:34px!important;padding:0 10px!important;border:1px solid #d9d5cd!important;border-radius:0!important;background:transparent!important;white-space:nowrap!important}
+.site-header.editorial-header .header-cta{background:var(--r8-blue)!important;color:#fff!important;border-color:var(--r8-blue)!important;gap:8px!important}
+.site-header.editorial-header .icon-button{width:30px!important;height:30px!important;border:1px solid #d9d5cd!important;border-radius:0!important;background:transparent!important}
+.talom-republique-overlay{position:fixed!important;z-index:2000!important;inset:0!important;display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr)!important;align-items:center!important;gap:8vw!important;padding:clamp(30px,8vw,120px)!important;background:#f1eee7!important;color:var(--r8-ink)!important;opacity:0!important;visibility:hidden!important;transform:translateY(-12px)!important;transition:opacity .35s,transform .35s,visibility .35s!important}
+.talom-republique-overlay.is-open{opacity:1!important;visibility:visible!important;transform:none!important}
+.talom-republique-overlay nav{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:clamp(6px,1.3vh,15px)!important}
+.talom-republique-overlay nav a{font:400 clamp(25px,4.2vw,58px)/1.35 "Vazirmatn",sans-serif!important;letter-spacing:-1px!important;color:var(--r8-ink)!important;transition:color .2s!important}
+.talom-republique-overlay nav a:hover{color:#977451!important}
+.talom-republique-side{display:flex!important;flex-direction:column!important;gap:18px!important;max-width:370px!important;padding-right:30px!important;border-right:1px solid #d1cbbf!important;text-align:right!important;direction:rtl!important;font:12px/2.1 "Vazirmatn",sans-serif!important;color:#777!important}
+.talom-republique-side strong{font-size:20px!important;font-weight:500!important;color:var(--r8-ink)!important}
+.talom-republique-side a{color:#6f5845!important;border-bottom:1px solid #d1cbbf!important;padding-bottom:8px!important}
+body.talom-menu-open{overflow:hidden!important}
+main{padding-top:78px!important}
+.rep8-welcome{padding:clamp(58px,8vw,105px) 20px 30px!important;text-align:center!important;background:#f8f7f3!important}
+.rep8-welcome-kicker{display:block!important;margin-bottom:15px!important;font:500 9px "DM Sans",sans-serif!important;letter-spacing:2.4px!important;color:#777!important}
+.rep8-welcome h1{margin:0!important;font-size:clamp(36px,5vw,64px)!important;font-weight:400!important;line-height:1.4!important;letter-spacing:-1.6px!important;color:var(--r8-ink)!important}
+.rep8-welcome h1 em{font-family:"Playfair Display","Vazirmatn",serif!important;font-style:normal!important;color:#8b6c4e!important}
+.rep8-welcome p{max-width:650px!important;margin:13px auto 0!important;font-size:12px!important;line-height:2.2!important;color:var(--r8-muted)!important}
+.rep8-hero.full-hero{position:relative!important;width:calc(100% - clamp(16px,3vw,44px))!important;height:min(78svh,790px)!important;min-height:530px!important;margin:0 auto!important;overflow:hidden!important;background:#25231f!important}
+.rep8-hero .full-hero-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 55%!important;filter:brightness(.65) saturate(.78)!important;transform:scale(1.015)!important}
+.rep8-hero .full-hero-shade{background:linear-gradient(90deg,rgba(10,12,11,.04) 0%,rgba(10,12,11,.14) 36%,rgba(10,12,11,.66) 100%),linear-gradient(0deg,rgba(0,0,0,.38),transparent 48%)!important}
+.rep8-hero .full-hero-content{width:min(690px,64%)!important;margin:0 5% 0 0!important;padding-top:35px!important;text-align:right!important}
+.rep8-hero .full-hero-eyebrow{font:500 9px "DM Sans","Vazirmatn",sans-serif!important;letter-spacing:1.8px!important;color:#e9dfd0!important}
+.rep8-hero .full-hero-content h1{font-size:clamp(48px,6.6vw,88px)!important;line-height:1.34!important;font-weight:400!important;letter-spacing:-2.6px!important;color:#fff!important}
+.rep8-hero .full-hero-content h1 em{font-family:"Playfair Display","Vazirmatn",serif!important;font-style:normal!important;color:#e8d7bb!important}
+.rep8-hero .full-hero-description{max-width:500px!important;font-size:13px!important;line-height:2.25!important;color:rgba(255,255,255,.82)!important}
+.rep8-hero .full-hero-actions .button{min-height:48px!important;padding:0 24px!important;border:1px solid #e9dfd0!important;border-radius:0!important;background:#e9dfd0!important;color:#25231f!important}
+.rep8-hero .full-hero-foot{margin-top:58px!important;padding-top:17px!important;border-top:1px solid rgba(255,255,255,.32)!important;color:rgba(255,255,255,.82)!important;font:9px "DM Sans","Vazirmatn",sans-serif!important;letter-spacing:1px!important}
+.rep8-hero .full-hero-scroll{font:9px "DM Sans","Vazirmatn",sans-serif!important;letter-spacing:1.5px!important;color:#fff!important}
+.rep8-experiences{padding:clamp(66px,8vw,112px) clamp(18px,5vw,76px)!important;background:#f8f7f3!important}
+.rep8-section-top{display:flex!important;align-items:flex-end!important;justify-content:space-between!important;gap:25px!important;margin:0 auto 30px!important;max-width:1380px!important}
+.rep8-section-top>div>span{font:500 9px "DM Sans",sans-serif!important;letter-spacing:1.7px!important;color:#8a7259!important}
+.rep8-section-top h2{margin:12px 0 0!important;font-size:clamp(30px,4vw,49px)!important;font-weight:400!important;line-height:1.45!important}
+.rep8-section-top h2 em{font-style:normal!important;color:#8a6a4d!important}
+.rep8-section-top>p{max-width:350px!important;margin:0 0 4px!important;font-size:11px!important;line-height:2.2!important;color:var(--r8-muted)!important}
+.rep8-experience-grid{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;grid-auto-rows:clamp(160px,17vw,230px)!important;gap:12px!important;max-width:1380px!important;margin:0 auto!important}
+.rep8-tile{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;align-items:flex-start!important;gap:8px!important;min-width:0!important;padding:clamp(17px,2.5vw,30px)!important;overflow:hidden!important;background-position:center!important;background-size:cover!important;color:#fff!important;text-decoration:none!important;isolation:isolate!important}
+.rep8-tile:before{content:""!important;position:absolute!important;inset:0!important;z-index:-1!important;background:linear-gradient(0deg,rgba(12,13,12,.76),rgba(12,13,12,.04) 78%)!important}
+.rep8-tile:after{content:"↗"!important;position:absolute!important;top:18px!important;left:19px!important;width:33px!important;height:33px!important;border:1px solid rgba(255,255,255,.68)!important;border-radius:50%!important;display:grid!important;place-items:center!important;font:15px "DM Sans",sans-serif!important;color:#fff!important;transition:transform .3s,background .3s!important}
+.rep8-tile:hover:after{transform:translate(3px,-3px)!important;background:rgba(255,255,255,.18)!important}
+.rep8-tile:before,.rep8-tile{transition:background-size .7s,filter .5s!important}
+.rep8-tile:hover{filter:saturate(1.08)!important}
+.rep8-tile span{font:500 9px "DM Sans",sans-serif!important;letter-spacing:1.5px!important;color:rgba(255,255,255,.78)!important}
+.rep8-tile strong{font-size:clamp(19px,2vw,28px)!important;line-height:1.5!important;font-weight:400!important;color:#fff!important}
+.rep8-tile b{font-size:10px!important;font-weight:400!important;border-bottom:1px solid rgba(255,255,255,.65)!important;padding-bottom:4px!important;color:#fff!important}
+.rep8-bakery{grid-column:span 7!important;grid-row:span 2!important;background-image:url("https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1800&q=90")!important}
+.rep8-brunch{grid-column:span 5!important;background-image:url("https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1300&q=88")!important}
+.rep8-coffee{grid-column:span 5!important;background-image:url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1300&q=88")!important}
+.rep8-dining{grid-column:span 5!important;background-image:url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1300&q=88")!important}
+.rep8-gather{grid-column:span 7!important;background-image:url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1600&q=88")!important}
+.rx-section{padding:clamp(76px,9vw,124px) 0!important;background:#f8f7f3!important}
+.rx-wrap{width:min(1240px,86%)!important}
+.rx-kicker{font:500 9px "DM Sans",sans-serif!important;letter-spacing:1.8px!important;color:#8a7259!important}
+.rx-heading{font-size:clamp(34px,4.6vw,61px)!important;line-height:1.42!important;font-weight:400!important;letter-spacing:-1px!important;color:var(--r8-ink)!important}
+.rx-heading em{font-style:normal!important;color:#8a6a4d!important}
+.rx-intro,.rx-story-grid p{font-size:12px!important;line-height:2.35!important;color:var(--r8-muted)!important}
+.rx-story-grid{gap:clamp(30px,7vw,100px)!important;align-items:center!important}
+.rx-story-photo{min-height:clamp(340px,42vw,570px)!important;background-position:center!important}
+.rep8-feature-cafe{background:#efede6!important}
+.rep8-feature-cafe .rx-story-photo{order:0!important}
+.rep8-feature-cafe .rx-story-grid>div:last-child{order:1!important}
+.rep8-feature-restaurant{background:#f8f7f3!important}
+.rep8-feature-restaurant .rx-experience-grid{grid-template-columns:1fr 1fr!important;gap:12px!important;margin-top:34px!important}
+.rep8-feature-restaurant .rx-experience-card{min-height:clamp(320px,38vw,490px)!important;border-radius:0!important}
+.rep8-story{background:#e9e5dc!important}
+.rep8-events{background:#263e4b!important;color:#fff!important}
+.rep8-events .rx-heading,.rep8-events .rx-kicker{color:#fff!important}
+.rep8-events .rx-heading em{color:#e3cfad!important}
+.rep8-events .rx-intro,.rep8-events p{color:rgba(255,255,255,.74)!important}
+.rep8-events .rx-experience-card{min-height:clamp(320px,37vw,470px)!important;border-radius:0!important}
+.rep8-booking{background:#f1eee7!important}
+.rep8-booking .rx-form{max-width:920px!important}
+.rx-form input,.rx-form select,.rx-form textarea{border:1px solid #d9d3c9!important;border-radius:0!important;background:rgba(255,255,255,.58)!important}
+.rx-submit{border-radius:0!important;background:#263e4b!important;color:#fff!important}
+.rep8-menu{background:#fff!important}
+.rep8-menu .section-heading{padding-bottom:26px!important;border-bottom:1px solid var(--r8-line)!important}
+.rep8-menu .section-heading h2{font-size:clamp(36px,4.6vw,62px)!important;font-weight:400!important}
+.rep8-menu .category-tab{border:1px solid #d9d5cd!important;border-radius:0!important;background:#fff!important;padding:10px 17px!important}
+.rep8-menu .category-tab.active{background:#263e4b!important;color:#fff!important;border-color:#263e4b!important}
+.rep8-menu .product-card{border:1px solid #e5e1d9!important;border-radius:0!important;box-shadow:none!important;background:#fff!important}
+.rep8-menu .product-image-wrap{background:#f1eee7!important}
+.rep8-menu .product-info{padding:17px!important}
+.rep8-menu .cart-add-button{border-radius:0!important;background:#263e4b!important}
+.signature-banner{min-height:clamp(410px,52vw,650px)!important}
+.rep8-gallery{background:#efede6!important}
+.rep8-gallery .gallery-grid{gap:13px!important}
+.rep8-gallery .gallery-card{border-radius:0!important}
+.rep8-contact{background:#f8f7f3!important}
+.site-footer{background:#20211e!important;color:#f7f3eb!important;padding:55px clamp(20px,6vw,90px) 36px!important}
+.site-footer .rep8-footer-links{display:flex!important;justify-content:center!important;flex-wrap:wrap!important;gap:12px 25px!important;margin:25px auto!important}
+.site-footer .rep8-footer-links a{font-size:10px!important;color:rgba(255,255,255,.76)!important}
+.site-footer .brand-word,.site-footer p{color:#fff!important}
+.rep8-feature,.rep8-story,.rep8-events,.rep8-menu,.rep8-gallery,.rep8-contact,.signature-banner{opacity:.92;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rep8-feature.rep8-visible,.rep8-story.rep8-visible,.rep8-events.rep8-visible,.rep8-menu.rep8-visible,.rep8-gallery.rep8-visible,.rep8-contact.rep8-visible,.signature-banner.rep8-visible{opacity:1;transform:translateY(0)}
+@media(max-width:1000px){.site-header.editorial-header .auth-open-button{display:none!important}.rep8-hero .full-hero-content{width:75%!important}.rx-wrap{width:90%!important}}
+@media(max-width:720px){
+ .site-header.editorial-header,.site-header.editorial-header.scrolled{height:66px!important;min-height:66px!important;padding:0 12px!important}
+ .site-header.editorial-header>.brand{left:50%!important}
+ .site-header.editorial-header .brand-word{font-size:21px!important;letter-spacing:3px!important}
+ .site-header.editorial-header .brand-word small{font-size:6px!important;letter-spacing:1.2px!important}
+ .site-header.editorial-header>.talom-republique-trigger{left:13px!important;font-size:0!important}
+ .talom-republique-icon{width:20px!important;height:14px!important}
+ .site-header.editorial-header>.header-actions{right:12px!important;gap:4px!important}
+ .site-header.editorial-header .cart-open-button{font-size:0!important;min-width:34px!important;width:34px!important;padding:0!important}
+ .site-header.editorial-header .cart-open-button b{font-size:10px!important}
+ .site-header.editorial-header .auth-open-button{display:none!important}
+ .site-header.editorial-header .header-cta{font-size:9px!important;min-height:32px!important;padding:0 8px!important}
+ .site-header.editorial-header #languageToggle{display:none!important}
+ main{padding-top:66px!important}
+ .talom-republique-overlay{grid-template-columns:1fr!important;align-content:center!important;gap:35px!important;padding:34px 27px!important;overflow:auto!important}
+ .talom-republique-overlay nav{gap:7px!important}
+ .talom-republique-overlay nav a{font-size:clamp(24px,7vw,36px)!important}
+ .talom-republique-side{border-right:0!important;border-top:1px solid #d1cbbf!important;padding:18px 0 0!important;max-width:none!important}
+ .rep8-welcome{padding:48px 14px 22px!important}
+ .rep8-welcome h1{font-size:clamp(31px,8vw,42px)!important}
+ .rep8-welcome p{font-size:10px!important}
+ .rep8-hero.full-hero{width:calc(100% - 12px)!important;height:64svh!important;min-height:430px!important}
+ .rep8-hero .full-hero-content{width:100%!important;margin:0!important;padding:28px 8px 0!important}
+ .rep8-hero .full-hero-content h1{font-size:clamp(39px,10vw,54px)!important;letter-spacing:-1px!important}
+ .rep8-hero .full-hero-description{font-size:11px!important;max-width:95%!important}
+ .rep8-hero .full-hero-foot{margin-top:37px!important;font-size:8px!important}
+ .rep8-experiences{padding:58px 12px!important}
+ .rep8-section-top{display:block!important;margin-bottom:20px!important}
+ .rep8-section-top h2{font-size:30px!important}
+ .rep8-section-top>p{margin-top:10px!important}
+ .rep8-experience-grid{grid-template-columns:1fr 1fr!important;grid-auto-rows:190px!important;gap:8px!important}
+ .rep8-bakery{grid-column:span 2!important;grid-row:span 1!important;min-height:290px!important}
+ .rep8-brunch,.rep8-coffee,.rep8-dining{grid-column:span 1!important}
+ .rep8-gather{grid-column:span 2!important}
+ .rep8-tile{padding:14px!important}
+ .rep8-tile strong{font-size:18px!important}
+ .rep8-tile:after{top:12px!important;left:12px!important;width:28px!important;height:28px!important}
+ .rx-section{padding:60px 0!important}
+ .rx-wrap{width:90%!important}
+ .rx-story-grid{gap:25px!important}
+ .rx-story-photo{min-height:280px!important}
+ .rep8-feature-restaurant .rx-experience-grid{grid-template-columns:1fr!important}
+ .rep8-feature-restaurant .rx-experience-card,.rep8-events .rx-experience-card{min-height:300px!important}
+ .rep8-menu .category-tab{padding:8px 10px!important;font-size:10px!important}
+ .site-footer .rep8-footer-links{gap:12px!important}
+}
+@media(prefers-reduced-motion:reduce){.rep8-feature,.rep8-story,.rep8-events,.rep8-menu,.rep8-gallery,.rep8-contact,.signature-banner{transition:none!important;transform:none!important;opacity:1!important}}
