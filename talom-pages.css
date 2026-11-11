@@ -1,0 +1,14 @@
+.talom-page-masthead{position:relative;isolation:isolate;min-height:clamp(390px,53vw,650px);display:flex;align-items:flex-end;overflow:hidden;color:#fff;background:#272722}
+.talom-page-masthead:before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--page-image);background-size:cover;background-position:center 52%;transform:scale(1.015)}
+.talom-page-masthead:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(14,17,15,.12),rgba(14,17,15,.68)),linear-gradient(0deg,rgba(14,17,15,.58),transparent 75%)}
+.talom-page-masthead-inner{width:min(1320px,88%);margin:0 auto;padding:95px 0 62px}
+.talom-page-masthead-inner>span{display:block;font:500 10px "DM Sans",sans-serif;letter-spacing:2px;color:#e7d6bd;margin-bottom:22px}
+.talom-page-masthead h1{font-size:clamp(46px,7vw,88px);font-weight:400;line-height:1.38;margin:0 0 14px;max-width:850px}
+.talom-page-masthead h1 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:#e8d8c2}
+.talom-page-masthead p{max-width:570px;font-size:13px;line-height:2.4;color:rgba(255,255,255,.86);margin:0}
+.talom-page-index{position:absolute;left:6%;bottom:35px;font:10px "DM Sans",sans-serif;letter-spacing:2px;color:rgba(255,255,255,.65)}
+.talom-pages-footer-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 26px;margin:25px auto}
+.talom-pages-footer-nav a{font-size:11px;color:rgba(255,255,255,.8)}
+#mainNav a[aria-current="page"]{text-decoration:underline;text-underline-offset:8px}
+@media(max-width:720px){.talom-page-masthead{min-height:440px}.talom-page-masthead-inner{width:88%;padding:90px 0 62px}.talom-page-masthead h1{font-size:clamp(40px,10vw,58px)}.talom-page-masthead p{font-size:12px}.talom-page-index{bottom:20px}}
+@media(prefers-reduced-motion:reduce){.talom-page-masthead:before{transform:none}}
