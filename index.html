@@ -5,15 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#F5F0E7">
-  <meta name="description" content="TALOM — قهوه تخصصی، انتخاب‌های تازه و لحظه‌هایی برای مکث.">
-  <title>TALOM — Coffee, thoughtfully.</title>
+  <meta name="description" content="TALOM Café & Restaurant — قهوه، صبحانه، غذا و تجربه‌های خوش‌طعم.">
+  <title>TALOM — Café & Restaurant</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20261111-editorial-02">
+  <link rel="stylesheet" href="restaurant-experience.css?v=20261111-01">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
   <script src="menu-runtime-v2.js?v=20261111-02" defer></script>
   <script src="cart.js" defer></script>
+  <script src="restaurant-experience.js?v=20261111-01" defer></script>
 </head>
 <body class="talom-redesign">
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -128,7 +130,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><a class="brand footer-brand" href="#home"><span class="brand-symbol">T</span><span class="brand-word">TALOM<span class="brand-dot">.</span><small>COFFEE CULTURE</small></span></a><p data-fa="قهوه، با حوصله." data-en="Coffee, with intention.">قهوه، با حوصله.</p><span>© <span id="year"></span> TALOM</span><small class="image-credit"><span data-fa="منبع تصویر اصلی:" data-en="Hero image source:">منبع تصویر اصلی:</span> <a href="https://www.caffegallery.com/" target="_blank" rel="noopener noreferrer" data-fa="کافه گالری" data-en="Caffegallery">کافه گالری</a> <span data-fa="؛ تصاویر گالری و منو نمونه هستند." data-en="; gallery and menu photos are illustrative.">؛ تصاویر گالری و منو نمونه هستند.</span></small></footer>
+  <footer class="site-footer" id="footer"><a class="brand footer-brand" href="#home"><span class="brand-symbol">T</span><span class="brand-word">TALOM<span class="brand-dot">.</span><small>COFFEE CULTURE</small></span></a><p data-fa="قهوه، با حوصله." data-en="Coffee, with intention.">قهوه، با حوصله.</p><span>© <span id="year"></span> TALOM</span><small class="image-credit"><span data-fa="منبع تصویر اصلی:" data-en="Hero image source:">منبع تصویر اصلی:</span> <a href="https://www.caffegallery.com/" target="_blank" rel="noopener noreferrer" data-fa="کافه گالری" data-en="Caffegallery">کافه گالری</a> <span data-fa="؛ تصاویر گالری و منو نمونه هستند." data-en="; gallery and menu photos are illustrative.">؛ تصاویر گالری و منو نمونه هستند.</span></small></footer>
 
   <div class="music-player" id="musicPlayer"><audio id="siteMusic" src="music/ali.mp3" preload="metadata" loop></audio><button class="music-toggle" id="musicToggle" aria-label="Play music"><span class="music-play-icon">▶</span></button><div class="music-info"><strong data-fa="لحظه‌ای با TALOM" data-en="A moment with TALOM">لحظه‌ای با TALOM</strong><small id="musicStatus" data-fa="برای پخش لمس کن" data-en="Tap to play">برای پخش لمس کن</small></div><div class="music-progress-wrap"><span id="musicCurrent">0:00</span><input id="musicProgress" type="range" min="0" max="100" value="0" aria-label="Music progress"><span id="musicDuration">0:00</span></div><button class="music-mute" id="musicMute" aria-label="Mute music">♫</button></div>
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
