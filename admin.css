@@ -135,3 +135,71 @@ tr:hover td{background:#F8F3EB}
  .nav-link:hover,.nav-link.active{background:#514035;color:#FFF9F1}
 }
 
+
+
+/* TALOM ADMIN — unified Editorial Coffee House system */
+:root{
+ --bg:#F5F0E7;--panel:#FFFCF6;--panel2:#EEE5D9;
+ --gold:#A66B4E;--text:#382B25;--muted:#81766D;
+ --border:#E2D6C8;--red:#A66B4E;--green:#64816A;
+ --shadow:0 14px 38px rgba(56,43,37,.07);
+}
+body{background:radial-gradient(ellipse at 85% 0%,rgba(166,107,78,.07),transparent 32%),var(--bg);color:var(--text)}
+.sidebar{width:278px;padding:32px 21px;background:#30231D;border:0;box-shadow:12px 0 40px rgba(45,32,24,.08)}
+.logo{font-family:Georgia,serif;font-size:34px;letter-spacing:4px;color:#E4C3A7}
+.sidebar-subtitle{color:#BCA895;letter-spacing:3px;margin-bottom:55px}
+.nav-title{color:#9F8D7E;letter-spacing:1px;margin:22px 12px 10px}
+.nav-link{min-height:45px;padding:12px 15px;border:1px solid transparent;border-radius:3px;color:#E5D9CC;font-size:12px}
+.nav-link:hover,.nav-link.active{background:#49372D;border-color:rgba(228,195,167,.16);color:#F5E8DB}
+#logout-btn{color:#E5B5A6}
+.main-content{margin-right:278px;width:calc(100% - 278px);padding:38px clamp(22px,4vw,62px);max-width:1760px}
+.topbar{padding-bottom:22px;margin-bottom:28px;border-color:var(--border)}
+.page-title{font-size:26px;font-weight:700;letter-spacing:-.7px}
+.admin-info{padding:10px 16px;border-radius:3px;background:var(--panel);border:1px solid var(--border);font-size:11px}
+.admin-info span{color:var(--gold)}
+.welcome{padding:32px 36px;margin-bottom:22px;border-radius:3px;background:linear-gradient(115deg,#49352B,#30231D);border:1px solid rgba(228,195,167,.15);box-shadow:var(--shadow)}
+.welcome:after{left:38px;top:-64px;color:rgba(228,195,167,.08);font-size:210px}
+.welcome h2{color:#F5F0E7;font-size:22px;font-weight:600}
+.welcome p{color:#CDBDAE}
+.stats-grid{gap:15px;margin-bottom:23px}
+.stat-card{position:relative;padding:23px 22px;border-radius:3px;background:var(--panel);border:1px solid var(--border);box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+.stat-card:before{content:"";position:absolute;top:0;right:0;left:0;height:2px;background:var(--gold);opacity:.7}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 20px 42px rgba(56,43,37,.1)}
+.stat-card p{font-size:11px;color:var(--muted);margin-bottom:14px}
+.stat-card h3{font-size:clamp(20px,2.1vw,28px);color:var(--gold);font-weight:700}
+.section{padding:28px;border-radius:3px;background:var(--panel);border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:22px}
+.section h2{font-size:18px;font-weight:700;color:var(--text);padding-bottom:13px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.section>p,.section-description{font-size:11px;line-height:2;color:var(--muted)}
+.form-group{margin-bottom:18px}
+.form-group label{font-size:11px;color:#6E5D50}
+.form-group input,.form-group select,.form-group textarea,#login-screen input{
+ min-height:47px;padding:12px 14px;border-radius:3px;background:#fffefa;border:1px solid var(--border);font-size:12px;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus,#login-screen input:focus{border-color:var(--gold);outline:0;box-shadow:0 0 0 3px rgba(166,107,78,.12)}
+.primary-btn{min-height:44px;padding:11px 22px;border-radius:3px;background:var(--gold);border-color:var(--gold);font-size:12px}
+.primary-btn:hover{background:#805039}
+.danger-btn{min-height:38px;border-radius:3px;background:#A75D50}
+.products-table{border-radius:3px;border-color:var(--border)}
+.products-table table{min-width:760px}
+th,td{padding:14px 16px;font-size:11px}
+th{background:#F0E6D9;color:#594437}
+td{color:#51453D}
+tbody tr:hover{background:#FAF5ED}
+.badge,.status-badge{border-radius:3px}
+#login-screen{background:radial-gradient(ellipse at 50% 35%,rgba(166,107,78,.11),transparent 55%);width:100%;max-width:none}
+#login-screen .section{max-width:470px;padding:42px;background:var(--panel);border:1px solid var(--border);border-radius:4px;box-shadow:0 28px 80px rgba(56,43,37,.11)}
+#login-screen .section>h2{font-family:Georgia,serif;font-size:35px;letter-spacing:4px;color:var(--gold)}
+#login-screen .section>p{font-size:12px;line-height:2}
+#login-screen .primary-btn{min-height:49px}
+@media(max-width:1100px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+ .sidebar{background:#30231D;padding:9px 11px;gap:6px}
+ .logo{font-size:19px;letter-spacing:1px}
+ .nav-link{min-height:39px;padding:8px 11px;font-size:10px}
+ .main-content{margin:0;width:100%;padding:19px 13px 38px}
+ .topbar{gap:10px}
+ .welcome{padding:23px 20px}
+ .welcome h2{font-size:17px}
+ .section{padding:17px}
+ #login-screen .section{padding:28px 22px}
+}
