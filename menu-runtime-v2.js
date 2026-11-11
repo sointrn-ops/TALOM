@@ -1201,6 +1201,13 @@ async function init() {
   setupAuth();
   setupNavigation();
   setupMenu();
+  if (document.body.dataset.page === "cafe" || document.body.dataset.page === "restaurant") {
+    state.category = document.body.dataset.page;
+    const activeTab = document.querySelector('#categoryTabs [data-category="' + state.category + '"]');
+    if (activeTab) {
+      $("#categoryTabs .category-tab").forEach(tab => tab.classList.toggle("active", tab === activeTab));
+    }
+  }
   setupProductCarousel();
   setupModals();
   setupMusic();
