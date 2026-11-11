@@ -1,6 +1,8 @@
 (()=>{"use strict";
 const main=document.querySelector("main"),header=document.getElementById("siteHeader");if(!main||!header||main.dataset.rep7)return;main.dataset.rep7="1";
-const $=id=>document.getElementById(id);\n// Retire legacy duplicate navigation and discovery strips; v7 owns this composition.\n$("repJourneys")?.remove();main.querySelector(".rep-discover")?.remove();header.querySelector(".talom-republique-trigger")?.remove();$("talomRepubliqueOverlay")?.remove();
+const $=id=>document.getElementById(id);
+// Retire legacy duplicate navigation and discovery strips; v7 owns this composition.
+$("repJourneys")?.remove();main.querySelector(".rep-discover")?.remove();header.querySelector(".talom-republique-trigger")?.remove();$("talomRepubliqueOverlay")?.remove();
 const intro=$("repWelcome")||main.querySelector(".rep-welcome");
 if(intro){intro.className="rep7-intro";intro.innerHTML='<div class="rep7-intro-top"><span>کافه، نانوایی و رستوران</span><span>قهوه · نان · میزبانی</span></div><h1>به تالم<br><em>خوش آمدید.</em></h1><p>جایی برای قهوه‌های خوب، نان تازه، غذاهای خوش‌طعم و لحظه‌هایی که دوست داری طولانی‌تر شوند.</p>';}
 const hero=$("home");
