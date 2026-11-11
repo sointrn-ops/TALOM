@@ -1,0 +1,93 @@
+/* TALOM — editorial hospitality redesign v5 */
+:root{--rep-ink:#1c1c19;--rep-muted:#77756e;--rep-paper:#f8f7f3;--rep-line:#dedbd4;--rep-blue:#243d50}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body.talom-redesign{background:#fff;color:var(--rep-ink);font-family:"Vazirmatn",sans-serif}
+.site-header.editorial-header,.site-header.editorial-header.scrolled{position:fixed!important;z-index:1000!important;inset:0 0 auto!important;height:78px!important;min-height:78px!important;padding:0 clamp(18px,5vw,76px)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important;direction:ltr!important;background:rgba(255,255,255,.97)!important;border:0!important;border-bottom:1px solid #e9e6df!important;box-shadow:none!important;backdrop-filter:blur(12px)}
+.site-header.editorial-header>.brand{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;color:#171717!important}
+.site-header.editorial-header .brand-symbol{display:none!important}
+.site-header.editorial-header .brand-word{font:500 26px/1 "Playfair Display",serif!important;letter-spacing:4px!important;color:#171717!important}
+.site-header.editorial-header .brand-word small{display:block!important;margin-top:6px!important;font:500 8px "Vazirmatn",sans-serif!important;letter-spacing:0!important;color:#777!important}
+.site-header.editorial-header>.talom-republique-trigger{position:absolute!important;left:clamp(18px,5vw,76px)!important;top:50%!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;gap:10px!important;padding:10px 0!important;border:0!important;background:none!important;color:#1c1c19!important;font:500 12px "Vazirmatn",sans-serif!important}
+.talom-republique-icon{width:19px!important;height:13px!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important}
+.talom-republique-icon i{display:block!important;width:100%!important;height:1px!important;background:#1c1c19!important}
+.site-header.editorial-header>.main-nav{display:none!important}
+.site-header.editorial-header>.header-actions{position:absolute!important;right:clamp(18px,5vw,76px)!important;top:50%!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;gap:9px!important;margin:0!important}
+.site-header.editorial-header .header-actions>*{font:500 10px "Vazirmatn",sans-serif!important;color:#1c1c19!important}
+.site-header.editorial-header .cart-open-button,.site-header.editorial-header .auth-open-button,.site-header.editorial-header .header-cta{min-height:36px!important;padding:0 11px!important;border:1px solid #dedbd4!important;border-radius:0!important;background:#fff!important;white-space:nowrap}
+.site-header.editorial-header .header-cta{background:var(--rep-blue)!important;color:#fff!important;border-color:var(--rep-blue)!important;gap:8px!important}
+.site-header.editorial-header .icon-button{width:31px!important;height:31px!important;border:1px solid #dedbd4!important;border-radius:0!important;background:#fff!important}
+.site-header.editorial-header .mobile-menu-toggle{display:none!important}
+.talom-republique-overlay{position:fixed!important;z-index:1500!important;inset:0!important;display:grid!important;grid-template-columns:minmax(0,1.3fr) minmax(240px,.7fr)!important;align-items:center!important;gap:7vw!important;padding:clamp(30px,8vw,120px)!important;background:#f5f3ee!important;color:#1b1b18!important;opacity:0!important;visibility:hidden!important;transform:translateY(-10px)!important;transition:opacity .35s,transform .35s,visibility .35s!important}
+.talom-republique-overlay.is-open{opacity:1!important;visibility:visible!important;transform:none!important}
+.talom-republique-overlay nav{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:clamp(7px,1.7vh,20px)!important}
+.talom-republique-overlay nav a{font:400 clamp(25px,4.2vw,58px)/1.35 "Vazirmatn",sans-serif!important;letter-spacing:0!important;color:#1c1c19!important;transition:color .2s!important}
+.talom-republique-overlay nav a:hover{color:#8a674c!important}
+.talom-republique-side{display:flex!important;flex-direction:column!important;gap:18px!important;max-width:370px!important;padding-right:30px!important;border-right:1px solid #d7d2c8!important;text-align:right!important;direction:rtl!important;font:12px/2 "Vazirmatn",sans-serif!important;color:#777!important}
+.talom-republique-side strong{font-size:17px!important;font-weight:500!important;color:#1c1c19!important}
+.talom-republique-side a{color:#666!important}
+body.talom-menu-open{overflow:hidden!important}
+.rep-welcome{padding:clamp(118px,15vh,168px) 20px 35px!important;text-align:center!important;background:#fff!important;display:flex!important;flex-direction:column!important;align-items:center!important}
+.rep-welcome p{margin:0 0 14px!important;color:#777!important;font-size:10px!important;letter-spacing:1px!important}
+.rep-welcome h1{margin:0!important;font-size:clamp(36px,6.5vw,76px)!important;font-weight:400!important;line-height:1.35!important;letter-spacing:-1.5px!important;color:#1c1c19!important}
+.rep-welcome h1 em{font:400 1em "Playfair Display",serif!important;letter-spacing:1px!important}
+.rep-welcome span{margin-top:13px!important;font-size:12px!important;color:#777!important}
+.full-hero{position:relative!important;width:100%!important;height:min(740px,76svh)!important;min-height:510px!important;max-height:780px!important;margin:0!important;padding:80px clamp(24px,10vw,150px)!important;display:flex!important;align-items:center!important;overflow:hidden!important;background:#333!important;color:white!important}
+.full-hero-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 52%!important;filter:brightness(.78) saturate(.76)!important}
+.full-hero-shade{position:absolute!important;inset:0!important;background:linear-gradient(90deg,rgba(0,0,0,.12),rgba(0,0,0,.58) 70%,rgba(0,0,0,.68))!important}
+.full-hero-content{position:relative!important;z-index:2!important;width:min(680px,70%)!important;max-width:680px!important;margin:0 auto 0 0!important;text-align:right!important}
+.full-hero-eyebrow{font-size:11px!important;letter-spacing:0!important;color:#eee!important}
+.full-hero-content h1{font:400 clamp(44px,6.2vw,82px)/1.35 "Vazirmatn",sans-serif!important;letter-spacing:0!important}
+.full-hero-content h1 em{font:400 1em "Playfair Display","Vazirmatn",serif!important}
+.full-hero-description{max-width:520px!important;font-size:13px!important;line-height:2.2!important;color:rgba(255,255,255,.88)!important}
+.full-hero-actions{justify-content:flex-start!important}
+.full-hero-actions .button{font-family:"Vazirmatn",sans-serif!important;letter-spacing:0!important;border-radius:0!important}
+.full-hero-foot{font-family:"Vazirmatn",sans-serif!important;letter-spacing:0!important}
+.full-hero-scroll{font:10px "Vazirmatn",sans-serif!important;letter-spacing:0!important}
+.rep-discover{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:10px!important;padding:36px clamp(18px,5vw,76px) 88px!important;background:#fff!important}
+.rep-discover-card{position:relative!important;min-height:clamp(190px,24vw,330px)!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;gap:8px!important;padding:18px!important;overflow:hidden!important;background-size:cover!important;background-position:center!important;color:#fff!important;text-decoration:none!important}
+.rep-discover-card:before{content:""!important;position:absolute!important;inset:0!important;background:linear-gradient(0deg,rgba(0,0,0,.72),rgba(0,0,0,.02) 78%)!important;transition:background .3s!important}
+.rep-discover-card:after{content:"↗"!important;position:absolute!important;top:14px!important;left:14px!important;font:20px "DM Sans",sans-serif!important;color:#fff!important;opacity:.8!important}
+.rep-discover-card:hover:before{background:linear-gradient(0deg,rgba(0,0,0,.8),rgba(0,0,0,.2))!important}
+.rep-discover-card span,.rep-discover-card strong{position:relative!important;z-index:1!important}
+.rep-discover-card span{font-size:9px!important;color:rgba(255,255,255,.78)!important}
+.rep-discover-card strong{font-size:clamp(14px,1.4vw,19px)!important;font-weight:500!important}
+.rep-pastry{background-image:url("https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85")!important}
+.rep-brunch{background-image:url("https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85")!important}
+.rep-dinner{background-image:url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=85")!important}
+.rep-coffee{background-image:url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85")!important}
+.rep-events{background-image:url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=900&q=85")!important}
+.rx-section{padding:clamp(70px,9vw,120px) 0!important;background:#fff!important}
+.rx-wrap{width:min(1240px,88%)!important}
+.rx-kicker,.section-kicker,.overline{font-family:"Vazirmatn",sans-serif!important;letter-spacing:0!important;font-size:10px!important}
+.rx-heading,.section-heading h2,.signature-content h2{font-family:"Vazirmatn",sans-serif!important;font-weight:400!important;letter-spacing:0!important}
+.rx-heading em,.section-heading h2 em,.signature-content h2 em{font-family:"Playfair Display","Vazirmatn",serif!important;font-style:normal!important}
+.rx-story-grid,.rx-location-grid{direction:rtl!important}
+.rx-story-photo{min-height:520px!important;background-size:cover!important;background-position:center!important}
+.rx-intro,.rx-story-copy p{font-size:13px!important;line-height:2.2!important;color:#777!important}
+.rx-services-grid{gap:0!important;border-top:1px solid #dedbd4!important;border-bottom:1px solid #dedbd4!important}
+.rx-service{min-height:210px!important;background:#fff!important;border:0!important;border-left:1px solid #dedbd4!important;padding:24px!important}
+.rx-service h3{font-weight:500!important}
+.rx-experience-grid{gap:12px!important}
+.rx-experience-card{min-height:370px!important}
+.rx-booking{background:#253d50!important}
+.rx-booking .rx-form{direction:rtl!important}
+.rx-field input,.rx-field select,.rx-field textarea,.rx-submit{font-family:"Vazirmatn",sans-serif!important;border-radius:0!important}
+.menu-section{background:#f8f7f3!important}
+.menu-section.section-pad,.gallery-section.section-pad{padding:clamp(72px,9vw,120px) clamp(18px,7vw,100px)!important}
+.section-heading{direction:rtl!important}
+.section-heading h2{font-size:clamp(34px,4.5vw,60px)!important}
+.menu-toolbar{direction:rtl!important}
+.category-tabs{flex-wrap:wrap!important}
+.category-tab{border-radius:0!important}
+.product-card,.product-card *{border-radius:0!important}
+.signature-banner{min-height:620px!important}
+.gallery-grid{gap:12px!important}
+.gallery-card{border-radius:0!important}
+.gallery-caption{font-family:"Vazirmatn",sans-serif!important;letter-spacing:0!important}
+.site-footer{background:#1c1c19!important;color:#f6f3ed!important}
+.site-footer .brand-word,.site-footer p{color:#f6f3ed!important}
+.site-footer .brand-word small{color:#bdb8ae!important}
+.rx-footer-links{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:14px 26px!important;margin-top:25px!important}
+.rx-footer-links a{font-size:11px!important;color:#d5d0c6!important}
+@media(max-width:1050px){.rep-discover{grid-template-columns:repeat(3,minmax(0,1fr))!important}.rep-discover-card{min-height:230px!important}.site-header.editorial-header .cart-open-button,.site-header.editorial-header .auth-open-button{padding:0 8px!important}}
+@media(max-width:700px){.site-header.editorial-header,.site-header.editorial-header.scrolled{height:66px!important;min-height:66px!important;padding:0 14px!important}.site-header.editorial-header>.brand{top:50%!important}.site-header.editorial-header .brand-word{font-size:20px!important}.site-header.editorial-header .brand-word small{font-size:7px!important}.site-header.editorial-header>.talom-republique-trigger{left:14px!important;font-size:10px!important}.site-header.editorial-header>.header-actions{right:14px!important;gap:5px!important}.site-header.editorial-header .header-actions .cart-open-button{font-size:9px!important;padding:0 7px!important;min-height:30px!important}.site-header.editorial-header .header-actions .auth-open-button,.site-header.editorial-header .header-actions .header-cta{display:none!important}.site-header.editorial-header .header-actions .icon-button{width:28px!important;height:28px!important}.talom-republique-overlay{grid-template-columns:1fr!important;align-content:center!important;gap:32px!important;padding:70px 28px 30px!important;overflow:auto!important}.talom-republique-overlay nav{gap:8px!important}.talom-republique-overlay nav a{font-size:clamp(25px,7vw,39px)!important}.talom-republique-side{max-width:none!important;padding:18px 0 0!important;border-right:0!important;border-top:1px solid #d7d2c8!important}.rep-welcome{padding:102px 18px 28px!important}.rep-welcome h1{font-size:clamp(33px,9vw,48px)!important}.rep-welcome span{font-size:10px!important}.full-hero{height:70svh!important;min-height:500px!important;padding:70px 22px!important}.full-hero-content{width:100%!important;margin:0!important}.full-hero-content h1{font-size:clamp(40px,10vw,58px)!important}.full-hero-description{font-size:12px!important}.rep-discover{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;padding:22px 14px 62px!important}.rep-discover-card{min-height:205px!important;padding:13px!important}.rep-discover-card:last-child{grid-column:1/-1;min-height:170px!important}.rx-section{padding:65px 0!important}.rx-wrap{width:90%!important}.rx-story-photo{min-height:300px!important}.rx-services-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.rx-service{padding:16px!important;min-height:185px!important}.rx-experience-card{min-height:280px!important}.menu-section.section-pad,.gallery-section.section-pad{padding:62px 16px!important}.section-heading{display:block!important}.section-heading>p{margin-top:12px!important}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.signature-banner{min-height:530px!important}}
