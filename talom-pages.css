@@ -12,3 +12,25 @@
 #mainNav a[aria-current="page"]{text-decoration:underline;text-underline-offset:8px}
 @media(max-width:720px){.talom-page-masthead{min-height:440px}.talom-page-masthead-inner{width:88%;padding:90px 0 62px}.talom-page-masthead h1{font-size:clamp(40px,10vw,58px)}.talom-page-masthead p{font-size:12px}.talom-page-index{bottom:20px}}
 @media(prefers-reduced-motion:reduce){.talom-page-masthead:before{transform:none}}
+
+/* Route-specific composition: each destination has its own visual rhythm and task */
+body[data-page="menu"] #menu{padding-top:clamp(35px,5vw,70px)}
+body[data-page="menu"] .talom-page-masthead{min-height:390px}
+body[data-page="menu"] .menu-toolbar{position:sticky;top:78px;z-index:20;padding:16px 0;background:var(--r9-paper,#f7f5ef)}
+body[data-page="menu"] .menu-shelf{padding-top:28px}
+body[data-page="cafe"] #menu,body[data-page="restaurant"] #menu{padding-top:clamp(45px,6vw,80px)}
+body[data-page="cafe"] #menu .section-heading h2:after{content:"CAFÉ · BAKERY · BREAKFAST";display:block;margin-top:12px;font:500 9px "DM Sans",sans-serif;letter-spacing:2px;color:#8a6b4e}
+body[data-page="restaurant"] #menu .section-heading h2:after{content:"STARTERS · MAINS · DESSERT";display:block;margin-top:12px;font:500 9px "DM Sans",sans-serif;letter-spacing:2px;color:#8a6b4e}
+body[data-page="reservation"] .talom-page-masthead{min-height:350px}
+body[data-page="reservation"] #reservation{padding-top:clamp(35px,5vw,65px)}
+body[data-page="reservation"] #reservation .rx-form{max-width:850px;margin-top:35px}
+body[data-page="reservation"] #reservation .rx-wide{grid-column:1/-1}
+body[data-page="events"] #events{padding-top:clamp(42px,6vw,80px)}
+body[data-page="events"] #events .rx-experience-card{min-height:360px}
+body[data-page="events"] #event-request{padding-top:clamp(50px,7vw,90px)}
+body[data-page="about"] #our-story,body[data-page="about"] #services,body[data-page="about"] #talom-team,body[data-page="about"] #faq{padding-top:clamp(55px,7vw,100px);padding-bottom:clamp(55px,7vw,100px)}
+body[data-page="contact"] #contact{padding-top:clamp(45px,6vw,80px)}
+body[data-page="contact"] #contact-request{padding-top:clamp(40px,6vw,85px)}
+.talom-page-action{display:inline-flex;align-items:center;gap:20px;margin-top:26px;padding:14px 22px;border:1px solid rgba(255,255,255,.7);color:#fff;font-size:12px}
+.talom-reservation-note{display:inline-block;margin-top:25px;padding:12px 18px;border-right:2px solid #e4d4bb;background:rgba(255,255,255,.09);font-size:11px;color:#fff}
+@media(max-width:720px){body[data-page="menu"] .menu-toolbar{top:64px}body[data-page="events"] #events .rx-experience-card{min-height:300px}}
