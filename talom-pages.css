@@ -167,3 +167,20 @@ body[data-page="events"] #events{padding-top:55px}
  #talom-home-experiences .rep-home-experience-grid{grid-template-columns:1fr!important;grid-template-rows:none!important}
  #talom-home-experiences .rep-home-card,#talom-home-experiences .rep-home-card-tall{min-height:280px!important;grid-row:auto!important}
 }
+
+
+/* Final homepage grid: five editorial experiences on desktop */
+#talom-home-experiences .rep-home-experience-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;grid-template-rows:auto!important;gap:12px!important}
+#talom-home-experiences .rep-home-card{min-height:clamp(300px,32vw,420px)!important;grid-row:auto!important}
+@media(max-width:1100px){
+ #talom-home-experiences .rep-home-experience-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:auto!important}
+ #talom-home-experiences .rep-home-card{min-height:320px!important}
+}
+@media(max-width:760px){
+ #talom-home-experiences .rep-home-experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:auto!important}
+ #talom-home-experiences .rep-home-card{min-height:270px!important}
+}
+@media(max-width:420px){
+ #talom-home-experiences .rep-home-experience-grid{grid-template-columns:1fr!important}
+ #talom-home-experiences .rep-home-card{min-height:290px!important}
+}
