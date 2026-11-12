@@ -94,9 +94,39 @@ body[data-page] main>section[hidden]{display:none!important}
 .talom-route-copy h1 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:#e1d2bd}
 .talom-route-copy p{max-width:520px;color:rgba(255,255,255,.83);font-size:13px;line-height:2.4}
 .talom-route-copy>a{display:inline-flex;gap:20px;margin-top:18px;padding:14px 20px;background:#e5dac8;color:#282620;font-size:11px}
-#signature-banner{display:none!important}
+
 body[data-page="home"] #talom-route-hero{display:none}
 body[data-page="home"] #menu,body[data-page="home"] #contact{display:none!important}
 @media(max-width:1000px){.talom-experience-grid{grid-template-columns:repeat(3,1fr)}.talom-experience-card{min-height:330px}.talom-experience-card:nth-child(4),.talom-experience-card:nth-child(5){min-height:280px}.talom-intro-grid{gap:5%}}
 @media(max-width:720px){main{padding-top:66px!important}.site-header.editorial-header,.site-header.editorial-header.scrolled{height:66px!important;min-height:66px!important;padding:0 18px!important}.site-header.editorial-header .brand-word{font-size:21px!important}.site-header.editorial-header>.header-cta{font-size:9px!important;padding:10px 12px!important}.site-header.editorial-header>.talom-republique-trigger{font-size:0!important}.talom-republique-icon{width:19px!important}.talom-republique-overlay{grid-template-columns:1fr!important;align-content:center!important;gap:28px!important;padding:28px!important;overflow:auto!important}.talom-republique-overlay nav a{font-size:28px!important}.talom-republique-side{max-width:none!important;border-right:0!important;border-top:1px solid #d1cbbf!important;padding:22px 0 0!important}.full-hero{height:72svh!important;min-height:500px!important;max-height:690px!important}.full-hero-content{width:88%!important}.full-hero-content h1{font-size:clamp(40px,10vw,58px)!important}.full-hero-description{font-size:11px!important}.full-hero-foot{bottom:18px!important;font-size:8px!important}.talom-section-top{align-items:flex-start!important;gap:15px!important;flex-direction:column!important}.talom-experience-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:10px!important;padding-bottom:10px!important}.talom-experience-card{flex:0 0 76vw!important;min-height:360px!important;scroll-snap-align:start!important}.talom-intro-grid{grid-template-columns:1fr!important;gap:22px!important}.talom-intro-grid h2{font-size:35px!important}.talom-home-events-image{inset:0!important;opacity:.42!important}.talom-home-events-copy{grid-column:1!important;padding:65px 7%!important}.talom-home-events-copy h2{font-size:42px!important}#gallery .gallery-grid{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:230px 180px 180px!important}#gallery .gallery-large{grid-row:span 2!important}#gallery .gallery-wide{grid-column:1/-1!important}.talom-route-copy{padding:60px 0!important}.talom-route-copy h1{font-size:42px!important}.site-footer{align-items:flex-start!important;flex-direction:column!important}.talom-footer-links{justify-content:flex-start!important}}
 @media(prefers-reduced-motion:reduce){.talom-experience-card img{transition:none!important}}
+
+/* Dedicated editorial content blocks */
+.talom-cafe-details-grid,.talom-restaurant-details-grid{width:min(1380px,90%);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center}
+#talom-cafe-details,#talom-restaurant-details{padding:clamp(65px,8vw,110px) 0;background:#e9e5dc}
+.talom-cafe-details-grid h2,.talom-restaurant-details-grid h2,.talom-events-details h2{font-size:clamp(34px,4.6vw,60px);font-weight:400;line-height:1.5;margin:18px 0}
+.talom-cafe-details-grid h2 em,.talom-restaurant-details-grid h2 em,.talom-events-details h2 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:#82735d}
+.talom-cafe-details-grid p,.talom-restaurant-details-grid p,.talom-events-details p{max-width:500px;color:#706b61;font-size:13px;line-height:2.45}
+.talom-cafe-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}
+.talom-cafe-photo-grid img{display:block;width:100%;height:clamp(250px,34vw,450px);object-fit:cover}
+.talom-cafe-photo-grid img+img{margin-top:55px;height:clamp(220px,29vw,380px)}
+.talom-restaurant-details-grid{grid-template-columns:1.05fr .95fr}
+.talom-restaurant-photo{min-height:clamp(340px,42vw,540px);background:url("https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1500&q=88") center/cover}
+#talom-events-details{padding:clamp(65px,8vw,110px) 0;background:#e9e5dc}
+.talom-events-details{max-width:850px!important;text-align:center}
+.talom-events-details .talom-overline{display:block}
+.talom-events-details p{margin:0 auto}
+.talom-events-details .talom-text-link{margin-top:26px}
+body[data-page="cafe"] #menu,body[data-page="restaurant"] #menu{background:#f3f0e8}
+body[data-page="cafe"] #signature-banner{display:block!important}
+body[data-page="cafe"] #signature-banner .signature-image{background-position:center}
+body[data-page="restaurant"] #events{background:#e9e5dc}
+body[data-page="events"] #events{padding-top:55px}
+@media(max-width:760px){
+ .talom-cafe-details-grid,.talom-restaurant-details-grid{grid-template-columns:1fr;gap:28px}
+ .talom-cafe-photo-grid img{height:270px}
+ .talom-cafe-photo-grid img+img{height:230px;margin-top:25px}
+ .talom-restaurant-photo{min-height:300px}
+ .talom-events-details{text-align:right}
+ .site-header.editorial-header>.brand{left:50%!important}
+}
