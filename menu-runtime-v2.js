@@ -1201,7 +1201,7 @@ async function init() {
   setupAuth();
   setupNavigation();
   setupMenu();
-  const currentPath = location.pathname.replace(/\\/$/, "") || "/";
+  const currentPath = location.pathname.replace(/\/$/, "") || "/";
   if (currentPath === "/cafe-bakery" || currentPath === "/restaurant") {
     state.category = currentPath === "/cafe-bakery" ? "cafe" : "restaurant";
     const activeTab = document.querySelector('#categoryTabs [data-category="' + state.category + '"]');
