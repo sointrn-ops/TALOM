@@ -40,13 +40,13 @@ if(route.key!=="home"){
 }
 const orderedHome=["home","talom-home-experiences","talom-home-intro","talom-home-events","gallery"];
 const ordered={
- cafe:["talom-route-hero","talom-cafe-details","menu","signature-banner","our-story"],
- restaurant:["talom-route-hero","talom-restaurant-details","menu","reservation","events"],
+ cafe:["talom-route-hero","talom-cafe-details","menu","signature-banner","our-story","services"],
+ restaurant:["talom-route-hero","talom-restaurant-details","menu","reservation","services","events"],
  menu:["talom-route-hero","menu"],
- events:["talom-route-hero","talom-events-details","events","event-request","gallery"],
- about:["talom-route-hero","our-story","services","faq"],
- reservation:["talom-route-hero","reservation"],
- contact:["talom-route-hero","contact-request","contact"]
+ events:["talom-route-hero","talom-events-details","events","event-request","gallery","faq"],
+ about:["talom-route-hero","our-story","services","faq","gallery"],
+ reservation:["talom-route-hero","reservation","faq"],
+ contact:["talom-route-hero","contact-request","contact","faq"]
 };
 const ids=route.key==="home"?orderedHome:ordered[route.key];
 const all=[...main.children];const wanted=new Set(ids);
