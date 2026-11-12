@@ -130,3 +130,40 @@ body[data-page="events"] #events{padding-top:55px}
  .talom-events-details{text-align:right}
  .site-header.editorial-header>.brand{left:50%!important}
 }
+
+
+/* Final cascade corrections: keep the editorial overlay navigation authoritative */
+#siteHeader>.mobile-menu-toggle,#siteHeader>.main-nav{display:none!important}
+#siteHeader>.brand{display:flex!important;position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}
+#siteHeader>.talom-republique-trigger{display:flex!important}
+#siteHeader>.header-actions{display:none!important}
+#siteHeader>.header-cta{display:inline-flex!important}
+#talom-home-experiences.rep-home-experiences{padding:clamp(70px,9vw,125px) 0!important;background:#f3f0e8!important;color:#25231f!important}
+#talom-home-intro.rep-home-intro{padding:clamp(80px,11vw,150px) 0!important;background:#e8e2d7!important;color:#29251f!important}
+#talom-home-events.rep-home-events{display:grid!important;grid-template-columns:1.05fr .95fr!important;min-height:560px!important;background:#29251f!important;color:#f5f0e7!important}
+#talom-home-experiences .rep-home-wrap{width:min(1320px,88%)!important;margin-inline:auto!important}
+#talom-home-experiences .rep-home-experience-grid{display:grid!important;grid-template-columns:1.15fr 1fr 1fr!important;grid-template-rows:repeat(2,minmax(230px,19vw))!important;gap:14px!important}
+#talom-home-experiences .rep-home-card{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;min-height:230px!important;padding:22px!important;overflow:hidden!important;color:#fff!important;text-decoration:none!important}
+#talom-home-experiences .rep-home-card-tall{grid-row:span 2!important}
+#talom-home-experiences .rep-home-card img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important}
+#talom-home-experiences .rep-home-card:after{content:""!important;position:absolute!important;inset:0!important;background:linear-gradient(0deg,rgba(16,13,10,.78),rgba(16,13,10,.04) 72%)!important}
+#talom-home-experiences .rep-home-card>*:not(img){position:relative!important;z-index:1!important}
+#talom-home-intro .talom-wrap{width:min(1120px,84%)!important;display:grid!important;grid-template-columns:1fr .85fr!important;gap:10%!important;align-items:center!important}
+#talom-home-intro h2{font-size:clamp(32px,5.5vw,68px)!important;line-height:1.45!important;font-weight:400!important;margin:0!important}
+#talom-home-intro p{font-size:14px!important;line-height:2.35!important;color:#6e665b!important;margin:0!important}
+#talom-home-events .rep-home-events-photo{min-height:480px!important;background-position:center!important;background-size:cover!important}
+#talom-home-events .rep-home-events-copy{align-self:center!important;padding:clamp(35px,7vw,100px)!important}
+#talom-home-events .rep-home-events-copy h2{font-size:clamp(32px,5vw,62px)!important;line-height:1.4!important;font-weight:400!important}
+#talom-home-events .rep-home-events-copy p{font-size:13px!important;line-height:2.2!important;color:#d0c8bc!important}
+@media(max-width:760px){
+ #talom-home-experiences .rep-home-experience-grid{grid-template-columns:1fr 1fr!important;grid-template-rows:repeat(3,250px)!important}
+ #talom-home-experiences .rep-home-card-tall{grid-row:span 2!important}
+ #talom-home-intro .talom-wrap{grid-template-columns:1fr!important;gap:22px!important}
+ #talom-home-events.rep-home-events{grid-template-columns:1fr!important}
+ #talom-home-events .rep-home-events-photo{min-height:320px!important}
+ #talom-home-events .rep-home-events-copy{padding:50px 7%!important}
+}
+@media(max-width:460px){
+ #talom-home-experiences .rep-home-experience-grid{grid-template-columns:1fr!important;grid-template-rows:none!important}
+ #talom-home-experiences .rep-home-card,#talom-home-experiences .rep-home-card-tall{min-height:280px!important;grid-row:auto!important}
+}
