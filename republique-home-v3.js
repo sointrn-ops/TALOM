@@ -1,0 +1,20 @@
+(()=>{"use strict";
+if(document.body.dataset.page!=="home")return;
+const $=(s,r=document)=>r.querySelector(s);
+const hero=$("#home"),experiences=$("#talom-home-experiences"),intro=$("#talom-home-intro"),events=$("#talom-home-events");
+if(!hero||!experiences||!intro||!events)return;
+hero.classList.add("rep-home-hero");
+const eyebrow=$(".full-hero-eyebrow",hero),heading=$("h1",hero),copy=$(".full-hero-description",hero),cta=$(".full-hero-actions a",hero);
+if(eyebrow)eyebrow.textContent="TALOM · CAFÉ, BAKERY & RESTAURANT";
+if(heading)heading.innerHTML="به تالم خوش آمدی؛<br><em>جایی برای باهم‌بودن.</em>";
+if(copy)copy.textContent="از نان تازه و قهوه صبحگاهی تا یک وعده خوب و دورهمی‌های طولانی؛ تجربه تالم را کشف کن.";
+if(cta){cta.href="/menu";cta.innerHTML="<span>دیدن منو</span><span>↗</span>";}
+experiences.classList.add("rep-home-experiences");
+experiences.innerHTML='<div class="rep-home-wrap"><div class="rep-home-section-head"><span class="rep-home-kicker">TALOM / OUR EXPERIENCES</span><p>از صبح تا شب، انتخاب با توست</p></div><div class="rep-home-experience-grid"><a class="rep-home-card rep-home-card-tall" href="/cafe-bakery"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1100&q=88" alt="نان تازه و شیرینی"><span>01 / BAKERY</span><h2>نانوایی و شیرینی</h2><b>کشف کن ↗</b></a><a class="rep-home-card" href="/cafe-bakery"><img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=88" alt="صبحانه و برانچ"><span>02 / BRUNCH</span><h2>صبحانه و برانچ</h2><b>کشف کن ↗</b></a><a class="rep-home-card" href="/cafe-bakery"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=88" alt="قهوه تازه"><span>03 / COFFEE</span><h2>قهوه</h2><b>کشف کن ↗</b></a><a class="rep-home-card" href="/restaurant"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=88" alt="غذای رستوران"><span>04 / DINING</span><h2>ناهار و شام</h2><b>کشف کن ↗</b></a><a class="rep-home-card" href="/menu"><img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=88" alt="نوشیدنی ویژه"><span>05 / SIGNATURES</span><h2>انتخاب‌های ویژه</h2><b>کشف کن ↗</b></a></div></div>';
+intro.classList.add("rep-home-intro");
+const introTitle=$("h2",intro),introText=$("p",intro);
+if(introTitle)introTitle.innerHTML="یک خانه برای طعم‌ها؛<br><em>یک میز برای همه.</em>";
+if(introText)introText.textContent="تالم فقط یک فنجان قهوه نیست. اینجا می‌توانی روزت را با صبحانه شروع کنی، برای ناهار بمانی، عصر قهوه بنوشی و شب را کنار آدم‌های مورد علاقه‌ات تمام کنی.";
+events.classList.add("rep-home-events");
+events.innerHTML='<div class="rep-home-events-photo" role="img" aria-label="فضای دورهمی و پذیرایی"></div><div class="rep-home-events-copy"><span class="rep-home-kicker">PRIVATE GATHERINGS / TALOM</span><h2>برای لحظه‌های مهم،<br><em>میزبانت می‌شویم.</em></h2><p>برای دورهمی‌های دوستانه، جشن‌های کوچک و پذیرایی گروهی، درخواستت را با تیم تالم در میان بگذار.</p><a href="/events">آشنایی با مراسم و دورهمی‌ها <b>↗</b></a></div>';
+})();
