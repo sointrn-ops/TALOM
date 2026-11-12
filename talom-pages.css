@@ -1,96 +1,102 @@
-/* République-inspired editorial page system for TALOM */
-:root{--talom-paper:#f2efe7;--talom-ink:#292821;--talom-muted:#777166;--talom-line:#d8d1c4;--talom-olive:#686e56;--talom-copper:#a17a57}
-body[data-page] main>section[hidden],body[data-page] main>div[hidden]{display:none!important}
-body[data-page] .talom-route-hero{position:relative;isolation:isolate;display:grid;grid-template-columns:1fr 1fr;min-height:clamp(440px,55vw,690px);background:var(--talom-paper);color:var(--talom-ink);overflow:hidden}
-.talom-route-hero-copy{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(42px,7vw,105px) clamp(24px,7vw,105px);z-index:1}
-.talom-route-eyebrow{font:500 9px "DM Sans",sans-serif;letter-spacing:2.5px;color:var(--talom-olive);margin-bottom:25px}
-.talom-route-hero h1{font-size:clamp(40px,5.5vw,76px);line-height:1.45;font-weight:400;letter-spacing:-1.8px;margin:0 0 18px;max-width:720px}
-.talom-route-hero h1 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:var(--talom-olive)}
-.talom-route-hero p{max-width:500px;color:var(--talom-muted);font-size:13px;line-height:2.5;margin:0}
-.talom-route-hero-image{min-height:100%;background-size:cover;background-position:center}
-.talom-route-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.talom-route-actions a{display:inline-flex;align-items:center;gap:22px;padding:13px 17px;border:1px solid #aaa18f;color:var(--talom-ink);font-size:11px;transition:background .25s,color .25s}
-.talom-route-actions a:hover{background:var(--talom-ink);color:#fff}
-.talom-route-actions a span{font:16px "DM Sans",sans-serif}
-.talom-route-index{position:absolute;bottom:26px;right:clamp(24px,7vw,105px);font:9px "DM Sans",sans-serif;letter-spacing:2px;color:#948c7e}
-.talom-hero-full{grid-template-columns:1fr;min-height:clamp(560px,70vw,790px);color:#fff;background:#292820}
-.talom-hero-full .talom-route-hero-image{position:absolute;inset:0;z-index:-2}
-.talom-hero-full:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(19,20,17,.76),rgba(19,20,17,.08)),linear-gradient(0deg,rgba(19,20,17,.4),transparent 65%)}
-.talom-hero-full .talom-route-hero-copy{width:min(1250px,88%);margin:auto;padding:100px 0}
-.talom-hero-full .talom-route-eyebrow,.talom-hero-full .talom-route-index{color:#e4d3b8}
-.talom-hero-full h1{font-size:clamp(50px,7.5vw,100px);color:#fff}
-.talom-hero-full h1 em{color:#e1c9a7}
-.talom-hero-full p{color:rgba(255,255,255,.82);font-size:14px}
-.talom-hero-full .talom-route-actions a{border-color:rgba(255,255,255,.6);color:#fff}
-.talom-hero-minimal{grid-template-columns:1fr;min-height:310px;background:#e7e2d7}
-.talom-hero-minimal .talom-route-hero-copy{width:min(1250px,88%);margin:auto;padding:60px 0}
-.talom-hero-minimal .talom-route-index{left:6%;right:auto}
-.talom-hero-event{grid-template-columns:1.15fr .85fr;min-height:590px;background:#282820;color:#fff}
-.talom-hero-event .talom-route-hero-copy{background:#282820;color:#fff}
-.talom-hero-event .talom-route-eyebrow,.talom-hero-event .talom-route-index{color:#d9c29e}
-.talom-hero-event h1 em{color:#d9c29e}
-.talom-hero-event p{color:#d4cfc4}
-.talom-hero-event .talom-route-actions a{color:#fff;border-color:#9b907b}
-.talom-hero-about{grid-template-columns:.9fr 1.1fr;min-height:580px}
-.talom-hero-about .talom-route-hero-copy{order:2}
-.talom-hero-about .talom-route-hero-image{order:1}
-.talom-hero-booking{grid-template-columns:1fr;min-height:360px;background:#e9e4d8;text-align:center}
-.talom-hero-booking .talom-route-hero-copy{align-items:center;width:min(900px,90%);margin:auto;padding:60px 0}
-.talom-hero-booking .talom-route-hero-copy p{max-width:650px}
-.talom-hero-booking .talom-route-index{left:0;right:0}
-.talom-hero-contact{grid-template-columns:1fr 1fr;min-height:470px}
-.talom-hero-contact .talom-route-hero-image{background-position:center}
-.talom-route-showcase{display:grid;gap:1px;background:var(--talom-line);border-bottom:1px solid var(--talom-line)}
-.talom-cafe-showcase{grid-template-columns:repeat(3,1fr)}
-.talom-cafe-showcase a{min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;padding:28px;color:#fff;background-size:cover;background-position:center;position:relative;isolation:isolate}
-.talom-cafe-showcase a:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(20,19,15,.78),rgba(20,19,15,.08))}
-.talom-cafe-showcase a:nth-child(1){background-image:url("https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85")}
-.talom-cafe-showcase a:nth-child(2){background-image:url("https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85")}
-.talom-cafe-showcase a:nth-child(3){background-image:url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85")}
-.talom-cafe-showcase a span,.talom-event-showcase article>span,.talom-contact-showcase a span{font:9px "DM Sans",sans-serif;letter-spacing:2px;color:#e2d1b3}
-.talom-cafe-showcase a strong{font-size:22px;font-weight:500}
-.talom-cafe-showcase a b{font-size:11px;font-weight:400}
-.talom-restaurant-showcase{grid-template-columns:1fr 1fr;align-items:center;padding:clamp(45px,7vw,90px) 8%;background:#e9e5dc}
-.talom-restaurant-showcase>div:first-child span,.talom-menu-showcase>span,.talom-about-showcase>div span{font:9px "DM Sans",sans-serif;letter-spacing:2px;color:var(--talom-olive)}
-.talom-restaurant-showcase h2{font-size:clamp(30px,4vw,52px);font-weight:400;line-height:1.4;margin:15px 0}
-.talom-restaurant-showcase h2 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:var(--talom-olive)}
-.talom-restaurant-showcase p{font-size:12px;line-height:2;color:var(--talom-muted)}
-.talom-menu-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.talom-menu-shortcuts a,.talom-menu-showcase a{padding:17px 18px;border:1px solid #c8c0b2;color:var(--talom-ink);font-size:12px;display:flex;justify-content:space-between}
-.talom-menu-shortcuts a:hover,.talom-menu-showcase a:hover{background:#292821;color:#fff}
-.talom-menu-showcase{grid-template-columns:repeat(5,1fr);align-items:center;padding:20px 6%;background:#e9e5dc}
-.talom-menu-showcase>span{grid-column:1/-1;margin-bottom:6px}
-.talom-event-showcase{grid-template-columns:1fr 1fr;background:#e8e2d7}
-.talom-event-showcase article{padding:clamp(30px,5vw,65px);background:#eeeae1}
-.talom-event-showcase article+article{background:#ded8cb}
-.talom-event-showcase h2{font-size:clamp(24px,3vw,36px);font-weight:400;margin:20px 0 8px}
-.talom-event-showcase p{font-size:12px;line-height:2;color:#746d61;max-width:420px}
-.talom-event-showcase article>a{display:inline-block;margin-top:14px;border-bottom:1px solid #8b806f;padding-bottom:7px;font-size:11px}
-.talom-about-showcase{grid-template-columns:repeat(3,1fr);padding:45px 7%;background:#e8e4da}
-.talom-about-showcase>div{padding:15px 25px;border-left:1px solid #cbc3b5}
-.talom-about-showcase>div:last-child{border:0}
-.talom-about-showcase strong{display:block;font-size:19px;font-weight:500;margin:15px 0 8px}
-.talom-about-showcase p{font-size:11px;line-height:2;color:#756e62}
-.talom-booking-showcase{grid-template-columns:repeat(3,1fr);padding:30px 7%;background:#e9e4d8}
-.talom-booking-showcase>div{display:flex;align-items:center;gap:14px;padding:12px;border-left:1px solid #cbc3b5;font-size:11px}
-.talom-booking-showcase b{font:22px "Playfair Display",serif;color:var(--talom-olive)}
-.talom-booking-showcase>p{grid-column:1/-1;margin:10px 0 0;font-size:10px;color:#756e62}
-.talom-contact-showcase{grid-template-columns:repeat(3,1fr);background:#292821}
-.talom-contact-showcase a{padding:28px;display:flex;flex-direction:column;gap:12px;color:#fff}
-.talom-contact-showcase a strong{font:20px "DM Sans","Vazirmatn",sans-serif;font-weight:400}
-.talom-contact-showcase a b{font-size:10px;font-weight:400;color:#d8c3a2}
-body[data-page="cafe"] #menu,body[data-page="restaurant"] #menu,body[data-page="menu"] #menu{padding:clamp(50px,7vw,95px) 0}
-body[data-page="menu"] #menu .menu-toolbar{position:sticky;top:75px;z-index:15;padding:14px 0;background:var(--talom-paper)}
-body[data-page="menu"] #menu .menu-shelf{padding-top:32px}
-body[data-page="cafe"] #cafe-bakery{background:#f2efe7}
-body[data-page="restaurant"] #restaurant{background:#f7f5ef}
-body[data-page="events"] #events,body[data-page="events"] #event-request{padding-top:clamp(55px,7vw,95px);padding-bottom:clamp(55px,7vw,95px)}
-body[data-page="about"] #our-story,body[data-page="about"] #services,body[data-page="about"] #talom-team,body[data-page="about"] #faq{padding-top:clamp(55px,7vw,95px);padding-bottom:clamp(55px,7vw,95px)}
-body[data-page="reservation"] #reservation{padding-top:clamp(50px,7vw,90px);padding-bottom:clamp(65px,8vw,105px)}
-body[data-page="contact"] #contact,body[data-page="contact"] #contact-request{padding-top:clamp(45px,6vw,80px);padding-bottom:clamp(45px,6vw,80px)}
-#mainNav a[aria-current="page"]{text-decoration:underline;text-underline-offset:8px}
-.talom-pages-footer-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:12px 25px;margin:24px auto}
-.talom-pages-footer-nav a{font-size:10px;color:rgba(255,255,255,.78)}
-@media(max-width:850px){.talom-route-hero{grid-template-columns:1fr;min-height:0}.talom-route-hero-image{min-height:340px;grid-row:1}.talom-route-hero-copy{grid-row:2;padding:42px 7% 65px}.talom-hero-about .talom-route-hero-image{order:0}.talom-hero-about .talom-route-hero-copy{order:0}.talom-hero-full{min-height:620px;grid-template-columns:1fr}.talom-hero-full .talom-route-hero-image{position:absolute;inset:0;min-height:100%}.talom-hero-full .talom-route-hero-copy{padding:90px 0}.talom-cafe-showcase{grid-template-columns:1fr 1fr}.talom-cafe-showcase a:last-child{grid-column:1/-1}.talom-menu-showcase{grid-template-columns:repeat(2,1fr)}.talom-menu-showcase>span{grid-column:1/-1}.talom-about-showcase{grid-template-columns:1fr}.talom-about-showcase>div{border-left:0;border-bottom:1px solid #cbc3b5;padding:18px 0}.talom-about-showcase>div:last-child{border-bottom:0}.talom-booking-showcase{grid-template-columns:1fr}.talom-booking-showcase>div{border-left:0;border-bottom:1px solid #cbc3b5}.talom-restaurant-showcase{grid-template-columns:1fr}.talom-contact-showcase{grid-template-columns:1fr}.talom-contact-showcase a{padding:20px 7%}}
-@media(max-width:600px){.talom-route-hero h1{font-size:40px}.talom-route-hero p{font-size:12px}.talom-route-hero-image{min-height:280px}.talom-hero-full{min-height:570px}.talom-hero-full .talom-route-hero-copy{width:86%;padding:80px 0}.talom-hero-full h1{font-size:47px}.talom-cafe-showcase{grid-template-columns:1fr}.talom-cafe-showcase a:last-child{grid-column:auto}.talom-cafe-showcase a{min-height:190px}.talom-event-showcase{grid-template-columns:1fr}.talom-menu-shortcuts{grid-template-columns:1fr}.talom-menu-showcase{grid-template-columns:1fr}.talom-route-actions{gap:8px}.talom-route-actions a{padding:11px 13px;font-size:10px}body[data-page="menu"] #menu .menu-toolbar{top:65px}}
-@media(prefers-reduced-motion:reduce){.talom-route-actions a,.talom-cafe-showcase a{transition:none!important}}
+:root{--talom-paper:#f3f0e8;--talom-ink:#24231f;--talom-muted:#777166;--talom-line:#d9d3c8;--talom-accent:#87745c}
+html{scroll-padding-top:78px}
+body.talom-redesign{background:var(--talom-paper)!important;color:var(--talom-ink)!important}
+main{padding-top:76px!important}
+.site-header.editorial-header,.site-header.editorial-header.scrolled{position:fixed!important;top:0!important;left:0!important;right:0!important;height:76px!important;min-height:76px!important;padding:0 clamp(20px,5vw,76px)!important;background:rgba(243,240,232,.97)!important;border-bottom:1px solid rgba(36,35,31,.14)!important;backdrop-filter:blur(12px)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;z-index:1000!important}
+.site-header.editorial-header>.brand{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;display:flex!important;align-items:center!important;gap:10px!important}
+.site-header.editorial-header .brand-symbol{display:none!important}
+.site-header.editorial-header .brand-word{font:600 25px/1 "DM Sans",sans-serif!important;letter-spacing:5px!important;color:var(--talom-ink)!important}
+.site-header.editorial-header .brand-word small{font:500 7px "DM Sans",sans-serif!important;letter-spacing:2.6px!important;text-align:center!important;color:#817a6e!important}
+.site-header.editorial-header>.main-nav,.site-header.editorial-header>.mobile-menu-toggle{display:none!important}
+.site-header.editorial-header>.talom-republique-trigger{position:relative!important;left:auto!important;top:auto!important;transform:none!important;order:0!important;display:flex!important;align-items:center!important;gap:11px!important;padding:10px 0!important;border:0!important;background:transparent!important;color:var(--talom-ink)!important;font:500 11px "Vazirmatn",sans-serif!important;cursor:pointer!important}
+.talom-republique-icon{width:20px!important;height:14px!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important}
+.talom-republique-icon i{display:block!important;height:1px!important;width:100%!important;background:var(--talom-ink)!important}
+.site-header.editorial-header>.header-cta{order:2!important;display:inline-flex!important;align-items:center!important;gap:15px!important;padding:12px 18px!important;min-height:38px!important;background:var(--talom-ink)!important;color:#fff!important;border:1px solid var(--talom-ink)!important;font-size:10px!important}
+.site-header.editorial-header .header-actions{display:flex!important;flex-wrap:wrap!important;gap:9px!important;margin-top:16px!important}
+.site-header.editorial-header .header-actions>*{font:10px "Vazirmatn",sans-serif!important;border-radius:0!important}
+.site-header.editorial-header .header-actions .cart-open-button,.site-header.editorial-header .header-actions .auth-open-button,.site-header.editorial-header .header-actions .icon-button{min-height:36px!important;padding:0 11px!important;background:transparent!important;border:1px solid #d5cfc3!important;color:var(--talom-ink)!important}
+.site-header.editorial-header .header-actions .icon-button{width:36px!important;padding:0!important}
+.talom-republique-overlay{position:fixed!important;z-index:2000!important;inset:0!important;display:grid!important;grid-template-columns:1.05fr .95fr!important;align-items:center!important;gap:8vw!important;padding:clamp(30px,8vw,110px)!important;background:#f0ede5!important;color:var(--talom-ink)!important;opacity:0!important;visibility:hidden!important;transform:translateY(-10px)!important;transition:opacity .35s,transform .35s,visibility .35s!important}
+.talom-republique-overlay.is-open{opacity:1!important;visibility:visible!important;transform:none!important}
+.talom-republique-overlay nav{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:clamp(5px,1vh,13px)!important}
+.talom-republique-overlay nav a{font:400 clamp(25px,4vw,56px)/1.35 "Vazirmatn",sans-serif!important;letter-spacing:-1px!important;color:var(--talom-ink)!important}
+.talom-republique-side{display:flex!important;flex-direction:column!important;gap:15px!important;max-width:400px!important;padding-right:30px!important;border-right:1px solid #d1cbbf!important;text-align:right!important;direction:rtl!important;font:12px/2 "Vazirmatn",sans-serif!important;color:var(--talom-muted)!important}
+.talom-republique-side>strong{font-size:20px!important;color:var(--talom-ink)!important}
+.talom-republique-side>a{color:#78664e!important;border-bottom:1px solid #d1cbbf!important;padding-bottom:8px!important}
+body.talom-menu-open{overflow:hidden!important}
+.talom-utility-actions{margin-top:18px!important}
+.full-hero{height:min(790px,calc(100svh - 76px))!important;min-height:590px!important;max-height:850px!important;margin:0!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;background:#292722!important;isolation:isolate!important}
+.full-hero-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 54%!important;filter:brightness(.57) saturate(.78)!important;z-index:-2!important}
+.full-hero-shade{position:absolute!important;inset:0!important;z-index:-1!important;background:linear-gradient(0deg,rgba(13,13,11,.55),rgba(13,13,11,.14) 55%,rgba(13,13,11,.3))!important}
+.full-hero-content{width:min(850px,88%)!important;margin:0 auto!important;padding:0!important;text-align:center!important}
+.full-hero-eyebrow{justify-content:center!important;color:#e8dfd0!important;font:500 10px "DM Sans","Vazirmatn",sans-serif!important;letter-spacing:3px!important;margin-bottom:26px!important}
+.full-hero-eyebrow:before{display:none!important}
+.full-hero-content h1{font-size:clamp(52px,7vw,94px)!important;line-height:1.34!important;font-weight:400!important;letter-spacing:-1px!important;color:#fff!important;margin:0 0 18px!important}
+.full-hero-content h1 em{font-family:"Playfair Display","Vazirmatn",serif!important;font-style:normal!important;font-weight:400!important;color:#e4d5be!important}
+.full-hero-description{max-width:560px!important;margin:0 auto 30px!important;color:rgba(255,255,255,.84)!important;font-size:13px!important;line-height:2.3!important}
+.full-hero-actions{justify-content:center!important}
+.full-hero .button-gold{background:#e6dccb!important;color:#27251f!important;border:1px solid #e6dccb!important;border-radius:0!important;padding:14px 23px!important}
+.full-hero-foot{position:absolute!important;bottom:28px!important;left:clamp(20px,5vw,76px)!important;right:clamp(20px,5vw,76px)!important;display:flex!important;justify-content:space-between!important;border-top:1px solid rgba(255,255,255,.35)!important;padding-top:14px!important;color:rgba(255,255,255,.78)!important;font:9px "DM Sans",sans-serif!important;letter-spacing:1.7px!important}
+.full-hero-scroll{display:none!important}
+.talom-wrap{width:min(1380px,90%);margin:0 auto}
+#talom-home-experiences{padding:clamp(70px,8vw,112px) 0;background:#f3f0e8}
+.talom-section-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:27px;color:#756e63}
+.talom-section-top span,.talom-overline{font:500 9px "DM Sans",sans-serif;letter-spacing:2px}
+.talom-section-top p{font-size:11px;margin:0}
+.talom-experience-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.talom-experience-card{position:relative;isolation:isolate;min-height:clamp(290px,33vw,430px);overflow:hidden;color:white;padding:22px 18px;display:flex;flex-direction:column;justify-content:flex-end;background:#34332d}
+.talom-experience-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(14,14,12,.78),rgba(14,14,12,.03) 70%)}
+.talom-experience-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .65s}
+.talom-experience-card:hover img{transform:scale(1.055)}
+.talom-experience-card>span{font:9px "DM Sans",sans-serif;letter-spacing:1.8px;color:#e2d6c4;margin-bottom:12px}
+.talom-experience-card h2{font-size:clamp(17px,1.7vw,24px);font-weight:400;margin:0 0 13px}
+.talom-experience-card b{font-size:10px;font-weight:400}
+#talom-home-intro{padding:clamp(75px,9vw,130px) 0;background:#e9e5dc}
+.talom-intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:10%;align-items:center}
+.talom-overline{color:#84745e}
+.talom-intro-grid h2{font-size:clamp(32px,4.3vw,58px);line-height:1.5;font-weight:400;margin:20px 0 0}
+.talom-intro-grid h2 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:#82735d}
+.talom-intro-grid>div:last-child p{font-size:13px;line-height:2.5;color:#706b61;margin:0}
+.talom-text-link{display:inline-flex;gap:25px;align-items:center;margin-top:23px;padding-bottom:8px;border-bottom:1px solid #8e816d;font-size:11px}
+#talom-home-events{position:relative;isolation:isolate;min-height:540px;display:grid;grid-template-columns:1fr 1fr;align-items:center;background:#24231f;color:#fff;overflow:hidden}
+.talom-home-events-image{position:absolute;inset:0 0 0 42%;z-index:-2;background:url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=90") center/cover}
+#talom-home-events:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#24231f 0%,rgba(36,35,31,.97) 35%,rgba(36,35,31,.12) 100%)}
+.talom-home-events-copy{padding:70px 8% 70px 0;grid-column:1;grid-row:1}
+.talom-home-events-copy>span{font:9px "DM Sans",sans-serif;letter-spacing:2px;color:#d9c9b2}
+.talom-home-events-copy h2{font-size:clamp(38px,5vw,65px);font-weight:400;line-height:1.5;margin:20px 0}
+.talom-home-events-copy h2 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:#d9c9b2}
+.talom-home-events-copy p{max-width:420px;font-size:12px;line-height:2.3;color:#ded9cf}
+.talom-home-events-copy a{display:inline-block;margin-top:20px;padding-bottom:8px;border-bottom:1px solid #c9b99f;font-size:11px;color:#fff}
+#gallery{padding:clamp(70px,8vw,112px) 0!important;background:#f3f0e8!important}
+#gallery>.section-kicker,#gallery>.section-heading,.gallery-grid{width:min(1380px,90%);margin-left:auto!important;margin-right:auto!important}
+#gallery .gallery-grid{grid-template-columns:1.15fr .85fr .85fr;grid-template-rows:260px 220px;gap:12px}
+#gallery .gallery-card{border-radius:0!important}
+#menu{padding:clamp(60px,8vw,110px) 0!important;background:#f3f0e8!important}
+#menu>.section-kicker,#menu>.section-heading,#menu>.menu-toolbar,#menu>.menu-meta,#menu>.menu-shelf,#menu>.empty-state{width:min(1380px,90%);margin-left:auto!important;margin-right:auto!important}
+#menu .section-heading h2{font-size:clamp(34px,4.5vw,60px)!important;font-weight:400!important}
+#menu .product-card{border-radius:0!important}
+#menu .menu-toolbar{top:76px!important;background:#f3f0e8!important}
+#menu .category-tab{border-radius:0!important}
+.rx-section{padding:clamp(60px,7vw,95px) 0!important}
+.rx-wrap{width:min(1200px,88%)!important}
+.rx-heading{font-weight:400!important}
+.rx-experience-card,.rx-service{border-radius:0!important}
+.site-footer{display:flex!important;flex-wrap:wrap!important;justify-content:space-between!important;gap:22px!important;padding:35px 6%!important;background:#24231f!important}
+.talom-footer-links{display:flex;flex-wrap:wrap;gap:12px 22px;width:100%;justify-content:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.2)}
+.talom-footer-links a{font-size:10px;color:rgba(255,255,255,.8)}
+body[data-page] main>section[hidden]{display:none!important}
+#talom-route-hero{position:relative;isolation:isolate;min-height:clamp(420px,55vw,650px);display:flex;align-items:center;overflow:hidden;background:#292722;color:#fff}
+.talom-route-image{position:absolute;inset:0;z-index:-2;background-position:center;background-size:cover;filter:brightness(.56) saturate(.78)}
+.talom-route-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(20,19,16,.72),rgba(20,19,16,.12))}
+.talom-route-copy{width:min(1380px,88%);margin:auto;padding:70px 0}
+.talom-route-copy>span{font:9px "DM Sans",sans-serif;letter-spacing:2px;color:#e1d2bd}
+.talom-route-copy h1{font-size:clamp(42px,6vw,78px);font-weight:400;line-height:1.45;margin:22px 0}
+.talom-route-copy h1 em{font-family:"Playfair Display","Vazirmatn",serif;font-style:normal;color:#e1d2bd}
+.talom-route-copy p{max-width:520px;color:rgba(255,255,255,.83);font-size:13px;line-height:2.4}
+.talom-route-copy>a{display:inline-flex;gap:20px;margin-top:18px;padding:14px 20px;background:#e5dac8;color:#282620;font-size:11px}
+#signature-banner{display:none!important}
+body[data-page="home"] #talom-route-hero{display:none}
+body[data-page="home"] #menu,body[data-page="home"] #contact{display:none!important}
+@media(max-width:1000px){.talom-experience-grid{grid-template-columns:repeat(3,1fr)}.talom-experience-card{min-height:330px}.talom-experience-card:nth-child(4),.talom-experience-card:nth-child(5){min-height:280px}.talom-intro-grid{gap:5%}}
+@media(max-width:720px){main{padding-top:66px!important}.site-header.editorial-header,.site-header.editorial-header.scrolled{height:66px!important;min-height:66px!important;padding:0 18px!important}.site-header.editorial-header .brand-word{font-size:21px!important}.site-header.editorial-header>.header-cta{font-size:9px!important;padding:10px 12px!important}.site-header.editorial-header>.talom-republique-trigger{font-size:0!important}.talom-republique-icon{width:19px!important}.talom-republique-overlay{grid-template-columns:1fr!important;align-content:center!important;gap:28px!important;padding:28px!important;overflow:auto!important}.talom-republique-overlay nav a{font-size:28px!important}.talom-republique-side{max-width:none!important;border-right:0!important;border-top:1px solid #d1cbbf!important;padding:22px 0 0!important}.full-hero{height:72svh!important;min-height:500px!important;max-height:690px!important}.full-hero-content{width:88%!important}.full-hero-content h1{font-size:clamp(40px,10vw,58px)!important}.full-hero-description{font-size:11px!important}.full-hero-foot{bottom:18px!important;font-size:8px!important}.talom-section-top{align-items:flex-start!important;gap:15px!important;flex-direction:column!important}.talom-experience-grid{display:flex!important;overflow-x:auto!important;scroll-snap-type:x mandatory!important;gap:10px!important;padding-bottom:10px!important}.talom-experience-card{flex:0 0 76vw!important;min-height:360px!important;scroll-snap-align:start!important}.talom-intro-grid{grid-template-columns:1fr!important;gap:22px!important}.talom-intro-grid h2{font-size:35px!important}.talom-home-events-image{inset:0!important;opacity:.42!important}.talom-home-events-copy{grid-column:1!important;padding:65px 7%!important}.talom-home-events-copy h2{font-size:42px!important}#gallery .gallery-grid{display:grid!important;grid-template-columns:1fr 1fr!important;grid-template-rows:230px 180px 180px!important}#gallery .gallery-large{grid-row:span 2!important}#gallery .gallery-wide{grid-column:1/-1!important}.talom-route-copy{padding:60px 0!important}.talom-route-copy h1{font-size:42px!important}.site-footer{align-items:flex-start!important;flex-direction:column!important}.talom-footer-links{justify-content:flex-start!important}}
+@media(prefers-reduced-motion:reduce){.talom-experience-card img{transition:none!important}}
