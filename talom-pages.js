@@ -16,7 +16,7 @@ document.body.dataset.page=route.key;document.documentElement.dataset.page=route
 document.title=route.title;
 const meta=$('meta[name="description"]');if(meta)meta.content=route.desc;
 let canonical=$('link[rel="canonical"]');if(!canonical){canonical=document.createElement("link");canonical.rel="canonical";document.head.append(canonical)}canonical.href=location.origin+(path==="/"?"/":path);
-const experienceRoot=$("#talomExperience");if(experienceRoot){[...experienceRoot.children].forEach(node=>main.append(node));experienceRoot.remove();}
+const experienceRoot=$("#talomExperience");if(experienceRoot){[...experienceRoot.children].forEach(node=>main.append(node));experienceRoot.remove();}const signature=$(".signature-banner");if(signature)signature.id="signature-banner";
 const oldRep=$("#talomRepSections");if(oldRep){[...oldRep.children].forEach(node=>main.append(node));oldRep.remove();}
 function addSection(id,html,after){if($("#"+id))return $("#"+id);const node=document.createElement("section");node.id=id;node.innerHTML=html;const ref=after?$("#"+after):null;if(ref&&ref.parentElement===main)ref.after(node);else main.append(node);return node;}
 addSection("talom-home-experiences",'<div class="talom-wrap"><div class="talom-section-top"><span>01 / THE TALOM EXPERIENCE</span><p>هر روز، یک انتخاب تازه</p></div><div class="talom-experience-grid"><a class="talom-experience-card" href="/cafe-bakery"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=88" alt="نان و شیرینی تازه"><span>01 · BAKERY</span><h2>نان و شیرینی</h2><b>کشف کن ↗</b></a><a class="talom-experience-card" href="/cafe-bakery"><img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=88" alt="صبحانه و برانچ"><span>02 · BRUNCH</span><h2>صبحانه و برانچ</h2><b>کشف کن ↗</b></a><a class="talom-experience-card" href="/cafe-bakery"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=88" alt="قهوه"><span>03 · COFFEE</span><h2>قهوه</h2><b>کشف کن ↗</b></a><a class="talom-experience-card" href="/restaurant"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=88" alt="غذای رستوران"><span>04 · DINING</span><h2>غذای رستوران</h2><b>کشف کن ↗</b></a><a class="talom-experience-card" href="/menu"><img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=88" alt="نوشیدنی ویژه"><span>05 · SIGNATURES</span><h2>نوشیدنی‌های ویژه</h2><b>کشف کن ↗</b></a></div></div>',"home");
@@ -29,6 +29,9 @@ if(trigger)trigger.innerHTML='<span class="talom-republique-icon" aria-hidden="t
 const navItems=[["/","خانه"],["/cafe-bakery","کافه و نانوایی"],["/restaurant","رستوران"],["/menu","منو و سفارش"],["/events","مراسم و دورهمی"],["/about","داستان تالم"],["/reservation","رزرو میز"],["/contact","تماس"]];
 const nav=$("#mainNav");if(nav)nav.innerHTML=navItems.map(([url,label])=>'<a href="'+url+'">'+label+'</a>').join("");
 if(overlay){const n=overlay.querySelector("nav");if(n)n.innerHTML=navItems.map(([url,label])=>'<a href="'+url+'">'+label+'</a>').join("");}
+addSection("talom-cafe-details",'<div class="talom-wrap talom-cafe-details-grid"><div><span class="talom-overline">CAFÉ / BAKERY / BRUNCH</span><h2>از ویترین نانوایی<br><em>تا فنجان قهوه.</em></h2><p>برای صبحانه، میان‌وعده یا یک قهوه کوتاه؛ انتخاب‌های روز تالم را از منو ببین. موجودی و قیمت‌ها از منوی زنده سایت خوانده می‌شوند.</p><a class="talom-text-link" href="/menu">رفتن به منو <span>↗</span></a></div><div class="talom-cafe-photo-grid"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=88" alt="نان تازه"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=88" alt="قهوه تازه"></div></div>',"menu");
+addSection("talom-restaurant-details",'<div class="talom-wrap talom-restaurant-details-grid"><div class="talom-restaurant-photo"></div><div><span class="talom-overline">THE TALOM TABLE</span><h2>برای یک وعده خوب،<br><em>با خیال راحت بنشین.</em></h2><p>منوی رستوران را بر اساس محصولات موجود تالم مرور کن. برای هماهنگی حضور، درخواست رزرو بفرست؛ تأیید نهایی پس از بررسی تیم تالم انجام می‌شود.</p><a class="talom-text-link" href="/reservation">درخواست رزرو میز <span>↗</span></a></div></div>',"menu");
+addSection("talom-events-details",'<div class="talom-wrap talom-events-details"><span class="talom-overline">PRIVATE GATHERINGS & CATERING</span><h2>برای جمع‌های کوچک<br><em>و مناسبت‌های به‌یادماندنی.</em></h2><p>نوع مراسم، تاریخ پیشنهادی و تعداد مهمان‌ها را بفرست تا تیم تالم درباره امکان میزبانی و پذیرایی با تو هماهنگ کند. جزئیات فضا و ظرفیت پس از بررسی درخواست اعلام می‌شود.</p><a class="talom-text-link" href="#event-request">ثبت درخواست مراسم <span>↗</span></a></div>',"events");
 const routeHero=$("#talom-route-hero");if(routeHero)routeHero.remove();
 if(route.key!=="home"){
  const hero=document.createElement("section");hero.id="talom-route-hero";hero.className="talom-route-hero";
@@ -37,10 +40,10 @@ if(route.key!=="home"){
 }
 const orderedHome=["home","talom-home-experiences","talom-home-intro","talom-home-events","gallery"];
 const ordered={
- cafe:["talom-route-hero","menu","signature-banner","our-story"],
- restaurant:["talom-route-hero","menu","reservation","events"],
+ cafe:["talom-route-hero","talom-cafe-details","menu","signature-banner","our-story"],
+ restaurant:["talom-route-hero","talom-restaurant-details","menu","reservation","events"],
  menu:["talom-route-hero","menu"],
- events:["talom-route-hero","events","event-request","gallery"],
+ events:["talom-route-hero","talom-events-details","events","event-request","gallery"],
  about:["talom-route-hero","our-story","services","faq"],
  reservation:["talom-route-hero","reservation"],
  contact:["talom-route-hero","contact-request","contact"]
