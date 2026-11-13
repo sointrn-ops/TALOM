@@ -68,4 +68,6 @@ if(page==="reservation")setFormHeading("reservation","درخواست رزرو م
 if(page==="events")setFormHeading("event-request","درخواست میزبانی مراسم","نوع برنامه، تاریخ پیشنهادی و تعداد مهمان‌ها را بنویس تا امکان میزبانی بررسی شود.");
 if(page==="contact"){const f=$("#contact-request");if(f){const h=$("h2",f);if(h)h.textContent="ارسال پیام به تیم TALOM";}}
 document.querySelectorAll('a[href^="#"]').forEach(a=>{const id=a.getAttribute("href").slice(1);if(!$("#"+id))return;if(a.closest("#tp-"))return;});
+document.addEventListener("DOMContentLoaded",()=>{if(!["restaurant","cafe"].includes(page))return;const allowed=page==="restaurant"?["restaurant","appetizer","main","pasta","pizza","burger","sandwich","food"]:["cafe","coffee","cold","special","breakfast","bakery","dessert"];$("#categoryTabs")?.querySelectorAll("[data-category]").forEach(b=>b.hidden=!allowed.includes(b.dataset.category));});
+
 })();
