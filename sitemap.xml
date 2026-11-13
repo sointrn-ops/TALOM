@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sointrn-ops.github.io/TALOM/</loc>
+    <loc>https://talom-coffee.vercel.app/</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://talom-coffee.vercel.app/cafe-bakery</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://talom-coffee.vercel.app/restaurant</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://talom-coffee.vercel.app/menu</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://talom-coffee.vercel.app/events</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://talom-coffee.vercel.app/about</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://talom-coffee.vercel.app/reservation</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://talom-coffee.vercel.app/contact</loc>
+    <lastmod>2026-11-13</lastmod>
   </url>
 </urlset>
