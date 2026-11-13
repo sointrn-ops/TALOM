@@ -13,7 +13,7 @@ menu:section("tp-cafe-menu-lead","tp-menu-lead",'<div class="tp-wrap"><span clas
 const restaurant={
 intro:section("tp-restaurant-intro","tp-editorial-intro",'<div class="tp-wrap tp-intro-grid"><div><span class="tp-kicker">01 / THE RESTAURANT</span><h2>یک میز برای غذا،<br><em>یک دلیل برای ماندن.</em></h2></div><p>بخش رستوران تالم برای انتخاب یک وعده کامل و گذراندن وقت کنار همراهانت است. در منوی پایین، دسته‌های مخصوص آشپزخانه را ببین؛ محصولات از فهرست واقعی و فعال تالم دریافت می‌شوند.</p></div>'),
 ambience:section("tp-restaurant-ambience","tp-feature-split",'<div class="tp-feature-image">'+img("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1500&q=88","فضای غذاخوری و چیدمان میز")+'</div><div class="tp-feature-copy"><span class="tp-kicker">02 / THE TABLE</span><h2>برای ناهار، شام،<br><em>و دورهمی‌های خوب.</em></h2><p>از یک وعده دونفره تا جمع دوستانه، تجربه رستوران را با منوی به‌روز تالم شروع کن. اطلاعاتی مانند ترکیبات، قیمت و موجودی هر آیتم در جزئیات همان محصول نمایش داده می‌شود.</p><a href="#menu">رفتن به منوی رستوران ↗</a></div>'),
-menuLead:section("tp-restaurant-menu-lead","tp-menu-lead",'<div class="tp-wrap"><span class="tp-kicker">03 / THE RESTAURANT MENU</span><h2>منوی رستوران تالم</h2><p>پیش‌غذا، غذای اصلی و دیگر دسته‌های ثبت‌شده رستوران را جست‌وجو کن. محصولات کافه در این فهرست نمایش داده نمی‌شوند.</p><div class="tp-category-links"><a href="#menu" data-tp-category="restaurant">همه غذاهای رستوران</a><a href="#menu" data-tp-category="appetizer">پیش‌غذا</a><a href="#menu" data-tp-category="main">غذای اصلی</a><a href="#menu" data-tp-category="pasta">پاستا</a><a href="#menu" data-tp-category="pizza">پیتزا</a><a href="#menu" data-tp-category="burger">برگر</a></div></div>'),
+
 reserve:section("tp-restaurant-reserve","tp-reserve-banner",'<div class="tp-wrap"><span class="tp-kicker">04 / YOUR TABLE</span><h2>میزت را از قبل هماهنگ کن.</h2><p>درخواست رزرو را ثبت کن؛ تیم تالم پس از بررسی ظرفیت برای تأیید با تو تماس می‌گیرد.</p><a href="#reservation">درخواست رزرو میز ↗</a></div>')
 };
 const menuLead=section("tp-menu-intro","tp-menu-lead",'<div class="tp-wrap"><span class="tp-kicker">TALOM / THE MENU</span><h2>منو را به سلیقه خودت کشف کن.</h2><p>بین نوشیدنی‌ها، نانوایی، صبحانه و غذاهای رستوران جست‌وجو کن. هر محصول اطلاعات و قیمت خودش را دارد و می‌توانی آن را به سبد خرید اضافه کنی.</p></div>');
@@ -40,6 +40,7 @@ const contact={
 intro:section("tp-contact-intro","tp-editorial-intro",'<div class="tp-wrap tp-intro-grid"><div><span class="tp-kicker">01 / CONTACT</span><h2>پیامت را<br><em>با ما در میان بگذار.</em></h2></div><p>برای پرسش درباره منو، سفارش، رزرو یا همکاری، فرم پیام را تکمیل کن. نشانی، شماره و ساعات کاری تا زمان دریافت اطلاعات رسمی به‌صورت فرضی نمایش داده نمی‌شوند.</p></div>')
 };
 const menu=$("#menu"),reservationForm=$("#reservation"),eventForm=$("#event-request"),contactForm=$("#contact-request");
+if(page==="restaurant") $("#tp-restaurant-menu-lead")?.remove();
 const restaurantIds=["talom-route-hero","tp-restaurant-intro","tp-restaurant-ambience","menu","tp-restaurant-reserve","reservation"];
 const cafeIds=["talom-route-hero","tp-cafe-intro","tp-cafe-bakery","tp-cafe-coffee","menu","signature-banner"];
 const ids={
