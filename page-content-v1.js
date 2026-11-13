@@ -56,6 +56,9 @@ if(menu){
  if(page==="cafe"){set(title,"منوی <em>کافه و نانوایی</em>","THE <em>CAFÉ & BAKERY MENU</em>");set(desc,"قهوه، صبحانه، نان و شیرینی‌های تالم.","Coffee, brunch, bakery and pastry.");}
  if(page==="menu"){set(title,"منوی کامل <em>TALOM</em>","THE COMPLETE <em>TALOM MENU</em>");set(desc,"همه انتخاب‌های کافه و رستوران در یک‌جا.","All café and restaurant selections in one place.");}
  const tabs=$("#categoryTabs");
+ const foodHeading=$("#foodShelf .shelf-heading h3"),foodCopy=$("#foodShelf .shelf-heading p"),foodIndex=$("#foodShelf .shelf-index");
+ if(page==="restaurant"){if(foodHeading){foodHeading.textContent="غذاهای رستوران";foodHeading.dataset.fa="غذاهای رستوران";foodHeading.dataset.en="Restaurant dishes";}if(foodCopy){foodCopy.textContent="پیش‌غذا، غذای اصلی، پاستا، برگر و ساندویچ";foodCopy.dataset.fa=foodCopy.textContent;foodCopy.dataset.en="Starters, mains, pasta, burgers and sandwiches";}if(foodIndex)foodIndex.textContent="02 / RESTAURANT";}
+ if(page==="cafe"){if(foodHeading){foodHeading.textContent="صبحانه و برانچ";foodHeading.dataset.fa="صبحانه و برانچ";foodHeading.dataset.en="Breakfast & brunch";}if(foodCopy){foodCopy.textContent="انتخاب‌های صبحگاهی و غذاهای سبک کافه";foodCopy.dataset.fa=foodCopy.textContent;foodCopy.dataset.en="Morning favourites and light café plates";}if(foodIndex)foodIndex.textContent="03 / BRUNCH";}
  if(tabs&&["restaurant","cafe"].includes(page)){
   const allowed=page==="restaurant"?["restaurant","appetizer","main","pasta","pizza","burger","sandwich","food"]:["cafe","coffee","cold","special","breakfast","bakery","dessert"];
   tabs.querySelectorAll("[data-category]").forEach(b=>b.hidden=!allowed.includes(b.dataset.category));
