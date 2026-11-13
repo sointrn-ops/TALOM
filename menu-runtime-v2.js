@@ -200,10 +200,25 @@ function productCardMarkup(product, index) {
 function renderProducts() {
   if (!grid) return;
   const query = normalizeSearchText(state.search);
+  const inferredFoodCategory = product => {
+    if (product.category !== "food") return product.category;
+    const name = normalizeSearchText([product.name, product.en].join(" "));
+    if (/صبحانه|املت|پنکیک|وافل|گرانولا|ماست یونانی|breakfast|omelette|pancake|waffle|granola/.test(name)) return "breakfast";
+    if (/برگر|burger/.test(name)) return "burger";
+    if (/پاستا|لازانیا|pasta|lasagna/.test(name)) return "pasta";
+    if (/پیتزا|pizza/.test(name)) return "pizza";
+    if (/ساندویچ|پنینی|رپ مرغ|کلاب|sandwich|panini|wrap/.test(name)) return "sandwich";
+    if (/سالاد|سیب.?زمینی|نان سیر|salad|fries|garlic bread/.test(name)) return "appetizer";
+    return "main";
+  };
   const filtered = products.filter(product => {
-    const cafeCategories = ["coffee","cold","special","dessert","breakfast","bakery"];
+    const inferred = inferredFoodCategory(product);
+    const cafeCategories = ["coffee","cold","special","dessert","bakery","breakfast"];
     const restaurantCategories = ["food","appetizer","main","pasta","pizza","burger","sandwich"];
-    const matchesCategory = state.category === "all" || product.category === state.category || (state.category === "cafe" && cafeCategories.includes(product.category)) || (state.category === "restaurant" && restaurantCategories.includes(product.category));
+    let matchesCategory = state.category === "all" || product.category === state.category;
+    if (state.category === "cafe") matchesCategory = cafeCategories.includes(inferred);
+    else if (state.category === "restaurant") matchesCategory = restaurantCategories.includes(inferred) && inferred !== "breakfast";
+    else if (["breakfast","appetizer","main","pasta","pizza","burger","sandwich","bakery"].includes(state.category)) matchesCategory = inferred === state.category;
     const searchable = normalizeSearchText([product.name, product.en, product.description, product.descEn].join(" "));
     return matchesCategory && (!query || searchable.includes(query));
   });
