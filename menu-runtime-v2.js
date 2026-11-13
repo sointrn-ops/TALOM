@@ -110,6 +110,7 @@ async function loadProducts() {
     return {
       id: String(row.id),
       category: String(row.category || "").trim().toLowerCase(),
+      displayCategory: String(row.category || "").trim().toLowerCase(),
       name: row.name || "",
       en: row.name_en || row.name || "",
       price: Number(row.price) || 0,
@@ -177,7 +178,7 @@ function escapeHTML(value) {
 
 function productCardMarkup(product, index) {
   const favorite = state.favorites.has(product.id);
-  const categoryLabel = categoryNames[product.category]?.[state.language] || "";
+  const categoryLabel = categoryNames[product.displayCategory || product.category]?.[state.language] || "";
   return `
     <article class="product-card" style="animation-delay:${Math.min(index * 35, 280)}ms">
       <div class="product-image-wrap">
@@ -203,7 +204,7 @@ function renderProducts() {
   const inferredFoodCategory = product => {
     if (product.category !== "food") return product.category;
     const name = normalizeSearchText([product.name, product.en].join(" "));
-    if (/صبحانه|املت|پنکیک|وافل|گرانولا|ماست یونانی|breakfast|omelette|pancake|waffle|granola/.test(name)) return "breakfast";
+    if (/صبحانه انگلیسی|املت|پنکیک|وافل|گرانولا|ماست یونانی|breakfast|omelette|pancake|waffle|granola/.test(name)) return "breakfast";
     if (/برگر|burger/.test(name)) return "burger";
     if (/پاستا|لازانیا|pasta|lasagna/.test(name)) return "pasta";
     if (/پیتزا|pizza/.test(name)) return "pizza";
@@ -211,16 +212,18 @@ function renderProducts() {
     if (/سالاد|سیب.?زمینی|نان سیر|salad|fries|garlic bread/.test(name)) return "appetizer";
     return "main";
   };
+  const pageMode = document.body.dataset.page || (location.pathname.includes("restaurant") ? "restaurant" : location.pathname.includes("cafe-bakery") ? "cafe" : "menu");
+  products.forEach(product => { product.displayCategory = inferredFoodCategory(product); });
+  const cafeCategories = ["coffee","cold","special","dessert","breakfast","bakery"];
+  const restaurantCategories = ["appetizer","main","pasta","pizza","burger","sandwich"];
   const filtered = products.filter(product => {
-    const inferred = inferredFoodCategory(product);
-    const cafeCategories = ["coffee","cold","special","dessert","bakery","breakfast"];
-    const restaurantCategories = ["food","appetizer","main","pasta","pizza","burger","sandwich"];
-    let matchesCategory = state.category === "all" || product.category === state.category;
-    if (state.category === "cafe") matchesCategory = cafeCategories.includes(inferred);
-    else if (state.category === "restaurant") matchesCategory = restaurantCategories.includes(inferred) && inferred !== "breakfast";
-    else if (["breakfast","appetizer","main","pasta","pizza","burger","sandwich","bakery"].includes(state.category)) matchesCategory = inferred === state.category;
+    const category = product.displayCategory;
+    const onPage = pageMode === "cafe" ? cafeCategories.includes(category)
+      : pageMode === "restaurant" ? restaurantCategories.includes(category)
+      : true;
+    const matchesCategory = state.category === "all" || category === state.category;
     const searchable = normalizeSearchText([product.name, product.en, product.description, product.descEn].join(" "));
-    return matchesCategory && (!query || searchable.includes(query));
+    return onPage && matchesCategory && (!query || searchable.includes(query));
   });
 
   const groups = [
@@ -232,7 +235,7 @@ function renderProducts() {
   groups.forEach(group => {
     const target = document.getElementById(group.ids[0]);
     const shelf = document.getElementById(group.shelf);
-    const items = filtered.filter(product => group.categories.includes(product.category));
+    const items = filtered.filter(product => group.categories.includes(product.displayCategory || product.category));
     if (target) {
       target.innerHTML = items.map((product, index) => productCardMarkup(product, index)).join("");
       target.hidden = items.length === 0;
@@ -372,7 +375,7 @@ function openProduct(productId) {
   $("#modalProductName").textContent = getProductName(product);
   $("#modalProductDescription").textContent = getProductDescription(product);
   $("#modalProductCategory").textContent =
-    categoryNames[product.category]?.[state.language] || "";
+    categoryNames[product.displayCategory || product.category]?.[state.language] || "";
   $("#modalProductPrice").textContent = formatPrice(product.price);
 
   const favoriteButton = $("#modalFavorite");
@@ -823,104 +826,68 @@ function setupProductCarousel() {
 
 function setupMenu() {
   const categoryTabs = $("#categoryTabs");
-
+  const pageMode = document.body.dataset.page || (location.pathname.includes("restaurant") ? "restaurant" : location.pathname.includes("cafe-bakery") ? "cafe" : "menu");
+  const tabSets = {
+    cafe: [["all","همه انتخاب‌ها","All"],["coffee","قهوه گرم","Hot coffee"],["cold","نوشیدنی سرد","Cold drinks"],["special","نوشیدنی‌های ویژه","Signatures"],["dessert","دسر و شیرینی","Desserts & pastry"],["breakfast","صبحانه و برانچ","Breakfast & brunch"]],
+    restaurant: [["all","همه غذاها","All dishes"],["appetizer","پیش‌غذا و سالاد","Starters & salads"],["main","غذای اصلی","Main courses"],["pasta","پاستا و لازانیا","Pasta & lasagna"],["pizza","پیتزا","Pizza"],["burger","برگر","Burgers"],["sandwich","ساندویچ و پنینی","Sandwiches"]],
+    menu: [["all","همه","All"],["coffee","قهوه گرم","Hot coffee"],["cold","نوشیدنی سرد","Cold drinks"],["special","امضای تالم","Signatures"],["dessert","دسر","Desserts"],["breakfast","صبحانه","Breakfast"],["appetizer","پیش‌غذا","Starters"],["main","غذای اصلی","Main courses"],["pasta","پاستا","Pasta"],["pizza","پیتزا","Pizza"],["burger","برگر","Burgers"],["sandwich","ساندویچ","Sandwiches"]]
+  };
   if (categoryTabs) {
-    const extraCategories = ["cafe","restaurant","breakfast","bakery","appetizer","main","pasta","pizza","burger","sandwich"];
-    extraCategories.forEach(key => {
-      if (categoryTabs.querySelector('[data-category="' + key + '"]')) return;
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "category-tab";
-      button.dataset.category = key;
-      button.dataset.fa = categoryNames[key].fa;
-      button.dataset.en = categoryNames[key].en;
-      button.textContent = categoryNames[key].fa;
-      categoryTabs.append(button);
+    categoryTabs.innerHTML = "";
+    (tabSets[pageMode] || tabSets.menu).forEach(([key,fa,en],index) => {
+      const button=document.createElement("button");
+      button.type="button";button.className="category-tab"+(index===0?" active":"");
+      button.dataset.category=key;button.dataset.fa=fa;button.dataset.en=en;
+      button.textContent=isEnglish()?en:fa;categoryTabs.append(button);
     });
-    categoryTabs.addEventListener("click", event => {
-      const button = event.target.closest("[data-category]");
-      if (!button) return;
-
-      state.category = button.dataset.category;
-
-      $$(".category-tab", categoryTabs).forEach(tab => {
-        tab.classList.toggle("active", tab === button);
+    state.category="all";
+    categoryTabs.addEventListener("click",event=>{
+      const button=event.target.closest("[data-category]");
+      if(!button)return;
+      state.category=button.dataset.category;
+      $$(".category-tab",categoryTabs).forEach(tab=>tab.classList.toggle("active",tab===button));
+      renderProducts();
+    });
+  }
+  if(searchInput)searchInput.addEventListener("input",()=>{
+    state.search=searchInput.value;
+    if(clearSearch)clearSearch.style.visibility=state.search?"visible":"hidden";
+    renderProducts();
+  });
+  if(clearSearch){
+    clearSearch.addEventListener("click",()=>{
+      if(searchInput){searchInput.value="";state.search="";searchInput.focus();}
+      clearSearch.style.visibility="hidden";renderProducts();
+    });
+    clearSearch.style.visibility="hidden";
+  }
+  if(grid){
+    [grid,$("#dessertGrid"),$("#foodGrid")].filter(Boolean).forEach(track=>{
+      track.addEventListener("click",event=>{
+        const favoriteButton=event.target.closest("[data-favorite]");
+        if(favoriteButton){toggleFavorite(String(favoriteButton.dataset.favorite),favoriteButton);return;}
+        const detailsButton=event.target.closest("[data-details]");
+        if(detailsButton)openProduct(String(detailsButton.dataset.details));
       });
-
-      renderProducts();
+      track.addEventListener("error",event=>{
+        const image=event.target;
+        if(!(image instanceof HTMLImageElement)||!image.matches("[data-product-image]"))return;
+        if(image.dataset.fallbackApplied==="true")return;
+        image.dataset.fallbackApplied="true";
+        const product=products.find(item=>item.id===image.dataset.productImage);
+        image.src=productPlaceholder(product?getProductName(product):"TALOM");
+        image.classList.add("image-unavailable");image.alt=product?getProductName(product):"TALOM";
+      },true);
     });
   }
-
-  if (searchInput) {
-    searchInput.addEventListener("input", () => {
-      state.search = searchInput.value;
-
-      if (clearSearch) {
-        clearSearch.style.visibility = state.search ? "visible" : "hidden";
-      }
-
-      renderProducts();
-    });
-  }
-
-  if (clearSearch) {
-    clearSearch.addEventListener("click", () => {
-      if (searchInput) {
-        searchInput.value = "";
-        state.search = "";
-        searchInput.focus();
-      }
-
-      clearSearch.style.visibility = "hidden";
-      renderProducts();
-    });
-
-    clearSearch.style.visibility = "hidden";
-  }
-
-  if (grid) {
-    [grid, $("#dessertGrid"), $("#foodGrid")].filter(Boolean).forEach(track => {
-      track.addEventListener("click", event => {
-        const favoriteButton = event.target.closest("[data-favorite]");
-        if (favoriteButton) {
-          toggleFavorite(String(favoriteButton.dataset.favorite), favoriteButton);
-          return;
-        }
-        const detailsButton = event.target.closest("[data-details]");
-        if (detailsButton) openProduct(String(detailsButton.dataset.details));
-      });
-      track.addEventListener("error", event => {
-        const image = event.target;
-        if (!(image instanceof HTMLImageElement) || !image.matches("[data-product-image]")) return;
-        if (image.dataset.fallbackApplied === "true") return;
-        image.dataset.fallbackApplied = "true";
-        const product = products.find(item => item.id === image.dataset.productImage);
-        image.src = productPlaceholder(product ? getProductName(product) : "TALOM");
-        image.classList.add("image-unavailable");
-        image.alt = product ? getProductName(product) : "TALOM";
-      }, true);
-    });
-  }
-
-  const modalFavorite = $("#modalFavorite");
-
-  if (modalFavorite) {
-    modalFavorite.addEventListener("click", () => {
-      if (!state.selectedProduct) return;
-
-      toggleFavorite(state.selectedProduct, modalFavorite);
-
-      const cardButton = $(
-        `[data-favorite="${state.selectedProduct}"]`
-      );
-
-      if (cardButton) {
-        updateFavoriteButton(cardButton, state.selectedProduct);
-      }
-    });
-  }
+  const modalFavorite=$("#modalFavorite");
+  if(modalFavorite)modalFavorite.addEventListener("click",()=>{
+    if(!state.selectedProduct)return;
+    toggleFavorite(state.selectedProduct,modalFavorite);
+    const cardButton=$(`[data-favorite="${state.selectedProduct}"]`);
+    if(cardButton)updateFavoriteButton(cardButton,state.selectedProduct);
+  });
 }
-
 function setupModals() {
   document.addEventListener("click", event => {
     const closeButton = event.target.closest("[data-close-modal]");
@@ -1216,14 +1183,6 @@ async function init() {
   setupAuth();
   setupNavigation();
   setupMenu();
-  const currentPath = location.pathname.replace(/\/$/, "") || "/";
-  if (currentPath === "/cafe-bakery" || currentPath === "/restaurant") {
-    state.category = currentPath === "/cafe-bakery" ? "cafe" : "restaurant";
-    const activeTab = document.querySelector('#categoryTabs [data-category="' + state.category + '"]');
-    if (activeTab) {
-      $("#categoryTabs .category-tab").forEach(tab => tab.classList.toggle("active", tab === activeTab));
-    }
-  }
   setupProductCarousel();
   setupModals();
   setupMusic();
