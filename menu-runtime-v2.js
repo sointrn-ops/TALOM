@@ -803,6 +803,7 @@ function updateAllCarouselControls() {
 function setupProductCarousel() {
   const tracks = [
     { track: "productGrid", prev: "drinksPrev", next: "drinksNext" },
+    { track: "bakeryGrid", prev: "bakeryPrev", next: "bakeryNext" },
     { track: "dessertGrid", prev: "dessertsPrev", next: "dessertsNext" },
     { track: "foodGrid", prev: "foodPrev", next: "foodNext" }
   ];
