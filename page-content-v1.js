@@ -40,8 +40,8 @@ const contact={
 intro:section("tp-contact-intro","tp-editorial-intro",'<div class="tp-wrap tp-intro-grid"><div><span class="tp-kicker">01 / CONTACT</span><h2>پیامت را<br><em>با ما در میان بگذار.</em></h2></div><p>برای پرسش درباره منو، سفارش، رزرو یا همکاری، فرم پیام را تکمیل کن. نشانی، شماره و ساعات کاری تا زمان دریافت اطلاعات رسمی به‌صورت فرضی نمایش داده نمی‌شوند.</p></div>')
 };
 const menu=$("#menu"),reservationForm=$("#reservation"),eventForm=$("#event-request"),contactForm=$("#contact-request");
-const restaurantIds=["talom-route-hero","tp-restaurant-intro","tp-restaurant-ambience","tp-restaurant-menu-lead","menu","tp-restaurant-reserve","reservation"];
-const cafeIds=["talom-route-hero","tp-cafe-intro","tp-cafe-bakery","tp-cafe-coffee","tp-cafe-menu-lead","menu","signature-banner"];
+const restaurantIds=["talom-route-hero","tp-restaurant-intro","tp-restaurant-ambience","menu","tp-restaurant-reserve","reservation"];
+const cafeIds=["talom-route-hero","tp-cafe-intro","tp-cafe-bakery","tp-cafe-coffee","menu","signature-banner"];
 const ids={
 cafe:cafeIds,
 restaurant:restaurantIds,
