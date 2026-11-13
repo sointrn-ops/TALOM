@@ -2,31 +2,31 @@
   "rewrites": [
     {
       "source": "/cafe-bakery",
-      "destination": "/index.html"
+      "destination": "/cafe-bakery.html"
     },
     {
       "source": "/restaurant",
-      "destination": "/index.html"
+      "destination": "/restaurant.html"
     },
     {
       "source": "/menu",
-      "destination": "/index.html"
+      "destination": "/menu.html"
     },
     {
       "source": "/events",
-      "destination": "/index.html"
+      "destination": "/events.html"
     },
     {
       "source": "/about",
-      "destination": "/index.html"
+      "destination": "/about.html"
     },
     {
       "source": "/reservation",
-      "destination": "/index.html"
+      "destination": "/reservation.html"
     },
     {
       "source": "/contact",
-      "destination": "/index.html"
+      "destination": "/contact.html"
     }
   ]
 }
