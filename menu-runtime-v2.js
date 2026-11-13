@@ -202,8 +202,11 @@ function renderProducts() {
   if (!grid) return;
   const query = normalizeSearchText(state.search);
   const inferredFoodCategory = product => {
-    if (product.category !== "food") return product.category;
     const name = normalizeSearchText([product.name, product.en].join(" "));
+    // Existing croissant and banana-bread products are shown in the bakery shelf,
+    // while the original Supabase category remains unchanged for orders/admin.
+    if (product.category === "dessert" && /کروسان|کرواسان|نان موزی|croissant|banana bread/.test(name)) return "bakery";
+    if (product.category !== "food") return product.category;
     if (/صبحانه انگلیسی|املت|پنکیک|وافل|گرانولا|ماست یونانی|breakfast|omelette|pancake|waffle|granola/.test(name)) return "breakfast";
     if (/برگر|burger/.test(name)) return "burger";
     if (/پاستا|لازانیا|pasta|lasagna/.test(name)) return "pasta";
@@ -228,8 +231,9 @@ function renderProducts() {
 
   const groups = [
     { key: "drinks", ids: ["productGrid"], categories: ["coffee", "cold", "special"], shelf: "drinksShelf", count: "drinksCount" },
+    { key: "bakery", ids: ["bakeryGrid"], categories: ["bakery"], shelf: "bakeryShelf", count: "bakeryCount" },
     { key: "desserts", ids: ["dessertGrid"], categories: ["dessert"], shelf: "dessertsShelf", count: "dessertsCount" },
-    { key: "food", ids: ["foodGrid"], categories: ["food", "breakfast", "bakery", "appetizer", "main", "pasta", "pizza", "burger", "sandwich"], shelf: "foodShelf", count: "foodCount" }
+    { key: "food", ids: ["foodGrid"], categories: ["food", "breakfast", "appetizer", "main", "pasta", "pizza", "burger", "sandwich"], shelf: "foodShelf", count: "foodCount" }
   ];
 
   groups.forEach(group => {
@@ -828,9 +832,9 @@ function setupMenu() {
   const categoryTabs = $("#categoryTabs");
   const pageMode = document.body.dataset.page || (location.pathname.includes("restaurant") ? "restaurant" : location.pathname.includes("cafe-bakery") ? "cafe" : "menu");
   const tabSets = {
-    cafe: [["all","همه انتخاب‌ها","All"],["coffee","قهوه گرم","Hot coffee"],["cold","نوشیدنی سرد","Cold drinks"],["special","نوشیدنی‌های ویژه","Signatures"],["dessert","دسر و شیرینی","Desserts & pastry"],["breakfast","صبحانه و برانچ","Breakfast & brunch"]],
+    cafe: [["all","همه انتخاب‌ها","All"],["coffee","قهوه گرم","Hot coffee"],["cold","نوشیدنی سرد","Cold drinks"],["special","نوشیدنی‌های ویژه","Signatures"],["bakery","نان و محصولات نانوایی","Bread & bakery"],["dessert","دسر","Desserts"],["breakfast","صبحانه و برانچ","Breakfast & brunch"]],
     restaurant: [["all","همه غذاها","All dishes"],["appetizer","پیش‌غذا و سالاد","Starters & salads"],["main","غذای اصلی","Main courses"],["pasta","پاستا و لازانیا","Pasta & lasagna"],["pizza","پیتزا","Pizza"],["burger","برگر","Burgers"],["sandwich","ساندویچ و پنینی","Sandwiches"]],
-    menu: [["all","همه","All"],["coffee","قهوه گرم","Hot coffee"],["cold","نوشیدنی سرد","Cold drinks"],["special","امضای تالم","Signatures"],["dessert","دسر","Desserts"],["breakfast","صبحانه","Breakfast"],["appetizer","پیش‌غذا","Starters"],["main","غذای اصلی","Main courses"],["pasta","پاستا","Pasta"],["pizza","پیتزا","Pizza"],["burger","برگر","Burgers"],["sandwich","ساندویچ","Sandwiches"]]
+    menu: [["all","همه","All"],["coffee","قهوه گرم","Hot coffee"],["cold","نوشیدنی سرد","Cold drinks"],["special","امضای تالم","Signatures"],["bakery","نان و نانوایی","Bread & bakery"],["dessert","دسر","Desserts"],["breakfast","صبحانه","Breakfast"],["appetizer","پیش‌غذا","Starters"],["main","غذای اصلی","Main courses"],["pasta","پاستا","Pasta"],["pizza","پیتزا","Pizza"],["burger","برگر","Burgers"],["sandwich","ساندویچ","Sandwiches"]]
   };
   const setCopy = (selector, fa, en) => {
     const node = $(selector);
