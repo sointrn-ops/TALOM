@@ -45,3 +45,28 @@
 }
 @media(max-width:420px){.rep-home-experience-grid{grid-template-columns:1fr}.rep-home-card{min-height:290px}}
 @media(prefers-reduced-motion:reduce){.rep-home-card img{transition:none}}
+
+/* Complete responsive overlay navigation */
+.site-header.editorial-header>.talom-republique-trigger{min-width:82px;justify-content:flex-start}
+.site-header.editorial-header>.header-actions{display:none!important}
+.site-header.editorial-header>.header-cta{margin-inline-start:auto}
+.talom-republique-overlay{overflow-y:auto}
+.talom-overlay-close{position:absolute;top:26px;inset-inline-end:clamp(22px,5vw,70px);width:44px;height:44px;border:1px solid #cfc8bc;background:transparent;color:#24231f;font-size:28px;line-height:1;cursor:pointer}
+.talom-republique-overlay nav a{display:block;text-decoration:none}
+.talom-republique-overlay nav a:hover{color:#8a7154!important}
+.talom-republique-side .header-actions{display:flex!important;flex-wrap:wrap!important;gap:9px!important;margin-top:14px!important}
+.talom-republique-side .header-actions>*{font:10px "Vazirmatn",sans-serif!important;border-radius:0!important}
+.talom-republique-side .header-actions .cart-open-button,.talom-republique-side .header-actions .auth-open-button,.talom-republique-side .header-actions .icon-button{min-height:36px!important;padding:0 11px!important;background:transparent!important;border:1px solid #d5cfc3!important;color:#24231f!important}
+.talom-republique-side .header-actions .icon-button{width:36px!important;padding:0!important}
+.talom-republique-side .header-actions .header-cta{display:none!important}
+.talom-footer-links{display:flex;flex-wrap:wrap;gap:12px 24px;margin:18px 0}
+.talom-footer-links a{color:inherit;text-decoration:none;font-size:12px}
+@media(max-width:760px){
+ .talom-republique-overlay{grid-template-columns:1fr!important;align-content:start!important;gap:26px!important;padding:86px 28px 38px!important}
+ .talom-republique-overlay nav{gap:3px!important}
+ .talom-republique-overlay nav a{font-size:clamp(23px,7vw,34px)!important}
+ .talom-republique-side{max-width:none!important;padding:20px 0 0!important;border-right:0!important;border-top:1px solid #d1cbbf!important}
+ .talom-overlay-close{top:18px!important}
+ .site-header.editorial-header>.header-cta{padding:10px 12px!important;font-size:9px!important}
+ .site-header.editorial-header>.talom-republique-trigger{gap:7px!important;font-size:10px!important}
+}
