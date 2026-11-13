@@ -832,6 +832,18 @@ function setupMenu() {
     restaurant: [["all","همه غذاها","All dishes"],["appetizer","پیش‌غذا و سالاد","Starters & salads"],["main","غذای اصلی","Main courses"],["pasta","پاستا و لازانیا","Pasta & lasagna"],["pizza","پیتزا","Pizza"],["burger","برگر","Burgers"],["sandwich","ساندویچ و پنینی","Sandwiches"]],
     menu: [["all","همه","All"],["coffee","قهوه گرم","Hot coffee"],["cold","نوشیدنی سرد","Cold drinks"],["special","امضای تالم","Signatures"],["dessert","دسر","Desserts"],["breakfast","صبحانه","Breakfast"],["appetizer","پیش‌غذا","Starters"],["main","غذای اصلی","Main courses"],["pasta","پاستا","Pasta"],["pizza","پیتزا","Pizza"],["burger","برگر","Burgers"],["sandwich","ساندویچ","Sandwiches"]]
   };
+  const setCopy = (selector, fa, en) => {
+    const node = $(selector);
+    if (node) { node.dataset.fa = fa; node.dataset.en = en; node.textContent = isEnglish() ? en : fa; }
+  };
+  if (pageMode === "cafe") {
+    setCopy("#foodShelf .shelf-heading h3","صبحانه و برانچ","Breakfast & brunch");
+    setCopy("#foodShelf .shelf-heading p","صبحانه‌های تازه و انتخاب‌های سبک برای شروع روز","Fresh breakfast and light daytime plates");
+    setCopy("#dessertsShelf .shelf-heading p","شیرینی و دسر؛ همراهی برای قهوه","Pastries and desserts to pair with coffee");
+  } else if (pageMode === "restaurant") {
+    setCopy("#foodShelf .shelf-heading h3","منوی آشپزخانه","The kitchen menu");
+    setCopy("#foodShelf .shelf-heading p","پیش‌غذا، غذاهای اصلی و انتخاب‌های گرم آشپزخانه","Starters, mains and kitchen favourites");
+  }
   if (categoryTabs) {
     categoryTabs.innerHTML = "";
     (tabSets[pageMode] || tabSets.menu).forEach(([key,fa,en],index) => {
