@@ -1,52 +1,44 @@
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const nav=$('#nav, #site-nav');
-const toggle=$('.menu-toggle');
-toggle?.addEventListener('click',()=>{
-  const open=nav?.classList.toggle('open') ?? false;
-  toggle.setAttribute('aria-expanded',String(open));
-});
-$$('a',nav||document).forEach(a=>a.addEventListener('click',()=>{
-  nav?.classList.remove('open');
-  toggle?.setAttribute('aria-expanded','false');
-}));
-
-const search=$('.search-screen, .search-panel');
-const field=$('#search-field, #site-search');
-const searchLinks=$$('.search-links a, .search-results a');
-function showSearch(open){
-  if(!search)return;
-  search.classList.toggle('open',open);
-  search.setAttribute('aria-hidden',String(!open));
-  document.body.classList.toggle('lock',open);
-  if(open)field?.focus();
+const $=(selector,root=document)=>root.querySelector(selector);
+const $$=(selector,root=document)=>[...root.querySelectorAll(selector)];
+const drawer=$('.site-drawer'),backdrop=$('.drawer-backdrop'),menuToggle=$('.menu-toggle');
+function setDrawer(open){
+ if(!drawer||!backdrop)return;
+ drawer.classList.toggle('open',open);backdrop.classList.toggle('open',open);
+ drawer.setAttribute('aria-hidden',String(!open));
+ menuToggle?.setAttribute('aria-expanded',String(open));
+ document.body.classList.toggle('lock',open);
+ if(open) $('.drawer-close')?.focus();
 }
-$('.search-open, .search-trigger')?.addEventListener('click',()=>showSearch(true));
-$('.search-close')?.addEventListener('click',()=>showSearch(false));
-field?.addEventListener('input',()=>{
-  const q=field.value.toLowerCase().trim();
-  searchLinks.forEach(a=>a.hidden=!!q&&!a.textContent.toLowerCase().includes(q));
-});
-
-const light=$('.lightbox'),lightImg=$('.lightbox img');
-$$('[data-full]').forEach(b=>b.addEventListener('click',()=>{
-  if(!light||!lightImg)return;
-  lightImg.src=b.dataset.full;
-  lightImg.alt=$('img',b)?.alt||'Gallery image';
-  light.classList.add('open');
-  light.setAttribute('aria-hidden','false');
-  document.body.classList.add('lock');
-}));
-function closeLight(){
-  light?.classList.remove('open');
-  light?.setAttribute('aria-hidden','true');
-  document.body.classList.remove('lock');
-  if(lightImg)lightImg.src='';
+menuToggle?.addEventListener('click',()=>setDrawer(!drawer?.classList.contains('open')));
+$('.drawer-close')?.addEventListener('click',()=>setDrawer(false));
+backdrop?.addEventListener('click',()=>setDrawer(false));
+$$('.drawer-links a,.drawer-actions a').forEach(a=>a.addEventListener('click',()=>setDrawer(false)));
+const search=$('.search-panel'),searchField=$('#site-search');
+function setSearch(open){
+ if(!search)return;
+ search.classList.toggle('open',open);search.setAttribute('aria-hidden',String(!open));
+ document.body.classList.toggle('lock',open);if(open)searchField?.focus();
 }
-$('.lightbox-close')?.addEventListener('click',closeLight);
-light?.addEventListener('click',e=>{if(e.target===light)closeLight()});
+$('.search-trigger')?.addEventListener('click',()=>setSearch(true));
+$('.search-close')?.addEventListener('click',()=>setSearch(false));
+searchField?.addEventListener('input',()=>{
+ const q=searchField.value.trim().toLocaleLowerCase('fa');
+ $$('.search-results a').forEach(a=>a.hidden=Boolean(q)&&!a.textContent.toLocaleLowerCase('fa').includes(q));
+});
+const lightbox=$('.lightbox'),lightboxImage=$('.lightbox img');
+$$('[data-full]').forEach(button=>button.addEventListener('click',()=>{
+ if(!lightbox||!lightboxImage)return;
+ lightboxImage.src=button.dataset.full;lightboxImage.alt=$('img',button)?.alt||'تصویر گالری';
+ lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');
+ document.body.classList.add('lock');$('.lightbox-close')?.focus();
+}));
+function closeLightbox(){
+ lightbox?.classList.remove('open');lightbox?.setAttribute('aria-hidden','true');
+ if(lightboxImage)lightboxImage.src='';
+ document.body.classList.remove('lock');
+}
+$('.lightbox-close')?.addEventListener('click',closeLightbox);
+lightbox?.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    showSearch(false);closeLight();nav?.classList.remove('open');
-    toggle?.setAttribute('aria-expanded','false');
-  }
+ if(e.key==='Escape'){setDrawer(false);setSearch(false);closeLightbox()}
 });
