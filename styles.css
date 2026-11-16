@@ -20,3 +20,11 @@
 .quick-order i{height:15px;width:1px;background:#c8c0b4}
 .hero{height:min(760px,calc(100svh - 160px))}
 @media(max-width:700px){.main-nav{inset:101px 0 0!important;height:calc(100svh - 101px)!important;padding:6vh 8%!important}.quick-order{gap:13px;min-height:39px;font-size:7px;letter-spacing:.7px}.quick-order>span{display:none}.quick-order b{margin-left:5px}.hero{height:calc(88svh - 140px)}}
+
+/* Interaction and accessibility refinements */
+.button{display:inline-flex;align-items:center;justify-content:center;gap:24px;padding:14px 20px;font-size:9px;letter-spacing:1.35px;text-decoration:none;border:1px solid var(--ink);transition:background .2s,color .2s,border-color .2s}
+.button-dark{background:var(--ink);color:var(--paper)}
+.button-dark:hover{background:var(--rust);border-color:var(--rust);color:#fff}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--rust);outline-offset:4px}
+.main-nav a:hover,.footer-columns a:hover{color:var(--rust)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
