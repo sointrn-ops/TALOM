@@ -1,194 +1,148 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl" data-theme="light">
+<!doctype html>
+<html lang="fa" dir="rtl">
 <head>
-  <meta name="google-site-verification" content="UJxVkLM2juOTkLCautKDjGMyLZrrLv-t5eoTrbrvTRg">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#F5F0E7">
-  <link rel="canonical" href="https://talom-coffee.vercel.app/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="TALOM">
-  <meta property="og:title" content="TALOM Café & Restaurant">
-  <meta property="og:description" content="کافه، نانوایی و رستوران تالم؛ قهوه، صبحانه، غذا و دورهمی‌های خوش‌طعم.">
-  <meta property="og:url" content="https://talom-coffee.vercel.app/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=85">
-  <meta name="description" content="TALOM Café & Restaurant — قهوه، صبحانه، غذا و تجربه‌های خوش‌طعم.">
-  <title>TALOM — Café & Restaurant</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta name="description" content="WOON — نانوایی، کافه و آشپزخانه؛ جایی برای مزه‌های خوب و لحظه‌های ماندگار.">
+  <title>WOON — Bakery, Café & Kitchen</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261111-editorial-02">
-  <link rel="stylesheet" href="restaurant-experience.css?v=20261111-01">
-
-
-
-  <link rel="stylesheet" href="talom-pages.css?v=20261112-02">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
-  <script src="menu-runtime-v2.js?v=20261113-01" defer></script>
-  <script src="cart.js" defer></script>
-  <script src="restaurant-experience.js?v=20261111-01" defer></script>
-
-  <script src="talom-pages.js?v=20261112-02" defer></script>
-  <link rel="stylesheet" href="page-content-v1.css?v=20261113-01">
-  <script src="page-content-v1.js?v=20261113-03" defer></script>
-    <link rel="stylesheet" href="republique-editorial-v14.css?v=20261116-14">
-    <link rel="stylesheet" href="republique-editorial-v15.css?v=20261116-15">
-    <link rel="stylesheet" href="republique-editorial-v16.css?v=20261116-16">
-  <script src="republique-editorial-v15.js?v=20261116-15" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="woon.css">
+  <script src="woon.js" defer></script>
 </head>
-<body class="talom-redesign">
-  <div class="scroll-progress" id="scrollProgress"></div>
-  <header class="site-header editorial-header" id="siteHeader">
-  <a class="brand" href="#home" aria-label="TALOM Home"><span class="brand-symbol">T</span><span class="brand-word">TALOM<span class="brand-dot">.</span><small>فرهنگ قهوه</small></span></a>
-  <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="باز کردن منو" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
-  <nav class="main-nav" id="mainNav" aria-label="ناوبری اصلی">
-    <a href="#menu" data-fa="منو" data-en="Menu">منو</a><a href="/cafe-bakery" data-fa="نانوایی" data-en="Bakery">نانوایی</a><a href="/restaurant" data-fa="رستوران" data-en="Restaurant">رستوران</a>
+<body>
+  <a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
+  <div class="announcement"><span>BAKERY · CAFÉ · KITCHEN</span><span class="announcement-fa">هر روز، از اولین قهوه تا آخرین لقمه</span></div>
+
+  <header class="site-header" id="siteHeader">
+    <button class="menu-trigger" id="menuTrigger" aria-expanded="false" aria-controls="siteMenu"><span class="menu-lines"><i></i><i></i></span><span>فهرست</span></button>
+    <a class="wordmark" href="#home" aria-label="WOON home">WOON<span>®</span></a>
+    <div class="header-right">
+      <a class="header-link" href="#visit">نشانی و ساعات</a>
+      <a class="reserve-link" href="#visit">رزرو میز <span>↗</span></a>
+    </div>
+  </header>
+
+  <nav class="menu-overlay" id="siteMenu" aria-hidden="true">
+    <div class="menu-overlay-top"><span>WOON® / EXPLORE</span><button id="menuClose" aria-label="بستن فهرست">بستن <b>×</b></button></div>
+    <div class="menu-overlay-body">
+      <div class="menu-overlay-links">
+        <a href="#home"><small>01</small>خانه<span>↗</span></a>
+        <a href="#experience"><small>02</small>تجربهٔ وون<span>↗</span></a>
+        <a href="#menu"><small>03</small>منو<span>↗</span></a>
+        <a href="#events"><small>04</small>میزبانی و رویدادها<span>↗</span></a>
+        <a href="#gallery"><small>05</small>گالری<span>↗</span></a>
+        <a href="#visit"><small>06</small>بازدید از وون<span>↗</span></a>
+      </div>
+      <div class="menu-overlay-note"><span class="eyebrow">A PLACE TO GATHER</span><p>برای یک قهوهٔ کوتاه، یک صبحانهٔ طولانی یا دیداری که دوست داری ادامه پیدا کند.</p><span class="menu-overlay-foot">GOOD FOOD. GOOD COMPANY.</span></div>
+    </div>
   </nav>
-  <div class="header-actions">
-    <button class="cart-open-button" id="cartOpenButton" type="button"><span>سبد خرید</span> <b id="cartCount">0</b></button>
-    <button class="auth-open-button" id="authOpenButton" type="button" data-fa="ورود / ثبت‌نام" data-en="Sign in">ورود / ثبت‌نام</button>
-    <button class="icon-button" id="languageToggle" aria-label="Change language">EN</button>
-    <button class="icon-button theme-button" id="themeToggle" aria-label="Change theme"><span id="themeIcon">☼</span></button>
-    <a class="header-cta" href="#contact"><span data-fa="رزرو و تماس" data-en="Reservations">رزرو و تماس</span><span class="cta-arrow">↗</span></a>
-  </div>
-</header>
-<button class="talom-index-trigger" id="talomIndexToggle" type="button" aria-expanded="false" aria-controls="talomIndexPanel"><span>فهرست</span><i></i></button>
-<aside class="talom-index-panel" id="talomIndexPanel" aria-hidden="true">
-  <div class="talom-index-top"><span>تالم / فهرست</span><button id="talomIndexClose" type="button" aria-label="بستن">×</button></div>
-  <a href="#home"><b>01</b> خانه</a><a href="#experiences"><b>02</b> تجربه‌ها</a><a href="#menu"><b>03</b> منو</a><a href="#about-talom"><b>04</b> درباره تالم</a><a href="#private-events"><b>05</b> دورهمی‌ها</a><a href="#gallery"><b>06</b> گالری</a><a href="#contact"><b>07</b> تماس</a>
-</aside>
 
-  <main>
-    <section class="hero republic-hero" id="home" aria-label="صفحه اصلی کافه TALOM">
-  <div class="republic-hero-image"><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=2400&q=90" alt="فضای گرم کافه تالم" fetchpriority="high"></div>
-  <div class="republic-hero-copy"><p class="republic-welcome">خــــوش آمــــدیــــد</p><h1>به <em>تالم</em></h1><p class="republic-hero-sub" data-fa="کافه، نانوایی و رستوران؛ برای لحظه‌هایی که ارزش مکث دارند" data-en="A café, bakery and a place to slow down">کافه، نانوایی و تجربه‌ای برای مکث کردن</p><span class="republic-hero-rule"></span><a href="#experiences" class="republic-text-link"><span data-fa="تجربه تالم را کشف کن" data-en="DISCOVER TALOM">تجربه تالم را کشف کن</span><b>↘</b></a></div>
-  <div class="republic-hero-caption"><span>۰۱ — کافه، نانوایی و رستوران تالم</span><span>آغاز فعالیت · ۱۴۰۱</span></div>
-</section>
-<section class="republic-experiences" id="experiences">
-  <div class="republic-section-intro"><span>۰۲ / تجربه‌های تالم</span><p data-fa="از صبحانه تا آخرین فنجان قهوه." data-en="A reason to gather, whatever your taste.">هر سلیقه، بهانه‌ای برای آمدن.</p></div>
-  <a class="republic-experience-row" href="#menu"><div class="republic-exp-photo"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=88" alt="نان تازه و شیرینی"></div><div class="republic-exp-copy"><span>۰۱ / نانوایی</span><h2 data-fa="نان تازه و شیرینی" data-en="Bakery & Pastry">نانوایی و شیرینی</h2><p data-fa="عطر نان تازه و شیرینی‌هایی برای لحظه‌های آرام." data-en="Freshly baked bread and pastries for slower moments.">عطر نان تازه و شیرینی‌هایی برای لحظه‌های آرام.</p><b>↗</b></div></a>
-  <a class="republic-experience-row reverse" href="#menu"><div class="republic-exp-photo"><img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=1200&q=88" alt="صبحانه و برانچ"></div><div class="republic-exp-copy"><span>۰۲ / صبحانه</span><h2 data-fa="صبحانه و برانچ" data-en="Breakfast & Brunch">صبحانه و برانچ</h2><p data-fa="شروعی خوش‌طعم برای روزهایی که ارزش آرام گرفتن دارند." data-en="A thoughtful start to days worth slowing down for.">شروعی خوش‌طعم برای روزهایی که ارزش آرام گرفتن دارند.</p><b>↗</b></div></a>
-  <a class="republic-experience-row" href="#menu"><div class="republic-exp-photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=88" alt="ناهار و شام"></div><div class="republic-exp-copy"><span>۰۳ / آشپزخانه</span><h2 data-fa="غذا و شام" data-en="Kitchen & Dinner">غذا و شام</h2><p data-fa="انتخاب‌هایی برای دورهمی‌های کوچک و وعده‌های به‌یادماندنی." data-en="A menu for intimate gatherings and memorable meals.">انتخاب‌هایی برای دورهمی‌های کوچک و وعده‌های به‌یادماندنی.</p><b>↗</b></div></a>
-  <a class="republic-experience-row reverse" href="#menu"><div class="republic-exp-photo"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=88" alt="قهوه تازه"></div><div class="republic-exp-copy"><span>۰۴ / قهوه</span><h2 data-fa="قهوه و نوشیدنی‌های ویژه" data-en="Coffee & Drinks">قهوه و نوشیدنی</h2><p data-fa="از طعم‌های آشنا تا امضای باریستاهای تالم." data-en="From familiar classics to TALOM barista signatures.">از طعم‌های آشنا تا امضای باریستاهای تالم.</p><b>↗</b></div></a>
-  <a class="republic-experience-row" href="#private-events"><div class="republic-exp-photo"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=88" alt="چای و دسر"></div><div class="republic-exp-copy"><span>۰۵ / دورهمی</span><h2 data-fa="چای و دسر" data-en="Gatherings & Events">دورهمی و مناسبت‌ها</h2><p data-fa="چیزی شیرین برای پایان یک وعده یا همراهی با قهوه." data-en="For celebrations, meetups and moments made better together.">برای جشن‌ها، قرارها و لحظه‌هایی که کنار هم کامل می‌شوند.</p><b>↗</b></div></a>
-  <div class="republic-menu-link"><a href="#menu" data-fa="دیدن منوی کامل تالم" data-en="VIEW THE TALOM MENU">دیدن منوی کامل تالم <b>↗</b></a></div>
-</section>
-
-    <section class="republic-about" id="about-talom"><span>۰۳ / جایی برای بازگشت</span><p data-fa="تالم، جایی برای قهوه خوب، نان تازه و دیدارهای ساده است؛ کافه‌ای که برای لحظه‌های روزمره ساخته شده و هر بار می‌تواند شروع یک خاطره تازه باشد." data-en="TALOM is a place for good coffee, fresh bread and easy company — a café made for everyday moments, each visit another chance to make a memory.">تالم، جایی برای قهوه خوب، نان تازه و دیدارهای ساده است؛ کافه‌ای که برای لحظه‌های روزمره ساخته شده و هر بار می‌تواند شروع یک خاطره تازه باشد.</p><a href="#contact" data-fa="بیشتر با تالم آشنا شو" data-en="GET TO KNOW TALOM">بیشتر با تالم آشنا شو ↗</a></section>
-<section class="republic-events" id="private-events"><div class="republic-events-photo"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1800&q=88" alt="میز آماده برای یک دورهمی"></div><div class="republic-events-copy"><span>۰۴ / دورهمی‌های خصوصی</span><p class="republic-events-kicker" data-fa="لحظه‌های مهم را کنار هم بسازید" data-en="MAKE ROOM FOR THE MOMENTS THAT MATTER">لحظه‌های مهم را کنار هم بسازید</p><h2 data-fa="دورهمی‌ها<br><em>در تالم</em>" data-en="Gatherings<br><em>at TALOM</em>">دورهمی‌ها<br><em>در تالم</em></h2><p data-fa="برای قرارهای دوستانه، جشن‌های کوچک و مناسبت‌های خاص، با ما هماهنگ کنید تا فضایی متناسب با جمع شما آماده کنیم." data-en="From friendly meetups to small celebrations, get in touch and let us help shape a setting for your gathering.">برای قرارهای دوستانه، جشن‌های کوچک و مناسبت‌های خاص، با ما هماهنگ کنید تا فضایی متناسب با جمع شما آماده کنیم.</p><a href="#contact" data-fa="هماهنگی و رزرو ↗" data-en="ENQUIRE & RESERVE ↗">هماهنگی و رزرو ↗</a></div></section>
-    <section class="menu-section editorial-menu section-pad" id="menu">
-      <div class="section-kicker reveal menu-discovery-kicker"><span>05</span><span data-fa="برای کشف طعم تازه" data-en="A TASTE TO DISCOVER">برای کشف طعم تازه</span></div>
-      <div class="section-heading reveal">
-        <div><p class="overline" data-fa="از کلاسیک تا متفاوت" data-en="CLASSIC TO UNEXPECTED">از کلاسیک تا متفاوت</p><h2 data-fa="منوی <em>TALOM</em>" data-en="THE <em>TALOM MENU</em>">منوی <em>TALOM</em></h2></div>
-        <p data-fa="یک انتخاب ساده یا طعمی تازه؛ از اینجا شروع کن." data-en="A familiar favourite or something new. Start here.">یک انتخاب ساده یا طعمی تازه؛ از اینجا شروع کن.</p>
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="hero-image" role="img" aria-label="فضای گرم و تاریخی یک کافه و رستوران"></div>
+      <div class="hero-tint"></div>
+      <div class="hero-content">
+        <p class="hero-overline">WELCOME TO</p>
+        <h1>WOON<span class="hero-period">.</span></h1>
+        <p class="hero-subtitle">BAKERY · CAFÉ · KITCHEN</p>
+        <p class="hero-description">جایی برای نان تازه، قهوهٔ خوب و غذاهایی که با فصل‌ها روایت می‌شوند.</p>
+        <a class="hero-button" href="#experience">کشف دنیای وون <span>↙</span></a>
       </div>
-      <div class="menu-toolbar reveal">
-        <div class="category-tabs" id="categoryTabs">
-          <button class="category-tab active" data-category="all" data-fa="همه" data-en="All">همه</button>
-          <button class="category-tab" data-category="coffee" data-fa="قهوه گرم" data-en="Hot coffee">قهوه گرم</button>
-          <button class="category-tab" data-category="cold" data-fa="نوشیدنی سرد" data-en="Cold drinks">نوشیدنی سرد</button>
-          <button class="category-tab" data-category="special" data-fa="امضای TALOM" data-en="Signatures">امضای TALOM</button>
-          <button class="category-tab" data-category="dessert" data-fa="دسر" data-en="Dessert">دسر</button>
-          <button class="category-tab" data-category="food" data-fa="خوراکی" data-en="Food">خوراکی</button>
-        </div>
-        <label class="search-box"><span>⌕</span><input id="menuSearch" type="search" placeholder="جست‌وجو در منو..." data-placeholder-fa="جست‌وجو در منو..." data-placeholder-en="Search the menu..." autocomplete="off"><button id="clearSearch" type="button" aria-label="Clear search">×</button></label>
-      </div>
-      <div class="menu-meta reveal"><span id="productCount">انتخاب‌های ما</span><span data-fa="قیمت‌ها به تومان" data-en="Prices in toman">قیمت‌ها به تومان</span></div>
-
-      <section class="menu-shelf" id="drinksShelf">
-        <div class="shelf-heading"><div><span class="shelf-index">۰۱ / نوشیدنی‌ها</span><h3 data-fa="نوشیدنی‌ها" data-en="Drinks">نوشیدنی‌ها</h3><p data-fa="قهوه‌های کلاسیک، نوشیدنی‌های سرد و ترکیب‌های ویژه" data-en="Coffee classics, chilled drinks and signatures">قهوه‌های کلاسیک، نوشیدنی‌های سرد و ترکیب‌های ویژه</p></div><span class="shelf-count" id="drinksCount"></span></div>
-        <div class="product-carousel" data-carousel="drinks">
-          <button class="carousel-arrow" id="drinksPrev" type="button" aria-label="قبلی">‹</button>
-          <div class="product-grid" id="productGrid"></div>
-          <button class="carousel-arrow" id="drinksNext" type="button" aria-label="بعدی">›</button>
-        </div>
-        <div class="carousel-hint"><span data-fa="برای دیدن موارد بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن موارد بیشتر ورق بزنید</span><span class="carousel-progress" id="drinksProgress"></span></div>
-      </section>
-
-      <section class="menu-shelf" id="dessertsShelf">
-        <div class="shelf-heading"><div><span class="shelf-index">۰۲ / دسرها</span><h3 data-fa="دسرها" data-en="Desserts">دسرها</h3><p data-fa="چیزهای شیرین برای کنار قهوه یا یک مکث کوتاه" data-en="Something sweet for your coffee break">چیزهای شیرین برای کنار قهوه یا یک مکث کوتاه</p></div><span class="shelf-count" id="dessertsCount"></span></div>
-        <div class="product-carousel" data-carousel="desserts">
-          <button class="carousel-arrow" id="dessertsPrev" type="button" aria-label="قبلی">‹</button>
-          <div class="product-grid" id="dessertGrid"></div>
-          <button class="carousel-arrow" id="dessertsNext" type="button" aria-label="بعدی">›</button>
-        </div>
-        <div class="carousel-hint"><span data-fa="برای دیدن موارد بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن موارد بیشتر ورق بزنید</span><span class="carousel-progress" id="dessertsProgress"></span></div>
-      </section>
-
-      <section class="menu-shelf" id="foodShelf">
-        <div class="shelf-heading"><div><span class="shelf-index">۰۳ / خوراکی‌ها</span><h3 data-fa="خوراکی‌ها" data-en="Food">خوراکی‌ها</h3><p data-fa="انتخاب‌های سبک و خوش‌طعم برای هر ساعت روز" data-en="Fresh bites for any time of day">انتخاب‌های سبک و خوش‌طعم برای هر ساعت روز</p></div><span class="shelf-count" id="foodCount"></span></div>
-        <div class="product-carousel" data-carousel="food">
-          <button class="carousel-arrow" id="foodPrev" type="button" aria-label="قبلی">‹</button>
-          <div class="product-grid" id="foodGrid"></div>
-          <button class="carousel-arrow" id="foodNext" type="button" aria-label="بعدی">›</button>
-        </div>
-        <div class="carousel-hint"><span data-fa="برای دیدن موارد بیشتر ورق بزنید" data-en="Swipe to explore more">برای دیدن موارد بیشتر ورق بزنید</span><span class="carousel-progress" id="foodProgress"></span></div>
-      </section>
-      <div class="empty-state" id="emptyState" hidden><span>⌕</span><p data-fa="موردی پیدا نشد؛ عبارت دیگری را امتحان کن." data-en="Nothing found. Try another search.">موردی پیدا نشد؛ عبارت دیگری را امتحان کن.</p></div>
+      <div class="hero-vertical">A TABLE FOR EVERY STORY</div>
+      <div class="hero-bottom"><span>EST. 2026</span><span>GOOD THINGS TAKE TIME</span><a href="#experience">SCROLL TO EXPLORE ↓</a></div>
     </section>
 
+    <section class="welcome-intro" id="experience">
+      <div class="intro-label"><span>01</span><i></i><span>THE WOON EXPERIENCE</span></div>
+      <div class="intro-main">
+        <h2>Come hungry.<br><em>Leave happy.</em></h2>
+        <div class="intro-copy"><p>وون از یک فکر ساده شروع شد: ساختن جایی که کیفیت، مهمان‌نوازی و لذتِ کنار هم بودن در هر جزئیاتش حس شود. از عطر نان تازه در صبح تا میزهای گرم و غذاهای فصلی در پایان روز.</p><a class="underlined-link" href="#story">داستان وون <span>↗</span></a></div>
+      </div>
+      <div class="intro-stamp">MADE WITH<br><b>CARE</b><br>IN WOON</div>
+    </section>
 
+    <section class="offerings" id="menu">
+      <div class="section-heading">
+        <div><p class="section-kicker">02 / WHAT WE SERVE</p><h2>Something for<br><em>every moment.</em></h2></div>
+        <p class="section-heading-copy">از صبح‌های آرام تا شام‌های طولانی؛ هر بخش از منو با مواد اولیهٔ تازه و توجه به جزئیات شکل می‌گیرد.</p>
+      </div>
+      <div class="offering-list">
+        <a class="offering-row" href="#menu-items" data-category="dessert">
+          <span class="offering-number">01</span><span class="offering-name">Bakery & Pastry</span><span class="offering-fa">نانوایی و شیرینی‌پزی</span>
+          <span class="offering-image"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85" alt="نان تازه"></span><span class="offering-arrow">↗</span>
+        </a>
+        <a class="offering-row" href="#menu-items" data-category="food">
+          <span class="offering-number">02</span><span class="offering-name">Brunch</span><span class="offering-fa">صبحانه و برانچ</span>
+          <span class="offering-image"><img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85" alt="صبحانه و برانچ"></span><span class="offering-arrow">↗</span>
+        </a>
+        <a class="offering-row" href="#menu-items" data-category="food">
+          <span class="offering-number">03</span><span class="offering-name">Kitchen</span><span class="offering-fa">آشپزخانه و غذاهای فصلی</span>
+          <span class="offering-image"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85" alt="غذای تازه"></span><span class="offering-arrow">↗</span>
+        </a>
+        <a class="offering-row" href="#menu-items" data-category="coffee">
+          <span class="offering-number">04</span><span class="offering-name">Coffee</span><span class="offering-fa">قهوه و نوشیدنی‌های گرم</span>
+          <span class="offering-image"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85" alt="قهوه"></span><span class="offering-arrow">↗</span>
+        </a>
+        <a class="offering-row" href="#menu-items" data-category="cold">
+          <span class="offering-number">05</span><span class="offering-name">Seasonal Drinks</span><span class="offering-fa">نوشیدنی‌های فصلی</span>
+          <span class="offering-image"><img src="https://images.unsplash.com/photo-1513558161293-c苦?auto=format&fit=crop&w=900&q=85" alt="نوشیدنی خنک"></span><span class="offering-arrow">↗</span>
+        </a>
+      </div>
+      <div class="menu-cta-row"><span>FRESHLY MADE. THOUGHTFULLY SERVED.</span><a href="#menu-items" class="dark-button">مشاهدهٔ منو <span>↗</span></a></div>
+    </section>
 
-    <section class="gallery-section section-pad editorial-gallery" id="gallery">
-      <div class="section-kicker reveal"><span>06</span><span data-fa="از نزدیک ببین" data-en="A CLOSER LOOK">از نزدیک ببین</span></div>
-      <div class="section-heading reveal"><div><p class="overline" data-fa="فضا و جزئیات" data-en="SPACE & DETAILS">فضا و جزئیات</p><h2 data-fa="حال‌وهوای <em>ما</em>" data-en="THE TALOM <em>MOOD</em>">حال‌وهوای <em>ما</em></h2></div><p data-fa="نور گرم، میزهای صمیمی و عطر قهوه تازه." data-en="Warm light, welcoming tables and the scent of fresh coffee.">نور گرم، میزهای صمیمی و عطر قهوه تازه.</p></div>
+    <section class="menu-items-section" id="menu-items">
+      <div class="menu-items-head"><div><p class="section-kicker">03 / THE MENU</p><h2>A taste of <em>WOON.</em></h2></div><p>منوی وون با فصل‌ها تغییر می‌کند.</p></div>
+      <div class="menu-controls">
+        <div class="menu-filters" role="group" aria-label="فیلتر دسته‌بندی منو">
+          <button class="filter-button active" data-filter="all">همه</button>
+          <button class="filter-button" data-filter="coffee">قهوه</button>
+          <button class="filter-button" data-filter="cold">نوشیدنی سرد</button>
+          <button class="filter-button" data-filter="dessert">شیرینی و دسر</button>
+          <button class="filter-button" data-filter="food">غذا</button>
+        </div>
+        <label class="menu-search"><span>⌕</span><input id="menuSearch" type="search" placeholder="جست‌وجو در منو..." autocomplete="off"></label>
+      </div>
+      <div class="menu-grid" id="menuGrid"><div class="menu-loading">در حال دریافت منو…</div></div>
+      <p class="menu-status" id="menuStatus" aria-live="polite"></p>
+    </section>
+
+    <section class="story-section" id="story">
+      <div class="story-photo"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1500&q=90" alt="فضای داخلی کافه"></div>
+      <div class="story-content"><p class="section-kicker">04 / OUR PHILOSOPHY</p><h2>Rooted in craft.<br><em>Made for people.</em></h2><p>ما به چیزهایی اهمیت می‌دهیم که شاید ساده به نظر برسند؛ مواد اولیهٔ خوب، دست‌های ماهر، فضایی صمیمی و زمانی که برای آماده‌کردن هر سفارش صرف می‌شود. وون قرار است بخشی از خاطرات روزمرهٔ شما باشد.</p><a class="underlined-link" href="#visit">بیشتر دربارهٔ ما <span>↗</span></a><div class="story-caption">A LITTLE MORE THAN A CAFÉ — WOON®</div></div>
+    </section>
+
+    <section class="private-events" id="events">
+      <div class="events-image"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=90" alt="چیدمان میز برای یک دورهمی"></div>
+      <div class="events-panel"><p class="section-kicker">05 / PRIVATE EVENTS</p><h2>Make room<br>for <em>moments.</em></h2><p>از دورهمی‌های کوچک تا جشن‌های به‌یادماندنی، وون می‌تواند میزبان لحظه‌های خاص شما باشد. دربارهٔ ظرفیت، چیدمان و برنامهٔ موردنظرتان با ما صحبت کنید.</p><a class="light-button" href="#visit">برنامه‌ریزی یک رویداد <span>↗</span></a><span class="events-index">GATHER · CELEBRATE · REMEMBER</span></div>
+    </section>
+
+    <section class="gallery-section" id="gallery">
+      <div class="gallery-heading"><div><p class="section-kicker">06 / THE GALLERY</p><h2>A peek inside <em>WOON.</em></h2></div><p>فضا، آدم‌ها و لحظه‌هایی که وون را می‌سازند.</p></div>
       <div class="gallery-grid">
-        <button class="gallery-card gallery-large reveal" data-image="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1800&q=88" aria-label="View cafe"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1800&q=88" alt="فضای کافه" loading="lazy"><span class="gallery-caption">۰۱ / فضای تالم <b>↗</b></span></button>
-        <button class="gallery-card reveal" data-image="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1400&q=88" aria-label="View interior"><img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1400&q=88" alt="فضای داخلی" loading="lazy"><span class="gallery-caption">۰۲ / جزئیات فضا <b>↗</b></span></button>
-        <button class="gallery-card reveal" data-image="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1400&q=88" aria-label="View coffee"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1400&q=88" alt="قهوه و جزئیات" loading="lazy"><span class="gallery-caption">۰۳ / هنر قهوه <b>↗</b></span></button>
-        <button class="gallery-card gallery-wide reveal" data-image="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1600&q=88" aria-label="View cafe atmosphere"><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1600&q=88" alt="حال و هوای کافه" loading="lazy"><span class="gallery-caption">۰۴ / لحظه‌های تالم <b>↗</b></span></button>
+        <button class="gallery-item gallery-large" data-image="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&w=1800&q=90" aria-label="نمای بزرگ فضای کافه"><img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&w=1100&q=85" alt="فضای کافه"></button>
+        <button class="gallery-item" data-image="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1800&q=90" aria-label="نمای نان تازه"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=85" alt="نان تازه"></button>
+        <button class="gallery-item" data-image="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=90" aria-label="نمای قهوه"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=85" alt="قهوه"></button>
+        <button class="gallery-item" data-image="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1800&q=90" aria-label="نمای غذا"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=85" alt="غذا"></button>
       </div>
     </section>
 
-    <section class="contact-section section-pad editorial-contact" id="contact">
-      <div class="section-kicker reveal"><span>07</span><span data-fa="پیدایمان کن" data-en="FIND US">پیدایمان کن</span></div>
-      <div class="contact-grid"><div class="contact-copy reveal"><p class="overline" data-fa="قرار بعدی با تو" data-en="YOUR NEXT VISIT">قرار بعدی با تو</p><h2 data-fa="یک فنجان فاصله<br><em>تا حال بهتر.</em>" data-en="One cup away<br><em>from a better day.</em>">یک فنجان فاصله<br><em>تا حال بهتر.</em></h2><p class="body-copy" data-fa="برای سفارش، پرسش یا دنبال کردن تازه‌های TALOM از راه‌های زیر با ما در ارتباط باش." data-en="For orders, questions and updates from TALOM, reach us through the links below.">برای سفارش، پرسش یا دنبال کردن تازه‌های TALOM از راه‌های زیر با ما در ارتباط باش.</p><div class="contact-links"><a href="https://www.instagram.com/mr.01di/" target="_blank" rel="noopener noreferrer"><span>Instagram</span><b>↗</b></a><a href="https://t.me/bardiasallmi" target="_blank" rel="noopener noreferrer"><span>Telegram</span><b>↗</b></a><a href="tel:09904711802"><span>0990 471 1802</span><b>↗</b></a><a href="tel:09019795131"><span>0901 979 5131</span><b>↗</b></a></div></div><div class="contact-visual reveal"><div class="contact-photo"></div><div class="contact-card"><span>TALOM.</span><small>قهوه خوب، لحظه‌های خوب</small><div>از ۱۴۰۱</div></div></div></div>
+    <section class="visit-section" id="visit">
+      <div class="visit-title"><p class="section-kicker">07 / COME BY</p><h2>Your table<br>is <em>waiting.</em></h2><p>برای بازدید، رزرو میز یا هماهنگی رویدادها با وون در ارتباط باشید.</p><a class="light-button" href="#contact">اطلاعات تماس <span>↗</span></a></div>
+      <div class="visit-details" id="contact">
+        <div class="visit-detail"><span>FIND US</span><p>نشانی مجموعه پس از مشخص‌شدن شعبه در این بخش قرار می‌گیرد.</p></div>
+        <div class="visit-detail"><span>OPENING HOURS</span><p>ساعات فعالیت به‌زودی اعلام می‌شود.</p></div>
+        <div class="visit-detail"><span>RESERVATIONS</span><p>برای فعال‌شدن رزرو آنلاین، اطلاعات تماس و سرویس رزرو مجموعه باید متصل شود.</p></div>
+        <div class="visit-detail"><span>FOLLOW WOON</span><p>شبکه‌های اجتماعی وون پس از ثبت نشانی رسمی اضافه می‌شوند.</p></div>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer" id="footer"><a class="brand footer-brand" href="#home"><span class="brand-symbol">T</span><span class="brand-word">TALOM<span class="brand-dot">.</span><small>COFFEE CULTURE</small></span></a><p data-fa="قهوه، با حوصله." data-en="Coffee, with intention.">قهوه، با حوصله.</p><span>© <span id="year"></span> TALOM</span><small class="image-credit"><span data-fa="منبع تصویر اصلی:" data-en="Hero image source:">منبع تصویر اصلی:</span> <a href="https://www.caffegallery.com/" target="_blank" rel="noopener noreferrer" data-fa="کافه گالری" data-en="Caffegallery">کافه گالری</a> <span data-fa="؛ تصاویر گالری و منو نمونه هستند." data-en="; gallery and menu photos are illustrative.">؛ تصاویر گالری و منو نمونه هستند.</span></small></footer>
+  <footer class="site-footer"><a class="footer-logo" href="#home">WOON<span>®</span></a><span>BAKERY · CAFÉ · KITCHEN</span><span>© 2026 WOON. ALL RIGHTS RESERVED.</span><a href="#home">بازگشت به بالا ↑</a></footer>
 
-  <div class="music-player" id="musicPlayer"><audio id="siteMusic" src="music/ali.mp3" preload="metadata" loop></audio><button class="music-toggle" id="musicToggle" aria-label="Play music"><span class="music-play-icon">▶</span></button><div class="music-info"><strong data-fa="لحظه‌ای با TALOM" data-en="A moment with TALOM">لحظه‌ای با TALOM</strong><small id="musicStatus" data-fa="برای پخش لمس کن" data-en="Tap to play">برای پخش لمس کن</small></div><div class="music-progress-wrap"><span id="musicCurrent">0:00</span><input id="musicProgress" type="range" min="0" max="100" value="0" aria-label="Music progress"><span id="musicDuration">0:00</span></div><button class="music-mute" id="musicMute" aria-label="Mute music">♫</button></div>
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-  <div class="modal" id="productModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="modal-panel product-modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalProductName"><button class="modal-close" data-close-modal aria-label="Close">×</button><div class="modal-product-image-wrap"><img id="modalProductImage" src="" alt=""><span class="modal-image-label">انتخاب تالم</span></div><div class="modal-product-content"><span id="modalProductCategory" class="product-category"></span><h2 id="modalProductName"></h2><p id="modalProductDescription"></p><div class="modal-product-bottom"><strong id="modalProductPrice"></strong><button id="modalFavorite" class="favorite-button" aria-label="Add to favorites">♡</button></div></div></div></div>
-  <div class="modal cart-modal" id="cartModal" aria-hidden="true"><div class="modal-backdrop" data-cart-close></div><section class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle"><button class="modal-close" type="button" data-cart-close aria-label="بستن">×</button><span class="auth-kicker">TALOM / YOUR SELECTION</span><h2 id="cartTitle">سبد خرید</h2><div id="cartItems"></div><p class="cart-total"><span>جمع تقریبی</span><strong id="cartTotal">۰ تومان</strong></p><p id="cartEmpty" class="cart-empty">سبد خریدت هنوز خالی است.</p><div class="checkout-divider"></div><h3 class="checkout-heading">اطلاعات ثبت سفارش</h3><form id="checkoutForm" class="checkout-form"><label for="checkoutName">نام و نام خانوادگی</label><input id="checkoutName" name="customer_name" type="text" minlength="2" maxlength="120" autocomplete="name" required><label for="checkoutPhone">شماره تماس</label><input id="checkoutPhone" name="phone" type="tel" minlength="7" maxlength="20" autocomplete="tel" required><label for="checkoutAddress">آدرس یا توضیحات تحویل (اختیاری)</label><textarea id="checkoutAddress" name="address" rows="3" maxlength="1000" autocomplete="street-address"></textarea><button id="checkoutSubmit" class="checkout-submit" type="submit">ثبت سفارش</button><p id="checkoutMessage" class="checkout-message" role="status" aria-live="polite"></p></form><p class="cart-notice">قیمت نهایی در سرور و از روی محصولات ثبت‌شده محاسبه می‌شود. ثبت سفارش به معنی پرداخت نیست؛ پرداخت آنلاین هنوز فعال نشده است.</p></section></div>
-  <div class="modal image-modal" id="imageModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="image-modal-panel" role="dialog" aria-modal="true"><button class="modal-close" data-close-modal aria-label="Close">×</button><img id="expandedImage" src="" alt="TALOM gallery image"></div></div>
-
-  <div class="modal auth-modal" id="authModal" aria-hidden="true">
-    <div class="modal-backdrop" data-close-modal></div>
-    <section class="auth-modal-panel" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-      <button class="modal-close" type="button" data-close-modal aria-label="بستن">×</button>
-      <div class="auth-modal-content">
-        <span class="auth-kicker">TALOM / ACCOUNT</span>
-        <h2 id="authTitle" data-fa="حساب کاربری" data-en="Your account">حساب کاربری</h2>
-        <div id="authSignedOut">
-          <div class="auth-mode-switch" id="authModeSwitch" role="group" aria-label="روش حساب کاربری">
-            <button type="button" class="active" data-auth-mode="signin" data-fa="ورود" data-en="Sign in">ورود</button>
-            <button type="button" data-auth-mode="signup" data-fa="ثبت‌نام" data-en="Create account">ثبت‌نام</button>
-          </div>
-          <form id="authForm" class="auth-form">
-            <label for="authEmail" data-fa="ایمیل" data-en="Email">ایمیل</label>
-            <input id="authEmail" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="name@example.com">
-            <label for="authPassword" data-fa="رمز عبور" data-en="Password">رمز عبور</label>
-            <input id="authPassword" name="password" type="password" autocomplete="current-password" required minlength="8" maxlength="72">
-            <div id="authConfirmWrap" hidden>
-              <label for="authPasswordConfirm" data-fa="تکرار رمز عبور" data-en="Confirm password">تکرار رمز عبور</label>
-              <input id="authPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" minlength="8" maxlength="72">
-            </div>
-            <button id="authSubmit" class="auth-submit" type="submit" data-fa="ورود به حساب" data-en="Sign in">ورود به حساب</button>
-            <button id="authForgotPassword" class="auth-forgot" type="button" data-fa="رمز عبور را فراموش کرده‌ام" data-en="Forgot password?" hidden>رمز عبور را فراموش کرده‌ام</button>
-          </form>
-          <p id="authMessage" class="auth-message" role="status" aria-live="polite"></p>
-          <p class="auth-note" data-fa="با ثبت‌نام، حساب کاربری شما در TALOM ساخته می‌شود." data-en="Create an account to use your TALOM customer profile.">با ثبت‌نام، حساب کاربری شما در TALOM ساخته می‌شود.</p>
-        </div>
-        <div id="authSignedIn" hidden>
-          <p class="auth-success" data-fa="با موفقیت وارد حساب شده‌اید." data-en="You are signed in.">با موفقیت وارد حساب شده‌اید.</p>
-          <p id="authUserEmail" class="auth-user-email"></p>
-          <button id="authSignOut" class="auth-submit auth-signout" type="button" data-fa="خروج از حساب" data-en="Sign out">خروج از حساب</button>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="lightbox" id="lightbox" aria-hidden="true"><button id="lightboxClose" aria-label="بستن تصویر">×</button><img id="lightboxImage" alt="نمای بزرگ تصویر گالری"></div>
 </body>
 </html>
