@@ -1,148 +1,27 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f4f0e8">
-  <meta name="description" content="WOON — نانوایی، کافه و آشپزخانه؛ جایی برای مزه‌های خوب و لحظه‌های ماندگار.">
-  <title>WOON — Bakery, Café & Kitchen</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="woon.css">
-  <script src="woon.js" defer></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4f1e9"><meta name="description" content="WOON — a bakery, café and restaurant. Thoughtful food, good bread, generous tables.">
+<title>WOON — Bakery, Café & Restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"><script defer src="app.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">رفتن به محتوای اصلی</a>
-  <div class="announcement"><span>BAKERY · CAFÉ · KITCHEN</span><span class="announcement-fa">هر روز، از اولین قهوه تا آخرین لقمه</span></div>
-
-  <header class="site-header" id="siteHeader">
-    <button class="menu-trigger" id="menuTrigger" aria-expanded="false" aria-controls="siteMenu"><span class="menu-lines"><i></i><i></i></span><span>فهرست</span></button>
-    <a class="wordmark" href="#home" aria-label="WOON home">WOON<span>®</span></a>
-    <div class="header-right">
-      <a class="header-link" href="#visit">نشانی و ساعات</a>
-      <a class="reserve-link" href="#visit">رزرو میز <span>↗</span></a>
-    </div>
-  </header>
-
-  <nav class="menu-overlay" id="siteMenu" aria-hidden="true">
-    <div class="menu-overlay-top"><span>WOON® / EXPLORE</span><button id="menuClose" aria-label="بستن فهرست">بستن <b>×</b></button></div>
-    <div class="menu-overlay-body">
-      <div class="menu-overlay-links">
-        <a href="#home"><small>01</small>خانه<span>↗</span></a>
-        <a href="#experience"><small>02</small>تجربهٔ وون<span>↗</span></a>
-        <a href="#menu"><small>03</small>منو<span>↗</span></a>
-        <a href="#events"><small>04</small>میزبانی و رویدادها<span>↗</span></a>
-        <a href="#gallery"><small>05</small>گالری<span>↗</span></a>
-        <a href="#visit"><small>06</small>بازدید از وون<span>↗</span></a>
-      </div>
-      <div class="menu-overlay-note"><span class="eyebrow">A PLACE TO GATHER</span><p>برای یک قهوهٔ کوتاه، یک صبحانهٔ طولانی یا دیداری که دوست داری ادامه پیدا کند.</p><span class="menu-overlay-foot">GOOD FOOD. GOOD COMPANY.</span></div>
-    </div>
-  </nav>
-
-  <main id="main">
-    <section class="hero" id="home">
-      <div class="hero-image" role="img" aria-label="فضای گرم و تاریخی یک کافه و رستوران"></div>
-      <div class="hero-tint"></div>
-      <div class="hero-content">
-        <p class="hero-overline">WELCOME TO</p>
-        <h1>WOON<span class="hero-period">.</span></h1>
-        <p class="hero-subtitle">BAKERY · CAFÉ · KITCHEN</p>
-        <p class="hero-description">جایی برای نان تازه، قهوهٔ خوب و غذاهایی که با فصل‌ها روایت می‌شوند.</p>
-        <a class="hero-button" href="#experience">کشف دنیای وون <span>↙</span></a>
-      </div>
-      <div class="hero-vertical">A TABLE FOR EVERY STORY</div>
-      <div class="hero-bottom"><span>EST. 2026</span><span>GOOD THINGS TAKE TIME</span><a href="#experience">SCROLL TO EXPLORE ↓</a></div>
-    </section>
-
-    <section class="welcome-intro" id="experience">
-      <div class="intro-label"><span>01</span><i></i><span>THE WOON EXPERIENCE</span></div>
-      <div class="intro-main">
-        <h2>Come hungry.<br><em>Leave happy.</em></h2>
-        <div class="intro-copy"><p>وون از یک فکر ساده شروع شد: ساختن جایی که کیفیت، مهمان‌نوازی و لذتِ کنار هم بودن در هر جزئیاتش حس شود. از عطر نان تازه در صبح تا میزهای گرم و غذاهای فصلی در پایان روز.</p><a class="underlined-link" href="#story">داستان وون <span>↗</span></a></div>
-      </div>
-      <div class="intro-stamp">MADE WITH<br><b>CARE</b><br>IN WOON</div>
-    </section>
-
-    <section class="offerings" id="menu">
-      <div class="section-heading">
-        <div><p class="section-kicker">02 / WHAT WE SERVE</p><h2>Something for<br><em>every moment.</em></h2></div>
-        <p class="section-heading-copy">از صبح‌های آرام تا شام‌های طولانی؛ هر بخش از منو با مواد اولیهٔ تازه و توجه به جزئیات شکل می‌گیرد.</p>
-      </div>
-      <div class="offering-list">
-        <a class="offering-row" href="#menu-items" data-category="dessert">
-          <span class="offering-number">01</span><span class="offering-name">Bakery & Pastry</span><span class="offering-fa">نانوایی و شیرینی‌پزی</span>
-          <span class="offering-image"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85" alt="نان تازه"></span><span class="offering-arrow">↗</span>
-        </a>
-        <a class="offering-row" href="#menu-items" data-category="food">
-          <span class="offering-number">02</span><span class="offering-name">Brunch</span><span class="offering-fa">صبحانه و برانچ</span>
-          <span class="offering-image"><img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85" alt="صبحانه و برانچ"></span><span class="offering-arrow">↗</span>
-        </a>
-        <a class="offering-row" href="#menu-items" data-category="food">
-          <span class="offering-number">03</span><span class="offering-name">Kitchen</span><span class="offering-fa">آشپزخانه و غذاهای فصلی</span>
-          <span class="offering-image"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85" alt="غذای تازه"></span><span class="offering-arrow">↗</span>
-        </a>
-        <a class="offering-row" href="#menu-items" data-category="coffee">
-          <span class="offering-number">04</span><span class="offering-name">Coffee</span><span class="offering-fa">قهوه و نوشیدنی‌های گرم</span>
-          <span class="offering-image"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85" alt="قهوه"></span><span class="offering-arrow">↗</span>
-        </a>
-        <a class="offering-row" href="#menu-items" data-category="cold">
-          <span class="offering-number">05</span><span class="offering-name">Seasonal Drinks</span><span class="offering-fa">نوشیدنی‌های فصلی</span>
-          <span class="offering-image"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=85" alt="نوشیدنی خنک"></span><span class="offering-arrow">↗</span>
-        </a>
-      </div>
-      <div class="menu-cta-row"><span>FRESHLY MADE. THOUGHTFULLY SERVED.</span><a href="#menu-items" class="dark-button">مشاهدهٔ منو <span>↗</span></a></div>
-    </section>
-
-    <section class="menu-items-section" id="menu-items">
-      <div class="menu-items-head"><div><p class="section-kicker">03 / THE MENU</p><h2>A taste of <em>WOON.</em></h2></div><p>منوی وون با فصل‌ها تغییر می‌کند.</p></div>
-      <div class="menu-controls">
-        <div class="menu-filters" role="group" aria-label="فیلتر دسته‌بندی منو">
-          <button class="filter-button active" data-filter="all">همه</button>
-          <button class="filter-button" data-filter="coffee">قهوه</button>
-          <button class="filter-button" data-filter="cold">نوشیدنی سرد</button>
-          <button class="filter-button" data-filter="dessert">شیرینی و دسر</button>
-          <button class="filter-button" data-filter="food">غذا</button>
-        </div>
-        <label class="menu-search"><span>⌕</span><input id="menuSearch" type="search" placeholder="جست‌وجو در منو..." autocomplete="off"></label>
-      </div>
-      <div class="menu-grid" id="menuGrid"><div class="menu-loading">در حال دریافت منو…</div></div>
-      <p class="menu-status" id="menuStatus" aria-live="polite"></p>
-    </section>
-
-    <section class="story-section" id="story">
-      <div class="story-photo"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1500&q=90" alt="فضای داخلی کافه"></div>
-      <div class="story-content"><p class="section-kicker">04 / OUR PHILOSOPHY</p><h2>Rooted in craft.<br><em>Made for people.</em></h2><p>ما به چیزهایی اهمیت می‌دهیم که شاید ساده به نظر برسند؛ مواد اولیهٔ خوب، دست‌های ماهر، فضایی صمیمی و زمانی که برای آماده‌کردن هر سفارش صرف می‌شود. وون قرار است بخشی از خاطرات روزمرهٔ شما باشد.</p><a class="underlined-link" href="#visit">بیشتر دربارهٔ ما <span>↗</span></a><div class="story-caption">A LITTLE MORE THAN A CAFÉ — WOON®</div></div>
-    </section>
-
-    <section class="private-events" id="events">
-      <div class="events-image"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=90" alt="چیدمان میز برای یک دورهمی"></div>
-      <div class="events-panel"><p class="section-kicker">05 / PRIVATE EVENTS</p><h2>Make room<br>for <em>moments.</em></h2><p>از دورهمی‌های کوچک تا جشن‌های به‌یادماندنی، وون می‌تواند میزبان لحظه‌های خاص شما باشد. دربارهٔ ظرفیت، چیدمان و برنامهٔ موردنظرتان با ما صحبت کنید.</p><a class="light-button" href="#visit">برنامه‌ریزی یک رویداد <span>↗</span></a><span class="events-index">GATHER · CELEBRATE · REMEMBER</span></div>
-    </section>
-
-    <section class="gallery-section" id="gallery">
-      <div class="gallery-heading"><div><p class="section-kicker">06 / THE GALLERY</p><h2>A peek inside <em>WOON.</em></h2></div><p>فضا، آدم‌ها و لحظه‌هایی که وون را می‌سازند.</p></div>
-      <div class="gallery-grid">
-        <button class="gallery-item gallery-large" data-image="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&w=1800&q=90" aria-label="نمای بزرگ فضای کافه"><img src="https://images.unsplash.com/photo-1559305616-3f99cd43e353?auto=format&fit=crop&w=1100&q=85" alt="فضای کافه"></button>
-        <button class="gallery-item" data-image="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1800&q=90" aria-label="نمای نان تازه"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=85" alt="نان تازه"></button>
-        <button class="gallery-item" data-image="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1800&q=90" aria-label="نمای قهوه"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=85" alt="قهوه"></button>
-        <button class="gallery-item" data-image="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1800&q=90" aria-label="نمای غذا"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=85" alt="غذا"></button>
-      </div>
-    </section>
-
-    <section class="visit-section" id="visit">
-      <div class="visit-title"><p class="section-kicker">07 / COME BY</p><h2>Your table<br>is <em>waiting.</em></h2><p>برای بازدید، رزرو میز یا هماهنگی رویدادها با وون در ارتباط باشید.</p><a class="light-button" href="#contact">اطلاعات تماس <span>↗</span></a></div>
-      <div class="visit-details" id="contact">
-        <div class="visit-detail"><span>FIND US</span><p>نشانی مجموعه پس از مشخص‌شدن شعبه در این بخش قرار می‌گیرد.</p></div>
-        <div class="visit-detail"><span>OPENING HOURS</span><p>ساعات فعالیت به‌زودی اعلام می‌شود.</p></div>
-        <div class="visit-detail"><span>RESERVATIONS</span><p>برای فعال‌شدن رزرو آنلاین، اطلاعات تماس و سرویس رزرو مجموعه باید متصل شود.</p></div>
-        <div class="visit-detail"><span>FOLLOW WOON</span><p>شبکه‌های اجتماعی وون پس از ثبت نشانی رسمی اضافه می‌شوند.</p></div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer"><a class="footer-logo" href="#home">WOON<span>®</span></a><span>BAKERY · CAFÉ · KITCHEN</span><span>© 2026 WOON. ALL RIGHTS RESERVED.</span><a href="#home">بازگشت به بالا ↑</a></footer>
-
-  <div class="lightbox" id="lightbox" aria-hidden="true"><button id="lightboxClose" aria-label="بستن تصویر">×</button><img id="lightboxImage" alt="نمای بزرگ تصویر گالری"></div>
-</body>
-</html>
+<div class="topline"><span>BAKERY · CAFÉ · RESTAURANT</span><span>MADE WITH TIME, SERVED WITH HEART</span><a href="contact.html">FIND US ↗</a></div>
+<header class="header"><button class="menu-toggle" aria-expanded="false" aria-controls="site-nav"><i></i><i></i><span>MENU</span></button><a class="logo" href="index.html" aria-label="WOON home">WOON<span>®</span></a><nav id="site-nav" class="nav"><a href="cafe-bakery.html">CAFÉ & BAKERY</a><a href="restaurant.html">RESTAURANT</a><a href="private-events.html">PRIVATE EVENTS</a><a href="contact.html">VISIT</a></nav><a class="header-cta" href="restaurant.html#reserve">BOOK A TABLE <b>↗</b></a></header>
+<main>
+<section class="hero"><img class="hero-photo" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=88" alt="Warm, sunlit restaurant dining room"><div class="hero-shade"></div><div class="hero-copy"><p class="eyebrow light">A PLACE TO GATHER · EST. 2026</p><h1>Good things<br><em>take time.</em></h1><p class="hero-sub">A bakery, café & restaurant for the everyday and the in-between.</p><a class="button button-light" href="cafe-bakery.html">COME ON IN <span>↗</span></a></div><div class="hero-foot"><span>FRESH FROM THE OVEN, EVERY MORNING</span><span>SCROLL TO EXPLORE ↓</span></div></section>
+<section class="welcome section-wrap"><div class="welcome-label"><span class="rule"></span><span>WELCOME TO WOON</span></div><div class="welcome-grid"><h2>More than a meal.<br><em>A little bit of life.</em></h2><div><p>From the first coffee of the morning to a table shared late into the evening, WOON is made for slowing down. Honest ingredients, thoughtful cooking and the kind of hospitality that makes you feel at home.</p><a class="text-link" href="contact.html">A LITTLE ABOUT US <b>↗</b></a></div></div></section>
+<section class="offerings"><div class="section-head"><div><p class="eyebrow">THROUGHOUT THE DAY</p><h2>Find your <em>moment.</em></h2></div><p>Come by for a little something, or stay awhile. There's always a seat at the table.</p></div><div class="offer-grid">
+<a class="offer-card offer-large" href="cafe-bakery.html"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1300&q=85" alt="Fresh artisan bread"><span class="offer-number">01 / MORNING</span><span class="offer-title">Café & Bakery <b>↗</b></span><span class="offer-note">Fresh bread · Pastries · Coffee</span></a>
+<a class="offer-card" href="restaurant.html"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1100&q=85" alt="Seasonal lunch dishes"><span class="offer-number">02 / AFTERNOON & EVENING</span><span class="offer-title">The Restaurant <b>↗</b></span><span class="offer-note">Seasonal plates · Dinner · Wine</span></a>
+<a class="offer-card" href="private-events.html"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1100&q=85" alt="A long table set for a gathering"><span class="offer-number">03 / TOGETHER</span><span class="offer-title">Private Events <b>↗</b></span><span class="offer-note">Gatherings · Celebrations · Good company</span></a>
+</div></section>
+<section class="feature"><div class="feature-image"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1500&q=85" alt="Freshly baked croissants"></div><div class="feature-copy"><p class="eyebrow">THE DAILY RITUAL</p><h2>First light.<br><em>Fresh bread.</em></h2><p>Our mornings begin before the doors open. Dough folded, pastry shaped, coffee dialled in. By the time you arrive, the good stuff is ready.</p><a class="button button-dark" href="cafe-bakery.html">EXPLORE THE BAKERY <span>↗</span></a></div></section>
+<section class="quote"><p class="eyebrow light">A TABLE IS ALWAYS BETTER SHARED</p><blockquote>“The best memories<br>are made <em>around the table.</em>”</blockquote><span>— THE WOON WAY</span></section>
+<section class="visit section-wrap"><div><p class="eyebrow">COME FIND US</p><h2>Your table<br><em>is waiting.</em></h2><p class="visit-copy">Drop in for coffee, join us for lunch, or make an evening of it. We would love to see you.</p><a class="button button-dark" href="contact.html">PLAN YOUR VISIT <span>↗</span></a></div><div class="visit-details"><div><span>CAFÉ & BAKERY</span><strong>DAILY · 8 AM — 3 PM</strong></div><div><span>RESTAURANT</span><strong>DINNER · TUE — SAT</strong></div><div><span>LOCATION</span><strong>ADDRESS COMING SOON</strong></div><div><span>CONTACT</span><strong>HELLO@WOON.COM</strong></div></div></section>
+</main>
+<footer class="footer"><div class="footer-top"><a class="footer-logo" href="index.html">WOON<span>®</span></a><p>Good food. Good people.<br>Room for everyone.</p><div class="footer-links"><a href="cafe-bakery.html">CAFÉ & BAKERY</a><a href="restaurant.html">RESTAURANT</a><a href="private-events.html">PRIVATE EVENTS</a><a href="contact.html">CONTACT</a></div></div><div class="footer-bottom"><span>© 2026 WOON. ALL RIGHTS RESERVED.</span><span>MADE TO BE SHARED.</span><a href="#top">BACK TO TOP ↑</a></div></footer>
+</body></html>

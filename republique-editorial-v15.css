@@ -1,5 +1,0 @@
-/* TALOM index interaction reliability fix */
-#talomIndexToggle{position:fixed!important;z-index:2147483000!important;pointer-events:auto!important;cursor:pointer!important;touch-action:manipulation}
-#talomIndexPanel{z-index:2147483001!important;pointer-events:none;visibility:hidden;transform:translateX(105%);transition:transform .35s ease,visibility .35s ease}
-#talomIndexPanel.open{pointer-events:auto;visibility:visible;transform:translateX(0)}
-#talomIndexPanel button,#talomIndexPanel a{pointer-events:auto}
