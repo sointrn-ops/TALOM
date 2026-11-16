@@ -1,0 +1,134 @@
+/* TALOM — République-inspired button system
+   Editorial typography, square edges, restrained borders and underline interactions. */
+:root{
+ --talom-ref-ink:#28251f;
+ --talom-ref-paper:#f4f0e7;
+ --talom-ref-line:#cfc8bb;
+ --talom-ref-accent:#806b50;
+}
+/* Shared motion: quiet, precise, no pill shapes or jumping buttons */
+body.talom-redesign :is(button,.button,.header-cta,.rx-location-links a,.tp-feature-copy a,.tp-reserve-banner a){
+ border-radius:0!important;
+ box-shadow:none;
+ text-decoration:none;
+ transition:color .22s ease,background-color .22s ease,border-color .22s ease,opacity .22s ease;
+}
+body.talom-redesign :is(button,.button,.header-cta):focus-visible{
+ outline:1px solid var(--talom-ref-accent)!important;
+ outline-offset:4px!important;
+}
+/* Header actions */
+body.talom-redesign .site-header.editorial-header>.header-cta{
+ min-height:0!important;padding:9px 0!important;gap:12px!important;
+ background:transparent!important;color:var(--talom-ref-ink)!important;
+ border:0!important;border-bottom:1px solid var(--talom-ref-ink)!important;
+ font:500 10px "DM Sans","Vazirmatn",sans-serif!important;
+ letter-spacing:.16em!important;text-transform:uppercase!important;
+}
+body.talom-redesign .site-header.editorial-header>.header-cta:hover{
+ color:var(--talom-ref-accent)!important;border-color:var(--talom-ref-accent)!important;
+}
+body.talom-redesign .site-header.editorial-header .header-actions :is(.cart-open-button,.auth-open-button,.icon-button){
+ min-height:34px!important;padding:0 10px!important;
+ border:0!important;border-bottom:1px solid transparent!important;
+ border-radius:0!important;background:transparent!important;color:var(--talom-ref-ink)!important;
+ font:500 10px "DM Sans","Vazirmatn",sans-serif!important;
+}
+body.talom-redesign .site-header.editorial-header .header-actions :is(.cart-open-button,.auth-open-button,.icon-button):hover{
+ border-bottom-color:var(--talom-ref-ink)!important;color:var(--talom-ref-accent)!important;
+}
+body.talom-redesign .site-header.editorial-header .cart-open-button b{
+ min-width:17px!important;height:17px!important;border-radius:50%!important;
+ background:var(--talom-ref-ink)!important;color:#fff!important;font-size:9px!important;
+}
+/* Main editorial calls to action: slim rectangular label with a rule */
+body.talom-redesign .button,
+body.talom-redesign .full-hero .button-gold,
+body.talom-redesign .signature-content .button-gold{
+ min-height:46px!important;padding:0 0 2px!important;
+ display:inline-flex!important;align-items:center!important;gap:22px!important;
+ background:transparent!important;color:inherit!important;
+ border:0!important;border-bottom:1px solid currentColor!important;
+ font:500 11px "DM Sans","Vazirmatn",sans-serif!important;
+ letter-spacing:.12em!important;text-transform:uppercase!important;
+}
+body.talom-redesign .button:hover,
+body.talom-redesign .full-hero .button-gold:hover,
+body.talom-redesign .signature-content .button-gold:hover{
+ transform:none!important;color:var(--talom-ref-accent)!important;
+ background:transparent!important;border-color:var(--talom-ref-accent)!important;
+}
+body.talom-redesign .button>span:last-child{font:16px "DM Sans",sans-serif!important}
+/* Menu category controls become editorial text tabs */
+body.talom-redesign .editorial-menu .category-tab,
+body.talom-redesign #menu .category-tab{
+ min-height:36px!important;padding:7px 3px!important;margin-inline-end:15px!important;
+ border:0!important;border-bottom:1px solid transparent!important;border-radius:0!important;
+ background:transparent!important;color:#756e63!important;
+ font:500 11px "Vazirmatn","DM Sans",sans-serif!important;
+}
+body.talom-redesign .editorial-menu .category-tab:hover,
+body.talom-redesign .editorial-menu .category-tab.active,
+body.talom-redesign #menu .category-tab:hover,
+body.talom-redesign #menu .category-tab.active{
+ background:transparent!important;color:var(--talom-ref-ink)!important;
+ border-bottom-color:var(--talom-ref-ink)!important;
+}
+/* Product actions */
+body.talom-redesign .menu-shelf .cart-add-button{
+ min-height:38px!important;padding:7px 0!important;margin-top:12px!important;
+ background:transparent!important;color:var(--talom-ref-ink)!important;
+ border:0!important;border-bottom:1px solid var(--talom-ref-line)!important;
+ text-align:start!important;font:500 11px "Vazirmatn",sans-serif!important;
+}
+body.talom-redesign .menu-shelf .cart-add-button:hover{
+ background:transparent!important;color:var(--talom-ref-accent)!important;
+ border-color:var(--talom-ref-accent)!important;transform:none!important;
+}
+body.talom-redesign .favorite-button{
+ border-radius:50%!important;border:1px solid var(--talom-ref-line)!important;
+ background:var(--talom-ref-paper)!important;
+}
+body.talom-redesign .favorite-button:hover,
+body.talom-redesign .favorite-button.is-favorite{
+ border-color:var(--talom-ref-accent)!important;color:var(--talom-ref-accent)!important;
+}
+/* Carousel arrows: understated outlined squares */
+body.talom-redesign .menu-shelf .carousel-arrow{
+ width:38px!important;height:38px!important;flex:0 0 38px!important;
+ border:1px solid var(--talom-ref-line)!important;border-radius:0!important;
+ background:transparent!important;color:var(--talom-ref-ink)!important;
+}
+body.talom-redesign .menu-shelf .carousel-arrow:hover:not(:disabled){
+ background:var(--talom-ref-ink)!important;border-color:var(--talom-ref-ink)!important;
+ color:var(--talom-ref-paper)!important;transform:none!important;
+}
+/* Forms and overlay controls */
+body.talom-redesign :is(.rx-submit,.auth-submit,.checkout-submit){
+ min-height:48px!important;padding:12px 20px!important;
+ border:1px solid var(--talom-ref-ink)!important;border-radius:0!important;
+ background:var(--talom-ref-ink)!important;color:var(--talom-ref-paper)!important;
+ font:500 11px "Vazirmatn","DM Sans",sans-serif!important;letter-spacing:.04em!important;
+}
+body.talom-redesign :is(.rx-submit,.auth-submit,.checkout-submit):hover:not(:disabled){
+ background:transparent!important;color:var(--talom-ref-ink)!important;
+}
+body.talom-redesign :is(.rx-submit,.auth-submit,.checkout-submit):disabled{
+ opacity:.5!important;cursor:wait!important;
+}
+body.talom-redesign .talom-republique-overlay :is(a,button){
+ border-radius:0!important;box-shadow:none!important;
+}
+body.talom-redesign .talom-republique-overlay nav a{
+ text-decoration:none!important;border-bottom:1px solid transparent!important;
+ transition:border-color .2s ease,color .2s ease!important;
+}
+body.talom-redesign .talom-republique-overlay nav a:hover{
+ border-bottom-color:currentColor!important;color:var(--talom-ref-accent)!important;
+}
+@media(max-width:720px){
+ body.talom-redesign .site-header.editorial-header>.header-cta{padding:7px 0!important;font-size:9px!important}
+ body.talom-redesign .editorial-menu .category-tab,
+ body.talom-redesign #menu .category-tab{margin-inline-end:9px!important;padding-inline:2px!important}
+ body.talom-redesign .menu-shelf .carousel-arrow{width:32px!important;height:32px!important;flex-basis:32px!important}
+}
