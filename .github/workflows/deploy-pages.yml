@@ -28,10 +28,24 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare GitHub Pages output
+        run: |
+          mkdir -p _site
+          rsync -a --exclude='.git' --exclude='.github' --exclude='tests' --exclude='_site' ./ _site/
+          python3 - <<'PY'
+          from pathlib import Path
+          for page in Path("_site").glob("*.html"):
+              source = page.read_text(encoding="utf-8")
+              marker = '<script src="github-pages-compat.js" defer></script>'
+              if marker not in source and "</body>" in source:
+                  source = source.replace("</body>", marker + "\\n</body>")
+                  page.write_text(source, encoding="utf-8")
+          PY
+
       - name: Upload website files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy website
         id: deployment
