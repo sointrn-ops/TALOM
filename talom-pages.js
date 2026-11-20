@@ -60,23 +60,28 @@ $$("[data-menu-filter]").forEach(a=>a.addEventListener("click",e=>{const key=a.d
 if(route.key==="cafe"||route.key==="restaurant"){const key=route.key;document.body.dataset.menuDefault=key;const apply=()=>{const tab=$('#categoryTabs [data-category="'+key+'"]');if(tab&&!tab.classList.contains("active"))tab.click();};document.addEventListener("DOMContentLoaded",apply,{once:true});}
 
 // GitHub Pages serves this project from /TALOM and does not apply vercel.json rewrites.
-// Convert every internal route to its real .html file while preserving hashes and queries.
+// Keep this compatibility block syntax-safe and independent of regex escaping.
 const githubProject=location.pathname==="/TALOM"||location.pathname.startsWith("/TALOM/");
 const routeFiles=new Set(["cafe-bakery","restaurant","menu","events","about","reservation","contact"]);
 function fixInternalRouteLinks(root=document){
  if(!githubProject)return;
- root.querySelectorAll('a[href^="/"]').forEach(a=>{
+ const anchors=[];
+ if(root.matches&&root.matches('a[href^="/"]'))anchors.push(root);
+ if(root.querySelectorAll)anchors.push(...root.querySelectorAll('a[href^="/"]'));
+ anchors.forEach(a=>{
   const raw=a.getAttribute("href");
   if(!raw||raw.startsWith("//"))return;
   let target;
   try{target=new URL(raw,location.origin)}catch{return}
   if(target.origin!==location.origin)return;
-  let pathname=target.pathname.replace(/\\/+$/,"")||"/";
-  if(pathname==="/TALOM"||pathname==="/TALOM/"){target.pathname="/TALOM/";}
+  let pathname=target.pathname;
+  while(pathname.length>1&&pathname.endsWith("/"))pathname=pathname.slice(0,-1);
+  if(pathname==="/TALOM"){target.pathname="/TALOM/";}
   else if(pathname.startsWith("/TALOM/"))return;
   else if(pathname==="/"){target.pathname="/TALOM/";}
   else{
-   const slug=pathname.replace(/^\\//,"").replace(/\\.html?$/i,"");
+   let slug=pathname.startsWith("/")?pathname.slice(1):pathname;
+   if(slug.endsWith(".html"))slug=slug.slice(0,-5);
    if(!routeFiles.has(slug))return;
    target.pathname="/TALOM/"+slug+".html";
   }
@@ -84,7 +89,10 @@ function fixInternalRouteLinks(root=document){
  });
 }
 fixInternalRouteLinks();
-new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{
- if(node.nodeType===1){if(node.matches?.('a[href^="/"]'))fixInternalRouteLinks(node.parentElement||document);else fixInternalRouteLinks(node);}
-}))).observe(document.body,{childList:true,subtree:true});
+new MutationObserver(records=>records.forEach(record=>{
+ record.addedNodes.forEach(node=>{
+  if(node.nodeType===1)fixInternalRouteLinks(node);
+ });
+})).observe(document.body,{childList:true,subtree:true});
+
 })();
