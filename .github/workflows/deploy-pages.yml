@@ -38,7 +38,7 @@ jobs:
               source = page.read_text(encoding="utf-8")
               marker = '<script src="github-pages-compat.js" defer></script>'
               if marker not in source and "</body>" in source:
-                  source = source.replace("</body>", marker + "\\n</body>")
+                  source = source.replace("</body>", marker + "\n</body>")
                   page.write_text(source, encoding="utf-8")
           PY
 
