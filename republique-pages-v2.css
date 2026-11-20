@@ -1,0 +1,140 @@
+/* TALOM destination pages — coordinated editorial system */
+:root{--talom-bg:#f6f3ec;--talom-ink:#25231f;--talom-muted:#756f65;--talom-line:#d9d2c6;--talom-brown:#806b50;--talom-dark:#292720}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body.talom-redesign{background:var(--talom-bg)!important;color:var(--talom-ink)!important}
+main{padding-top:78px}
+.site-header.editorial-header,.site-header.editorial-header.scrolled{position:fixed!important;inset:0 0 auto!important;z-index:1400!important;height:78px!important;min-height:78px!important;background:rgba(247,245,239,.97)!important;border-bottom:1px solid rgba(37,35,31,.13)!important;backdrop-filter:blur(18px)!important}
+.site-header.editorial-header>.brand{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;color:var(--talom-ink)!important}
+.site-header.editorial-header .brand-symbol{display:none!important}
+.site-header.editorial-header .brand-word{font:500 27px/1 "Playfair Display",serif!important;letter-spacing:4px!important;color:var(--talom-ink)!important}
+.site-header.editorial-header .brand-word small{display:block!important;margin-top:6px!important;font:500 7px/1.4 "DM Sans",sans-serif!important;letter-spacing:1.8px!important;color:var(--talom-muted)!important}
+.site-header.editorial-header>.main-nav,.site-header.editorial-header>.mobile-menu-toggle{display:none!important}
+.site-header.editorial-header>.header-actions{display:flex!important;position:absolute!important;right:clamp(18px,5vw,76px)!important;top:50%!important;transform:translateY(-50%)!important;gap:8px!important}
+.site-header.editorial-header .header-actions .cart-open-button,.site-header.editorial-header .header-actions .auth-open-button,.site-header.editorial-header .header-cta{display:none!important}
+.site-header.editorial-header .header-actions .icon-button{border:0!important;border-radius:0!important;background:transparent!important;color:var(--talom-ink)!important}
+.site-header.editorial-header>.talom-republique-trigger{position:absolute!important;left:clamp(18px,5vw,76px)!important;right:auto!important;top:50%!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;gap:10px!important;width:auto!important;min-width:0!important;height:auto!important;padding:10px 0!important;background:transparent!important;color:var(--talom-ink)!important;writing-mode:horizontal-tb!important;font:500 11px "Vazirmatn",sans-serif!important}
+.site-header.editorial-header .talom-republique-icon{width:20px!important;height:16px!important;gap:4px!important}
+.site-header.editorial-header .talom-republique-icon i{width:20px!important;background:currentColor!important}
+.talom-reserve-link{position:absolute!important;right:clamp(95px,12vw,175px)!important;top:50%!important;transform:translateY(-50%)!important;display:inline-flex!important;align-items:center!important;gap:12px!important;padding:9px 0!important;border:0!important;border-bottom:1px solid var(--talom-ink)!important;color:var(--talom-ink)!important;font:500 11px "DM Sans","Vazirmatn",sans-serif!important;letter-spacing:.08em!important;text-decoration:none!important;white-space:nowrap!important}
+.talom-reserve-link:hover{color:var(--talom-brown)!important;border-color:var(--talom-brown)!important}
+.talom-republique-overlay{position:fixed!important;inset:0!important;z-index:1600!important;display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(250px,.85fr)!important;align-content:center!important;gap:8vw!important;padding:100px clamp(30px,9vw,140px)!important;background:var(--talom-bg)!important;color:var(--talom-ink)!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,visibility .25s ease!important}
+.talom-republique-overlay.is-open{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+.talom-republique-overlay nav{display:flex!important;flex-direction:column!important;gap:5px!important}
+.talom-republique-overlay nav a{width:max-content!important;max-width:100%!important;color:var(--talom-ink)!important;font:400 clamp(26px,4vw,54px)/1.35 "DM Sans","Vazirmatn",sans-serif!important;letter-spacing:-.035em!important;text-decoration:none!important}
+.talom-republique-overlay nav a:hover{color:var(--talom-brown)!important}
+.talom-republique-side{align-self:center!important;display:flex!important;flex-direction:column!important;gap:14px!important;padding:24px 0 0!important;border-top:1px solid var(--talom-line)!important;color:var(--talom-muted)!important;font-size:13px!important;line-height:2!important}
+.talom-republique-side strong{color:var(--talom-ink)!important;font-size:16px!important;font-weight:500!important}
+.talom-republique-side a{color:inherit!important;text-decoration:none!important}
+.talom-overlay-close{position:absolute!important;top:28px!important;left:clamp(24px,5vw,72px)!important;width:46px!important;height:46px!important;border:1px solid var(--talom-line)!important;background:transparent!important;color:var(--talom-ink)!important;font-size:28px!important}
+body.talom-menu-open{overflow:hidden!important}
+#talom-route-hero{position:relative!important;display:flex!important;align-items:center!important;min-height:clamp(480px,59vw,690px)!important;margin:0!important;padding:clamp(70px,9vw,130px) 7%!important;overflow:hidden!important;background:#27241f!important;color:#fff!important}
+#talom-route-hero .talom-route-image{position:absolute!important;inset:0!important;background-size:cover!important;background-position:center!important;transform:scale(1.01)!important}
+#talom-route-hero .talom-route-shade{position:absolute!important;inset:0!important;background:linear-gradient(90deg,rgba(15,14,12,.72),rgba(15,14,12,.18) 85%),linear-gradient(0deg,rgba(15,14,12,.3),transparent 50%)!important}
+#talom-route-hero .talom-route-copy{position:relative!important;z-index:1!important;width:min(720px,75%)!important;margin:0!important}
+#talom-route-hero .talom-route-copy>span{display:block!important;margin-bottom:22px!important;color:#e2cba9!important;font:500 10px "DM Sans",sans-serif!important;letter-spacing:.18em!important}
+#talom-route-hero .talom-route-copy h1{margin:0 0 18px!important;color:#fff!important;font:400 clamp(42px,6.3vw,82px)/1.35 "Vazirmatn",sans-serif!important;letter-spacing:-.035em!important}
+#talom-route-hero .talom-route-copy h1 em{color:#e2cba9!important;font-family:"Playfair Display","Vazirmatn",serif!important;font-style:normal!important}
+#talom-route-hero .talom-route-copy p{max-width:520px!important;margin:0!important;color:rgba(255,255,255,.83)!important;font-size:14px!important;line-height:2.35!important}
+#talom-route-hero .talom-route-copy>a{display:inline-flex!important;align-items:center!important;gap:24px!important;margin-top:30px!important;padding:12px 0!important;border-bottom:1px solid rgba(255,255,255,.65)!important;color:#fff!important;text-decoration:none!important;font-size:12px!important}
+#talom-route-hero .talom-route-copy>a b{font:18px "DM Sans",sans-serif!important}
+.tp-editorial-intro,.tp-event-intro,.tp-reservation-intro{background:#eae5db!important;color:var(--talom-ink)!important}
+.tp-wrap{width:min(1180px,86%)!important;margin-inline:auto!important}
+.tp-editorial-intro{padding:clamp(68px,9vw,120px) 0!important}
+.tp-intro-grid{display:grid!important;grid-template-columns:1.05fr .95fr!important;align-items:end!important;gap:9%!important}
+.tp-kicker{color:var(--talom-brown)!important;font:600 10px "DM Sans",sans-serif!important;letter-spacing:.14em!important}
+.tp-editorial-intro h2,.tp-feature-copy h2,.tp-event-intro-copy h2,.tp-reservation-hero-copy h2{margin:18px 0 0!important;color:var(--talom-ink)!important;font-size:clamp(32px,4.8vw,62px)!important;line-height:1.48!important;font-weight:400!important;letter-spacing:-.03em!important}
+.tp-editorial-intro h2 em,.tp-feature-copy h2 em,.tp-event-intro-copy h2 em,.tp-reservation-hero-copy h2 em{color:var(--talom-brown)!important;font-family:"Playfair Display","Vazirmatn",serif!important;font-style:normal!important}
+.tp-editorial-intro p,.tp-feature-copy p,.tp-event-intro-copy p,.tp-reservation-hero-copy p{margin:0!important;color:var(--talom-muted)!important;font-size:14px!important;line-height:2.4!important}
+.tp-feature-split,.tp-event-feature,.tp-reservation-note{display:grid!important;grid-template-columns:1fr 1fr!important;align-items:stretch!important;gap:0!important;background:var(--talom-bg)!important}
+.tp-feature-image,.tp-event-feature-image,.tp-reservation-note-image{min-height:480px!important;overflow:hidden!important}
+.tp-feature-image img,.tp-event-feature-image img,.tp-reservation-note-image img{width:100%!important;height:100%!important;min-height:480px!important;object-fit:cover!important;display:block!important;transition:transform .7s ease!important}
+.tp-feature-image:hover img,.tp-event-feature-image:hover img,.tp-reservation-note-image:hover img{transform:scale(1.035)!important}
+.tp-feature-copy,.tp-event-feature-copy,.tp-reservation-note-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;padding:clamp(40px,7vw,100px)!important}
+.tp-feature-copy h2,.tp-event-feature-copy h2,.tp-reservation-note-copy h2{font-size:clamp(30px,4vw,52px)!important}
+.tp-feature-copy p,.tp-event-feature-copy p,.tp-reservation-note-copy p{margin-top:20px!important}
+.tp-feature-copy a,.tp-event-feature-copy>a,.tp-reservation-note-copy>a,.tp-event-intro-copy>a{display:inline-flex!important;gap:20px!important;margin-top:24px!important;padding-bottom:9px!important;border-bottom:1px solid var(--talom-brown)!important;color:var(--talom-brown)!important;text-decoration:none!important;font-size:12px!important}
+.tp-feature-reverse .tp-feature-image{order:2!important}
+.tp-menu-lead{padding:70px 0 35px!important;background:var(--talom-bg)!important}
+.tp-menu-lead h2{margin:12px 0!important;font-size:clamp(30px,4vw,50px)!important;font-weight:400!important}
+.tp-menu-lead p{color:var(--talom-muted)!important;font-size:14px!important;line-height:2.2!important}
+#menu{padding:50px 0 100px!important;background:var(--talom-bg)!important;color:var(--talom-ink)!important}
+#menu .section-heading,#menu .menu-toolbar,#menu .menu-meta,#menu .menu-shelf,#menu .empty-state{width:min(1180px,86%)!important;margin-left:auto!important;margin-right:auto!important}
+#menu .section-heading h2{font-size:clamp(30px,4.3vw,54px)!important;font-weight:400!important}
+#menu .category-tab{border-radius:0!important;border-color:var(--talom-line)!important}
+#menu .category-tab.active{background:var(--talom-ink)!important;color:#fff!important}
+#menu .search-box{border-radius:0!important;border-color:var(--talom-line)!important}
+#menu .product-card{border-radius:0!important;background:#ebe6dc!important;overflow:hidden!important}
+#menu .product-card img{border-radius:0!important}
+.tp-event-intro,.tp-reservation-intro{display:grid!important;grid-template-columns:1fr 1fr!important;align-items:stretch!important}
+.tp-event-intro-image,.tp-reservation-hero-image{min-height:540px!important;overflow:hidden!important}
+.tp-event-intro-image img,.tp-reservation-hero-image img{display:block!important;width:100%!important;height:100%!important;min-height:540px!important;object-fit:cover!important}
+.tp-event-intro-copy,.tp-reservation-hero-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;padding:clamp(38px,7vw,95px)!important}
+.tp-event-spaces,.tp-event-steps,.tp-reservation-steps,.tp-event-faq{padding:clamp(65px,8vw,110px) 0!important;background:var(--talom-bg)!important}
+.tp-editorial-heading{margin-bottom:32px!important}
+.tp-editorial-heading h2,.tp-event-steps h2,.tp-event-faq h2{font-size:clamp(32px,4.5vw,58px)!important;font-weight:400!important;line-height:1.45!important}
+.tp-editorial-heading h2 em{font-family:"Playfair Display","Vazirmatn",serif!important;color:var(--talom-brown)!important;font-style:normal!important}
+.tp-editorial-heading p{color:var(--talom-muted)!important;font-size:14px!important;line-height:2.2!important}
+.tp-event-card-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+.tp-event-card-grid article{background:#eae5db!important;border-radius:0!important;overflow:hidden!important}
+.tp-event-card-grid article>img{width:100%!important;height:260px!important;object-fit:cover!important;border-radius:0!important}
+.tp-event-card-grid article>div{padding:22px!important}
+.tp-event-card-grid h3{font-size:20px!important;font-weight:400!important}
+.tp-event-card-grid p{font-size:13px!important;line-height:2.1!important;color:var(--talom-muted)!important}
+.tp-event-step-grid,.tp-reservation-step-grid,.tp-value-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+.tp-event-step-grid article,.tp-reservation-step-grid article,.tp-value-grid article{padding:25px!important;border:1px solid var(--talom-line)!important;background:transparent!important;border-radius:0!important}
+.tp-event-step-grid b,.tp-reservation-step-grid b{color:var(--talom-brown)!important;font:500 11px "DM Sans",sans-serif!important;letter-spacing:.12em!important}
+.tp-event-step-grid h3,.tp-reservation-step-grid h3,.tp-value-grid h3{font-size:19px!important;font-weight:400!important}
+.tp-event-step-grid p,.tp-reservation-step-grid p,.tp-value-grid p{color:var(--talom-muted)!important;font-size:13px!important;line-height:2.2!important}
+.tp-faq-list{border-top:1px solid var(--talom-line)!important}
+.tp-faq-list details{border-bottom:1px solid var(--talom-line)!important;padding:18px 0!important}
+.tp-faq-list summary{font-size:15px!important;cursor:pointer!important}
+.tp-faq-list details p{color:var(--talom-muted)!important;font-size:13px!important;line-height:2.1!important}
+#event-request,#reservation{padding:clamp(65px,8vw,110px) 0!important;background:#eae5db!important}
+#event-request .rx-wrap,#reservation .rx-wrap{width:min(780px,88%)!important;margin-inline:auto!important}
+#event-request .rx-heading,#reservation .rx-heading{font-size:clamp(34px,5vw,58px)!important;font-weight:400!important}
+#event-request .rx-form,#reservation .rx-form{padding:clamp(24px,4vw,48px)!important;background:#f8f6f0!important;border:1px solid var(--talom-line)!important;border-radius:0!important;box-shadow:none!important}
+#event-request .rx-field input,#event-request .rx-field select,#event-request .rx-field textarea,#reservation .rx-field input,#reservation .rx-field select,#reservation .rx-field textarea{border-radius:0!important;border:1px solid var(--talom-line)!important;background:#fffefa!important}
+#event-request .rx-submit,#reservation .rx-submit{border-radius:0!important;background:var(--talom-ink)!important;color:#fff!important}
+#contact-request{padding:clamp(65px,8vw,110px) 0!important;background:#eae5db!important}
+#contact-request .rx-wrap{width:min(780px,88%)!important;margin-inline:auto!important}
+#contact-request .rx-form{border-radius:0!important;box-shadow:none!important}
+.site-footer{background:var(--talom-dark)!important;color:#f4f1e9!important}
+.site-footer a{color:inherit!important}
+.talom-footer-links{display:flex!important;flex-wrap:wrap!important;gap:12px 26px!important;justify-content:center!important;padding:20px!important}
+@media(max-width:850px){
+ .tp-intro-grid,.tp-feature-split,.tp-event-feature,.tp-reservation-note,.tp-event-intro,.tp-reservation-intro{grid-template-columns:1fr!important}
+ .tp-feature-image,.tp-event-feature-image,.tp-reservation-note-image,.tp-feature-image img,.tp-event-feature-image img,.tp-reservation-note-image img{min-height:320px!important}
+ .tp-feature-reverse .tp-feature-image{order:0!important}
+ .tp-event-intro-image,.tp-reservation-hero-image,.tp-event-intro-image img,.tp-reservation-hero-image img{min-height:340px!important}
+ .tp-event-card-grid{grid-template-columns:1fr 1fr!important}
+ .tp-event-step-grid,.tp-reservation-step-grid,.tp-value-grid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:700px){
+ main{padding-top:68px}
+ .site-header.editorial-header,.site-header.editorial-header.scrolled{height:68px!important;min-height:68px!important;padding:0 16px!important}
+ .site-header.editorial-header .brand-word{font-size:19px!important;letter-spacing:3px!important}
+ .site-header.editorial-header .brand-word small{font-size:6px!important}
+ .site-header.editorial-header>.talom-republique-trigger{left:16px!important;font-size:0!important}
+ .site-header.editorial-header .talom-republique-icon{width:19px!important}
+ .site-header.editorial-header>.header-actions{right:16px!important}
+ .site-header.editorial-header .header-actions .icon-button{width:30px!important;height:30px!important}
+ .talom-reserve-link{right:65px!important;font-size:0!important;gap:0!important;width:28px!important;height:28px!important;align-items:center!important;justify-content:center!important;border:1px solid var(--talom-line)!important}
+ .talom-reserve-link span{font-size:0!important}
+ .talom-reserve-link b{font-size:16px!important}
+ #talom-route-hero{min-height:500px!important;padding:70px 7%!important}
+ #talom-route-hero .talom-route-copy{width:100%!important}
+ #talom-route-hero .talom-route-copy h1{font-size:clamp(36px,10vw,56px)!important}
+ #talom-route-hero .talom-route-copy p{font-size:13px!important}
+ .tp-wrap{width:88%!important}
+ .tp-editorial-intro{padding:58px 0!important}
+ .tp-editorial-intro h2,.tp-feature-copy h2,.tp-event-intro-copy h2,.tp-reservation-hero-copy h2{font-size:clamp(30px,8vw,43px)!important}
+ .tp-feature-copy,.tp-event-intro-copy,.tp-reservation-hero-copy,.tp-event-feature-copy,.tp-reservation-note-copy{padding:38px 7%!important}
+ #menu .section-heading,#menu .menu-toolbar,#menu .menu-meta,#menu .menu-shelf{width:88%!important}
+ .tp-event-card-grid,.tp-event-step-grid,.tp-reservation-step-grid,.tp-value-grid{grid-template-columns:1fr!important}
+ .tp-event-card-grid article>img{height:230px!important}
+ .talom-republique-overlay{grid-template-columns:1fr!important;align-content:start!important;gap:24px!important;padding:84px 25px 35px!important;overflow:auto!important}
+ .talom-republique-overlay nav a{font-size:clamp(26px,8vw,38px)!important}
+ .talom-republique-side{padding-top:18px!important;gap:8px!important}
+ .talom-overlay-close{top:16px!important;left:18px!important}
+}
+@media(prefers-reduced-motion:reduce){.tp-feature-image img,.tp-event-intro-image img,.tp-reservation-hero-image img,.tp-event-card-grid img{transition:none!important}}
