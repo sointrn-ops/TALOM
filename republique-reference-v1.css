@@ -1,0 +1,102 @@
+/* TALOM — République reference pass. Shared visual system for all destination pages. */
+:root{
+ --talom-paper:#f3f0e8;--talom-paper-deep:#e8e2d7;--talom-ink:#28251f;
+ --talom-muted:#71695e;--talom-rule:#cfc7ba;--talom-accent:#8a7154;
+}
+html{scroll-padding-top:86px}
+body.talom-redesign{background:var(--talom-paper);color:var(--talom-ink)}
+.site-header.editorial-header{background:rgba(243,240,232,.96)!important;border-bottom:1px solid rgba(40,37,31,.12)!important;backdrop-filter:blur(14px)!important}
+.site-header.editorial-header.scrolled{background:rgba(243,240,232,.98)!important}
+#siteHeader>.brand{color:var(--talom-ink)!important}
+#siteHeader>.header-cta{background:var(--talom-ink)!important;color:#f3f0e8!important;border:1px solid var(--talom-ink)!important}
+.talom-republique-trigger{color:var(--talom-ink)!important}
+.talom-republique-overlay{background:var(--talom-paper)!important}
+.talom-republique-overlay nav a{font-family:"Vazirmatn",sans-serif!important;font-weight:400!important}
+.full-hero.rep-home-hero{height:min(820px,calc(100svh - 72px))!important;min-height:620px!important;margin-top:0!important}
+.rep-home-hero .full-hero-image{object-position:center 54%!important;filter:brightness(.55) saturate(.72)!important}
+.rep-home-hero .full-hero-shade{background:linear-gradient(0deg,rgba(20,18,15,.56),rgba(20,18,15,.08) 58%,rgba(20,18,15,.22))!important}
+.rep-home-hero .full-hero-content{max-width:900px!important}
+.rep-home-hero .full-hero-eyebrow{font-size:10px!important;letter-spacing:.22em!important;margin-bottom:24px!important}
+.rep-home-hero .full-hero-content h1{font-size:clamp(48px,7.5vw,100px)!important;line-height:1.28!important;letter-spacing:-.035em!important}
+.rep-home-hero .full-hero-content h1 em{font-family:"Playfair Display","Vazirmatn",serif!important;font-style:normal!important;color:#e8ddcc!important}
+.rep-home-hero .full-hero-description{max-width:600px!important;font-size:14px!important;line-height:2.25!important}
+.rep-home-hero .full-hero-actions{gap:12px!important;flex-wrap:wrap!important}
+.rep-home-hero .button-gold{min-width:150px!important;justify-content:center!important;background:#e8ddcc!important;color:#28251f!important;border:1px solid #e8ddcc!important}
+.rep-home-hero .button-outline{min-width:145px!important;justify-content:center!important;background:transparent!important;color:#fff!important;border:1px solid rgba(255,255,255,.7)!important}
+.rep-home-hero .full-hero-foot{font-size:9px!important;letter-spacing:.15em!important}
+.rep-home-experiences{background:var(--talom-paper)!important;padding:clamp(66px,8vw,112px) 0!important}
+.rep-home-wrap{width:min(1320px,88%)!important}
+.rep-home-section-head{border-color:var(--talom-rule)!important;margin-bottom:24px!important}
+.rep-home-kicker{color:#806d55!important}
+.rep-home-experience-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important}
+.rep-home-card{min-height:clamp(290px,32vw,410px)!important;border-radius:0!important}
+.rep-home-card:after{background:linear-gradient(0deg,rgba(17,15,12,.78),rgba(17,15,12,.02) 74%)!important}
+.rep-home-card h2{font-size:clamp(17px,1.55vw,23px)!important;font-weight:400!important}
+.rep-home-intro{background:var(--talom-paper-deep)!important;padding:clamp(76px,10vw,138px) 0!important}
+.rep-home-intro .talom-wrap{width:min(1120px,84%)!important}
+.rep-home-intro h2{font-size:clamp(34px,5.3vw,68px)!important;line-height:1.42!important}
+.rep-home-intro p{font-size:14px!important;line-height:2.35!important}
+.rep-home-events{grid-template-columns:1fr 1fr!important;min-height:560px!important;background:#28251f!important}
+.rep-home-events-photo{min-height:500px!important;background-position:center!important}
+.rep-home-events-copy{padding:clamp(38px,7vw,100px)!important}
+.rep-home-events-copy h2{font-size:clamp(34px,5vw,62px)!important;line-height:1.42!important}
+#gallery{background:var(--talom-paper)!important;padding:clamp(70px,8vw,112px) 0!important}
+#gallery .gallery-grid{width:min(1320px,88%)!important;grid-template-columns:1.2fr .8fr .8fr!important;grid-template-rows:260px 220px!important;gap:12px!important}
+#gallery .gallery-card{border-radius:0!important}
+#gallery .gallery-card img{transition:transform .65s ease!important}
+#gallery .gallery-card:hover img{transform:scale(1.035)!important}
+#gallery .section-heading h2{font-weight:400!important}
+#talom-route-hero{min-height:clamp(470px,58vw,690px)!important;background:#28251f!important}
+#talom-route-hero .talom-route-image{filter:brightness(.52) saturate(.72)!important}
+#talom-route-hero .talom-route-shade{background:linear-gradient(90deg,rgba(20,18,15,.72),rgba(20,18,15,.12))!important}
+#talom-route-hero .talom-route-copy{width:min(1320px,88%)!important}
+#talom-route-hero .talom-route-copy h1{font-size:clamp(42px,6.2vw,82px)!important;line-height:1.38!important;font-weight:400!important}
+#talom-route-hero .talom-route-copy h1 em{font-style:normal!important;color:#e6d8c3!important}
+.tp-editorial-intro,.tp-event-intro,.tp-reservation-intro{background:var(--talom-paper-deep)!important}
+.tp-feature-split,.tp-event-spaces,.tp-reservation-steps,.tp-menu-lead{background:var(--talom-paper)!important}
+.tp-feature-split,.tp-event-feature,.tp-reservation-note{border-radius:0!important}
+.tp-feature-image img,.tp-event-intro-image img,.tp-reservation-hero-image img,.tp-event-feature-image img{transition:transform .7s ease}
+.tp-feature-image:hover img,.tp-event-intro-image:hover img{transform:scale(1.025)}
+.tp-kicker{color:#806d55!important}
+.tp-editorial-intro h2,.tp-feature-copy h2,.tp-event-intro-copy h2,.tp-reservation-hero-copy h2{font-weight:400!important}
+.tp-event-card-grid article{border-radius:0!important;background:#e8e2d7!important}
+.tp-event-card-grid article>img{border-radius:0!important}
+.tp-event-step-grid article,.tp-reservation-step-grid article{border-color:var(--talom-rule)!important}
+.tp-faq-list{border-color:var(--talom-rule)!important}
+.tp-faq-list details{border-color:var(--talom-rule)!important}
+#menu{background:var(--talom-paper)!important;color:var(--talom-ink)!important}
+#menu .product-card{border-radius:0!important;background:#e9e4da!important}
+#menu .product-card img{border-radius:0!important}
+#menu .category-tab{border-radius:0!important}
+#menu .search-box{border-radius:0!important}
+.rx-booking,.rx-section{background:var(--talom-paper)!important}
+.rx-wrap{width:min(1180px,88%)!important}
+.rx-booking .rx-panel,.rx-booking form,.rx-form-panel{border-radius:0!important;box-shadow:none!important}
+.rx-booking input,.rx-booking select,.rx-booking textarea,.rx-booking button{border-radius:0!important}
+.rx-booking input,.rx-booking select,.rx-booking textarea{background:#fbf9f3!important;border:1px solid var(--talom-rule)!important}
+.site-footer{background:#28251f!important;color:#f3f0e8!important}
+.site-footer a{color:inherit}
+@media(max-width:1100px){
+ .rep-home-experience-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .rep-home-card{min-height:330px!important}
+}
+@media(max-width:760px){
+ .full-hero.rep-home-hero{height:74svh!important;min-height:510px!important}
+ .rep-home-experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .rep-home-card{min-height:270px!important}
+ .rep-home-intro .talom-wrap,.rep-home-events{grid-template-columns:1fr!important}
+ .rep-home-events-photo{min-height:310px!important}
+ .rep-home-events-copy{padding:48px 7%!important}
+ #gallery .gallery-grid{width:88%!important;grid-template-columns:1fr 1fr!important;grid-template-rows:230px 180px 180px!important}
+ #gallery .gallery-large{grid-row:span 2!important}
+ #gallery .gallery-wide{grid-column:1/-1!important}
+ .tp-event-intro,.tp-reservation-intro,.tp-feature-split,.tp-event-feature,.tp-reservation-note{grid-template-columns:1fr!important}
+ .tp-event-intro-image,.tp-reservation-hero-image,.tp-feature-image,.tp-event-feature-image{min-height:300px!important}
+}
+@media(max-width:430px){
+ .rep-home-experience-grid{grid-template-columns:1fr!important}
+ .rep-home-card{min-height:290px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .tp-feature-image img,.tp-event-intro-image img,#gallery .gallery-card img{transition:none!important}
+}
