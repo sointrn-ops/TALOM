@@ -1,9 +1,11 @@
 (()=>{"use strict";
+if(document.body.dataset.page!=="home")return;
 const $=(s,r=document)=>r.querySelector(s);
 const setCopy=(el,fa,en)=>{if(!el)return;el.dataset.fa=fa;el.dataset.en=en;el.innerHTML=fa;};
 const hero=$("#home"),experiences=$("#talom-home-experiences"),intro=$("#talom-home-intro"),events=$("#talom-home-events");
 if(!hero||!experiences||!intro||!events||hero.dataset.repV4==="1")return;
 hero.dataset.repV4="1";hero.classList.add("rep-home-hero");
+const heroImage=$(".full-hero-image",hero);if(heroImage){heroImage.src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=90";heroImage.alt="فضای داخلی کافه و رستوران تالم";}
 setCopy($(".full-hero-eyebrow",hero),"TALOM · کافه، نانوایی و رستوران","TALOM · CAFÉ, BAKERY & RESTAURANT");
 setCopy($(".full-hero-content h1",hero),"به تالم خوش آمدی؛<br><em>جایی برای باهم‌بودن.</em>","WELCOME<br><em>to TALOM.</em>");
 setCopy($(".full-hero-description",hero),"از نان تازه و قهوه صبحگاهی تا یک وعده خوب و دورهمی‌های طولانی؛ تالم جایی برای مکث و کنار هم بودن است.","Fresh bakery, morning coffee, relaxed dining and good company — discover the TALOM experience.");
