@@ -8,8 +8,11 @@ hero.classList.add("rep-home-hero");
 setCopy($(".full-hero-eyebrow",hero),"TALOM · کافه، نانوایی و رستوران","TALOM · CAFÉ, BAKERY & RESTAURANT");
 setCopy($(".full-hero-content h1",hero),"به تالم خوش آمدی؛<br><em>جایی برای باهم‌بودن.</em>","WELCOME<br><em>to TALOM.</em>");
 setCopy($(".full-hero-description",hero),"از نان تازه و قهوه صبحگاهی تا یک وعده خوب و دورهمی‌های طولانی؛ تجربه تالم را کشف کن.","From fresh bakery and morning coffee to a relaxed meal and time together — discover TALOM.");
-const cta=$(".full-hero-actions a",hero);
-if(cta){cta.href="/menu";cta.innerHTML='<span data-fa="دیدن منو" data-en="View the menu">دیدن منو</span><span aria-hidden="true">↗</span>';}
+const heroImage=$(".full-hero-image",hero);
+if(heroImage){heroImage.src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2400&q=90";heroImage.alt="فضای داخلی رستوران و کافه تالم";}
+const actions=$(".full-hero-actions",hero),cta=actions?.querySelector("a");
+if(cta){cta.href="/menu";cta.innerHTML='<span data-fa="مشاهده منو" data-en="View the menu">مشاهده منو</span><span aria-hidden="true">↗</span>';}
+if(actions&&!actions.querySelector(".button-outline")){const reserve=document.createElement("a");reserve.className="button button-outline";reserve.href="/reservation";reserve.innerHTML='<span data-fa="رزرو میز" data-en="Reserve a table">رزرو میز</span><span aria-hidden="true">↗</span>';actions.append(reserve);}
 experiences.classList.add("rep-home-experiences");
 const cards=[
 {href:"/cafe-bakery",code:"01 / BAKERY",fa:"نانوایی و شیرینی",en:"Bakery & pastry",alt:"نان تازه و شیرینی",src:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1100&q=88"},
