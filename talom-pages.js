@@ -15,7 +15,7 @@ const rawPath=location.pathname.replace(/^\/TALOM(?=\/|$)/,"")||"/";const path=(
 document.body.dataset.page=route.key;document.documentElement.dataset.page=route.key;
 document.title=route.title;
 const meta=$('meta[name="description"]');if(meta)meta.content=route.desc;
-let canonical=$('link[rel="canonical"]');if(!canonical){canonical=document.createElement("link");canonical.rel="canonical";document.head.append(canonical)}canonical.href=location.origin+(path==="/"?"/":path);
+let canonical=$('link[rel="canonical"]');if(!canonical){canonical=document.createElement("link");canonical.rel="canonical";document.head.append(canonical)}canonical.href=location.origin+(location.pathname.startsWith("/TALOM")?"/TALOM"+(path==="/"?"/":path+".html"):(path==="/"?"/":path));
 const experienceRoot=$("#talomExperience");if(experienceRoot){[...experienceRoot.children].forEach(node=>main.append(node));experienceRoot.remove();}const signature=$(".signature-banner");if(signature)signature.id="signature-banner";
 const oldRep=$("#talomRepSections");if(oldRep){[...oldRep.children].forEach(node=>main.append(node));oldRep.remove();}
 function addSection(id,html,after){if($("#"+id))return $("#"+id);const node=document.createElement("section");node.id=id;node.innerHTML=html;const ref=after?$("#"+after):null;if(ref&&ref.parentElement===main)ref.after(node);else main.append(node);return node;}
