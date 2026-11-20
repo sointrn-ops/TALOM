@@ -11,7 +11,7 @@ const routes={
  "/reservation":{key:"reservation",title:"رزرو میز | TALOM",desc:"درخواست رزرو میز در کافه و رستوران TALOM.",eyebrow:"TALOM · RESERVATIONS",heading:"میزت را<br><em>از قبل هماهنگ کن.</em>",copy:"اطلاعاتت را ثبت کن تا تیم تالم برای تأیید زمان و ظرفیت با تو تماس بگیرد.",image:"https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=90",ids:["reservation"]},
  "/contact":{key:"contact",title:"تماس با TALOM",desc:"راه‌های ارتباطی و ارسال پیام به TALOM.",eyebrow:"TALOM · SAY HELLO",heading:"در تماس باش،<br><em>ما اینجاییم.</em>",copy:"برای پرسش، پیشنهاد یا همکاری، از راه‌های ارتباطی تالم استفاده کن.",image:"https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=2200&q=90",ids:["contact-request","contact"]}
 };
-const path=location.pathname.replace(/\/$/,"")||"/",route=routes[path]||routes["/"];
+const rawPath=location.pathname.replace(/^\/TALOM(?=\/|$)/,"")||"/";const path=(rawPath.replace(/\.html$/,"").replace(/\/$/,"")||"/"),route=routes[path]||routes["/"];
 document.body.dataset.page=route.key;document.documentElement.dataset.page=route.key;
 document.title=route.title;
 const meta=$('meta[name="description"]');if(meta)meta.content=route.desc;
