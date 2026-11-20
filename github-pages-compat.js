@@ -1,15 +1,20 @@
 (()=>{"use strict";
 const base="/TALOM/";
-const routes=new Set(["cafe-bakery","restaurant","menu","events","about","reservation","contact"]);
+const pageNames=new Set(["cafe-bakery","restaurant","menu","events","about","reservation","contact"]);
 function rewrite(anchor){
- const href=anchor.getAttribute("href");
- if(!href||!href.startsWith("/")||href.startsWith("//")||href.startsWith(base))return;
- const match=href.match(/^\/([^?#]*)([?#].*)?$/);
- if(!match)return;
- let path=match[1],suffix=match[2]||"";
- if(!path){anchor.setAttribute("href",base+suffix);return;}
- if(routes.has(path))path+=".html";
- anchor.setAttribute("href",base+path+suffix);
+ const raw=anchor.getAttribute("href");
+ if(!raw||raw.startsWith("#")||/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(raw))return;
+ let url;
+ try{url=new URL(raw,location.href);}catch{return;}
+ if(url.origin!==location.origin)return;
+ let path=url.pathname;
+ if(path==="/"||path==="/TALOM"||path==="/TALOM/"){path=base+"index.html";}
+ else{
+  if(!path.startsWith(base))path=base+path.replace(/^\/+/, "");
+  let slug=path.slice(base.length).replace(/\/$/,"");
+  if(pageNames.has(slug.toLowerCase()))path=base+slug+".html";
+ }
+ anchor.setAttribute("href",path+url.search+url.hash);
 }
 function scan(root=document){
  if(root.matches?.("a[href]"))rewrite(root);
