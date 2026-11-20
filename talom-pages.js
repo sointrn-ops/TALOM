@@ -58,4 +58,33 @@ const linkMap={"menu":"/menu","cafe-bakery":"/cafe-bakery","restaurant":"/restau
 $$('a[href^="#"]').forEach(a=>{const id=a.getAttribute("href").slice(1),dest=linkMap[id];if(!dest)return;if(dest===path)a.href="#"+id;else a.href=dest+"#"+id;});
 $$("[data-menu-filter]").forEach(a=>a.addEventListener("click",e=>{const key=a.dataset.menuFilter;const tab=$('#categoryTabs [data-category="'+CSS.escape(key)+'"]');if(tab){e.preventDefault();tab.click();$("#menu")?.scrollIntoView({behavior:"smooth"});}}));
 if(route.key==="cafe"||route.key==="restaurant"){const key=route.key;document.body.dataset.menuDefault=key;const apply=()=>{const tab=$('#categoryTabs [data-category="'+key+'"]');if(tab&&!tab.classList.contains("active"))tab.click();};document.addEventListener("DOMContentLoaded",apply,{once:true});}
+
+// GitHub Pages serves this project from /TALOM and does not apply vercel.json rewrites.
+// Convert every internal route to its real .html file while preserving hashes and queries.
+const githubProject=location.pathname==="/TALOM"||location.pathname.startsWith("/TALOM/");
+const routeFiles=new Set(["cafe-bakery","restaurant","menu","events","about","reservation","contact"]);
+function fixInternalRouteLinks(root=document){
+ if(!githubProject)return;
+ root.querySelectorAll('a[href^="/"]').forEach(a=>{
+  const raw=a.getAttribute("href");
+  if(!raw||raw.startsWith("//"))return;
+  let target;
+  try{target=new URL(raw,location.origin)}catch{return}
+  if(target.origin!==location.origin)return;
+  let pathname=target.pathname.replace(/\\/+$/,"")||"/";
+  if(pathname==="/TALOM"||pathname==="/TALOM/"){target.pathname="/TALOM/";}
+  else if(pathname.startsWith("/TALOM/"))return;
+  else if(pathname==="/"){target.pathname="/TALOM/";}
+  else{
+   const slug=pathname.replace(/^\\//,"").replace(/\\.html?$/i,"");
+   if(!routeFiles.has(slug))return;
+   target.pathname="/TALOM/"+slug+".html";
+  }
+  a.setAttribute("href",target.pathname+target.search+target.hash);
+ });
+}
+fixInternalRouteLinks();
+new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{
+ if(node.nodeType===1){if(node.matches?.('a[href^="/"]'))fixInternalRouteLinks(node.parentElement||document);else fixInternalRouteLinks(node);}
+}))).observe(document.body,{childList:true,subtree:true});
 })();
